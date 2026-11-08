@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Episode player</title>
+<style>
+  @font-face { font-family: 'Special Elite'; src: url(fonts/special-elite-latin-400-normal.woff2); }
+  @font-face { font-family: 'Playfair Display'; font-weight: 700; src: url(fonts/playfair-display-latin-700-normal.woff2); }
+  @font-face { font-family: 'Playfair Display'; font-weight: 900; src: url(fonts/playfair-display-latin-900-normal.woff2); }
+  @font-face { font-family: 'Playfair Display'; font-style: italic; font-weight: 400; src: url(fonts/playfair-display-latin-400-italic.woff2); }
+  @font-face { font-family: 'Inter'; font-weight: 400; src: url(fonts/inter-latin-400-normal.woff2); }
+  @font-face { font-family: 'Inter'; font-weight: 600; src: url(fonts/inter-latin-600-normal.woff2); }
+  @font-face { font-family: 'Inter'; font-weight: 800; src: url(fonts/inter-latin-800-normal.woff2); }
+  @font-face { font-family: 'Noto Serif Devanagari'; font-weight: 700; src: url(fonts/noto-serif-devanagari-devanagari-700-normal.woff2); }
+  html, body { margin: 0; background: #000; }
+  canvas { display: block; width: 100vw; height: auto; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+  import { Player } from './engine.js';
+
+  const params = new URLSearchParams(location.search);
+  const ep = params.get('ep');            // e.g. episodes/ep01-satyam
+  const build = params.get('build');      // e.g. build/ep01-satyam
+
+  await Promise.all([
+    "16px 'Special Elite'", "700 16px 'Playfair Display'", "900 16px 'Playfair Display'",
+    "italic 400 16px 'Playfair Display'", "400 16px Inter", "600 16px Inter", "800 16px Inter",
+    "700 16px 'Noto Serif Devanagari'",
+  ].map((f) => document.fonts.load(f, 'Aa सत्यम्')));
+
+  const timeline = await (await fetch(`/${build}/timeline.json`)).json();
+  const { scenes } = await import(`/${ep}/scenes.js`);
+  const canvas = document.getElementById('c');
+  const player = new Player(canvas, timeline, scenes);
+  const fps = timeline.fps;
+
+  // Used by render.mjs: draw frames and return them as JPEG data URLs
+  window.totalFrames = Math.ceil(timeline.duration * fps);
+  window.renderFrames = async (start, count) => {
+    const out = [];
+    for (let f = start; f < Math.min(start + count, window.totalFrames); f++) {
+      player.render(f / fps, f);
+      out.push(canvas.toDataURL('image/jpeg', 0.92));
+    }
+    return out;
+  };
+
+  // Opened in a normal browser? Play it live (no audio) for quick previews.
+  if (!params.has('headless')) {
+    const t0 = performance.now();
+    const tick = () => {
+      const time = ((performance.now() - t0) / 1000) % timeline.duration;
+      player.render(time, Math.floor(time * fps));
+      requestAnimationFrame(tick);
+    };
+    tick();
+  }
+  window.ready = true;
+</script>
+</body>
+</html>
