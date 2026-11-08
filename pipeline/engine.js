@@ -98,7 +98,7 @@ export class Player {
     this.scenes = scenes;
     this.layers = [new OffscreenCanvas(W, H), new OffscreenCanvas(W, H)];
     const missing = timeline.scenes.filter((s) => !scenes[s.id]).map((s) => s.id);
-    if (missing.length) throw new Error(`No drawing for scenes: ${missing.join(', ')}`);
+    if (missing.length) console.warn(`No drawing yet for scenes: ${missing.join(', ')}`);
   }
 
   drawScene(target, sc, t, frame) {
@@ -108,6 +108,7 @@ export class Player {
     ctx.fillStyle = palette.bg;
     ctx.fillRect(0, 0, W, H);
     const s = {
+      id: sc.id,
       t: Math.max(0, t),
       d: sc.duration,
       frame,
@@ -116,7 +117,8 @@ export class Player {
       cueEnd: (i) => sc.cues[i]?.end ?? sc.duration,
     };
     ctx.save();
-    this.scenes[sc.id](ctx, s);
+    if (this.scenes[sc.id]) this.scenes[sc.id](ctx, s);
+    else text(ctx, `[ ${sc.id} ]`, W / 2, H / 2, { size: 60, align: 'center', color: palette.dim });
     ctx.restore();
   }
 

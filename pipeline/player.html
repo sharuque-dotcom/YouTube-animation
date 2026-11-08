@@ -36,7 +36,9 @@
   ].map((f) => document.fonts.load(f, 'Aa सत्यम्')));
 
   const timeline = await (await fetch(`/${build}/timeline.json`)).json();
-  const { scenes } = await import(`/${ep}/scenes.js`);
+  const mod = await import(`/${ep}/scenes.js`);
+  if (mod.preload) await mod.preload();
+  const { scenes } = mod;
   const canvas = document.getElementById('c');
   const player = new Player(canvas, timeline, scenes);
   const fps = timeline.fps;

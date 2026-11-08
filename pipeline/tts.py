@@ -117,14 +117,21 @@ def main():
                              if (p := ep / "voice" / f"{scene['id']}-{i}.{ext}").exists()), None)
             if recorded:
                 to_wav(recorded, clip)
+                clip.with_suffix(".txt").unlink(missing_ok=True)
                 source = "recording"
             else:
                 say = line.get("say", line["text"])
-                if args.engine == "kokoro":
-                    kokoro(say, clip, voice, speed)
+                key = f"{args.engine}|{voice}|{speed}|{say}"
+                stamp = clip.with_suffix(".txt")
+                if clip.exists() and stamp.exists() and stamp.read_text() == key:
+                    source = "cached"
                 else:
-                    piper(say, clip, Path(args.piper_voice), speed)
-                source = args.engine
+                    if args.engine == "kokoro":
+                        kokoro(say, clip, voice, speed)
+                    else:
+                        piper(say, clip, Path(args.piper_voice), speed)
+                    stamp.write_text(key)
+                    source = args.engine
             line_start = now()
             pcm += read_frames(clip)
             cues.append({"start": round(line_start - start, 3), "end": round(now() - start, 3),

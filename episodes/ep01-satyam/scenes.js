@@ -6,19 +6,25 @@
 // Timing comes from the narration, so re-recording the voice keeps everything in sync.
 
 import { W, H, clamp, lerp, prog, ease, rand, text, typed } from '../../pipeline/engine.js';
+import * as act1 from './acts/act1.js';
+import * as act2 from './acts/act2.js';
+import * as act3 from './acts/act3.js';
+import * as act4 from './acts/act4.js';
+import * as act5 from './acts/act5.js';
+import { loadLand } from '../../pipeline/map.js';
 import {
   C, backdrop, piece, tape, markerCircle, markerLine, arrow, highlight, camera, cameraPath, person, paperFill,
 } from '../../pipeline/collage.js';
 
 // Impact sounds, placed relative to narration lines (mixed in by render.mjs)
-export const hits = [
+const coldHits = [
   { scene: 'letter', cue: 3, at: 1.25 }, // NON-EXISTENT stamp
   { scene: 'crash', cue: 0, at: 1.6 },   // price collapses
   { scene: 'truth', cue: 2, at: 0.7 },   // TRUTH tears
   { scene: 'title', at: 0.15 },          // title card
 ];
 const hitAt = (scene, s) => {
-  const h = hits.find((x) => x.scene === scene);
+  const h = coldHits.find((x) => x.scene === scene);
   return (h.cue != null ? s.cue(h.cue) : 0) + (h.at || 0);
 };
 const shake = (ctx, t, at, power = 14) => {
@@ -332,4 +338,9 @@ function title(ctx, s) {
   });
 }
 
-export const scenes = { letter, crash, truth, title };
+const acts = [act1, act2, act3, act4, act5];
+export const hits = [...coldHits, ...acts.flatMap((a) => a.hits)];
+export const scenes = Object.assign({ letter, crash, truth, title }, ...acts.map((a) => a.scenes));
+export async function preload() {
+  await loadLand();
+}

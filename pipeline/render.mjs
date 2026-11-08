@@ -46,10 +46,15 @@ const url = `http://127.0.0.1:${server.address().port}/pipeline/player.html` +
   `?headless&ep=${encodeURIComponent(epRel)}&build=${encodeURIComponent(buildRel)}`;
 
 const browser = await chromium.launch();
-const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
-page.on('pageerror', (e) => console.error('Page error:', e.message));
-await page.goto(url);
-await page.waitForFunction('window.ready === true', null, { timeout: 30000 });
+async function openPage() {
+  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const p = await context.newPage();
+  p.on('pageerror', (e) => console.error('Page error:', e.message));
+  await p.goto(url);
+  await p.waitForFunction('window.ready === true', null, { timeout: 60000 });
+  return p;
+}
+const page = await openPage();
 const total = await page.evaluate('window.totalFrames');
 
 const stills = flag('stills');
@@ -68,9 +73,10 @@ if (stills) {
 
 // ---- audio: narration, music bed (ducked under the voice), impact sounds ----
 const { hits = [] } = await import(pathToFileURL(path.join(epDir, 'scenes.js')));
-const hitTimes = hits.map((h) => {
+const hitTimes = hits.flatMap((h) => {
   const sc = timeline.scenes.find((s) => s.id === h.scene);
-  return sc.start + (h.cue != null ? sc.cues[h.cue].start : 0) + (h.at || 0);
+  if (!sc) return [];
+  return [sc.start + (h.cue != null ? sc.cues[h.cue].start : 0) + (h.at || 0)];
 });
 const dur = timeline.duration;
 const musicFile = ['mp3', 'wav', 'm4a'].map((e) => path.join(epDir, `music.${e}`)).find(existsSync);
@@ -107,17 +113,34 @@ const ff = spawn('ffmpeg', ['-y', '-loglevel', 'error', ...inputs, '-filter_comp
 { stdio: ['pipe', 'inherit', 'inherit'] });
 const done = new Promise((ok, fail) => ff.on('close', (c) => (c ? fail(new Error(`ffmpeg exit ${c}`)) : ok())));
 
+// Several browser pages draw frames in parallel; frames are written to ffmpeg in order.
+const workers = Number(flag('workers') || Math.min(4, (await import('node:os')).cpus().length));
+const pages = [page, ...(await Promise.all(Array.from({ length: workers - 1 }, openPage)))];
 const started = Date.now();
 const BATCH = 15;
-for (let f = 0; f < total; f += BATCH) {
-  const frames = await page.evaluate(([a, b]) => window.renderFrames(a, b), [f, BATCH]);
+const batches = [];
+for (let f = 0; f < total; f += BATCH) batches.push(f);
+const pending = new Map();
+let next = 0;
+const launch = (pg) => {
+  if (next >= batches.length) return;
+  const f = batches[next++];
+  pending.set(f, pg.evaluate(([a, b]) => window.renderFrames(a, b), [f, BATCH]).then((r) => { launch(pg); return r; }));
+};
+pages.forEach(launch);
+for (const f of batches) {
+  while (!pending.has(f)) await new Promise((r) => setTimeout(r, 5));
+  const frames = await pending.get(f);
+  pending.delete(f);
   for (const d of frames) {
     if (!ff.stdin.write(Buffer.from(d.split(',')[1], 'base64'))) {
       await new Promise((r) => ff.stdin.once('drain', r));
     }
   }
-  if (f % (fps * 5) < BATCH) {
-    process.stdout.write(`\rFrame ${Math.min(f + BATCH, total)}/${total}`);
+  if (f % (fps * 10) < BATCH) {
+    const done = Math.min(f + BATCH, total);
+    const el = (Date.now() - started) / 1000;
+    process.stdout.write(`\rFrame ${done}/${total}  (${el.toFixed(0)}s, ~${((el / done) * (total - done)).toFixed(0)}s left)   `);
   }
 }
 ff.stdin.end();

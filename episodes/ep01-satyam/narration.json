@@ -8,9 +8,18 @@
       "id": "letter",
       "lines": [
         "On the morning of January 7th, 2009, the chairman of one of India's biggest companies sat down and wrote a letter.",
-        { "text": "In it, he admitted something nobody believed was possible.", "pause": 0.7 },
-        { "text": "The billions of rupees his company said it had in the bank?", "pause": 0.5 },
-        { "text": "Almost all of it… didn't exist.", "say": "Almost all of it… didn't exist." }
+        {
+          "text": "In it, he admitted something nobody believed was possible.",
+          "pause": 0.7
+        },
+        {
+          "text": "The billions of rupees his company said it had in the bank?",
+          "pause": 0.5
+        },
+        {
+          "text": "Almost all of it… didn't exist.",
+          "say": "Almost all of it… didn't exist."
+        }
       ]
     },
     {
@@ -27,8 +36,16 @@
     {
       "id": "truth",
       "lines": [
-        { "text": "The strangest part? The company's name was Satyam.", "say": "The strangest part? The company's name was, Satyam.", "pause": 0.6 },
-        { "text": "In Sanskrit, Satyam means…", "say": "In Sanskrit, Satyam means", "pause": 0.5 },
+        {
+          "text": "The strangest part? The company's name was Satyam.",
+          "say": "The strangest part? The company's name was, Satyam.",
+          "pause": 0.6
+        },
+        {
+          "text": "In Sanskrit, Satyam means…",
+          "say": "In Sanskrit, Satyam means",
+          "pause": 0.5
+        },
         "Truth."
       ],
       "tail": 1.2
@@ -36,6 +53,335 @@
     {
       "id": "title",
       "duration": 4.5
+    },
+    {
+      "id": "chapter1",
+      "duration": 2.6
+    },
+    {
+      "id": "founding",
+      "lines": [
+        "The story starts in Hyderabad in 1987.",
+        {
+          "text": "A businessman named B. Ramalinga Raju, from a family that had worked in textiles and real estate, starts a small software company with his brother.",
+          "say": "A businessman named, B. Ramalinga Raju, from a family that had worked in textiles and real estate, starts a small software company with his brother."
+        },
+        "They call it Satyam Computer Services."
+      ]
+    },
+    {
+      "id": "outsourcing",
+      "lines": [
+        {
+          "text": "The timing is perfect.",
+          "pause": 0.5
+        },
+        "The world is going digital, and Western companies have discovered something:",
+        "Indian engineers can write the same code for a fraction of the cost."
+      ]
+    },
+    {
+      "id": "y2k",
+      "lines": [
+        {
+          "text": "Then comes the Y2K panic.",
+          "say": "Then comes the Y two K panic."
+        },
+        "Every company on earth needs old software fixed before the year 2000,",
+        {
+          "text": "and Indian IT firms are flooded with work.",
+          "say": "and Indian I.T. firms are flooded with work."
+        }
+      ]
+    },
+    {
+      "id": "growth",
+      "lines": [
+        "Satyam grows explosively.",
+        "In 2001, it lists on the New York Stock Exchange.",
+        "By 2008 it has over 50,000 employees, offices around the world, and clients that include a huge list of Fortune 500 companies."
+      ]
+    },
+    {
+      "id": "bigfour",
+      "lines": [
+        {
+          "text": "It's one of the \"Big Four\" of Indian IT, alongside TCS, Infosys and Wipro.",
+          "say": "It's one of the Big Four of Indian I.T., alongside T.C.S., Infosys, and Wipro."
+        }
+      ]
+    },
+    {
+      "id": "award",
+      "lines": [
+        {
+          "text": "And in 2008, Satyam wins a prestigious award…",
+          "say": "And in 2008, Satyam wins a prestigious award,",
+          "pause": 0.3
+        },
+        {
+          "text": "for excellence in corporate governance.",
+          "pause": 0.6
+        },
+        {
+          "text": "In other words, for being honest.",
+          "pause": 0.7
+        },
+        "Remember that trophy. We'll come back to it."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter2",
+      "duration": 2.6
+    },
+    {
+      "id": "gap",
+      "lines": [
+        {
+          "text": "Here's what nobody outside knew.",
+          "pause": 0.6
+        },
+        "Years earlier, Satyam's real profits had started falling a little short of what the market expected.",
+        "The gap was small. A few numbers adjusted. Just enough to keep the share price happy.",
+        "The plan, presumably, was simple: next year would be better, and the gap would quietly close."
+      ]
+    },
+    {
+      "id": "grows",
+      "lines": [
+        {
+          "text": "But it never closed.",
+          "pause": 0.6
+        },
+        "Every year, the fake profit had to match the fake profit from the year before, plus growth.",
+        "Every lie needed a bigger lie to cover it."
+      ]
+    },
+    {
+      "id": "paper",
+      "lines": [
+        "And fake profits create a problem: if you claim you earned money, that money has to be somewhere.",
+        {
+          "text": "So the money appeared on paper.",
+          "pause": 0.5
+        },
+        "Cash balances. Bank deposits. Interest earned on those deposits.",
+        "According to investigators, thousands of fake invoices were created for work that was never done, and bank documents were forged to show money that was never there."
+      ]
+    },
+    {
+      "id": "mountain",
+      "lines": [
+        {
+          "text": "On paper, Satyam was sitting on a mountain of cash.",
+          "pause": 0.6
+        },
+        "In reality, the mountain was made of paper."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter3",
+      "duration": 2.6
+    },
+    {
+      "id": "maytas",
+      "lines": [
+        "By 2008, the hole had grown so big it couldn't be hidden much longer. Raju needed a way out.",
+        "And it seems he found one in a company called Maytas.",
+        {
+          "text": "Notice something?",
+          "pause": 0.6
+        },
+        {
+          "text": "Maytas is Satyam… spelled backwards.",
+          "say": "Maytas is Satyam, spelled backwards."
+        }
+      ]
+    },
+    {
+      "id": "deal",
+      "lines": [
+        "Maytas Properties and Maytas Infra were real-estate and infrastructure companies controlled by Raju's family.",
+        "On December 16th, 2008, Satyam announced it would buy them for about 1.6 billion dollars.",
+        "On the surface, it made no sense. Why would a software company buy construction businesses?"
+      ]
+    },
+    {
+      "id": "swap",
+      "lines": [
+        {
+          "text": "But look at it from the inside.",
+          "pause": 0.5
+        },
+        {
+          "text": "If Satyam \"spent\" its fake cash buying real companies, the fake money would disappear into a deal…",
+          "say": "If Satyam spent its fake cash buying real companies, the fake money would disappear into a deal,"
+        },
+        "and be replaced by real buildings and land.",
+        "The hole would be filled. Forever."
+      ]
+    },
+    {
+      "id": "revolt",
+      "lines": [
+        "It almost worked. But investors were furious.",
+        "Why was the company spending shareholders' money on the founder's family businesses?",
+        "Satyam's shares crashed. Within about a day, the deal was cancelled."
+      ]
+    },
+    {
+      "id": "banned",
+      "lines": [
+        "Then the hits kept coming.",
+        "Days later, it emerged that the World Bank had banned Satyam from its contracts.",
+        "Independent directors began resigning.",
+        {
+          "text": "The escape door had slammed shut.",
+          "pause": 0.5
+        },
+        "And Raju was trapped inside his own lie."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter4",
+      "duration": 2.6
+    },
+    {
+      "id": "confession",
+      "lines": [
+        "Which brings us back to January 7th, 2009.",
+        "Raju's letter to the board was addressed to the directors and the stock exchanges. And it was a full confession."
+      ]
+    },
+    {
+      "id": "numbers",
+      "lines": [
+        "The cash and bank balances: overstated by more than 5,000 crore rupees.",
+        "That's over a billion dollars that simply did not exist.",
+        "Interest on deposits that didn't exist: fake.",
+        "Money owed by customers: inflated.",
+        "Even the latest quarter: the company claimed operating margins of around 24 percent.",
+        "The real figure was about 3 percent."
+      ]
+    },
+    {
+      "id": "tiger",
+      "lines": [
+        "In the letter, Raju described his situation with a line that would become famous:",
+        {
+          "text": "\"It was like riding a tiger, not knowing how to get off without being eaten.\"",
+          "say": "It was like riding a tiger, not knowing how to get off, without being eaten.",
+          "pause": 0.7
+        },
+        "He also claimed he hadn't taken a single rupee for himself from the inflated numbers. Investigators would later dispute that."
+      ]
+    },
+    {
+      "id": "aftermath",
+      "lines": [
+        "That day, Satyam's shares lost almost 80 percent of their value. Billions in investor money vanished in hours.",
+        {
+          "text": "And remember that governance trophy?",
+          "pause": 0.5
+        },
+        "It was taken back."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter5",
+      "duration": 2.6
+    },
+    {
+      "id": "arrest",
+      "lines": [
+        "Two days later, Ramalinga Raju was arrested.",
+        "The Indian government did something unusual.",
+        "It dissolved Satyam's board and appointed its own directors to save the company.",
+        "Not to save Raju, but to save the tens of thousands of employees and the clients depending on them."
+      ]
+    },
+    {
+      "id": "mahindra",
+      "lines": [
+        "In 2009, Tech Mahindra won the bid to take over Satyam.",
+        "The company survived, renamed Mahindra Satyam, and was later merged fully into Tech Mahindra.",
+        {
+          "text": "The name \"Satyam\" disappeared.",
+          "say": "The name Satyam disappeared."
+        }
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "verdict",
+      "lines": [
+        "The court case dragged on for six years.",
+        "In 2015, a special court convicted Raju, his brother and several others, sentencing them to seven years in prison.",
+        {
+          "text": "And the auditors?",
+          "pause": 0.5
+        },
+        "Satyam's accounts had been audited by PricewaterhouseCoopers, one of the biggest audit firms in the world.",
+        {
+          "text": "Its auditors were also convicted in India, and US regulators fined PwC's Indian affiliates millions of dollars for failing to catch the fraud.",
+          "say": "Its auditors were also convicted in India, and U.S. regulators fined P.W.C.'s Indian affiliates millions of dollars for failing to catch the fraud."
+        }
+      ]
+    },
+    {
+      "id": "chapter6",
+      "duration": 2.6
+    },
+    {
+      "id": "checklist",
+      "lines": [
+        {
+          "text": "So how did a lie this big survive for years?",
+          "pause": 0.6
+        },
+        "One: auditors trusted documents instead of checking with the banks directly.",
+        "Two: the board, including well-known independent directors, approved what the founder wanted.",
+        "Three: everyone was making money. When a share price keeps going up, very few people ask hard questions."
+      ]
+    },
+    {
+      "id": "legacy",
+      "lines": [
+        "Satyam's fall changed Indian business.",
+        {
+          "text": "Corporate governance rules were tightened, auditors faced new scrutiny, and \"Satyam\" became shorthand for corporate fraud in India.",
+          "say": "Corporate governance rules were tightened, auditors faced new scrutiny, and Satyam became shorthand for corporate fraud in India."
+        }
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "outro",
+      "lines": [
+        {
+          "text": "A company named after truth, built on one of the biggest lies in Indian business history.",
+          "pause": 0.6
+        },
+        "It started as a small gap between real numbers and reported ones.",
+        "And that's the lesson: frauds this big almost never begin big.",
+        {
+          "text": "They begin small… and then they become a tiger you can't get off.",
+          "say": "They begin small, and then, they become a tiger you can't get off."
+        }
+      ],
+      "tail": 1.2
+    },
+    {
+      "id": "endcard",
+      "lines": [
+        "Next time on Paper Empires: how the world's biggest phone company went from number one to nothing in six years.",
+        "Subscribe, and I'll see you there."
+      ],
+      "tail": 6.0
     }
   ]
 }

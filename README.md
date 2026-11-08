@@ -20,6 +20,9 @@ Every animation is timed to the narration lines, so if you re-record the voice t
 | `episodes/<ep>/voice/` | *(optional)* your own recordings |
 | `episodes/<ep>/music.mp3` | *(optional)* background music |
 | `pipeline/` | The engine, voice builder and renderer |
+| `pipeline/kit.js` | Scene building blocks: stage/camera, chapter cards, cards, stamps, sticky notes, label strips, icons |
+| `pipeline/map.js` + `pipeline/data/land.json` | Paper-style world maps with pins and routes. Coastlines only, no country borders (Natural Earth, public domain) |
+| `episodes/<ep>/acts/` | Scene drawings for each chapter |
 | `pipeline/collage.js` | The paper-collage look: textured paper, torn edges, tape, marker circles, arrows, highlighter, sticky notes, camera moves |
 | `build/<ep>/` | Output: `video.mp4`, `subtitles.srt` (not committed) |
 
@@ -46,6 +49,8 @@ node pipeline/render.mjs episodes/ep01-satyam     # 2. video -> build/ep01-satya
 
 Useful extras:
 - `node pipeline/render.mjs episodes/ep01-satyam --stills 3,10,25` saves single frames to check the look without a full render.
+- Rendering uses 4 parallel workers by default; change with `--workers N`.
+- Voice clips are cached: re-running `tts.py` only regenerates lines whose text changed.
 - Open `pipeline/player.html?ep=episodes/ep01-satyam&build=build/ep01-satyam` through any local web server for a live (silent) preview.
 
 ## Audio
