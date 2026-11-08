@@ -8,9 +8,12 @@ with pauses, and writes to build/<episode-name>/:
 
 Voice for each line comes from, in order:
   1. a recording you made: <episode>/voice/<scene-id>-<line-number>.wav (or .mp3/.m4a)
-  2. Piper text-to-speech (free, runs offline) as a placeholder
+  2. Kokoro text-to-speech (free, offline, natural-sounding), the default
+  3. Piper text-to-speech (older, more robotic) with --engine piper
 
-Usage: python3 pipeline/tts.py episodes/ep01-satyam [--voice models/en_US-ryan-high.onnx]
+The Kokoro voice is set by "voice" in narration.json (e.g. "am_michael", "bm_george").
+
+Usage: python3 pipeline/tts.py episodes/ep01-satyam [--engine kokoro|piper]
 """
 
 import argparse
@@ -35,6 +38,23 @@ def to_wav(src: Path, dst: Path):
            "silenceremove=start_periods=1:start_threshold=-50dB,areverse"
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(src), "-af", trim,
                     "-ac", "1", "-ar", str(RATE), "-sample_fmt", "s16", str(dst)], check=True)
+
+
+_kokoro = None
+
+
+def kokoro(text: str, out: Path, voice: str, speed: float):
+    global _kokoro
+    from kokoro_onnx import Kokoro
+    import soundfile as sf
+    if _kokoro is None:
+        _kokoro = Kokoro(str(ROOT / "models/kokoro.onnx"), str(ROOT / "models/kokoro-voices.npz"))
+    lang = "en-gb" if voice.startswith("b") else "en-us"
+    samples, rate = _kokoro.create(text, voice=voice, speed=speed, lang=lang)
+    raw = out.with_suffix(".raw.wav")
+    sf.write(str(raw), samples, rate)
+    to_wav(raw, out)
+    raw.unlink()
 
 
 def piper(text: str, out: Path, voice: Path, speed: float):
@@ -63,7 +83,8 @@ def srt_time(s: float) -> str:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("episode")
-    ap.add_argument("--voice", default=str(ROOT / "models/en_US-ryan-high.onnx"))
+    ap.add_argument("--engine", default="kokoro", choices=["kokoro", "piper"])
+    ap.add_argument("--piper-voice", default=str(ROOT / "models/en_US-ryan-high.onnx"))
     ap.add_argument("--only", help="comma-separated scene ids to include")
     args = ap.parse_args()
 
@@ -72,7 +93,7 @@ def main():
     out_dir = ROOT / "build" / ep.name
     clips = out_dir / "clips"
     clips.mkdir(parents=True, exist_ok=True)
-    voice = Path(args.voice)
+    voice = spec.get("voice", "am_michael")
     speed = spec.get("speed", 1.0)
     only = set(args.only.split(",")) if args.only else None
 
@@ -98,8 +119,12 @@ def main():
                 to_wav(recorded, clip)
                 source = "recording"
             else:
-                piper(line.get("say", line["text"]), clip, voice, speed)
-                source = "tts"
+                say = line.get("say", line["text"])
+                if args.engine == "kokoro":
+                    kokoro(say, clip, voice, speed)
+                else:
+                    piper(say, clip, Path(args.piper_voice), speed)
+                source = args.engine
             line_start = now()
             pcm += read_frames(clip)
             cues.append({"start": round(line_start - start, 3), "end": round(now() - start, 3),
