@@ -61,7 +61,15 @@ Useful extras:
 
 You can mix both: record the lines you care about and let TTS fill the rest while drafting. In `narration.json`, `say` changes what TTS speaks without changing the subtitle text (e.g. "I.T." vs "IT"), and `pause` sets the silence after a line.
 
-**Music.** Drop `music.mp3` in the episode folder and it loops under the voice, automatically lowered whenever someone speaks. Without one, a generated dark drone with a heartbeat pulse is used. Use royalty-free tracks (YouTube Audio Library is safe for monetized videos).
+**Music.** `episodes/<ep>/music.json` is a cue sheet: one track per chapter, starting at a given scene, with crossfades. Tracks are levelled automatically and lowered whenever someone speaks; `level` sets the overall music loudness and `gain` adjusts one track. Episode 1 uses Kevin MacLeod tracks from incompetech.com (CC BY 4.0: credit him in the description, see `music/CREDITS.txt`). The mp3s aren't committed; download them with:
+
+```bash
+cd episodes/ep01-satyam/music && for t in "Hidden Agenda" "Investigations" "Spy Glass" "Crypto" "Interloper" "Hitman" "Lightless Dawn"; do curl -L -o "$(echo "$t" | tr ' ' '-' | tr A-Z a-z).mp3" "https://incompetech.com/music/royalty-free/mp3-royaltyfree/$(echo "$t" | sed 's/ /%20/g').mp3"; done
+```
+
+A single `music.mp3` in the episode folder also works (looped). With no music at all, a generated drone is used.
+
+**Changing only the sound** (music, levels, re-recorded voice with the same timing): `node pipeline/render.mjs episodes/<ep> --remix` reuses the rendered picture and takes under a minute.
 
 **Sound effects.** `hits` in `scenes.js` places impact booms on specific narration lines (stamp, crash, title).
 
