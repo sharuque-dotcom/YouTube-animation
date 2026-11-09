@@ -7,31 +7,42 @@
     {
       "id": "letter",
       "lines": [
-        "On the morning of January 7th, 2009, the chairman of one of India's biggest companies sat down and wrote a letter.",
+        {
+          "text": "On the morning of January 7th, 2009, the chairman of one of India's biggest companies sat down and wrote a letter.",
+          "pause": 0.8
+        },
         {
           "text": "In it, he admitted something nobody believed was possible.",
-          "pause": 0.7
+          "pause": 0.9
         },
         {
           "text": "The billions of rupees his company said it had in the bank?",
-          "pause": 0.5
+          "pause": 0.9
         },
         {
           "text": "Almost all of it… didn't exist.",
           "say": "Almost all of it… didn't exist."
         }
-      ]
+      ],
+      "tail": 1.5
     },
     {
       "id": "crash",
       "lines": [
-        "By evening, the company's share price had crashed nearly 80 percent.",
-        "Fifty thousand employees didn't know if they still had jobs.",
+        {
+          "text": "By evening, the company's share price had crashed nearly 80 percent.",
+          "pause": 1.2
+        },
+        {
+          "text": "Fifty thousand employees didn't know if they still had jobs.",
+          "pause": 1.2
+        },
         {
           "text": "And India's entire IT industry, the pride of the nation, was suddenly under suspicion.",
           "say": "And India's entire I.T. industry, the pride of the nation, was suddenly under suspicion."
         }
-      ]
+      ],
+      "tail": 1.4
     },
     {
       "id": "truth",
@@ -39,16 +50,18 @@
         {
           "text": "The strangest part? The company's name was Satyam.",
           "say": "The strangest part? The company's name was, Satyam.",
-          "pause": 0.6
+          "pause": 0.9
         },
         {
           "text": "In Sanskrit, Satyam means…",
           "say": "In Sanskrit, Satyam means",
-          "pause": 0.5
+          "pause": 0.7
         },
-        "Truth."
+        {
+          "text": "Truth."
+        }
       ],
-      "tail": 1.2
+      "tail": 1.8
     },
     {
       "id": "title",

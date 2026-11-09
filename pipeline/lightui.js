@@ -12,16 +12,18 @@ export const UI = {
 };
 
 // ---------- motion ----------
+/** Global tempo: >1 slows every spring, ease and number roll (1.35 = 35% slower) */
+export const TEMPO = 1.35;
 /** Spring from 0 to 1 starting at `at` (damping 0.7 reads premium; lower = more bounce) */
 export function spring(t, at, { freq = 1.5, damp = 0.72 } = {}) {
   const x = t - at;
   if (x <= 0) return 0;
-  const w = 2 * Math.PI * freq, wd = w * Math.sqrt(1 - damp * damp);
+  const w = (2 * Math.PI * freq) / TEMPO, wd = w * Math.sqrt(1 - damp * damp);
   return 1 - Math.exp(-damp * w * x) * (Math.cos(wd * x) + ((damp * w) / wd) * Math.sin(wd * x));
 }
-export const ease = (t, at, d = 0.6) => ez.expoOut(span(t, at, d));
-export const easeIn = (t, at, d = 0.4) => ez.p3In(span(t, at, d));
-export const inOut = (t, at, d = 1) => ez.p2InOut(span(t, at, d));
+export const ease = (t, at, d = 0.6) => ez.expoOut(span(t, at, d * TEMPO));
+export const easeIn = (t, at, d = 0.4) => ez.p3In(span(t, at, d * TEMPO));
+export const inOut = (t, at, d = 1) => ez.p2InOut(span(t, at, d * TEMPO));
 
 // ---------- world ----------
 /** Pastel gradient with slowly drifting colour blobs */
@@ -71,7 +73,7 @@ export function headline(ctx, t, lines, x, y, inAt, outAt = 1e9, { size = 96, co
 }
 
 /** Rolling-digit number (odometer). str like '₹5,361 cr'. Digits roll up into place, staggered. */
-export function odometer(ctx, t, at, str, x, y, { size = 72, color = UI.ink, weight = 700, font = UI.HEAD, align = 'left', from = null } = {}) {
+export function odometer(ctx, t, at, str, x, y, { size = 72, color = UI.ink, weight = 700, font = UI.HEAD, align = 'left', from = null, dur = 1.1 } = {}) {
   ctx.save();
   ctx.font = `${weight} ${size}px ${font}`;
   const widths = [...str].map((ch) => ctx.measureText(ch).width);
@@ -86,7 +88,7 @@ export function odometer(ctx, t, at, str, x, y, { size = 72, color = UI.ink, wei
   let di = 0;
   [...str].forEach((ch, i) => {
     const isD = /\d/.test(ch);
-    const p = ez.expoOut(span(t, at + di * 0.06, 1.1));
+    const p = ez.expoOut(span(t, at + di * 0.08 * (dur / 1.1), dur * TEMPO));
     if (isD) {
       const target = +ch + 10 * (2 + (di % 2));
       const start = from != null ? +String(from).padStart(str.length, '0')[i] || 0 : 0;

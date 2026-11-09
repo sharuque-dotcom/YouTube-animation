@@ -20,7 +20,7 @@ const EVENTS = [
 ];
 const QUOTE = 'It is with deep regret, and tremendous burden that I am carrying on my conscience, that I would like to bring the following facts to your notice:';
 const TL = { x0: 120, x1: W - 120, y: H / 2 - 20 }; // big centred timeline in beat 1
-const scrubPos = (T, b) => lerp(0, 0.81, ez.p2InOut(span(T, b.date - 0.7, 2.6)));
+const scrubPos = (T, b) => lerp(0, 0.81, ez.p2InOut(span(T, b.date - 0.9, 3.2)));
 const yearAt = (pos) => {
   if (pos <= EVENTS[0].at) return 1987;
   for (let i = 1; i < EVENTS.length; i++) if (pos <= EVENTS[i].at) return lerp(EVENTS[i - 1].year, EVENTS[i].year, (pos - EVENTS[i - 1].at) / (EVENTS[i].at - EVENTS[i - 1].at));
@@ -107,7 +107,7 @@ function build(b) {
       at: b.letter,
       in: { type: 'zoom', focus: [1250, 845], depth: 6 },
       draw: (g, x) => {
-        const lines = typeOn(new OffscreenCanvas(1, 1).getContext('2d'), x.T, b.admit - 0.4, QUOTE, 0, 0, { size: 58, maxW: 1240, cps: 30 });
+        const lines = typeOn(new OffscreenCanvas(1, 1).getContext('2d'), x.T, b.admit - 0.4, QUOTE, 0, 0, { size: 58, maxW: 1240, cps: 24 });
         const follow = lerp(0, Math.max(0, lines - 2) * 92, ease(x.T, b.admit, 4));
         push(g, x, { from: 1.04, to: 1.12, focus: [W / 2, H / 2] });
         g.translate(0, -follow);
@@ -120,7 +120,7 @@ function build(b) {
           cg.fillStyle = UI.line; cg.fillRect(60, 180, cw - 120, 2);
           const hl = ease(x.T, b.admit + 3.5, 0.7);
           if (hl > 0) { cg.fillStyle = 'rgba(217,204,255,0.6)'; cg.fillRect(54, 300 + 2 * 92 - 52, (cw - 120) * hl, 72); }
-          typeOn(cg, x.T, b.admit - 0.4, QUOTE, 64, 300, { size: 58, maxW: 1240, cps: 30, lineH: 1.58, color: '#2b2838' });
+          typeOn(cg, x.T, b.admit - 0.4, QUOTE, 64, 300, { size: 58, maxW: 1240, cps: 24, lineH: 1.58, color: '#2b2838' });
         });
         g.restore();
       },
@@ -161,7 +161,7 @@ function build(b) {
           g.strokeStyle = UI.red; g.beginPath(); g.arc(0, 0, 170, -Math.PI / 2, -Math.PI / 2 + rp * Math.PI * 2); g.stroke();
           text(g, `${Math.round(rp * 100)}%`, 0, 30, { font: UI.HEAD, weight: 700, size: 86, color: UI.ink, align: 'center' });
           g.restore();
-          odometer(g, x.T, b.exist + 0.6, '₹5,040 cr', 900, 560, { size: 140, color: UI.red });
+          odometer(g, x.T, b.exist + 0.45, '₹5,040 cr', 900, 560, { size: 140, color: UI.red, dur: 0.75 });
           headline(g, x.T, ['never existed'], 905, 660, b.exist + 0.9, 1e9, { size: 64, color: UI.ink, weight: 600 });
         }
       },

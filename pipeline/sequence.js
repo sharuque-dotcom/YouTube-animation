@@ -52,7 +52,7 @@ export function sequence(beats, background) {
     const trans = (j) => {
       const tr = beats[j]?.in;
       if (!tr || tr.type === 'cut' || j === 0) return null;
-      const d = tr.dur ?? 0.7;
+      const d = (tr.dur ?? 0.8) * (tr.slow ?? 1.35);
       const start = beats[j].at - d * (tr.lead ?? 0.5);
       return T >= start && T < start + d ? { j, tr, p: (T - start) / d } : null;
     };
