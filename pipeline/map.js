@@ -21,7 +21,7 @@ export function view(lon, lat, scale) {
 }
 
 /** Draw land masses for a view */
-export function drawLand(ctx, project, scale, { color = C.paper, sea = C.teal } = {}) {
+export function drawLand(ctx, project, scale, { color = C.paper, sea = C.teal, stroke = 'rgba(31,29,26,0.35)', shadow = true } = {}) {
   ctx.save();
   ctx.setTransform(ctx.getTransform());
   ctx.fillStyle = paperFill(ctx, sea);
@@ -44,14 +44,16 @@ export function drawLand(ctx, project, scale, { color = C.paper, sea = C.teal } 
     path.closePath();
   }
   // soft paper shadow (an offset dark copy is much faster than shadowBlur)
-  ctx.save();
-  ctx.translate(5, 8);
-  ctx.fillStyle = 'rgba(0,0,0,0.28)';
-  ctx.fill(path);
-  ctx.restore();
+  if (shadow) {
+    ctx.save();
+    ctx.translate(5, 8);
+    ctx.fillStyle = 'rgba(0,0,0,0.28)';
+    ctx.fill(path);
+    ctx.restore();
+  }
   ctx.fillStyle = paperFill(ctx, color);
   ctx.fill(path);
-  ctx.strokeStyle = 'rgba(31,29,26,0.35)';
+  ctx.strokeStyle = stroke;
   ctx.lineWidth = 1.5;
   ctx.stroke(path);
   ctx.restore();

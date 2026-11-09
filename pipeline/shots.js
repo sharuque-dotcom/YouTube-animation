@@ -96,6 +96,13 @@ function ground(ctx, bg, p, opts = {}) {
 
 // ---------------------------------------------------------------- shot types
 const T = {};
+const OVERLAYS = [];
+/** Add shot types (and optional overlay drawers) from another module, e.g. pipeline/cinema.js */
+export function addShotTypes(types, overlay) {
+  Object.assign(T, types);
+  if (overlay) OVERLAYS.push(overlay);
+}
+export { landing, ground };
 
 T.photo = (ctx, sh, x) => {
   photo(ctx, sh.img, x.p, { zoom: sh.zoom || [1.06, 1.18], pan: sh.pan || [[0.015, 0], [-0.015, 0]], grade: sh.grade || 'doc', darken: sh.darken ?? 0.35 });
@@ -486,6 +493,7 @@ T.tear = (ctx, sh, x) => {
 
 // ---------------------------------------------------------------- overlays on any shot
 function overlays(ctx, sh, x) {
+  for (const o of OVERLAYS) o(ctx, sh, x);
   if (sh.note) {
     const at = sh.note.when ? when(x.words, sh.note.when, x.a) : x.a + 0.6;
     kinetic(ctx, x.t, [{ word: sh.note.text, at }], sh.note.x ?? W / 2, sh.note.y ?? H * 0.9, { size: sh.note.size || 64, font: 'Permanent Marker', weight: 400, color: sh.note.color || GOLD, out: x.b - 0.1 });
@@ -524,7 +532,7 @@ function impactsOf(sh, words, a) {
 
 // ---------------------------------------------------------------- scene builder
 /** Turn a shot list into a scene drawing function */
-export function shotScene(list) {
+export function shotScene(list, { shake = true } = {}) {
   let cache = null;
   return (ctx, s) => {
     const key = `${s.cue(0)}|${s.d}`;
@@ -539,7 +547,7 @@ export function shotScene(list) {
     }
     const { words, bounds, hits } = cache;
     const t = s.t;
-    for (const h of hits) impact(ctx, t, h, 16);
+    if (shake) for (const h of hits) impact(ctx, t, h, 16);
 
     let k = bounds.findIndex(([a, b]) => t < b);
     if (k < 0) k = bounds.length - 1;

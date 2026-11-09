@@ -60,7 +60,7 @@ export function text(ctx, str, x, y, o = {}) {
 export const typed = (str, p) => str.slice(0, Math.floor(str.length * clamp(p)));
 
 let grainTile;
-function grain(ctx, frame) {
+function grain(ctx, frame, amount = 0.03) {
   if (!grainTile) {
     grainTile = new OffscreenCanvas(256, 256);
     const g = grainTile.getContext('2d');
@@ -75,7 +75,7 @@ function grain(ctx, frame) {
   }
   const r = rand(Math.floor(frame / 2) * 31 + 1); // new grain every 2nd frame keeps files small
   ctx.save();
-  ctx.globalAlpha = 0.03;
+  ctx.globalAlpha = amount;
   ctx.fillStyle = ctx.createPattern(grainTile, 'repeat');
   ctx.translate(-r() * 256, -r() * 256);
   ctx.fillRect(0, 0, W + 256, H + 256);
@@ -92,8 +92,11 @@ function vignette(ctx) {
 
 // ---------- timeline playback ----------
 export class Player {
-  constructor(canvas, timeline, scenes) {
+  constructor(canvas, timeline, scenes, look) {
     this.ctx = canvas.getContext('2d');
+    this.look = look || null; // e.g. { cinema: true } for the documentary finish
+    this.post = new OffscreenCanvas(W, H);
+    this.glow = new OffscreenCanvas(W / 4, H / 4);
     this.timeline = timeline;
     this.scenes = scenes;
     this.layers = [new OffscreenCanvas(W, H), new OffscreenCanvas(W, H)];
@@ -154,7 +157,57 @@ export class Player {
       ctx.globalAlpha = 1;
     }
 
-    vignette(ctx);
-    grain(ctx, frame);
+    if (this.look?.cinema) this.cinema(frame);
+    else {
+      vignette(ctx);
+      grain(ctx, frame);
+    }
+  }
+
+  /** Documentary finish: grade, halation, vignette, gate weave, fine grain, 2.39:1 bars */
+  cinema(frame) {
+    const { ctx, post, glow } = this;
+    const L = this.look;
+    const p = post.getContext('2d');
+    p.filter = `contrast(${L.contrast ?? 1.14}) saturate(${L.saturate ?? 0.78}) brightness(${L.brightness ?? 0.94})`;
+    p.drawImage(ctx.canvas, 0, 0);
+    p.filter = 'none';
+    // split tone: teal shadows, warm highlights
+    p.globalCompositeOperation = 'soft-light';
+    const tone = p.createLinearGradient(0, 0, W, H);
+    tone.addColorStop(0, 'rgba(20,70,90,0.55)');
+    tone.addColorStop(1, 'rgba(30,80,95,0.45)');
+    p.fillStyle = tone;
+    p.fillRect(0, 0, W, H);
+    p.globalCompositeOperation = 'overlay';
+    p.fillStyle = 'rgba(255,170,90,0.07)';
+    p.fillRect(0, 0, W, H);
+    // halation: bright areas bleed a soft warm glow
+    const gl = glow.getContext('2d');
+    gl.filter = 'brightness(0.9) contrast(2.2) blur(6px)';
+    gl.drawImage(post, 0, 0, W / 4, H / 4);
+    gl.filter = 'none';
+    p.globalCompositeOperation = 'screen';
+    p.globalAlpha = 0.22;
+    p.drawImage(glow, 0, 0, W, H);
+    p.globalAlpha = 1;
+    p.globalCompositeOperation = 'source-over';
+    // gate weave: the frame drifts a fraction of a pixel, like film in a projector
+    const r = rand(frame * 7 + 3);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, H);
+    ctx.drawImage(post, (r() - 0.5) * 1.2, (r() - 0.5) * 1.2);
+    // heavy vignette
+    const g = ctx.createRadialGradient(W / 2, H / 2, H * 0.3, W / 2, H / 2, H * 1.0);
+    g.addColorStop(0, 'rgba(0,0,0,0)');
+    g.addColorStop(1, 'rgba(0,0,0,0.75)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+    grain(ctx, frame * 2, 0.055);
+    // 2.39:1 letterbox
+    const bar = Math.round((H - W / 2.39) / 2);
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, W, bar);
+    ctx.fillRect(0, H - bar, W, bar);
   }
 }
