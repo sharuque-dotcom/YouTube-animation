@@ -181,10 +181,15 @@ const started = Date.now();
 const BATCH = 15;
 const batches = [];
 for (let f = 0; f < total; f += BATCH) batches.push(f);
+// Workers may run at most a few batches ahead of the encoder, so memory stays flat.
 const pending = new Map();
+const idle = [];
 let next = 0;
+let written = 0;
+const AHEAD = pages.length * 2;
 const launch = (pg) => {
   if (next >= batches.length) return;
+  if (next >= written + AHEAD) { idle.push(pg); return; }
   const f = batches[next++];
   pending.set(f, pg.evaluate(([a, b]) => window.renderFrames(a, b), [f, BATCH]).then((r) => { launch(pg); return r; }));
 };
@@ -193,6 +198,8 @@ for (const f of batches) {
   while (!pending.has(f)) await new Promise((r) => setTimeout(r, 5));
   const frames = await pending.get(f);
   pending.delete(f);
+  written++;
+  while (idle.length && next < written + AHEAD) launch(idle.shift());
   for (const d of frames) {
     if (!ff.stdin.write(Buffer.from(d.split(',')[1], 'base64'))) {
       await new Promise((r) => ff.stdin.once('drain', r));
