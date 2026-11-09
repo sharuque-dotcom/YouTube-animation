@@ -1,5 +1,7 @@
 # Paper Empires: animation pipeline
 
+**Making a new episode:** follow `.claude/skills/new-episode/SKILL.md` (Claude Code picks it up as the `new-episode` skill). An episode is a script, a narration file and shot lists; no drawing code.
+
 Turns a narration script into a finished 1080p video with animated scenes, voice, a music bed, sound effects and subtitles.
 
 ```
@@ -20,6 +22,10 @@ Every animation is timed to the narration lines, so if you re-record the voice t
 | `episodes/<ep>/voice/` | *(optional)* your own recordings |
 | `episodes/<ep>/music.mp3` | *(optional)* background music |
 | `pipeline/` | The engine, voice builder and renderer |
+| `pipeline/shots.js` | Shot library (photo, kinetic, number, ride, bars, swarm, map, profile, doc, quote, letters, list, flow, vs, chapter, tear) driven by shot lists |
+| `pipeline/motion.js` | Motion rules: photo moves and grades, words landing at speech rhythm, crash-ins, whips, impacts |
+| `pipeline/fetch_photos.py` | Finds freely licensed photos on Wikimedia Commons and records credits |
+| `episodes/<ep>/shots.js` | The episode's visuals as shot lists |
 | `pipeline/kit.js` | Scene building blocks: stage/camera, chapter cards, cards, stamps, sticky notes, label strips, icons |
 | `pipeline/map.js` + `pipeline/data/land.json` | Paper-style world maps with pins and routes. Coastlines only, no country borders (Natural Earth, public domain) |
 | `episodes/<ep>/acts/` | Scene drawings for each chapter |

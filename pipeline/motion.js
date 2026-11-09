@@ -21,7 +21,7 @@ export async function loadImages(map) {
   await Promise.all(Object.entries(map).map(([k, src]) => new Promise((ok, fail) => {
     const im = new Image();
     im.onload = () => { images[k] = im; ok(); };
-    im.onerror = () => fail(new Error(`Could not load ${src}`));
+    im.onerror = () => { console.warn(`No image: ${src}`); ok(); }; // missing photos are skipped
     im.src = src;
   })));
 }
@@ -32,6 +32,7 @@ export const img = (k) => images[k];
  * zoom/pan are [from, to] over p (0..1). grade: 'doc' (muted, contrasty), 'cold', 'red', 'bw'.
  */
 export function photo(ctx, key, p, { zoom = [1.05, 1.15], pan = [[0, 0], [0, 0]], grade = 'doc', blur = 0, alpha = 1, darken = 0.25 } = {}) {
+  if (Array.isArray(key)) key = key.find((k) => images[k]); // first photo that exists
   const im = images[key];
   if (!im || alpha <= 0) return;
   const z = lerp(zoom[0], zoom[1], p);

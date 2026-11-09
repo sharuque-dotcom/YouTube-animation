@@ -47,8 +47,10 @@ const url = `http://127.0.0.1:${server.address().port}/pipeline/player.html` +
   `?headless&ep=${encodeURIComponent(epRel)}&build=${encodeURIComponent(buildRel)}`;
 
 // ---- audio: narration, music (ducked under the voice), impact sounds ----
-const { hits = [] } = await import(pathToFileURL(path.join(epDir, 'scenes.js')));
+const epMod = await import(pathToFileURL(path.join(epDir, 'scenes.js')));
+const hits = [...(epMod.hits || []), ...(epMod.extraHits ? epMod.extraHits(timeline) : [])];
 const hitTimes = hits.flatMap((h) => {
+  if (h.t != null) return [h.t];
   const sc = timeline.scenes.find((s) => s.id === h.scene);
   if (!sc) return [];
   return [sc.start + (h.cue != null ? sc.cues[h.cue].start : 0) + (h.at || 0)];
