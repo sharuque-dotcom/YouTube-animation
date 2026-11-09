@@ -1,7 +1,7 @@
 {
   "level": -21,
   "cues": [
-    { "scene": "letter",    "track": "music/hidden-agenda.mp3" },
+    { "scene": "letter",    "track": "music/investigations.mp3" },
     { "scene": "chapter1",  "track": "music/investigations.mp3" },
     { "scene": "chapter2",  "track": "music/spy-glass.mp3" },
     { "scene": "chapter3",  "track": "music/crypto.mp3" },

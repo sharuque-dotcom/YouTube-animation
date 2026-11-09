@@ -5,6 +5,7 @@ import { clamp, ease, text } from './engine.js';
 import { C, paperFill, markerLine } from './collage.js';
 
 let land = null;
+export const landRings = (res) => (land ? land[res] : []);
 export async function loadLand() {
   if (!land) land = await (await fetch('/pipeline/data/land.json')).json();
 }

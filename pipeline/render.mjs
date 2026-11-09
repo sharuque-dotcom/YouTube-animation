@@ -49,12 +49,18 @@ const url = `http://127.0.0.1:${server.address().port}/pipeline/player.html` +
 // ---- audio: narration, music (ducked under the voice), impact sounds ----
 const epMod = await import(pathToFileURL(path.join(epDir, 'scenes.js')));
 const hits = [...(epMod.hits || []), ...(epMod.extraHits ? epMod.extraHits(timeline) : [])];
-const hitTimes = hits.flatMap((h) => {
-  if (h.t != null) return [h.t];
-  const sc = timeline.scenes.find((s) => s.id === h.scene);
-  if (!sc) return [];
-  return [sc.start + (h.cue != null ? sc.cues[h.cue].start : 0) + (h.at || 0)];
+// every sound effect as { t, kind, vol }
+const sounds = hits.flatMap((h) => {
+  let t = h.t;
+  if (t == null) {
+    const sc = timeline.scenes.find((s) => s.id === h.scene);
+    if (!sc) return [];
+    t = sc.start + (h.cue != null ? sc.cues[h.cue].start : 0) + (h.at || 0);
+  }
+  return [{ t, kind: h.kind || 'boom', vol: h.vol ?? 0.9 }];
 });
+const hitTimes = sounds.map((x) => x.t);
+const hitKinds = sounds.map((x) => x.kind);
 const until = Number(flag('until')) || 0;
 const dur = until ? Math.min(until, timeline.duration) : timeline.duration;
 
@@ -117,7 +123,18 @@ const videoIn = remix
 const inputs = [...videoIn, '-i', path.join(buildDir, 'narration.wav')];
 inputs.push(...(musicFile ? [...(bed ? [] : ['-stream_loop', '-1']), '-i', musicFile]
   : ['-f', 'lavfi', '-i', `aevalsrc=exprs='${drone}':s=48000:d=${dur + 1},lowpass=f=700`]));
-hitTimes.forEach(() => inputs.push('-f', 'lavfi', '-i', `aevalsrc=exprs='${boom}':s=48000:d=2.5`));
+// sound effects: boom (impact), pop (UI element appears), tick (small UI step), whoosh (camera move), hit (soft low accent)
+const sfx = {
+  boom: [boom, 2.5, ''],
+  pop: ['0.6*sin(2*PI*(520+900*exp(-t*30))*t)*exp(-t*28)', 0.35, ''],
+  tick: ['0.4*sin(2*PI*1800*t)*exp(-t*90)', 0.1, ''],
+  whoosh: ['(random(0)*2-1)*sin(PI*min(t/0.7\\,1))^2*0.5', 0.7, ',highpass=f=500,lowpass=f=3500'],
+  hit: ['0.8*sin(2*PI*(60+40*exp(-t*12))*t)*exp(-t*5)+0.15*sin(2*PI*220*t)*exp(-t*9)', 1.6, ''],
+};
+hitTimes.forEach((_, i) => {
+  const [expr, d] = sfx[hitKinds[i]] || sfx.boom;
+  inputs.push('-f', 'lavfi', '-i', `aevalsrc=exprs='${expr}':s=48000:d=${d}`);
+});
 
 const graph = [
   // voice levelled to a broadcast-style loudness
@@ -126,7 +143,7 @@ const graph = [
     `afade=in:d=1,afade=out:st=${Math.max(0, dur - 3)}:d=3[m]`,
   // lower the music while someone is speaking
   `[m][v1]sidechaincompress=threshold=0.05:ratio=${bed ? 5 : 5}:attack=40:release=700[md]`,
-  ...hitTimes.map((t, i) => `[${3 + i}]adelay=${Math.round(t * 1000)}:all=1,aformat=channel_layouts=stereo,volume=0.9[h${i}]`),
+  ...hitTimes.map((t, i) => `[${3 + i}]adelay=${Math.round(t * 1000)}:all=1${(sfx[hitKinds[i]] || sfx.boom)[2]},aformat=channel_layouts=stereo,volume=${sounds[i].vol}[h${i}]`),
   `[v2][md]${hitTimes.map((_, i) => `[h${i}]`).join('')}amix=inputs=${2 + hitTimes.length}:normalize=0,` +
     'alimiter=limit=0.88[a]',
 ].join(';');

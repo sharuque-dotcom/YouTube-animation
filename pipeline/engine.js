@@ -112,6 +112,8 @@ export class Player {
     ctx.fillRect(0, 0, W, H);
     const s = {
       id: sc.id,
+      start: sc.start, // scene start in the episode, for things that continue across scenes
+      T: sc.start + t, // episode time (not clamped), for continuous pieces spanning scenes
       t: Math.max(0, t),
       d: sc.duration,
       frame,
@@ -158,6 +160,7 @@ export class Player {
     }
 
     if (this.look?.cinema) this.cinema(frame);
+    else if (this.look?.light) grain(ctx, frame, 0.018); // light mode: no dark vignette, barely-there grain
     else {
       vignette(ctx);
       grain(ctx, frame);
