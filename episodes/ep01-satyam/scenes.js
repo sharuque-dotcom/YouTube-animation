@@ -12,6 +12,8 @@ import * as act3 from './acts/act3.js';
 import * as act4 from './acts/act4.js';
 import * as act5 from './acts/act5.js';
 import { loadLand } from '../../pipeline/map.js';
+import { loadImages } from '../../pipeline/motion.js';
+import * as v2 from './coldopen-v2.js';
 import {
   C, backdrop, piece, tape, markerCircle, markerLine, arrow, highlight, camera, cameraPath, person, paperFill,
 } from '../../pipeline/collage.js';
@@ -339,8 +341,13 @@ function title(ctx, s) {
 }
 
 const acts = [act1, act2, act3, act4, act5];
-export const hits = [...coldHits, ...acts.flatMap((a) => a.hits)];
-export const scenes = Object.assign({ letter, crash, truth, title }, ...acts.map((a) => a.scenes));
+// Cold open: v2 (photos + kinetic type) by default; set COLD_OPEN = 'v1' for the original collage version
+const COLD_OPEN = 'v2';
+const cold = COLD_OPEN === 'v2' ? v2 : { hits: coldHits, scenes: { letter, crash, truth, title } };
+export const hits = [...cold.hits, ...acts.flatMap((a) => a.hits)];
+export const scenes = Object.assign({}, ...acts.map((a) => a.scenes), cold.scenes);
 export async function preload() {
   await loadLand();
+  const base = new URL('./photos/', import.meta.url).href;
+  await loadImages({ first: base + 'first-building.jpg', tech: base + 'tech-center.jpg', campus: base + 'campus.jpg' });
 }

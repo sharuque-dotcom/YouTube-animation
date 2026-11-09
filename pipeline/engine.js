@@ -115,6 +115,7 @@ export class Player {
       // when narration line i starts / ends (seconds into this scene)
       cue: (i) => sc.cues[i]?.start ?? 0,
       cueEnd: (i) => sc.cues[i]?.end ?? sc.duration,
+      line: (i) => sc.cues[i]?.text ?? '',
     };
     ctx.save();
     if (this.scenes[sc.id]) this.scenes[sc.id](ctx, s);

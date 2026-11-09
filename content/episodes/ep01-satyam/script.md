@@ -254,6 +254,7 @@ These match the widely reported record, but confirm each against a primary sourc
 - [ ] Tech Mahindra acquisition in April 2009
 - [ ] Conviction in April 2015, 7-year sentence
 - [ ] PwC: auditors convicted in India; SEC/PCAOB fined PwC India affiliates (2011)
+- [ ] Opening line of Raju's letter shown on screen in the v2 cold open: "It is with deep regret, and tremendous burden that I am carrying on my conscience, that I would like to bring the following facts to your notice"
 - [ ] Fake invoices count (CBI figures, often cited as ~7,000+), kept vague in script on purpose
 
 Script sticks to facts from court and regulator findings. Raju's personal-gain claims are framed as "claimed" vs "investigators disputed".

@@ -53,7 +53,8 @@ const hitTimes = hits.flatMap((h) => {
   if (!sc) return [];
   return [sc.start + (h.cue != null ? sc.cues[h.cue].start : 0) + (h.at || 0)];
 });
-const dur = timeline.duration;
+const until = Number(flag('until')) || 0;
+const dur = until ? Math.min(until, timeline.duration) : timeline.duration;
 
 /**
  * Music. Either:
@@ -72,11 +73,11 @@ function buildMusicBed() {
     const sc = timeline.scenes.find((s) => s.id === c.scene);
     if (!sc) throw new Error(`music.json: unknown scene ${c.scene}`);
     return { ...c, start: sc.start };
-  }).sort((a, b) => a.start - b.start);
+  }).sort((a, b) => a.start - b.start).filter((c) => c.start < dur);
   const args = ['-y', '-loglevel', 'error'];
   const parts = [];
   cues.forEach((c, i) => {
-    const end = i + 1 < cues.length ? cues[i + 1].start + XF : dur + 1;
+    const end = i + 1 < cues.length ? cues[i + 1].start + XF : Math.max(dur, c.start + XF) + 1;
     const len = end - c.start;
     args.push('-stream_loop', '-1', '-i', path.join(epDir, c.track));
     const fin = i === 0 ? 0.3 : XF;
@@ -128,7 +129,7 @@ const graph = [
     'alimiter=limit=0.88[a]',
 ].join(';');
 
-const out = path.join(buildDir, remix ? 'video-remix.mp4' : 'video.mp4');
+const out = path.join(buildDir, remix ? 'video-remix.mp4' : until ? `video-first${Math.round(until)}s.mp4` : 'video.mp4');
 const ffArgs = (extra) => ['-y', '-loglevel', 'error', ...inputs, '-filter_complex', graph,
   '-map', '0:v', '-map', '[a]', ...extra, '-c:a', 'aac', '-b:a', '192k', '-t', String(dur), '-movflags', '+faststart', out];
 if (remix) {
@@ -151,7 +152,7 @@ async function openPage() {
   return p;
 }
 const page = await openPage();
-const total = await page.evaluate('window.totalFrames');
+const total = Math.min(await page.evaluate('window.totalFrames'), Math.ceil(dur * fps));
 
 const stills = flag('stills');
 if (stills) {
