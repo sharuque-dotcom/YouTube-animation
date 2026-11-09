@@ -1,0 +1,70 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css">
+<style>
+ canvas { position: absolute; inset: 0; }
+ h1 { position: absolute; left: 150px; top: 150px; font-size: 96px; width: 700px; }
+ .kicker { position: absolute; left: 154px; top: 104px; font-family: Jakarta; font-weight: 600; font-size: 24px; color: var(--muted); }
+ .event { position: absolute; left: 1120px; top: 250px; width: 600px; padding: 0; overflow: hidden; }
+ .event img { width: 100%; height: 250px; object-fit: cover; display: block; }
+ .event .in { padding: 26px 32px 30px; }
+ .event .date { font-size: 21px; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
+ .event h2 { font-family: Jakarta; font-weight: 700; font-size: 38px; line-height: 1.15; margin-bottom: 12px; }
+ .event p { font-size: 22px; color: #4a475a; line-height: 1.45; }
+ .event .chips { margin-top: 20px; display: flex; gap: 12px; }
+ .pinlabel { position: absolute; left: 905px; top: 590px; padding: 12px 20px; font-family: Jakarta; font-weight: 700; font-size: 24px; }
+ .tl { position: absolute; left: 150px; right: 150px; bottom: 120px; height: 120px; padding: 26px 40px; }
+ .track { position: absolute; left: 40px; right: 40px; top: 44px; height: 8px; border-radius: 8px; background: #ece8f5; }
+ .fill { position: absolute; left: 40px; top: 44px; height: 8px; border-radius: 8px; background: var(--accent); width: 79%; }
+ .ev { position: absolute; top: 34px; transform: translateX(-50%); text-align: center; }
+ .ev i { display: block; width: 28px; height: 28px; margin: 0 auto 10px; border-radius: 50%; background: #fff; border: 5px solid #c9bfe6; }
+ .ev.done i { border-color: var(--accent); }
+ .ev.now i { width: 40px; height: 40px; margin-top: -6px; background: var(--accent); border: 8px solid #fff; box-shadow: 0 0 0 4px var(--accent), 0 8px 20px rgba(74,42,140,.35); }
+ .ev span { font-size: 19px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+ .ev.now span { color: var(--accent); }
+</style></head><body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<div class="kicker">PAPER EMPIRES · THE SATYAM FILE</div>
+<h1>22 years of a perfect story</h1>
+<div class="card pinlabel" style="left:960px;top:520px">Hyderabad</div>
+<div class="card event">
+  <img src="tech-center.jpg">
+  <div class="in">
+    <div class="date">7 January 2009</div>
+    <h2>The founder's letter</h2>
+    <p>B. Ramalinga Raju tells the board the company's cash had been inflated for years.</p>
+    <div class="chips"><span class="chip">What did it say?</span><span class="chip">Next: the arrest →</span></div>
+  </div>
+</div>
+<div class="card tl">
+  <div class="track"></div><div class="fill"></div>
+  <div class="ev done" style="left:4%"><i></i><span>1987 · Founded</span></div>
+  <div class="ev done" style="left:30%"><i></i><span>2001 · NYSE</span></div>
+  <div class="ev done" style="left:56%"><i></i><span>2008 · Award</span></div>
+  <div class="ev done" style="left:66%"><i></i><span>Dec '08 · Maytas</span></div>
+  <div class="ev now" style="left:81%"><i></i><span>Jan '09 · The letter</span></div>
+  <div class="ev" style="left:96%"><i></i><span>2015 · Verdict</span></div>
+</div>
+<script src="land.js"></script>
+<script>
+ const c = document.getElementById('c').getContext('2d');
+ const g = c.createLinearGradient(0, 0, 1920, 1080);
+ g.addColorStop(0, '#f3efff'); g.addColorStop(1, '#fdf4ee');
+ c.fillStyle = g; c.fillRect(0, 0, 1920, 1080);
+ const merc = (lat) => Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360)) * 180 / Math.PI;
+ const lon0 = 74, lat0 = 18, k = 38;
+ const P = ([x, y]) => [860 + (x - lon0) * k, 560 - (merc(y) - merc(lat0)) * k];
+ const path = new Path2D();
+ for (const r of LAND) { r.forEach((pt, i) => { const [x, y] = P(pt); i ? path.lineTo(x, y) : path.moveTo(x, y); }); path.closePath(); }
+ c.save(); c.translate(0, 10); c.fillStyle = 'rgba(80,60,140,.08)'; c.fill(path); c.restore();
+ c.fillStyle = '#ffffff'; c.fill(path);
+ c.strokeStyle = '#d8d1ea'; c.lineWidth = 2; c.stroke(path);
+ // dotted route to New York (off-screen left) and pin
+ const [hx, hy] = P([78.49, 17.39]);
+ c.setLineDash([2, 14]); c.lineCap = 'round'; c.strokeStyle = '#4a2a8c'; c.lineWidth = 6;
+ c.beginPath(); c.moveTo(hx, hy); c.quadraticCurveTo(hx - 420, hy + 40, -100, hy + 120); c.stroke(); c.setLineDash([]);
+ for (const [rad, a] of [[90, .08], [55, .14], [26, .25]]) { c.fillStyle = `rgba(74,42,140,${a})`; c.beginPath(); c.arc(hx, hy, rad, 0, 7); c.fill(); }
+ c.fillStyle = '#4a2a8c'; c.beginPath(); c.arc(hx, hy, 14, 0, 7); c.fill();
+ c.fillStyle = '#fff'; c.beginPath(); c.arc(hx, hy, 5, 0, 7); c.fill();
+ // connector from pin to event card
+ c.strokeStyle = '#4a2a8c'; c.lineWidth = 3; c.beginPath(); c.moveTo(hx + 14, hy - 6); c.bezierCurveTo(hx + 120, hy - 60, 1000, 420, 1118, 400); c.stroke();
+</script>
+</body></html>

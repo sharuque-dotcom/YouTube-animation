@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="style.css">
+<style>
+ h1 { position: absolute; left: 150px; top: 200px; font-size: 92px; width: 600px; }
+ .kicker { position: absolute; left: 154px; top: 140px; font-family: Jakarta; font-weight: 600; font-size: 24px; color: var(--muted); }
+ .lede { position: absolute; left: 154px; top: 520px; width: 560px; font-size: 30px; line-height: 1.45; color: #4a475a; }
+ .grid { position: absolute; left: 820px; top: 70px; width: 960px; display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+ .card { padding: 32px 34px; }
+ .wide { grid-column: span 2; }
+ .label { font-size: 22px; color: var(--muted); font-weight: 600; margin-bottom: 8px; display: flex; justify-content: space-between; }
+ .big { font-family: Jakarta; font-weight: 700; font-size: 62px; letter-spacing: -0.02em; white-space: nowrap; }
+ .sub { font-size: 20px; color: var(--muted); margin-top: 6px; }
+ .legend { display: flex; gap: 28px; font-size: 20px; color: #4a475a; margin-top: 6px; }
+ .dot { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+ .ringwrap { display: flex; align-items: center; gap: 28px; }
+ .bars { display: flex; align-items: flex-end; gap: 30px; height: 140px; margin-top: 50px; }
+ .bar { width: 120px; border-radius: 16px 16px 6px 6px; position: relative; }
+ .bar span { position: absolute; top: -40px; left: 0; right: 0; text-align: center; font-family: Jakarta; font-weight: 700; font-size: 30px; }
+ .bl { display: flex; gap: 30px; font-size: 19px; color: var(--muted); margin-top: 10px; }
+ .bl div { width: 120px; text-align: center; }
+ .b1 { width: 700px; height: 700px; background: #dcd0ff; left: -200px; top: 380px; }
+ .b2 { width: 600px; height: 600px; background: #ffdccb; left: 1300px; top: -250px; }
+</style></head><body>
+<div class="blob b1"></div><div class="blob b2"></div>
+<div class="kicker">PAPER EMPIRES · THE SATYAM FILE</div>
+<h1>Two numbers. One lie.</h1>
+<div class="lede">For years, the profit Satyam reported pulled further away from the profit it really made.</div>
+<div class="grid">
+  <div class="card wide">
+    <div class="label"><span>Profit, reported vs real</span><span class="tag amber">Illustrative</span></div>
+    <svg width="890" height="210" viewBox="0 0 890 250" preserveAspectRatio="none">
+      <g stroke="#ece8f5" stroke-width="2">
+        <line x1="0" y1="40" x2="890" y2="40"/><line x1="0" y1="110" x2="890" y2="110"/><line x1="0" y1="180" x2="890" y2="180"/></g>
+      <path d="M0,200 C120,190 220,175 330,150 S560,90 700,55 S840,25 890,18" fill="none" stroke="#4a2a8c" stroke-width="7" stroke-linecap="round"/>
+      <path d="M0,205 C150,200 260,196 380,192 S600,188 720,190 S840,196 890,198" fill="none" stroke="#f08a5d" stroke-width="7" stroke-linecap="round"/>
+      <path d="M890,18 L890,198" stroke="#e2412e" stroke-width="3" stroke-dasharray="8 8"/>
+      <circle cx="890" cy="18" r="10" fill="#4a2a8c"/><circle cx="890" cy="198" r="10" fill="#f08a5d"/>
+    </svg>
+    <div class="legend"><span><i class="dot" style="background:#4a2a8c"></i>Reported</span><span><i class="dot" style="background:#f08a5d"></i>Real</span><span style="margin-left:auto;color:#a3261a;font-weight:600">The gap ↕</span></div>
+  </div>
+  <div class="card">
+    <div class="label"><span>Cash the books showed</span></div>
+    <div class="big">₹5,361 cr</div>
+    <div class="sub">30 September 2008</div>
+  </div>
+  <div class="card">
+    <div class="label"><span>Never existed</span><span class="tag redt">94%</span></div>
+    <div class="ringwrap">
+      <svg width="130" height="130" viewBox="0 0 130 130"><circle cx="65" cy="65" r="52" fill="none" stroke="#f1edf9" stroke-width="16"/>
+      <circle cx="65" cy="65" r="52" fill="none" stroke="#e2412e" stroke-width="16" stroke-linecap="round" stroke-dasharray="307 327" transform="rotate(-90 65 65)"/></svg>
+      <div><div class="big" style="font-size:50px">₹5,040 cr</div><div class="sub">per the confession letter</div></div>
+    </div>
+  </div>
+  <div class="card wide">
+    <div class="label"><span>Operating margin, latest quarter</span></div>
+    <div class="bars"><div class="bar" style="height:130px;background:#4a2a8c"><span>24%</span></div><div class="bar" style="height:18px;background:#e2412e"><span>3%</span></div></div>
+    <div class="bl"><div>Claimed</div><div>Real</div></div>
+  </div>
+</div>
+<div class="fine">Illustrative recreation. Figures from B. Ramalinga Raju's letter to the Satyam board, 7 January 2009.</div>
+</body></html>
