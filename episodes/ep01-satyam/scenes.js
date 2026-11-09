@@ -16,6 +16,7 @@ import { loadImages } from '../../pipeline/motion.js';
 import * as v2 from './coldopen-v2.js';
 import * as v3 from './coldopen-v3.js';
 import * as v4 from './coldopen-v4.js';
+import * as v5 from './coldopen-v5.js';
 import '../../pipeline/cinema.js';
 import { shots, photos } from './shots.js';
 import { shotScene, hitsFor } from '../../pipeline/shots.js';
@@ -347,20 +348,21 @@ function title(ctx, s) {
 
 const acts = [act1, act2, act3, act4, act5];
 // Cold open: v2 (photos + kinetic type) by default; set COLD_OPEN = 'v1' for the original collage version
-const COLD_OPEN = 'v4';
+const COLD_OPEN = 'v5';
 const v3scenes = Object.fromEntries(Object.entries(v3.shots).map(([id, list]) => [id, shotScene(list, { shake: false })]));
-const cold = COLD_OPEN === 'v4' ? { hits: [], scenes: v4.scenes } : COLD_OPEN === 'v3' ? { hits: [], scenes: v3scenes } : COLD_OPEN === 'v2' ? v2 : { hits: coldHits, scenes: { letter, crash, truth, title } };
+const cold = COLD_OPEN === 'v5' ? { hits: [], scenes: v5.scenes } : COLD_OPEN === 'v4' ? { hits: [], scenes: v4.scenes } : COLD_OPEN === 'v3' ? { hits: [], scenes: v3scenes } : COLD_OPEN === 'v2' ? v2 : { hits: coldHits, scenes: { letter, crash, truth, title } };
 // Documentary finish (grade, glow, grain, 2.39:1 bars) on every frame
-export const look = COLD_OPEN === 'v3' ? { cinema: true } : COLD_OPEN === 'v4' ? { light: true } : null;
+export const look = COLD_OPEN === 'v3' ? { cinema: true } : ['v4', 'v5'].includes(COLD_OPEN) ? { light: true } : null;
 // Everything after the cold open: shot lists (shots.js) by default; set SHOTS = false for the collage version (acts/)
 const SHOTS = true;
 const shotScenes = Object.fromEntries(Object.entries(shots).map(([id, list]) => [id, shotScene(list)]));
 export const hits = [...cold.hits, ...(SHOTS ? [] : acts.flatMap((a) => a.hits))];
-export const extraHits = (timeline) => [...(SHOTS ? hitsFor(timeline, shots) : []), ...(COLD_OPEN === 'v3' ? hitsFor(timeline, v3.shots) : []), ...(COLD_OPEN === 'v4' ? v4.sounds(timeline) : [])];
+export const extraHits = (timeline) => [...(SHOTS ? hitsFor(timeline, shots) : []), ...(COLD_OPEN === 'v3' ? hitsFor(timeline, v3.shots) : []), ...(COLD_OPEN === 'v4' ? v4.sounds(timeline) : []), ...(COLD_OPEN === 'v5' ? v5.sounds(timeline) : [])];
 export const scenes = Object.assign({}, ...acts.map((a) => a.scenes), SHOTS ? shotScenes : {}, cold.scenes);
 export async function preload() {
   await loadLand();
   if (COLD_OPEN === 'v4') await v4.preload();
+  if (COLD_OPEN === 'v5') await v5.preload();
   const base = new URL('./photos/', import.meta.url).href;
   const files = { first: 'first-building.jpg', tech: 'tech-center.jpg', campus: 'campus.jpg' };
   await loadImages(Object.fromEntries(photos.map((k) => [k, base + (files[k] || `${k}.jpg`)])));
