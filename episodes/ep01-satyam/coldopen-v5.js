@@ -10,7 +10,9 @@ import { beats } from './coldopen-v4.js';
 
 const IDS = ['letter', 'crash', 'truth', 'title'];
 const HYD = [78.49, 17.39];
-const HUBS = [['Bengaluru', [77.59, 12.97]], ['Hyderabad', HYD], ['Pune', [73.86, 18.52]], ['Chennai', [80.27, 13.08]], ['Mumbai', [72.88, 19.08]], ['Gurugram', [77.03, 28.46]]];
+const HUBS = [['Bengaluru', [77.59, 12.97], -1], ['Hyderabad', HYD], ['Pune', [73.86, 18.52], 1, 34], ['Chennai', [80.27, 13.08]], ['Mumbai', [72.88, 19.08], -1], ['Gurugram', [77.03, 28.46]]];
+/** x of a hub label: right of the pin, or left (side -1) */
+const labelX = (g, name, hx, side = 1, size = 24) => { g.font = `600 ${size}px Inter`; return side < 0 ? hx - 26 - g.measureText(name).width - 40 : hx + 26; };
 const EVENTS = [
   { label: '1987 · Founded', at: 0.04, year: 1987 }, { label: '2001 · NYSE', at: 0.3, year: 2001 },
   { label: '2008 · Award', at: 0.56, year: 2008 }, { label: "Dec '08 · Maytas", at: 0.66, year: 2008.9 },
@@ -243,12 +245,12 @@ function build(b) {
       draw: (g, x) => {
         const c = indiaCam(x.T);
         const proj = lightMap(g, c.lon, c.lat, c.k);
-        HUBS.forEach(([name, ll], i) => {
+        HUBS.forEach(([name, ll, side, dy = 0], i) => {
           const [hx, hy] = proj(ll);
           const at = b.industry + i * 0.16;
           mapPin(g, x.T, at, hx, hy, { scale: 0.85 });
           const lp = spring(x.T, at + 0.12, { freq: 1.8, damp: 0.65 });
-          chip(g, name, hx + 26, hy - 24, { size: 24, weight: 600, scale: lp, alpha: Math.min(1, lp), stroke: null });
+          chip(g, name, labelX(g, name, hx, side), hy - 24 + dy, { size: 24, weight: 600, scale: lp, alpha: Math.min(1, lp), stroke: null });
         });
         const pr = spring(x.T, b.pride, { freq: 1.6, damp: 0.7 });
         chip(g, '★  The pride of the nation', 1230, 150, { size: 32, weight: 600, scale: pr, alpha: Math.min(1, pr), stroke: null, color: UI.purple });
@@ -263,10 +265,10 @@ function build(b) {
         push(g, x, { from: 1, to: 1.12, focus: [1000, 600] });
         const proj = lightMap(g, c.lon, c.lat, c.k);
         g.fillStyle = `rgba(255,120,100,${0.1 * ease(x.T, b.susp, 0.6)})`; g.fillRect(-200, -200, W + 400, H + 400);
-        HUBS.forEach(([name, ll]) => {
+        HUBS.forEach(([name, ll, side, dy = 0]) => {
           const [hx, hy] = proj(ll);
           mapPin(g, x.T, b.susp - 3, hx, hy, { scale: 0.85, color: UI.red });
-          chip(g, name, hx + 26, hy - 24, { size: 24, weight: 600, stroke: null, fill: UI.redSoft, color: '#a3261a' });
+          chip(g, name, labelX(g, name, hx, side), hy - 24 + dy, { size: 24, weight: 600, stroke: null, fill: UI.redSoft, color: '#a3261a' });
         });
         const su = spring(x.T, b.susp + 0.15, { freq: 1.4, damp: 0.72 });
         card(g, 1180 + (1 - Math.min(1, su)) * 400, 150, 620, 230, { alpha: Math.min(1, su) }, (cg) => {
