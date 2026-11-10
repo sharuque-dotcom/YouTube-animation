@@ -3,385 +3,385 @@
 On the morning of January 7th, 2009, the chairman of one of India's biggest companies sat down and wrote a letter.
 
 2
-00:00:09,114 --> 00:00:12,687
+00:00:09,564 --> 00:00:13,137
 In it, he admitted something nobody believed was possible.
 
 3
-00:00:13,387 --> 00:00:16,988
+00:00:14,037 --> 00:00:17,638
 The billions of rupees his company said it had in the bank?
 
 4
-00:00:17,488 --> 00:00:19,392
+00:00:18,538 --> 00:00:20,442
 Almost all of it… didn't exist.
 
 5
-00:00:20,342 --> 00:00:24,351
+00:00:22,292 --> 00:00:26,301
 By evening, the company's share price had crashed nearly 80 percent.
 
 6
-00:00:24,701 --> 00:00:28,626
+00:00:27,501 --> 00:00:31,426
 Fifty thousand employees didn't know if they still had jobs.
 
 7
-00:00:28,976 --> 00:00:35,346
+00:00:32,626 --> 00:00:38,996
 And India's entire IT industry, the pride of the nation, was suddenly under suspicion.
 
 8
-00:00:36,296 --> 00:00:39,550
+00:00:40,746 --> 00:00:44,000
 The strangest part? The company's name was Satyam.
 
 9
-00:00:40,150 --> 00:00:41,847
+00:00:44,900 --> 00:00:46,597
 In Sanskrit, Satyam means…
 
 10
-00:00:42,347 --> 00:00:42,967
+00:00:47,297 --> 00:00:47,917
 Truth.
 
 11
-00:00:51,617 --> 00:00:55,607
+00:00:57,167 --> 00:01:01,157
 The story starts in Hyderabad in 1987.
 
 12
-00:00:55,957 --> 00:01:06,239
+00:01:01,507 --> 00:01:11,789
 A businessman named B. Ramalinga Raju, from a family that had worked in textiles and real estate, starts a small software company with his brother.
 
 13
-00:01:06,589 --> 00:01:09,057
+00:01:12,139 --> 00:01:14,607
 They call it Satyam Computer Services.
 
 14
-00:01:10,007 --> 00:01:11,377
+00:01:15,557 --> 00:01:16,927
 The timing is perfect.
 
 15
-00:01:11,877 --> 00:01:16,396
+00:01:17,427 --> 00:01:21,946
 The world is going digital, and Western companies have discovered something:
 
 16
-00:01:16,746 --> 00:01:20,931
+00:01:22,296 --> 00:01:26,481
 Indian engineers can write the same code for a fraction of the cost.
 
 17
-00:01:21,881 --> 00:01:23,795
+00:01:27,431 --> 00:01:29,345
 Then comes the Y2K panic.
 
 18
-00:01:24,145 --> 00:01:29,189
+00:01:29,695 --> 00:01:34,739
 Every company on earth needs old software fixed before the year 2000,
 
 19
-00:01:29,539 --> 00:01:32,947
+00:01:35,089 --> 00:01:38,497
 and Indian IT firms are flooded with work.
 
 20
-00:01:33,897 --> 00:01:35,663
+00:01:39,447 --> 00:01:41,213
 Satyam grows explosively.
 
 21
-00:01:36,013 --> 00:01:39,951
+00:01:41,563 --> 00:01:45,501
 In 2001, it lists on the New York Stock Exchange.
 
 22
-00:01:40,301 --> 00:01:51,403
+00:01:45,851 --> 00:01:56,953
 By 2008 it has over 50,000 employees, offices around the world, and clients that include a huge list of Fortune 500 companies.
 
 23
-00:01:52,353 --> 00:01:58,931
+00:01:57,903 --> 00:02:04,481
 It's one of the "Big Four" of Indian IT, alongside TCS, Infosys and Wipro.
 
 24
-00:01:59,881 --> 00:02:03,532
+00:02:05,431 --> 00:02:09,082
 And in 2008, Satyam wins a prestigious award…
 
 25
-00:02:03,832 --> 00:02:05,938
+00:02:09,382 --> 00:02:11,488
 for excellence in corporate governance.
 
 26
-00:02:06,538 --> 00:02:08,336
+00:02:12,088 --> 00:02:13,886
 In other words, for being honest.
 
 27
-00:02:09,036 --> 00:02:11,380
+00:02:14,586 --> 00:02:16,930
 Remember that trophy. We'll come back to it.
 
 28
-00:02:15,330 --> 00:02:17,148
+00:02:20,880 --> 00:02:22,698
 Here's what nobody outside knew.
 
 29
-00:02:17,748 --> 00:02:24,127
+00:02:23,298 --> 00:02:29,677
 Years earlier, Satyam's real profits had started falling a little short of what the market expected.
 
 30
-00:02:24,477 --> 00:02:30,019
+00:02:30,027 --> 00:02:35,569
 The gap was small. A few numbers adjusted. Just enough to keep the share price happy.
 
 31
-00:02:30,369 --> 00:02:36,230
+00:02:35,919 --> 00:02:41,780
 The plan, presumably, was simple: next year would be better, and the gap would quietly close.
 
 32
-00:02:37,180 --> 00:02:38,446
+00:02:42,730 --> 00:02:43,996
 But it never closed.
 
 33
-00:02:39,046 --> 00:02:44,539
+00:02:44,596 --> 00:02:50,089
 Every year, the fake profit had to match the fake profit from the year before, plus growth.
 
 34
-00:02:44,889 --> 00:02:47,453
+00:02:50,439 --> 00:02:53,003
 Every lie needed a bigger lie to cover it.
 
 35
-00:02:48,403 --> 00:02:54,168
+00:02:53,953 --> 00:02:59,718
 And fake profits create a problem: if you claim you earned money, that money has to be somewhere.
 
 36
-00:02:54,518 --> 00:02:56,267
+00:03:00,068 --> 00:03:01,817
 So the money appeared on paper.
 
 37
-00:02:56,767 --> 00:03:01,580
+00:03:02,317 --> 00:03:07,130
 Cash balances. Bank deposits. Interest earned on those deposits.
 
 38
-00:03:01,930 --> 00:03:12,304
+00:03:07,480 --> 00:03:17,854
 According to investigators, thousands of fake invoices were created for work that was never done, and bank documents were forged to show money that was never there.
 
 39
-00:03:13,254 --> 00:03:16,426
+00:03:18,804 --> 00:03:21,976
 On paper, Satyam was sitting on a mountain of cash.
 
 40
-00:03:17,026 --> 00:03:19,701
+00:03:22,576 --> 00:03:25,251
 In reality, the mountain was made of paper.
 
 41
-00:03:23,651 --> 00:03:30,388
+00:03:29,201 --> 00:03:35,938
 By 2008, the hole had grown so big it couldn't be hidden much longer. Raju needed a way out.
 
 42
-00:03:30,738 --> 00:03:33,960
+00:03:36,288 --> 00:03:39,510
 And it seems he found one in a company called Maytas.
 
 43
-00:03:34,310 --> 00:03:35,292
+00:03:39,860 --> 00:03:40,842
 Notice something?
 
 44
-00:03:35,892 --> 00:03:38,304
+00:03:41,442 --> 00:03:43,854
 Maytas is Satyam… spelled backwards.
 
 45
-00:03:39,254 --> 00:03:46,885
+00:03:44,804 --> 00:03:52,435
 Maytas Properties and Maytas Infra were real-estate and infrastructure companies controlled by Raju's family.
 
 46
-00:03:47,235 --> 00:03:54,802
+00:03:52,785 --> 00:04:00,352
 On December 16th, 2008, Satyam announced it would buy them for about 1.6 billion dollars.
 
 47
-00:03:55,152 --> 00:04:01,144
+00:04:00,702 --> 00:04:06,694
 On the surface, it made no sense. Why would a software company buy construction businesses?
 
 48
-00:04:02,094 --> 00:04:03,830
+00:04:07,644 --> 00:04:09,380
 But look at it from the inside.
 
 49
-00:04:04,330 --> 00:04:10,702
+00:04:09,880 --> 00:04:16,252
 If Satyam "spent" its fake cash buying real companies, the fake money would disappear into a deal…
 
 50
-00:04:11,052 --> 00:04:13,440
+00:04:16,602 --> 00:04:18,990
 and be replaced by real buildings and land.
 
 51
-00:04:13,790 --> 00:04:15,891
+00:04:19,340 --> 00:04:21,441
 The hole would be filled. Forever.
 
 52
-00:04:16,841 --> 00:04:19,747
+00:04:22,391 --> 00:04:25,297
 It almost worked. But investors were furious.
 
 53
-00:04:20,097 --> 00:04:25,086
+00:04:25,647 --> 00:04:30,636
 Why was the company spending shareholders' money on the founder's family businesses?
 
 54
-00:04:25,436 --> 00:04:29,584
+00:04:30,986 --> 00:04:35,134
 Satyam's shares crashed. Within about a day, the deal was cancelled.
 
 55
-00:04:30,534 --> 00:04:31,903
+00:04:36,084 --> 00:04:37,453
 Then the hits kept coming.
 
 56
-00:04:32,253 --> 00:04:37,215
+00:04:37,803 --> 00:04:42,765
 Days later, it emerged that the World Bank had banned Satyam from its contracts.
 
 57
-00:04:37,565 --> 00:04:39,962
+00:04:43,115 --> 00:04:45,512
 Independent directors began resigning.
 
 58
-00:04:40,312 --> 00:04:42,098
+00:04:45,862 --> 00:04:47,648
 The escape door had slammed shut.
 
 59
-00:04:42,598 --> 00:04:44,992
+00:04:48,148 --> 00:04:50,542
 And Raju was trapped inside his own lie.
 
 60
-00:04:48,942 --> 00:04:52,447
+00:04:54,492 --> 00:04:57,997
 Which brings us back to January 7th, 2009.
 
 61
-00:04:52,797 --> 00:04:59,711
+00:04:58,347 --> 00:05:05,261
 Raju's letter to the board was addressed to the directors and the stock exchanges. And it was a full confession.
 
 62
-00:05:00,661 --> 00:05:06,141
+00:05:06,211 --> 00:05:11,691
 The cash and bank balances: overstated by more than 5,000 crore rupees.
 
 63
-00:05:06,491 --> 00:05:10,018
+00:05:12,041 --> 00:05:15,568
 That's over a billion dollars that simply did not exist.
 
 64
-00:05:10,368 --> 00:05:13,219
+00:05:15,918 --> 00:05:18,769
 Interest on deposits that didn't exist: fake.
 
 65
-00:05:13,569 --> 00:05:16,018
+00:05:19,119 --> 00:05:21,568
 Money owed by customers: inflated.
 
 66
-00:05:16,368 --> 00:05:22,297
+00:05:21,918 --> 00:05:27,847
 Even the latest quarter: the company claimed operating margins of around 24 percent.
 
 67
-00:05:22,647 --> 00:05:24,895
+00:05:28,197 --> 00:05:30,445
 The real figure was about 3 percent.
 
 68
-00:05:25,845 --> 00:05:31,186
+00:05:31,395 --> 00:05:36,736
 In the letter, Raju described his situation with a line that would become famous:
 
 69
-00:05:31,536 --> 00:05:36,119
+00:05:37,086 --> 00:05:41,669
 "It was like riding a tiger, not knowing how to get off without being eaten."
 
 70
-00:05:36,819 --> 00:05:44,940
+00:05:42,369 --> 00:05:50,490
 He also claimed he hadn't taken a single rupee for himself from the inflated numbers. Investigators would later dispute that.
 
 71
-00:05:45,890 --> 00:05:53,516
+00:05:51,440 --> 00:05:59,066
 That day, Satyam's shares lost almost 80 percent of their value. Billions in investor money vanished in hours.
 
 72
-00:05:53,866 --> 00:05:55,761
+00:05:59,416 --> 00:06:01,311
 And remember that governance trophy?
 
 73
-00:05:56,261 --> 00:05:57,353
+00:06:01,811 --> 00:06:02,903
 It was taken back.
 
 74
-00:06:01,303 --> 00:06:04,415
+00:06:06,853 --> 00:06:09,965
 Two days later, Ramalinga Raju was arrested.
 
 75
-00:06:04,765 --> 00:06:07,555
+00:06:10,315 --> 00:06:13,105
 The Indian government did something unusual.
 
 76
-00:06:07,905 --> 00:06:12,971
+00:06:13,455 --> 00:06:18,521
 It dissolved Satyam's board and appointed its own directors to save the company.
 
 77
-00:06:13,321 --> 00:06:20,012
+00:06:18,871 --> 00:06:25,562
 Not to save Raju, but to save the tens of thousands of employees and the clients depending on them.
 
 78
-00:06:20,962 --> 00:06:25,436
+00:06:26,512 --> 00:06:30,986
 In 2009, Tech Mahindra won the bid to take over Satyam.
 
 79
-00:06:25,786 --> 00:06:32,124
+00:06:31,336 --> 00:06:37,674
 The company survived, renamed Mahindra Satyam, and was later merged fully into Tech Mahindra.
 
 80
-00:06:32,474 --> 00:06:34,110
+00:06:38,024 --> 00:06:39,660
 The name "Satyam" disappeared.
 
 81
-00:06:35,460 --> 00:06:37,821
+00:06:41,010 --> 00:06:43,371
 The court case dragged on for six years.
 
 82
-00:06:38,171 --> 00:06:47,115
+00:06:43,721 --> 00:06:52,665
 In 2015, a special court convicted Raju, his brother and several others, sentencing them to seven years in prison.
 
 83
-00:06:47,465 --> 00:06:48,510
+00:06:53,015 --> 00:06:54,060
 And the auditors?
 
 84
-00:06:49,010 --> 00:06:55,707
+00:06:54,560 --> 00:07:01,257
 Satyam's accounts had been audited by PricewaterhouseCoopers, one of the biggest audit firms in the world.
 
 85
-00:06:56,057 --> 00:07:07,797
+00:07:01,607 --> 00:07:13,347
 Its auditors were also convicted in India, and US regulators fined PwC's Indian affiliates millions of dollars for failing to catch the fraud.
 
 86
-00:07:11,347 --> 00:07:14,051
+00:07:16,897 --> 00:07:19,601
 So how did a lie this big survive for years?
 
 87
-00:07:14,651 --> 00:07:19,283
+00:07:20,201 --> 00:07:24,833
 One: auditors trusted documents instead of checking with the banks directly.
 
 88
-00:07:19,633 --> 00:07:25,632
+00:07:25,183 --> 00:07:31,182
 Two: the board, including well-known independent directors, approved what the founder wanted.
 
 89
-00:07:25,982 --> 00:07:33,026
+00:07:31,532 --> 00:07:38,576
 Three: everyone was making money. When a share price keeps going up, very few people ask hard questions.
 
 90
-00:07:33,976 --> 00:07:36,446
+00:07:39,526 --> 00:07:41,996
 Satyam's fall changed Indian business.
 
 91
-00:07:36,796 --> 00:07:45,440
+00:07:42,346 --> 00:07:50,990
 Corporate governance rules were tightened, auditors faced new scrutiny, and "Satyam" became shorthand for corporate fraud in India.
 
 92
-00:07:46,790 --> 00:07:52,544
+00:07:52,340 --> 00:07:58,094
 A company named after truth, built on one of the biggest lies in Indian business history.
 
 93
-00:07:53,144 --> 00:07:57,437
+00:07:58,694 --> 00:08:02,987
 It started as a small gap between real numbers and reported ones.
 
 94
-00:07:57,787 --> 00:08:01,769
+00:08:03,337 --> 00:08:07,319
 And that's the lesson: frauds this big almost never begin big.
 
 95
-00:08:02,119 --> 00:08:05,959
+00:08:07,669 --> 00:08:11,509
 They begin small… and then they become a tiger you can't get off.
 
 96
-00:08:07,509 --> 00:08:14,836
+00:08:13,059 --> 00:08:20,386
 Next time on Paper Empires: how the world's biggest phone company went from number one to nothing in six years.
 
 97
-00:08:15,186 --> 00:08:17,000
+00:08:20,736 --> 00:08:22,550
 Subscribe, and I'll see you there.
