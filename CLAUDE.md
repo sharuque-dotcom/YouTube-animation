@@ -17,14 +17,19 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 ## Pipeline (see README.md and the `new-episode` skill)
 - `pipeline/tts.py` produces narration, timeline and subtitles. `pipeline/render.mjs` renders video and mixes audio (flags: `--stills`, `--from`, `--until`, `--remix`).
 - Shot types live in `lightshots.js` (light product-doc style, the style of episodes 1–2). Effects live in `fx.js`: hearts, chips, spy, scanHUD, person, diner.
-- **House style from episode 2 on is "Case File"** (inspired by lemomo-ai/lemo-opuscar, reimplemented in our own code):
-  - `dossier.js`: paper finish, halftone, headlines, stamps, callouts, evidence board.
-  - `iso.js`: isometric diorama, one signature set piece per episode.
-  - Style frames: `episodes/styleframes-ep2`, images in `content/episodes/ep02-nvidia/styleframes/`.
+- **House style = the light PURPLE style** (episode 2 / test C look: `lightshots.js` + `fx.js` story effects). The owner prefers it over the Case File paper look.
+- The Case File toolkit (`dossier.js`, `iso.js`, `episodes/ep02-nvidia/casefile.js`, `episodes/styleframes-ep2`) is kept as a parts bin. Reuse ideas from it (isometric diorama, stamps, scan, evidence board) only when recoloured to the purple theme.
 - Don't run code downloaded from other repos; the safety check blocks it. Read their docs and reimplement the ideas instead.
+
+## Workflow for every new episode (owner's request)
+1. Write the draft script (fact-checked, with sources) and send it for approval.
+2. Plan the visuals shot by shot: story-specific motion graphics for every line.
+3. Check github.com/lemomo-ai/lemo-opuscar (styles, e.g. Caption News, Visual Investigation, Satellite Briefing, Briefing Board, Exploded Teardown, Data Physicalization, Broadcast News Package) for animation and motion-graphics ideas, and adapt them to the purple theme in our own code. If adapting is too hard, design our own.
+4. Send a 45–60 s test clip and wait for the go-ahead.
+5. Render the full video at **1080p only** (no 720p copies).
 
 ## Status (update this when something changes)
 - Episode 1 Satyam: published, along with its Shorts.
-- Episode 2 NVIDIA ("The CEO, the Chips and the Alleged Spy"): the story is approved and the treatment is at `content/episodes/ep02-nvidia/TREATMENT.md`. Three Case File style frames were sent and are **awaiting approval**.
-  - Next: a 45–60 s test clip in Case File style, then the full re-render.
-  - Then: update `shorts.json` (the timeline moved when the `sub` scene was added), make a thumbnail, and re-check facts on publish day.
+- Episode 2 NVIDIA ("The CEO, the Chips and the Alleged Spy"): full 1080p render in the purple style.
+  - Remaining: update `shorts.json` (the timeline moved when the `sub` scene was added), make a thumbnail, and re-check facts on publish day.
+- Next week: episode 3, following the workflow above.
