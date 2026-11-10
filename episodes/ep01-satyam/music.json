@@ -1,13 +1,9 @@
 {
   "level": -21,
   "cues": [
-    { "scene": "letter",    "track": "music/investigations.mp3" },
-    { "scene": "chapter1",  "track": "music/investigations.mp3" },
-    { "scene": "chapter2",  "track": "music/spy-glass.mp3" },
-    { "scene": "chapter3",  "track": "music/crypto.mp3" },
-    { "scene": "chapter4",  "track": "music/interloper.mp3" },
-    { "scene": "chapter5",  "track": "music/hitman.mp3", "gain": -2 },
-    { "scene": "chapter6",  "track": "music/lightless-dawn.mp3", "gain": 1 },
-    { "scene": "endcard",   "track": "music/investigations.mp3" }
+    { "scene": "letter",   "track": "music/theme.mp3" },
+    { "scene": "chapter2", "track": "music/tension.mp3" },
+    { "scene": "chapter4", "track": "music/fall.mp3" },
+    { "scene": "chapter6", "track": "music/resolve.mp3" }
   ]
 }
