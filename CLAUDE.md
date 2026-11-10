@@ -29,6 +29,7 @@ The owner reads on a phone, so keep messages short and put the outcome first.
   - warm key and cool fill, not "moody"
   - also: volumetric rays, exponential falloff, bloom/halation, depth occlusion, inertia and weight (heavy sways slowly, light reacts fast), depth-scaled particles (near = thick and fast, far = thin and slow)
 - No single-frame pops: flashes and transitions build over about 8 frames and recover over about 10.
+- Pick the look per story. Night/painterly suits episode 3 (Ueno), but dark is NOT a rule for every video; the light purple style stays the default.
 - Detail target (the owner's reference: a painterly lighthouse made with Claude): layered depth (far, mid and near planes), textured clouds with rim light, volumetric light beams, depth-scaled rain, grass with inertia, film grain, and small story details (a lit window, distant lights). Not flat clip-art. Build key set pieces with that level of detail.
 - After every change, render stills of the new shots, look at them, and fix them before the full render.
 - Topic shortlist: `content/topics-shortlist.md`.
