@@ -1,1 +1,5 @@
-[]
+[
+  { "name": "short1-email", "start": 0, "end": 50.68, "hook": "Nvidia's CEO sent\\Nthis email. Here's\\Nwhy it matters" },
+  { "name": "short2-megaspeed", "start": 185.77, "end": 242.5, "hook": "The company at the\\Ncentre of the Nvidia\\Nspy allegations" },
+  { "name": "short3-report", "start": 245.3, "end": 301.27, "hook": "The report that put\\NNvidia's CEO under\\Nscrutiny" }
+]
