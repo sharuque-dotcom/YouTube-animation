@@ -34,7 +34,7 @@ export const shots = {
     { type: 'aiboom', dissolve: 'researchers', boom: 'AI boom', hub: 'needed Nvidia', labels: ['made for video games', 'perfect for training AI', 'the AI boom runs on Nvidia'] },
   ],
   value: [
-    { type: 'race', when: 'trillion', title: "the world's most valuable companies", note: 'approximate market values, end of each year · 2026 = late 2026', years: [2019, 2020, 2021, 2022, 2023, 2024, 2026], companies: [
+    { type: 'race', when: 'trillion', title: "the world's most valuable companies", note: 'approximate market values at the end of each year', years: [2019, 2020, 2021, 2022, 2023, 2024, 2025], companies: [
       { name: 'Apple', color: '#c9b8ff', v: [1.29, 2.26, 2.91, 2.07, 2.99, 3.79, 4.0] },
       { name: 'Microsoft', color: '#ffc9a8', v: [1.2, 1.68, 2.52, 1.79, 2.79, 3.13, 3.5] },
       { name: 'Alphabet', color: '#b8e0d2', v: [0.92, 1.19, 1.92, 1.15, 1.76, 2.33, 3.7] },
