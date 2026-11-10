@@ -46,6 +46,11 @@ const server = createServer(async (req, res) => {
 const url = `http://127.0.0.1:${server.address().port}/pipeline/player.html` +
   `?headless&ep=${encodeURIComponent(epRel)}&build=${encodeURIComponent(buildRel)}`;
 
+const until = Number(flag('until')) || 0;
+const dur = until ? Math.min(until, timeline.duration) : timeline.duration;
+// --from: start the render part-way through (for test clips of a middle section)
+const FROM = Number(flag('from')) || 0;
+const LEN = dur - FROM;
 // ---- audio: narration, music (ducked under the voice), impact sounds ----
 const epMod = await import(pathToFileURL(path.join(epDir, 'scenes.js')));
 const hits = [...(epMod.hits || []), ...(epMod.extraHits ? epMod.extraHits(timeline) : [])];
@@ -58,11 +63,9 @@ const sounds = hits.flatMap((h) => {
     t = sc.start + (h.cue != null ? sc.cues[h.cue].start : 0) + (h.at || 0);
   }
   return [{ t, kind: h.kind || 'boom', vol: h.vol ?? 0.9 }];
-});
+}).map((x) => ({ ...x, t: x.t - FROM })).filter((x) => x.t >= 0 && x.t < LEN);
 const hitTimes = sounds.map((x) => x.t);
 const hitKinds = sounds.map((x) => x.kind);
-const until = Number(flag('until')) || 0;
-const dur = until ? Math.min(until, timeline.duration) : timeline.duration;
 
 /**
  * Music. Either:
@@ -120,8 +123,9 @@ const remix = args.includes('--remix');
 const videoIn = remix
   ? ['-i', path.join(buildDir, 'video.mp4')]
   : ['-f', 'image2pipe', '-framerate', String(fps), '-c:v', 'mjpeg', '-i', 'pipe:0'];
-const inputs = [...videoIn, '-i', path.join(buildDir, 'narration.wav')];
-inputs.push(...(musicFile ? [...(bed ? [] : ['-stream_loop', '-1']), '-i', musicFile]
+const ss = FROM ? ['-ss', String(FROM)] : [];
+const inputs = [...videoIn, ...ss, '-i', path.join(buildDir, 'narration.wav')];
+inputs.push(...(musicFile ? [...(bed ? [] : ['-stream_loop', '-1']), ...ss, '-i', musicFile]
   : ['-f', 'lavfi', '-i', `aevalsrc=exprs='${drone}':s=48000:d=${dur + 1},lowpass=f=700`]));
 // sound effects: boom (impact), pop (UI element appears), tick (small UI step), whoosh (camera move), hit (soft low accent)
 const sfx = {
@@ -140,7 +144,7 @@ const graph = [
   // voice levelled to a broadcast-style loudness
   '[1]aresample=48000,loudnorm=I=-15:TP=-1.5:LRA=9,aresample=48000,aformat=channel_layouts=stereo,asplit=2[v1][v2]',
   `[2]aresample=48000,aformat=channel_layouts=stereo,volume=${bed ? 1 : musicFile ? 0.35 : 0.28},` +
-    `afade=in:d=1,afade=out:st=${Math.max(0, dur - 3)}:d=3[m]`,
+    `afade=in:d=1,afade=out:st=${Math.max(0, LEN - (FROM ? 1 : 3))}:d=${FROM ? 1 : 3}[m]`,
   // lower the music while someone is speaking
   `[m][v1]sidechaincompress=threshold=0.05:ratio=${bed ? 5 : 5}:attack=40:release=700[md]`,
   ...hitTimes.map((t, i) => `[${3 + i}]adelay=${Math.round(t * 1000)}:all=1${(sfx[hitKinds[i]] || sfx.boom)[2]},aformat=channel_layouts=stereo,volume=${sounds[i].vol}[h${i}]`),
@@ -148,9 +152,9 @@ const graph = [
     'alimiter=limit=0.88[a]',
 ].join(';');
 
-const out = path.join(buildDir, remix ? 'video-remix.mp4' : until ? `video-first${Math.round(until)}s.mp4` : 'video.mp4');
+const out = path.join(buildDir, remix ? 'video-remix.mp4' : FROM ? `video-${Math.round(FROM)}-${Math.round(dur)}s.mp4` : until ? `video-first${Math.round(until)}s.mp4` : 'video.mp4');
 const ffArgs = (extra) => ['-y', '-loglevel', 'error', ...inputs, '-filter_complex', graph,
-  '-map', '0:v', '-map', '[a]', ...extra, '-c:a', 'aac', '-b:a', '192k', '-t', String(dur), '-movflags', '+faststart', out];
+  '-map', '0:v', '-map', '[a]', ...extra, '-c:a', 'aac', '-b:a', '192k', '-t', String(LEN), '-movflags', '+faststart', out];
 if (remix) {
   const r = spawnSync('ffmpeg', ffArgs(['-c:v', 'copy']), { stdio: 'inherit' });
   if (r.status) throw new Error('Remix failed');
@@ -197,7 +201,7 @@ const pages = [page, ...(await Promise.all(Array.from({ length: workers - 1 }, o
 const started = Date.now();
 const BATCH = 15;
 const batches = [];
-for (let f = 0; f < total; f += BATCH) batches.push(f);
+for (let f = Math.round(FROM * fps); f < total; f += BATCH) batches.push(f);
 // Workers may run at most a few batches ahead of the encoder, so memory stays flat.
 const pending = new Map();
 const idle = [];

@@ -11,5 +11,5 @@ export const scenes = Object.fromEntries(Object.entries(shots).map(([id, list]) 
 export async function preload() {
   await loadLand();
   const base = new URL('./photos/', import.meta.url).href;
-  await loadImages(Object.fromEntries(photos.map((k) => [k, `${base}${k}.jpg`])));
+  await loadImages(Object.fromEntries(photos.map((f) => [f.replace(/\.\w+$/, ''), base + (f.includes('.') ? f : `${f}.jpg`)])));
 }

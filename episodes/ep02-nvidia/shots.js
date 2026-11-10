@@ -3,13 +3,13 @@ const SG = [103.82, 1.35], KL = [101.69, 3.14], SZ = [114.06, 22.54], TAINAN = [
 const H = 1080;
 const RECREATION = { text: 'Recreation · words as reported', y: 990 };
 
-export const photos = ['jensen', 'nvidiahq', 'singapore', 'capitol', 'gpu', 'datacenter', 'kualalumpur'];
+export const photos = ['jensen', 'nvidiahq', 'singapore', 'capitol', 'gpu', 'datacenter', 'kualalumpur', 'trump', 'nvidialogo.png'];
 
 export const shots = {
   // ---------------------------------------------------------------- cold open
   c_email: [
     { type: 'email', from: 'Jensen Huang', to: 'Nvidia employees', date: 'Sunday, 8 November 2026', subject: '', body: 'I was unfaithful to my wife. My actions hurt her and our children. There is no excuse for what I did.', when: 'I was unfaithful', until: 'what I did', note: RECREATION },
-    { at: 'The man was', type: 'photo', img: 'jensen', text: 'Jensen Huang · founder and CEO of Nvidia' },
+    { at: 'The man was', type: 'photo', img: 'jensen', logo: 'nvidialogo', text: 'Jensen Huang · founder and CEO of Nvidia' },
   ],
   c_twist: [
     { type: 'kinetic', text: 'Not just *an affair', size: 140, dark: true },
@@ -20,7 +20,7 @@ export const shots = {
     { type: 'list', items: [{ text: 'A LOVE STORY?', when: 'love story' }, { text: 'A SPY STORY?', when: 'spy story' }, { text: 'A CHIP STORY?', when: 'chips', color: 'yellow' }] },
     { at: 'Maybe all three', type: 'kinetic', text: 'Maybe *all three.', size: 140 },
   ],
-  title: [{ type: 'title', title: 'Toppled Giants', sub: 'Episode 2 · The CEO, the Chips and the Alleged Spy' }],
+  title: [{ type: 'sting', title: 'Toppled Giants', sub: 'Episode 2 · The CEO, the Chips and the Alleged Spy' }],
 
   // ---------------------------------------------------------------- 1
   chapter1: [{ type: 'chapter', num: 1, title: 'The Man Who Powers AI', img: 'jensen' }],
@@ -36,14 +36,14 @@ export const shots = {
   ],
   value: [
     { type: 'number', value: 4.5, decimals: 1, prefix: '$', suffix: ' trillion', when: '4.5', label: 'Nvidia, late 2026' },
-    { at: 'And Jensen Huang', type: 'photo', img: 'jensen', text: 'one of the most powerful businessmen alive' },
+    { at: 'And Jensen Huang', type: 'photo', img: 'jensen', logo: 'nvidialogo', text: 'one of the most powerful businessmen alive' },
   ],
 
   // ---------------------------------------------------------------- 2
   chapter2: [{ type: 'chapter', num: 2, title: 'The Chip Wall', img: 'datacenter' }],
   wall: [
     { type: 'kinetic', text: 'Not just *products', size: 140, sub: 'strategic weapons' },
-    { at: 'Since 2022', type: 'map', from: [95, 30, 5.5], to: [104, 34, 8], pins: [{ at: [104, 35], label: 'China', when: 'China' }], text: 'US limits on advanced AI chips · since 2022' },
+    { at: 'Since 2022', type: 'export', cut: 'restricted', text: 'US limits on advanced AI chips to China · since 2022' },
     { at: 'China is a huge', type: 'kinetic', text: 'The rules cost Nvidia *billions', size: 110 },
   ],
   leak: [
@@ -74,12 +74,14 @@ export const shots = {
     { at: 'It calls the reports', type: 'quote', text: 'Misleading information and incorrect insinuations.', when: 'misleading', until: 'insinuations', by: '— Megaspeed' },
   ],
 
+  sub: [{ type: 'subscribe', clickWhen: 'tap subscribe', text: 'it really helps the channel' }],
+
   // ---------------------------------------------------------------- 4
   chapter4: [{ type: 'chapter', num: 4, title: 'The Report', img: 'nvidiahq' }],
   report: [
     { type: 'kinetic', text: '29 October', size: 150, sub: 'The New York Times', dark: true },
     { at: 'It reported that American', type: 'profile', name: 'A person close|to Jensen Huang', role: 'could be a Chinese intelligence asset, the report said', caption: 'no photo shown', dark: true },
-    { at: 'The concern', type: 'flow', title: 'the concern, according to the report', nodes: [{ text: 'NVIDIA', sub: 'information', when: 'Nvidia', icon: 'computer' }, { text: 'THE PRESIDENT', sub: 'access', when: 'President', color: 'yellow' }], dark: true },
+    { at: 'The concern', type: 'flow', title: 'the concern, according to the report', nodes: [{ text: 'NVIDIA', sub: 'information', when: 'Nvidia', img: 'nvidialogo' }, { text: 'THE PRESIDENT', sub: 'access', when: 'President', img: 'trump', fit: 'cover', color: 'yellow' }], dark: true },
   ],
   more: [
     { type: 'list', items: [{ text: 'WALL STREET JOURNAL', sub: 'suspicion in the US, Singapore and Taiwan', when: 'Wall Street' }, { text: 'FINANCIAL TIMES', sub: 'a romantic relationship', when: 'Financial', color: 'yellow' }], dark: true },
@@ -122,5 +124,5 @@ export const shots = {
     { at: 'Now, in a world', type: 'kinetic', text: 'Something far more *human.', size: 130, dark: true },
     { at: 'This story is still', type: 'kinetic', text: 'Still *developing', size: 140, sub: 'as of 10 November 2026' },
   ],
-  endcard: [{ type: 'title', title: 'Toppled Giants', sub: 'Subscribe for the next story' }],
+  endcard: [{ type: 'subscribe', clickWhen: 'Subscribe', text: 'see you in the next story' }],
 };

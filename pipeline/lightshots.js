@@ -8,10 +8,19 @@ import { sequence, push } from './sequence.js';
 import { sceneWords, when, plan, landing } from './shots.js';
 import {
   UI, TEMPO, spring, ease, easeIn, inOut, world, headline, odometer, typeOn, card, chip, photoIn,
-  lightMap, mapPin, avatar,
+  lightMap, mapPin, avatar, cursor,
 } from './lightui.js';
 import { trophy, building } from './kit.js';
 
+/** Words land when spoken, but never later than a quick stagger from the shot start (no waiting) */
+const tight = (ws, a, lead = 0.3, gap = 0.11) => ws.map((w, k) => ({ ...w, at: Math.min(w.at, a + lead + k * gap) }));
+/** Draw an image to fit inside a box (logos) */
+function imageIn(g, key, x, y, w, h) {
+  const im = img(key);
+  if (!im) return;
+  const s = Math.min(w / im.width, h / im.height);
+  g.drawImage(im, x + (w - im.width * s) / 2, y + (h - im.height * s) / 2, im.width * s, im.height * s);
+}
 const clean = (s = '') => s.replace(/\*/g, '').replace(/\|/g, ' ');
 const pick = (k) => (Array.isArray(k) ? k.find((x) => img(x)) : k);
 const FILLS = ['#c9b8ff', '#ffc9a8', '#b8e0d2', '#f5c6e0', '#ffe2a8'];
@@ -86,6 +95,14 @@ L.photo = (g, sh, x) => {
   card(g, 240, 90, 1440, 770, { r: 40, alpha: Math.min(1, ein * 1.5) }, (cg, cw, ch) => {
     if (k) photoIn(cg, k, 0, 0, cw, ch, { zoom: lerp(1.12, 1.0, ease(x.T, x.a, 4)) });
   });
+  if (sh.logo) {
+    const lp = spring(x.T, x.a + 0.6, { freq: 1.6, damp: 0.65 });
+    if (lp > 0.01) {
+      g.save(); g.translate(400, 190); g.scale(lp, lp);
+      card(g, -150, -60, 300, 120, { r: 30 }, (cg) => imageIn(cg, sh.logo, 30, 22, 240, 76));
+      g.restore();
+    }
+  }
   g.restore();
   if (sh.text) pill(g, clean(sh.text), W / 2, 900, x.a + 0.5, x.T, { size: 34 });
   if (sh.sub) pill(g, clean(sh.sub), W / 2, 985, x.a + 0.9, x.T, { size: 26, fill: UI.soft, color: UI.purple });
@@ -95,7 +112,7 @@ L.kinetic = (g, sh, x) => {
   if (sh.bg && !['deep', 'navy', 'paper'].includes(sh.bg)) photoBG(g, sh.bg, x);
   push(g, x, { from: 1, to: 1.06 });
   const lines = sh.text.split('|');
-  const words = landing(x.words, sh.text.replace(/\|/g, ' '), x.a, x.b);
+  const words = tight(landing(x.words, sh.text.replace(/\|/g, ' '), x.a, x.b), x.a);
   statement(g, x.T, words, lines, W / 2, H / 2 - (sh.sub ? 40 : 0), { size: Math.min(120, (sh.size || 130) * 0.82) });
   if (sh.sub) pill(g, clean(sh.sub), W / 2, H / 2 + lines.length * 70 + 40, (words[words.length - 1]?.at ?? x.a) + 0.3, x.T, { size: 30, fill: UI.soft, color: UI.purple });
 };
@@ -107,7 +124,8 @@ L.number = (g, sh, x) => {
   const v = sh.value;
   const num = `${sh.prefix || ''}${v.toLocaleString('en-IN', { maximumFractionDigits: sh.decimals || 0, minimumFractionDigits: sh.decimals || 0 })}${sh.suffix || ''}`;
   if (sh.sub) pill(g, clean(sh.sub), W / 2, 300, at - 0.2, x.T, { size: 30, fill: UI.soft, color: UI.purple });
-  odometer(g, x.T, at - 0.15, num, W / 2, 600, { size: 230, align: 'center', color: sh.color ? UI.red : TH.text });
+  const roll = Math.max(0.9, at - x.a + 0.3) / TEMPO;
+  odometer(g, x.T, x.a + 0.1, num, W / 2, 600, { size: 230, align: 'center', color: sh.color ? UI.red : TH.text, dur: Math.min(roll, 3) });
   if (sh.label) pill(g, clean(sh.label), W / 2, 680, at + 0.5, x.T, { size: 34 });
 };
 
@@ -162,12 +180,13 @@ L.ride = (g, sh, x) => {
 L.bars = (g, sh, x) => {
   push(g, x, { from: 1, to: 1.05 });
   card(g, 220, 90, W - 440, 880, { r: 36 }, (cg, cw, ch) => {
-    if (sh.title) statement(cg, x.T, landing(x.words, sh.title, x.a, x.b), [sh.title], cw / 2, 90, { size: 52 });
+    if (sh.title) statement(cg, x.T, tight(landing(x.words, sh.title, x.a, x.b), x.a), [sh.title], cw / 2, 90, { size: 52 });
     const n = sh.bars.length, bw = Math.min(200, 1100 / n), gap = bw * 0.5;
     const total = n * bw + (n - 1) * gap, base = ch - 130, max = sh.max || Math.max(...sh.bars.map((b) => b.value + (b.top || 0)));
     const hmax = ch - 330;
     sh.bars.forEach((b, i) => {
-      const at = b.when ? when(x.words, b.when, x.a) : x.a + 0.3 + i * 0.25;
+      const at0 = b.when ? when(x.words, b.when, x.a) : x.a + 0.3 + i * 0.25;
+      const at = i === 0 ? Math.min(at0, x.a + 0.35) : at0;
       const gr = spring(x.T, at, { freq: 1.2, damp: 0.75 });
       const h = (b.value / max) * hmax * gr, ht = ((b.top || 0) / max) * hmax * gr;
       const bx = cw / 2 - total / 2 + i * (bw + gap);
@@ -191,7 +210,7 @@ L.swarm = (g, sh, x) => {
     const f = hit ? ease(x.T, redAt + c * 0.02, 0.5) : 0;
     avatar(g, ox + c * gp, oy + rr * gp, 21 * Math.max(0, ap), f > 0.5 ? '#f4a597' : FILLS[i % 5]);
   }
-  const at = sh.when ? when(x.words, sh.when, x.a) : x.a + 0.4;
+  const at = Math.min(sh.when ? when(x.words, sh.when, x.a) : x.a + 0.4, x.a + 0.35);
   const lab = clean(sh.label || '');
   const isNum = /\d/.test(lab);
   card(g, 150, 70, isNum ? 720 : 860, 230, { alpha: ease(x.T, x.a, 0.4) }, (cg) => {
@@ -221,7 +240,8 @@ L.map = (g, sh, x) => {
   const pins = [...(sh.pins || []).map((p) => ({ ...p, ll: p.at })), ...(sh.hubs || []).map((h, i) => ({ ll: h, label: '', when: sh.hubsWhen, i }))];
   pins.forEach((pn, i) => {
     const [px, py] = proj(pn.ll);
-    const at = (pn.when ? when(x.words, pn.when, x.a) : x.a + 0.8) + (pn.i || 0) * 0.15;
+    const at0 = (pn.when ? when(x.words, pn.when, x.a) : x.a + 0.8) + (pn.i || 0) * 0.15;
+    const at = i === 0 ? Math.min(at0, x.a + 0.5) : at0;
     mapPin(g, x.T, at, px, py, { scale: 0.85, color: doubt > 0.5 ? UI.red : UI.purple });
     if (pn.label) {
       const lp = spring(x.T, at + 0.15, { freq: 1.8, damp: 0.65 });
@@ -257,7 +277,8 @@ L.doc = (g, sh, x) => {
     cg.fillStyle = UI.line; cg.fillRect(70, 150, cw - 140, 2);
     let y = 270;
     (sh.rows || []).forEach((row, i) => {
-      const at = row.when ? when(x.words, row.when, x.a) : x.a + 0.4 + i * 0.6;
+      const at0 = row.when ? when(x.words, row.when, x.a) : x.a + 0.4 + i * 0.6;
+      const at = i === 0 ? Math.min(at0, x.a + 0.35) : at0;
       if (row.mark) { const m = ease(x.T, at + 0.9, 0.6); if (m > 0) { cg.fillStyle = 'rgba(217,204,255,0.6)'; cg.fillRect(60, y - 62, (cw - 120) * m, 86); } }
       text(cg, row.label.slice(0, Math.floor(row.label.length * clamp((x.T - at + 0.1) / (0.6 * TEMPO)))), 70, y, { font: UI.BODY, weight: 600, size: 52, color: UI.ink });
       if (row.value) odometer(cg, x.T, at + 0.5, row.value, cw - 70, y, { size: 60, align: 'right', color: UI.red });
@@ -276,7 +297,7 @@ L.quote = (g, sh, x) => {
     g.restore();
   }
   push(g, x, { from: 1, to: 1.05 });
-  const at = sh.when ? when(x.words, sh.when, x.a) : x.a;
+  const at = Math.min(sh.when ? when(x.words, sh.when, x.a) : x.a, x.a + 0.35);
   const end = sh.until ? when(x.words, sh.until, at) : x.b - 0.6;
   const ein = spring(x.T, x.a, { freq: 1.2, damp: 0.78 });
   card(g, 240, 200 + (1 - Math.min(1, ein)) * 300, 1440, 640, { r: 40, alpha: Math.min(1, ein * 1.4) }, (cg, cw) => {
@@ -290,7 +311,7 @@ L.quote = (g, sh, x) => {
 L.letters = (g, sh, x) => {
   push(g, x, { from: 1, to: 1.05 });
   const word = sh.word, n = word.length;
-  const at = sh.when ? when(x.words, sh.when, x.a) : x.a + 0.2;
+  const at = Math.min(sh.when ? when(x.words, sh.when, x.a) : x.a + 0.2, x.a + 0.3);
   const flipAt = sh.toWhen ? when(x.words, sh.toWhen, at) : 1e9;
   const flip = inOut(x.T, flipAt - 0.4, 0.9);
   for (let i = 0; i < n; i++) {
@@ -307,7 +328,7 @@ L.letters = (g, sh, x) => {
 
 L.list = (g, sh, x) => {
   push(g, x, { from: 1, to: 1.04 });
-  const times = sh.items.map((it, i) => (it.when ? when(x.words, it.when, x.a) : x.a + 0.3 + i * 1.3));
+  const times = sh.items.map((it, i) => (it.when ? when(x.words, it.when, x.a) : x.a + 0.3 + i * 1.3)).map((t, i) => (i === 0 ? Math.min(t, x.a + 0.35) : t));
   const cur = times.reduce((k, tm, i) => (x.T >= tm - 0.15 ? i : k), -1);
   const n = sh.items.length;
   sh.items.forEach((it, i) => {
@@ -341,7 +362,7 @@ function icon(cg, kind, cx, cy) {
 }
 
 L.flow = (g, sh, x) => {
-  const times = sh.nodes.map((nd, i) => (nd.when ? when(x.words, nd.when, x.a) : x.a + 0.3 + i * 1.5));
+  const times = sh.nodes.map((nd, i) => (nd.when ? when(x.words, nd.when, x.a) : x.a + 0.3 + i * 1.5)).map((t, i) => (i === 0 ? Math.min(t, x.a + 0.35) : t));
   const cur = times.reduce((k, tm, i) => (x.T >= tm - 0.4 ? i : k), 0);
   const gapX = 860;
   const camX = lerp(Math.max(0, cur - 1) * gapX, cur * gapX, inOut(x.T, times[cur] - 0.4, 0.8));
@@ -357,8 +378,10 @@ L.flow = (g, sh, x) => {
     if (s <= 0.01) return;
     g.save(); g.translate(nx, H / 2); g.scale(s, s);
     card(g, -300, -260, 600, 520, { r: 40, fill: nd.color === 'yellow' ? '#fff4d6' : '#fff' }, (cg, cw) => {
-      if (nd.icon) icon(cg, nd.icon, cw / 2, 170);
-      const ty = nd.icon ? 380 : 270;
+      if (nd.img && nd.fit === 'cover') photoIn(cg, nd.img, 0, 0, cw, 300, { zoom: lerp(1.15, 1, ease(x.T, times[i], 3)) });
+      else if (nd.img) imageIn(cg, nd.img, 60, 70, cw - 120, 200);
+      else if (nd.icon) icon(cg, nd.icon, cw / 2, 170);
+      const ty = nd.icon || nd.img ? 380 : 270;
       text(cg, nd.text, cw / 2, ty, { font: UI.HEAD, weight: 700, size: nd.text.length > 14 ? 48 : 66, color: UI.ink, align: 'center' });
       if (nd.sub) text(cg, nd.sub, cw / 2, ty + 58, { font: UI.BODY, size: 34, color: UI.muted, align: 'center' });
     });
@@ -372,7 +395,8 @@ L.flow = (g, sh, x) => {
 L.vs = (g, sh, x) => {
   push(g, x, { from: 1, to: 1.05 });
   [sh.left, sh.right].forEach((side, i) => {
-    const at = side.when ? when(x.words, side.when, x.a) : x.a + 0.3 + i * 1.5;
+    const at0 = side.when ? when(x.words, side.when, x.a) : x.a + 0.3 + i * 1.5;
+    const at = i === 0 ? Math.min(at0, x.a + 0.35) : at0;
     const s = spring(x.T, at - 0.1, { freq: 1.4, damp: 0.7 });
     if (s <= 0.01) return;
     const cx = W / 2 + (i ? 1 : -1) * 430;
@@ -389,7 +413,7 @@ L.vs = (g, sh, x) => {
 L.email = (g, sh, x) => {
   // an inbox-style email card; the body types out between `when` and `until`
   push(g, x, { from: 1, to: 1.06, focus: [W / 2, 520] });
-  const at = sh.when ? when(x.words, sh.when, x.a) : x.a + 0.4;
+  const at = Math.min(sh.when ? when(x.words, sh.when, x.a) : x.a + 0.4, x.a + 0.8);
   const end = sh.until ? when(x.words, sh.until, at) : x.b - 0.5;
   const ein = spring(x.T, x.a, { freq: 1.1, damp: 0.8 });
   card(g, 300, 120 + (1 - Math.min(1, ein)) * 380, 1320, 860, { r: 36, alpha: Math.min(1, ein * 1.5) }, (cg, cw) => {
@@ -423,6 +447,138 @@ L.title = (g, sh, x) => {
   pill(g, sh.sub || '', W / 2, H / 2 + 130, x.a + 1.1, x.T, { size: 28 });
 };
 
+L.export = (g, sh, x) => {
+  // a chip travels from the US towards China across the Pacific; a wall slams down and the line snaps
+  const k = 4.3 * (1 + 0.05 * x.p);
+  const proj = lightMap(g, -172, 30, k, { wrap: true });
+  const US = proj(sh.from || [-121.97, 37.37]), CN = proj([(sh.to || [104, 35])[0] - 360, (sh.to || [104, 35])[1]]);
+  const cutAt = sh.cut ? when(x.words, sh.cut, x.a) : x.a + 2.2;
+  const mid = [(US[0] + CN[0]) / 2, Math.min(US[1], CN[1]) - 300];
+  const P = (t) => [(1 - t) ** 2 * US[0] + 2 * (1 - t) * t * mid[0] + t * t * CN[0], (1 - t) ** 2 * US[1] + 2 * (1 - t) * t * mid[1] + t * t * CN[1]];
+  const travel = inOut(x.T, x.a + 0.2, Math.max(0.6, (cutAt - x.a - 0.2) / TEMPO));
+  const reach = Math.min(travel * 0.5, 0.5);        // the chip stops at the wall (half-way)
+  const snap = ease(x.T, cutAt + 0.15, 0.8);
+  // the line: drawn up to the chip; after the cut, the far half falls away
+  g.save(); g.lineCap = 'round'; g.setLineDash([3, 16]); g.lineWidth = 7;
+  g.strokeStyle = UI.purple;
+  g.beginPath(); for (let i = 0; i <= 60; i++) { const t = (i / 60) * reach; const [px, py] = P(t); i ? g.lineTo(px, py) : g.moveTo(px, py); } g.stroke();
+  if (x.T < cutAt + 0.15) {
+    const far = Math.max(0, travel - 0.5);
+    if (far > 0) { g.beginPath(); for (let i = 0; i <= 40; i++) { const t = 0.5 + (i / 40) * far; const [px, py] = P(t); i ? g.lineTo(px, py) : g.moveTo(px, py); } g.stroke(); }
+  } else {
+    g.globalAlpha = 1 - snap; g.strokeStyle = UI.red;
+    g.beginPath(); for (let i = 0; i <= 40; i++) { const t = 0.5 + (i / 40) * 0.5; const [px, py] = P(t); i ? g.lineTo(px, py + snap * snap * 500) : g.moveTo(px, py + snap * snap * 500); } g.stroke();
+  }
+  g.restore();
+  // the wall
+  const [wx, wy] = P(0.5);
+  const wl = spring(x.T, cutAt, { freq: 1.6, damp: 0.55 });
+  if (wl > 0.01) {
+    g.save(); g.translate(wx + 40, wy + 120);
+    g.fillStyle = UI.red; g.shadowColor = 'rgba(226,65,46,0.4)'; g.shadowBlur = 30;
+    g.beginPath(); g.roundRect(-18, -340 * Math.min(1.1, wl), 36, 340 * Math.min(1.1, wl), 18); g.fill();
+    g.restore();
+    pill(g, 'EXPORT LIMITS', wx + 40, wy - 280, cutAt + 0.2, x.T, { size: 28, fill: UI.red, color: '#fff', weight: 700 });
+  }
+  // the chip, bouncing back off the wall
+  const bounce = x.T > cutAt ? Math.sin(Math.min(1, (x.T - cutAt) / 0.4) * Math.PI) * 0.04 : 0;
+  const [chx, chy] = P(Math.max(0, reach - bounce - 0.02));
+  if (travel > 0) {
+    g.save(); g.translate(chx, chy); g.rotate(Math.sin(x.T * 3) * 0.05);
+    g.fillStyle = '#2b2440'; g.beginPath(); g.roundRect(-42, -42, 84, 84, 12); g.fill();
+    g.fillStyle = '#76b900'; g.beginPath(); g.roundRect(-26, -26, 52, 52, 8); g.fill();
+    g.strokeStyle = '#2b2440'; g.lineWidth = 5;
+    for (let i = -2; i <= 2; i++) { g.beginPath(); g.moveTo(i * 15, -42); g.lineTo(i * 15, -56); g.moveTo(i * 15, 42); g.lineTo(i * 15, 56); g.moveTo(-42, i * 15); g.lineTo(-56, i * 15); g.moveTo(42, i * 15); g.lineTo(56, i * 15); g.stroke(); }
+    g.restore();
+  }
+  mapPin(g, x.T, x.a + 0.1, US[0], US[1], { scale: 0.85 });
+  mapPin(g, x.T, x.a + 0.25, CN[0], CN[1], { scale: 0.85, color: UI.red });
+  chip(g, 'United States', US[0] + 30, US[1] - 26, { size: 26, weight: 600, stroke: null, alpha: ease(x.T, x.a + 0.3, 0.4) });
+  g.font = `600 26px ${UI.BODY}`;
+  chip(g, 'China', CN[0] - 30 - g.measureText('China').width - 40, CN[1] - 26, { size: 26, weight: 600, stroke: null, alpha: ease(x.T, x.a + 0.45, 0.4) });
+  if (sh.text) pill(g, clean(sh.text), W / 2, 960, x.a + 0.5, x.T, { size: 30 });
+};
+
+L.sting = (g, sh, x) => {
+  // channel sting: a tower of letter tiles topples, and the tiles land to spell the name
+  const word = (sh.title || 'Toppled Giants').toUpperCase();
+  const lines = word.split(' ');
+  const letters = lines.join('');
+  const n = letters.length, s0 = 70;
+  const t = x.T - x.a;
+  const impact = 1.5;
+  const tilt = t < 0.55 ? 0 : Math.min(Math.PI / 2, ((t - 0.55) / (impact - 0.55)) ** 2 * (Math.PI / 2));
+  const bx = W * 0.36, by = 1000;            // tower base (pivot at its right edge)
+  const targets = [];
+  lines.forEach((ln, li) => {
+    const size = 150, gap = 14, total = ln.length * size + (ln.length - 1) * gap;
+    for (let i = 0; i < ln.length; i++) targets.push([W / 2 - total / 2 + i * (size + gap) + size / 2, 430 + li * 190, size]);
+  });
+  for (let i = 0; i < n; i++) {
+    const drop = spring(x.T, x.a + i * 0.03, { freq: 2.2, damp: 0.7 });
+    if (drop <= 0.01) continue;
+    // position in the tower (bottom tile = 0), rotated around the pivot
+    const lx = -s0 / 2, ly = -(i + 0.5) * s0 - (1 - Math.min(1, drop)) * 400;
+    const c = Math.cos(tilt), sn = Math.sin(tilt);
+    const tx = bx + s0 / 2 + lx * c - ly * sn, ty = by + lx * sn + ly * c;
+    const fly = spring(x.T, x.a + impact + i * 0.035, { freq: 1.3, damp: 0.72 });
+    const [gx, gy, gs] = targets[i];
+    const px = lerp(tx, gx, Math.min(1, fly)) + (fly > 1 ? (fly - 1) * 0 : 0), py = lerp(ty, gy, fly);
+    const size = lerp(s0, gs, Math.min(1, fly));
+    const rot = lerp(tilt, 0, Math.min(1, fly)) + (1 - Math.min(1, fly)) * ((i % 3) - 1) * 0.6;
+    g.save(); g.translate(px, py); g.rotate(rot);
+    card(g, -size / 2, -size / 2, size, size, { r: size * 0.18, lift: 0.8 }, (cg) => text(cg, letters[i], size / 2, size * 0.72, { font: UI.HEAD, weight: 700, size: size * 0.66, color: i % 2 ? UI.purple : UI.ink, align: 'center' }));
+    g.restore();
+  }
+  // dust at the moment of impact
+  const d = span(x.T, x.a + impact, 0.9);
+  if (d > 0 && d < 1) {
+    const r = rand(3);
+    for (let k = 0; k < 26; k++) {
+      const ang = Math.PI + r() * Math.PI, sp = 120 + r() * 380;
+      g.fillStyle = `rgba(150,130,200,${0.35 * (1 - d)})`;
+      g.beginPath(); g.arc(bx + 600 + Math.cos(ang) * sp * d, by - 10 + Math.sin(ang) * sp * d * 0.4, 8 + r() * 16, 0, Math.PI * 2); g.fill();
+    }
+  }
+  if (sh.sub) pill(g, sh.sub, W / 2, 760, x.a + impact + 0.9, x.T, { size: 30 });
+};
+
+L.subscribe = (g, sh, x) => {
+  // the YouTube-style subscribe moment: card, cursor click, button turns to Subscribed, bell rings
+  push(g, x, { from: 1, to: 1.04 });
+  const ein = spring(x.T, x.a, { freq: 1.3, damp: 0.72 });
+  const clickAt = sh.clickWhen ? when(x.words, sh.clickWhen, x.a) : x.a + (sh.clickAt ?? 1.8);
+  const done = x.T > clickAt + 0.1;
+  const bell = spring(x.T, clickAt + 0.5, { freq: 2, damp: 0.5 });
+  g.save(); g.translate(W / 2, 470); g.scale(Math.min(1.05, ein), Math.min(1.05, ein)); g.translate(-W / 2, -470);
+  card(g, 360, 300, 1200, 340, { r: 44, alpha: Math.min(1, ein * 1.4) }, (cg, cw) => {
+    // channel avatar (TG monogram)
+    cg.fillStyle = UI.purple; cg.beginPath(); cg.arc(130, 170, 86, 0, Math.PI * 2); cg.fill();
+    text(cg, 'TG', 130, 200, { font: UI.HEAD, weight: 700, size: 76, color: '#fff', align: 'center' });
+    text(cg, sh.channel || 'Toppled Giants', 250, 150, { font: UI.HEAD, weight: 700, size: 56, color: UI.ink });
+    text(cg, sh.handle || '@ToppledGiants', 252, 205, { font: UI.BODY, size: 30, color: UI.muted });
+    // button
+    const press = span(x.T, clickAt, 0.1) * (1 - span(x.T, clickAt + 0.1, 0.15));
+    const bw = done ? 290 : 300, bxx = cw - bw - 160, byy = 125;
+    cg.save(); cg.translate(bxx + bw / 2, byy + 45); cg.scale(1 - press * 0.08, 1 - press * 0.08);
+    cg.fillStyle = done ? '#ececf0' : '#ff0033';
+    cg.beginPath(); cg.roundRect(-bw / 2, -45, bw, 90, 45); cg.fill();
+    text(cg, done ? 'Subscribed' : 'Subscribe', 0, 14, { font: UI.BODY, weight: 600, size: 34, color: done ? UI.ink : '#fff', align: 'center' });
+    cg.restore();
+    // bell
+    if (done) {
+      cg.save(); cg.translate(cw - 90, byy + 45); cg.rotate(Math.sin((x.T - clickAt) * 18) * 0.35 * Math.max(0, 1 - (x.T - clickAt - 0.5) / 1.2)); cg.scale(Math.min(1, bell), Math.min(1, bell));
+      cg.fillStyle = UI.ink;
+      cg.beginPath(); cg.moveTo(-26, 20); cg.quadraticCurveTo(-26, -30, 0, -32); cg.quadraticCurveTo(26, -30, 26, 20); cg.lineTo(32, 26); cg.lineTo(-32, 26); cg.closePath(); cg.fill();
+      cg.beginPath(); cg.arc(0, 34, 8, 0, Math.PI * 2); cg.fill();
+      cg.restore();
+    }
+  });
+  g.restore();
+  cursor(g, x.T, [1500, 980], [1255, 470], x.a + 0.4, clickAt);
+  if (sh.text) pill(g, sh.text, W / 2, 720, x.a + 0.5, x.T, { size: 30, fill: UI.soft, color: UI.purple });
+};
+
 L.chapter = (g, sh, x) => {
   push(g, x, { from: 1.05, to: 1 });
   const k = pick(sh.img);
@@ -438,7 +594,7 @@ L.chapter = (g, sh, x) => {
 
 L.tear = (g, sh, x) => {
   push(g, x, { from: 1, to: 1.06 });
-  const at = sh.when ? when(x.words, sh.when, x.a) : x.a + 0.2;
+  const at = Math.min(sh.when ? when(x.words, sh.when, x.a) : x.a + 0.2, x.a + 0.3);
   const tearAt = sh.tearWhen ? when(x.words, sh.tearWhen, at) : at + 0.8;
   const tp = ease(x.T, at - 0.1, 0.5);
   const split = ease(x.T, tearAt, 0.8);
@@ -536,6 +692,9 @@ export function lightSounds(timeline, shotLists) {
       const a = starts[i], T = (t) => out.push(t);
       if (i > 0) out.push({ t: sc.start + a - 0.45, kind: 'whoosh', vol: 0.35 });
       const w = (p, after = a) => when(words, p, after);
+      if (sh.type === 'sting') out.push({ t: sc.start + a + 0.3, kind: 'whoosh', vol: 0.4 }, { t: sc.start + a + 1.5, kind: 'hit', vol: 0.8 }, { t: sc.start + a + 2.3, kind: 'pop', vol: 0.6 });
+      if (sh.type === 'export') { const c = sh.cut ? w(sh.cut) : a + 2.2; out.push({ t: sc.start + c + 0.05, kind: 'hit', vol: 0.75 }, { t: sc.start + c + 0.2, kind: 'pop', vol: 0.6 }); }
+      if (sh.type === 'subscribe') { const c = sh.clickWhen ? w(sh.clickWhen) : a + (sh.clickAt ?? 1.8); out.push({ t: sc.start + c, kind: 'tick', vol: 0.9 }, { t: sc.start + c + 0.5, kind: 'pop', vol: 0.8 }); }
       if (sh.type === 'chapter') out.push({ t: sc.start + a + 0.15, kind: 'hit', vol: 0.6 }, { t: sc.start + a + 0.5, kind: 'pop', vol: 0.6 });
       if (sh.stamp) out.push({ t: sc.start + w(sh.stamp.when) + (sh.stamp.delay || 0), kind: 'pop', vol: 0.9 }, { t: sc.start + w(sh.stamp.when) + (sh.stamp.delay || 0), kind: 'hit', vol: 0.45 });
       if (sh.type === 'number') out.push({ t: sc.start + (sh.when ? w(sh.when) : a + 0.3), kind: 'pop' });

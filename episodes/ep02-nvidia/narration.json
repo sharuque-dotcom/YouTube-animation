@@ -148,6 +148,17 @@
       "tail": 1.0
     },
     {
+      "id": "sub",
+      "lines": [
+        {
+          "text": "Quick pause. If you're enjoying this story and haven't subscribed yet, tap subscribe.",
+          "pause": 0.4
+        },
+        "It really helps the channel."
+      ],
+      "tail": 0.8
+    },
+    {
       "id": "chapter4",
       "duration": 2.8
     },

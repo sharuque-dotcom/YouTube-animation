@@ -99,7 +99,7 @@ export function odometer(ctx, t, at, str, x, y, { size = 72, color = UI.ink, wei
       }
       di++;
     } else {
-      ctx.globalAlpha = clamp(p * 2);
+      ctx.globalAlpha = clamp(0.35 + p * 6); // symbols ($, commas, units) show straight away
       ctx.fillText(ch, cx, y + (1 - p) * lh * 0.5);
       ctx.globalAlpha = 1;
     }
@@ -183,18 +183,18 @@ export function photoIn(ctx, key, x, y, w, h, { zoom = 1 } = {}) {
 
 // ---------- map ----------
 /** Light map: white land with a soft edge, no country borders. Returns the projection. */
-export function lightMap(ctx, lon, lat, k, { alpha = 1 } = {}) {
+export function lightMap(ctx, lon, lat, k, { alpha = 1, wrap = false } = {}) {
   const proj = view(lon, lat, k);
   if (alpha <= 0.01) return proj;
   const rings = landRings(k > 14 ? '50m' : '110m');
   const path = new Path2D();
-  for (const ring of rings) {
-    const [ax, ay] = proj(ring[0]);
+  for (const shift of wrap ? [0, -360] : [0]) for (const ring of rings) {
+    const [ax, ay] = proj([ring[0][0] + shift, ring[0][1]]);
     if ((ax < -4000 || ax > 6000 || ay < -4000 || ay > 5000) && ring.length < 300) continue;
     if (ring.every((p) => p[1] < -58)) continue;
     let prev = null;
     for (const pt of ring) {
-      const [x, y] = proj([pt[0], Math.max(-80, pt[1])]);
+      const [x, y] = proj([pt[0] + shift, Math.max(-80, pt[1])]);
       if (!prev || Math.abs(pt[0] - prev[0]) > 180) path.moveTo(x, y); else path.lineTo(x, y);
       prev = pt;
     }
