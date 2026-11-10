@@ -45,4 +45,7 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 - Episode 1 Satyam: published, along with its Shorts.
 - Episode 2 NVIDIA ("The CEO, the Chips and the Alleged Spy"): PUBLISHED, do not change. Final 1080p render in the purple style with act-it-out shots (`pipeline/acts.js`: sendmail, flight, aiboom, race, keynote, chess, drain, maze, hops, badge, chipstack, casefolder, checks, newspaper, radar, shield, hearing, boardroom, phone, chipheart; map routes take `ship: true`). This is the quality bar: every line acted out.
   - Remaining: update `shorts.json` (the timeline moved when the `sub` scene was added), make a thumbnail, and re-check facts on publish day.
-- Next week: episode 3, following the workflow above.
+- Episode 3 Ueno Bank ("The Bank That Toppled a President"): full 1080p render done (6:13), awaiting the owner's review.
+  - Night painterly style: `pipeline/scenery.js`, `episodes/ep03-ueno/{sets,kit,rest,scenes}.js`.
+  - Still to do: thumbnail, title, Shorts, and re-check facts before publishing (the story is still developing).
+- Next topic: "The $129M Deepfake CEO Heist" (see `content/topics-shortlist.md`).
