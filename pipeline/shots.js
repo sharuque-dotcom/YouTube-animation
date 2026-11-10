@@ -57,7 +57,7 @@ export function when(words, phrase, after = 0) {
 }
 
 /** Shot start times for a scene */
-function plan(list, words) {
+export function plan(list, words) {
   const starts = [];
   list.forEach((sh, i) => {
     if (i === 0) starts.push(sh.at != null ? when(words, sh.at) : 0);
