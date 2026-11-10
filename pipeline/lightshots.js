@@ -12,6 +12,7 @@ import {
 } from './lightui.js';
 import { trophy, building } from './kit.js';
 import { hearts, chipRain, spy, scanHUD, diner } from './fx.js';
+import { ACTS, routeShip } from './acts.js';
 
 /** Words land when spoken, but never later than a quick stagger from the shot start (no waiting) */
 const tight = (ws, a, lead = 0.3, gap = 0.11) => ws.map((w, k) => ({ ...w, at: Math.min(w.at, a + lead + k * gap) }));
@@ -237,6 +238,7 @@ L.map = (g, sh, x) => {
     g.beginPath();
     for (let i = 0; i <= 50 * p; i++) { const t = i / 50; const px = (1 - t) ** 2 * ax + 2 * (1 - t) * t * mx + t * t * bx, py = (1 - t) ** 2 * ay + 2 * (1 - t) * t * my + t * t * by; i ? g.lineTo(px, py) : g.moveTo(px, py); }
     g.stroke(); g.restore();
+    if (rt.ship) routeShip(g, x.T, at + 0.6, (t) => [(1 - t) ** 2 * ax + 2 * (1 - t) * t * mx + t * t * bx, (1 - t) ** 2 * ay + 2 * (1 - t) * t * my + t * t * by]);
   });
   const pins = [...(sh.pins || []).map((p) => ({ ...p, ll: p.at })), ...(sh.hubs || []).map((h, i) => ({ ll: h, label: '', when: sh.hubsWhen, i }))];
   pins.forEach((pn, i) => {
@@ -623,6 +625,8 @@ L.diner = (g, sh, x) => {
   if (sh.text) pill(g, clean(sh.text), W / 2, 980, x.a + 0.5, x.T, { size: 30 });
 };
 
+Object.assign(L, ACTS);
+
 function overlays(g, sh, x) {
   // story effects tied to a spoken word: hearts, raining chips, a spy, a surveillance scan
   const fxAt = (sh.fx || []).map((f) => (f.when != null ? when(x.words, f.when, x.a) : x.a));
@@ -683,7 +687,7 @@ export function lightScene(list) {
         end: s.d,
         in: i ? transitionFor(sh, list[i - 1], i) : null,
         draw: (g, x) => {
-          const xx = { ...x, words };
+          const xx = { ...x, words, kit: { pill, clean } };
           TH = sh.dark ? DARK_TH : LIGHT_TH;
           if (sh.dark) darkGround(g, worldT);
           (L[sh.type] || L.kinetic)(g, sh, xx);
@@ -716,6 +720,27 @@ export function lightSounds(timeline, shotLists) {
       (sh.fx || []).forEach((f) => { const at = f.when != null ? w(f.when) : a; out.push({ t: sc.start + at, kind: f.kind === 'spy' ? 'whoosh' : 'pop', vol: 0.7 }); if (f.kind === 'chips') for (let k = 1; k < 6; k++) out.push({ t: sc.start + at + 0.45 + k * 0.18, kind: 'tick', vol: 0.5 }); });
       if (sh.scan) { const at = sh.scan.when ? w(sh.scan.when) : a + 0.5; out.push({ t: sc.start + at, kind: 'hit', vol: 0.5 }); (sh.scan.lines || []).forEach((_, k) => out.push({ t: sc.start + at + 0.5 + k * 0.55, kind: 'tick', vol: 0.55 })); }
       if (sh.type === 'diner' && sh.sketch) out.push({ t: sc.start + w(sh.sketch), kind: 'pop', vol: 0.5 });
+      const ph = (p, fb) => (p ? w(p) : a + fb);
+      if (sh.type === 'sendmail') { const s = ph(sh.send, 3); out.push({ t: sc.start + s, kind: 'tick', vol: 0.9 }, { t: sc.start + s + 0.25, kind: 'whoosh', vol: 0.6 }, { t: sc.start + s + 0.9, kind: 'pop', vol: 0.7 }, { t: sc.start + s + 1.3, kind: 'pop', vol: 0.6 }); }
+      if (sh.type === 'chipstack') { const l = ph(sh.when, 2); for (let k = 0; k < 8; k++) out.push({ t: sc.start + a + 0.2 + (k / 8) * (l - a), kind: 'tick', vol: 0.45 }); out.push({ t: sc.start + l + 0.4, kind: 'pop', vol: 0.9 }); }
+      if (sh.type === 'flight') { const d = ph(sh.depart, 2); out.push({ t: sc.start + d - 0.3, kind: 'whoosh', vol: 0.6 }, { t: sc.start + d + 1.6, kind: 'pop', vol: 0.6 }); }
+      if (sh.type === 'aiboom') { out.push({ t: sc.start + ph(sh.dissolve, 4), kind: 'whoosh', vol: 0.6 }, { t: sc.start + ph(sh.boom, 9), kind: 'hit', vol: 0.6 }, { t: sc.start + ph(sh.hub, 12), kind: 'pop', vol: 0.8 }); }
+      if (sh.type === 'race') { const e = Math.max(ph(sh.when, 5), a + 4.5); for (let k = 0; k < 7; k++) out.push({ t: sc.start + a + 0.3 + (k / 7) * (e - a - 0.3), kind: 'tick', vol: 0.4 }); out.push({ t: sc.start + e + 0.1, kind: 'hit', vol: 0.7 }, { t: sc.start + e + 0.15, kind: 'pop', vol: 0.8 }); }
+      if (sh.type === 'keynote') out.push({ t: sc.start + a + 0.3, kind: 'whoosh', vol: 0.5 }, { t: sc.start + ph(sh.jacket, 2) + 0.4, kind: 'pop', vol: 0.5 });
+      if (sh.type === 'chess') { const d = ph(sh.drop, 1.5); out.push({ t: sc.start + d + 0.35, kind: 'hit', vol: 0.8 }, { t: sc.start + ph(sh.flagsWhen, 0.3), kind: 'pop', vol: 0.5 }); }
+      if (sh.type === 'drain') out.push({ t: sc.start + ph(sh.lose, 2.5), kind: 'whoosh', vol: 0.5 }, { t: sc.start + ph(sh.lose, 2.5) + 0.2, kind: 'hit', vol: 0.6 });
+      if (sh.type === 'maze') out.push({ t: sc.start + a + 0.9, kind: 'hit', vol: 0.7 }, { t: sc.start + a + 2.5, kind: 'pop', vol: 0.7 });
+      if (sh.type === 'hops') sh.stops.forEach((s, k) => out.push({ t: sc.start + (k ? w(s.when) : a + 0.3), kind: 'pop', vol: 0.6 }));
+      if (sh.type === 'badge') out.push({ t: sc.start + a + 0.2, kind: 'whoosh', vol: 0.5 });
+      if (sh.type === 'casefolder') { const s = ph(sh.stampWhen, 1.2); out.push({ t: sc.start + a + 0.1, kind: 'whoosh', vol: 0.5 }, { t: sc.start + s, kind: 'pop', vol: 0.9 }, { t: sc.start + s, kind: 'hit', vol: 0.5 }); }
+      if (sh.type === 'checks') sh.rows.forEach((r, k) => out.push({ t: sc.start + (k ? w(r.when) : a + 0.4) + 0.5, kind: 'tick', vol: 0.7 }));
+      if (sh.type === 'newspaper') out.push({ t: sc.start + a + 0.1, kind: 'whoosh', vol: 0.7 }, { t: sc.start + a + 1.1, kind: 'hit', vol: 0.6 });
+      if (sh.type === 'radar') sh.flags.forEach((f, k) => out.push({ t: sc.start + (k ? w(f.when) : a + 0.4), kind: 'pop', vol: 0.5 }));
+      if (sh.type === 'shield') for (let k = 0; k < 5; k++) out.push({ t: sc.start + a + 0.75 + k * 0.55, kind: 'tick', vol: 0.6 });
+      if (sh.type === 'hearing') { out.push({ t: sc.start + ph(sh.doors, 1.5), kind: 'whoosh', vol: 0.5 }); sh.seats.forEach((s) => out.push({ t: sc.start + w(s.when), kind: 'pop', vol: 0.5 })); }
+      if (sh.type === 'boardroom') sh.rows.forEach((r) => out.push({ t: sc.start + w(r.when), kind: 'pop', vol: 0.55 }));
+      if (sh.type === 'phone') out.push({ t: sc.start + a + 0.1, kind: 'whoosh', vol: 0.5 }, { t: sc.start + ph(sh.drop, 1), kind: 'hit', vol: 0.6 });
+      if (sh.type === 'chipheart') out.push({ t: sc.start + ph(sh.rival, 2), kind: 'whoosh', vol: 0.5 }, { t: sc.start + ph(sh.morph, 6) + 0.8, kind: 'pop', vol: 0.8 });
       if (sh.type === 'chapter') out.push({ t: sc.start + a + 0.15, kind: 'hit', vol: 0.6 }, { t: sc.start + a + 0.5, kind: 'pop', vol: 0.6 });
       if (sh.stamp) out.push({ t: sc.start + w(sh.stamp.when) + (sh.stamp.delay || 0), kind: 'pop', vol: 0.9 }, { t: sc.start + w(sh.stamp.when) + (sh.stamp.delay || 0), kind: 'hit', vol: 0.45 });
       if (sh.type === 'number') out.push({ t: sc.start + (sh.when ? w(sh.when) : a + 0.3), kind: 'pop' });
