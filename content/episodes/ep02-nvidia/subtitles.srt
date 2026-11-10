@@ -1,0 +1,259 @@
+1
+00:00:00,350 --> 00:00:09,994
+On Sunday, November 8th, 2026, the most important man in artificial intelligence sent an email to his employees.
+
+2
+00:00:10,344 --> 00:00:17,667
+"I was unfaithful to my wife," he wrote. "My actions hurt her and our children. There is no excuse for what I did."
+
+3
+00:00:18,567 --> 00:00:22,707
+The man was Jensen Huang, the founder and CEO of Nvidia.
+
+4
+00:00:23,857 --> 00:00:26,529
+But this was not just a story about an affair.
+
+5
+00:00:27,229 --> 00:00:35,826
+The woman at the centre of it, according to reports, had been watched by American intelligence, who suspected she could be working for China.
+
+6
+00:00:36,176 --> 00:00:40,583
+And her company had bought billions of dollars' worth of Nvidia's chips.
+
+7
+00:00:41,533 --> 00:00:47,772
+So is this a love story, a spy story, or a story about the most valuable chips on Earth?
+
+8
+00:00:48,372 --> 00:00:49,478
+Maybe all three.
+
+9
+00:00:58,328 --> 00:01:05,623
+Jensen Huang was born in Taiwan in 1963, and moved to the United States as a child.
+
+10
+00:01:05,973 --> 00:01:16,290
+In 1993, he and two friends started a company to make graphics chips for video games. The plan was famously sketched out in a Denny's restaurant.
+
+11
+00:01:16,640 --> 00:01:18,162
+They called it Nvidia.
+
+12
+00:01:19,112 --> 00:01:22,581
+For years, Nvidia's chips made video games look better.
+
+13
+00:01:22,931 --> 00:01:28,596
+Then researchers discovered the same chips were perfect for training artificial intelligence.
+
+14
+00:01:28,946 --> 00:01:35,067
+When the AI boom arrived, almost every major AI system in the world needed Nvidia.
+
+15
+00:01:36,017 --> 00:01:45,214
+By late 2026, Nvidia was worth roughly 4.5 trillion dollars, one of the most valuable companies ever.
+
+16
+00:01:45,564 --> 00:01:52,218
+And Jensen Huang, in his trademark leather jacket, became one of the most powerful businessmen alive.
+
+17
+00:01:56,368 --> 00:01:59,168
+But Nvidia's chips aren't just products anymore.
+
+18
+00:01:59,668 --> 00:02:02,797
+Governments now treat them like strategic weapons.
+
+19
+00:02:03,147 --> 00:02:15,974
+Since 2022, the United States has restricted the export of its most advanced AI chips to China, worried they could power China's military and its own AI race.
+
+20
+00:02:16,324 --> 00:02:20,772
+China is a huge market, so the rules have cost Nvidia billions.
+
+21
+00:02:21,722 --> 00:02:24,826
+As the wall went up, one question kept coming back.
+
+22
+00:02:25,176 --> 00:02:27,139
+Were the chips finding a way around it?
+
+23
+00:02:27,739 --> 00:02:38,282
+Investigators and lawmakers started looking at Southeast Asia, especially Singapore and Malaysia, as possible routes for chips to reach Chinese customers.
+
+24
+00:02:38,632 --> 00:02:41,436
+Nvidia has always said it follows the rules.
+
+25
+00:02:45,586 --> 00:02:48,270
+Which brings us to a company called Megaspeed.
+
+26
+00:02:48,620 --> 00:02:52,570
+Megaspeed is a cloud computing company based in Singapore.
+
+27
+00:02:52,920 --> 00:03:05,173
+According to reports, it began as a spin-off from a Chinese gaming and cloud firm called 7Road, and was later sold to an offshore company linked to a woman named Alice Huang.
+
+28
+00:03:06,123 --> 00:03:09,574
+Alice Huang had worked as a television reporter in China.
+
+29
+00:03:09,924 --> 00:03:15,555
+From March to November 2023, she was Megaspeed's managing director.
+
+30
+00:03:15,905 --> 00:03:20,405
+Huang is a common surname. The two are not reported to be related.
+
+31
+00:03:21,355 --> 00:03:24,648
+Megaspeed became one of Nvidia's big customers.
+
+32
+00:03:24,998 --> 00:03:32,456
+The New York Times reported that it bought more than 4.8 billion dollars of Nvidia chips over two years.
+
+33
+00:03:32,806 --> 00:03:38,197
+Investigators are now examining whether some of those chips were diverted to China.
+
+34
+00:03:38,547 --> 00:03:44,856
+The Times also reported that the Justice Department has opened a criminal inquiry into the company.
+
+35
+00:03:45,806 --> 00:03:47,515
+Megaspeed denies all of it.
+
+36
+00:03:48,015 --> 00:04:01,500
+It calls the reports "misleading information and incorrect insinuations", and says inspections by American and Malaysian officials, and by Nvidia, found no evidence of any violations.
+
+37
+00:04:05,650 --> 00:04:10,861
+On October 29th, The New York Times published a story that changed everything.
+
+38
+00:04:11,211 --> 00:04:21,812
+It reported that American intelligence agencies had been watching a person close to Jensen Huang, because they believed she could be a Chinese intelligence asset.
+
+39
+00:04:22,162 --> 00:04:33,609
+The concern, according to the report, was that she could help Beijing gain information about Nvidia, and about a CEO with access to the President of the United States.
+
+40
+00:04:34,559 --> 00:04:43,680
+The Wall Street Journal reported that intelligence services in the United States, Singapore and Taiwan all had reason to suspect her.
+
+41
+00:04:44,030 --> 00:04:48,080
+The Financial Times reported that the relationship was romantic.
+
+42
+00:04:49,030 --> 00:04:50,303
+Nvidia pushed back.
+
+43
+00:04:50,803 --> 00:05:00,273
+It said Huang talks to thousands of customers every year, and that the chip diversion allegations had been "thoroughly investigated and debunked".
+
+44
+00:05:04,423 --> 00:05:06,222
+But the story would not go away.
+
+45
+00:05:06,722 --> 00:05:19,263
+Last week, three Republican committee chairmen in the House asked Huang to brief them behind closed doors: from the Foreign Affairs Committee, the China Committee, and the Intelligence Committee.
+
+46
+00:05:19,613 --> 00:05:21,574
+Democrats called for answers too.
+
+47
+00:05:22,524 --> 00:05:24,075
+Then came Sunday's email.
+
+48
+00:05:24,575 --> 00:05:30,406
+Huang admitted the affair, and said he supported an investigation and would cooperate fully.
+
+49
+00:05:30,756 --> 00:05:42,274
+Nvidia's board announced that independent directors, with outside lawyers, would investigate, including whether Huang had been the target of a foreign intelligence effort.
+
+50
+00:05:42,624 --> 00:05:49,647
+The board said it had no reason to believe that national security or Nvidia's secrets were compromised.
+
+51
+00:05:50,597 --> 00:05:53,803
+On Monday, Nvidia's stock fell about 4 percent.
+
+52
+00:05:54,153 --> 00:06:02,440
+President Trump called Huang "an honorable guy", and added that the FBI was "looking into it in terms of something else".
+
+53
+00:06:02,790 --> 00:06:07,017
+Nvidia says Huang will stay on as CEO, without interruption.
+
+54
+00:06:11,167 --> 00:06:12,747
+So, what do we actually know?
+
+55
+00:06:13,347 --> 00:06:16,751
+Huang has admitted an affair. That part is confirmed.
+
+56
+00:06:17,101 --> 00:06:22,623
+The spying claims come from anonymous intelligence sources quoted in news reports.
+
+57
+00:06:22,973 --> 00:06:27,373
+No one has been charged. Alice Huang has not commented publicly.
+
+58
+00:06:27,723 --> 00:06:29,932
+And Megaspeed says it did nothing wrong.
+
+59
+00:06:30,882 --> 00:06:32,378
+What happens next matters.
+
+60
+00:06:32,728 --> 00:06:41,661
+Nvidia's board is investigating. Lawmakers want a briefing. And investigators are still looking at where Megaspeed's chips went.
+
+61
+00:06:42,611 --> 00:06:47,467
+For decades, the biggest risk to a company like Nvidia was a better chip.
+
+62
+00:06:48,067 --> 00:06:53,479
+Now, in a world where chips are power, the biggest risk might be something far more human.
+
+63
+00:06:53,829 --> 00:06:57,669
+This story is still developing, and we'll update you as it does.
+
+64
+00:06:59,219 --> 00:07:01,091
+This has been Toppled Giants.
+
+65
+00:07:01,441 --> 00:07:03,926
+Subscribe, and I'll see you in the next story.
