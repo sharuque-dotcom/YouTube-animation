@@ -1,26 +1,17 @@
-# Next topics — researched 10 Nov 2026
+# Trending topics — researched 10 Nov 2026 (this week's news)
 
-Ranked by viral potential for Toppled Giants (famous brand + huge money + human drama + a fresh news hook).
-
-1. **Wirecard — "The €1.9 Billion That Never Existed"** (top pick)
-   - A German fintech star that vanished overnight in 2020. The COO, Jan Marsalek, fled and is reported to be in Russia, with alleged spy ties.
-   - Hook: the Munich criminal trial is heading to a verdict after nearly four years, so publish around the verdict.
-   - Follows the spy thread from episode 2. Facts are well established, so legal risk is lower.
-   - Act-it-out ideas: money vanishing from a vault, a private jet escape, Singapore and Manila bank accounts that are empty, short-seller vs. regulator.
-2. **Byju's — "From $22 Billion to a Jail Sentence"**
-   - India's edtech giant collapsed. A Singapore court sentenced the founder to 6 months for contempt in May 2026, he is appealing, and US courts allege about $533M was "round-tripped".
-   - Hook: still in the news. Fits the Indian audience from the Satyam episode.
-   - Careful: many disputes are unresolved. Wording must stay "alleged" and "the court found".
-3. **Builder.ai — "The AI Start-up Accused of Faking Its AI"**
-   - Microsoft-backed, once valued at $1.5B, collapsed in May 2025 after revenue was revised down to about a quarter.
-   - Reports said human engineers did work sold as AI. This is disputed, so word it carefully.
-   - Hook: the AI hype, very shareable. US probes have no charges yet.
-4. **First Brands + Tricolor — "The Car-Parts Empire Built on Fake Invoices"**
-   - About $2.3B in alleged double- and triple-pledged invoices. The founder was indicted in January 2026 and denies the charges.
-   - Tricolor (subprime auto loans, $1.9B): its ex-COO pleaded guilty.
-   - Angle: the hidden fraud that scared Wall Street's private-credit boom. Less famous brands, but a strong "how did nobody notice" story.
-5. **Nvidia follow-up (Short or update video)**
-   - A shareholder class action was filed on 9 Nov, and the stock fell 4.3% that day.
-   - Cut a 60-second update Short when the board investigation or Congress briefing lands.
-
-Also proven evergreen hits if we need a safe bet: FTX, Theranos, Luckin Coffee, Evergrande.
+1. **Ueno Bank, "The Bank That Toppled a President"** (top pick, breaking 5–9 Nov 2026)
+   - Paraguay's big digital bank collapsed: regulators moved in after solvency fell to about 5.6%.
+   - About 1.8–3M customers are locked out of their money, and about $800M of public funds were held there, including the state pension fund.
+   - Protests forced out President Peña (reports differ: resignation vs. Senate removal).
+   - Charges were announced for 27 people, with arrest warrants for Ueno's CEO and president.
+   - Literally a "toppled giant". Facts are still moving, so verify on script day.
+2. **"The $129M Deepfake CEO Heist"** (charged 5–6 Nov 2026)
+   - Three men are accused of using AI-cloned voices of chief executives to trick companies, mid-2024 to early 2026. Extradition is under way. These are allegations only.
+   - Very viral AI-crime angle, and great to act out: voice waveforms, fake calls, money moving.
+3. **Character.AI bankruptcy, "From $1B AI Darling to a $20M Bid"** (filed 12–13 Oct 2026)
+   - Chapter 11 in Delaware amid lawsuits. Disney is the opening bidder at $20M for an IP licence. Bid deadline is around 24 Nov, auction around 1 Dec.
+   - Sensitive: lawsuits involve teen suicides. Needs careful handling and may limit ads.
+4. **Banco Master, Brazil** (ongoing)
+   - The bank was liquidated in Nov 2025. Owner Vorcaro is in jail, with police reports on links to a Supreme Court justice, and it is shaking the election.
+   - Big story, but complex, and the sources are mostly in Portuguese.
