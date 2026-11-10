@@ -5,7 +5,7 @@ The channel was first called "Paper Empires". Episode 1 went out under that name
 The owner reads on a phone, so keep messages short and put the outcome first.
 
 ## Standing rules from the owner
-- **Never change episode 1** (`episodes/ep01-satyam`, `content/episodes/ep01-satyam`). It is published.
+- **Never change published episodes**: episode 1 (`ep01-satyam`) and episode 2 (`ep02-nvidia`), including their content folders.
 - For every new video, send a **45–60 s test clip** first and wait for confirmation before the full render.
 - Every video needs new, story-specific motion graphics. No plain, repetitive or blank frames, and no waiting for the voice: the first element appears ≤0.35 s after a cut.
 - Use the Toppled Giants **title sting** (the owner likes it). Add a YouTube-style **subscribe** moment mid-video and at the end.
@@ -29,6 +29,7 @@ The owner reads on a phone, so keep messages short and put the outcome first.
   - warm key and cool fill, not "moody"
   - also: volumetric rays, exponential falloff, bloom/halation, depth occlusion, inertia and weight (heavy sways slowly, light reacts fast), depth-scaled particles (near = thick and fast, far = thin and slow)
 - No single-frame pops: flashes and transitions build over about 8 frames and recover over about 10.
+- Detail target (the owner's reference: a painterly lighthouse made with Claude): layered depth (far, mid and near planes), textured clouds with rim light, volumetric light beams, depth-scaled rain, grass with inertia, film grain, and small story details (a lit window, distant lights). Not flat clip-art. Build key set pieces with that level of detail.
 - After every change, render stills of the new shots, look at them, and fix them before the full render.
 - Topic shortlist: `content/topics-shortlist.md`.
 
@@ -41,6 +42,6 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 
 ## Status (update this when something changes)
 - Episode 1 Satyam: published, along with its Shorts.
-- Episode 2 NVIDIA ("The CEO, the Chips and the Alleged Spy"): APPROVED. Final 1080p render in the purple style with act-it-out shots (`pipeline/acts.js`: sendmail, flight, aiboom, race, keynote, chess, drain, maze, hops, badge, chipstack, casefolder, checks, newspaper, radar, shield, hearing, boardroom, phone, chipheart; map routes take `ship: true`). This is the quality bar: every line acted out.
+- Episode 2 NVIDIA ("The CEO, the Chips and the Alleged Spy"): PUBLISHED, do not change. Final 1080p render in the purple style with act-it-out shots (`pipeline/acts.js`: sendmail, flight, aiboom, race, keynote, chess, drain, maze, hops, badge, chipstack, casefolder, checks, newspaper, radar, shield, hearing, boardroom, phone, chipheart; map routes take `ship: true`). This is the quality bar: every line acted out.
   - Remaining: update `shorts.json` (the timeline moved when the `sub` scene was added), make a thumbnail, and re-check facts on publish day.
 - Next week: episode 3, following the workflow above.
