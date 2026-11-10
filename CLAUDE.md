@@ -24,7 +24,7 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 ## Workflow for every new episode (owner's request)
 1. Write the draft script (fact-checked, with sources) and send it for approval.
 2. Plan the visuals shot by shot: story-specific motion graphics for every line.
-3. Check github.com/lemomo-ai/lemo-opuscar (styles, e.g. Caption News, Visual Investigation, Satellite Briefing, Briefing Board, Exploded Teardown, Data Physicalization, Broadcast News Package) for animation and motion-graphics ideas, and adapt them to the purple theme in our own code. If adapting is too hard, design our own.
+3. Design and build our own animations and motion graphics first (the owner likes ours best). Then skim github.com/lemomo-ai/lemo-opuscar for anything worth reusing (styles such as Visual Investigation, Satellite Briefing, Briefing Board, Exploded Teardown, Data Physicalization) and adapt it to the purple theme in our own code.
 4. Send a 45–60 s test clip and wait for the go-ahead.
 5. Render the full video at **1080p only** (no 720p copies).
 
