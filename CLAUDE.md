@@ -30,6 +30,6 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 
 ## Status (update this when something changes)
 - Episode 1 Satyam: published, along with its Shorts.
-- Episode 2 NVIDIA ("The CEO, the Chips and the Alleged Spy"): full 1080p render in the purple style.
+- Episode 2 NVIDIA ("The CEO, the Chips and the Alleged Spy"): APPROVED. Final 1080p render in the purple style with act-it-out shots (`pipeline/acts.js`: sendmail, flight, aiboom, race, keynote, chess, drain, maze, hops, badge, chipstack, casefolder, checks, newspaper, radar, shield, hearing, boardroom, phone, chipheart; map routes take `ship: true`). This is the quality bar: every line acted out.
   - Remaining: update `shorts.json` (the timeline moved when the `sub` scene was added), make a thumbnail, and re-check facts on publish day.
 - Next week: episode 3, following the workflow above.
