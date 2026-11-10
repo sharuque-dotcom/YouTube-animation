@@ -1,0 +1,255 @@
+{
+  "title": "The Bank That Toppled a President",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "scenes": [
+    {
+      "id": "c_night",
+      "lines": [
+        {
+          "text": "At 3:24 in the morning on November 2nd, 2026, Paraguay's central bank posted a short message online.",
+          "say": "At three twenty-four in the morning on November second, 2026, Paraguay's central bank posted a short message online.",
+          "pause": 0.8
+        },
+        {
+          "text": "By sunrise, the most popular banking app in the country had stopped working.",
+          "pause": 0.6
+        },
+        "Three million customers, about six in ten adults, could not pay, withdraw cash, or use their cards."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "c_fall",
+      "lines": [
+        {
+          "text": "Five days later, the President of Paraguay was out of office and under arrest.",
+          "pause": 0.9
+        },
+        "How does one bank bring down a president?"
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "title",
+      "duration": 4.5
+    },
+    {
+      "id": "chapter1",
+      "duration": 2.8
+    },
+    {
+      "id": "rise",
+      "lines": [
+        {
+          "text": "Ueno started in 1976 as a small finance company, and for decades almost nobody noticed it.",
+          "say": "Wenno started in 1976 as a small finance company, and for decades almost nobody noticed it."
+        },
+        {
+          "text": "In 2021 a powerful business family, Grupo Vázquez, took control, renamed it Ueno, and turned it into an app.",
+          "say": "In 2021 a powerful business family, Groopo Vasquez, took control, renamed it Wenno, and turned it into an app."
+        },
+        "It offered cashback on groceries, credit cards for people who had never had one, and its name on the shirts of the national football team."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "bigger",
+      "lines": [
+        "In 2023 it won a full banking licence. In 2024 it bought another bank, Visión Banco, and became the sixth-largest bank in the country.",
+        {
+          "text": "At the same time, Paraguay was selling itself to investors as the \"Dubai of South America\": low taxes, steady growth, and new investment-grade credit ratings.",
+          "say": "At the same time, Paraguay was selling itself to investors as the Dubai of South America. Low taxes, steady growth, and new investment-grade credit ratings."
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter2",
+      "duration": 2.8
+    },
+    {
+      "id": "pena",
+      "lines": [
+        {
+          "text": "Paraguay's president, Santiago Peña, was a former IMF economist elected in 2023.",
+          "say": "Paraguay's president, Santiago Penya, was a former I.M.F. economist elected in 2023."
+        },
+        {
+          "text": "Before and during his presidency, he held a small stake in Ueno's holding company. He said he sold it in 2025.",
+          "say": "Before and during his presidency, he held a small stake in Wenno's holding company. He said he sold it in 2025."
+        },
+        {
+          "text": "He also picked Carlos Carvallo, who had led Ueno's predecessor company, to run the central bank: the regulator that was supposed to watch Ueno.",
+          "say": "He also picked Carlos Carvayo, who had led Wenno's predecessor company, to run the central bank. The regulator that was supposed to watch Wenno."
+        }
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "money",
+      "lines": [
+        {
+          "text": "And public money poured in. By August 2026, state agencies had about 850 million dollars at Ueno, including around 355 million from the national social security fund.",
+          "say": "And public money poured in. By August 2026, state agencies had about 850 million dollars at Wenno, including around 355 million from the national social security fund."
+        },
+        "Paraguay's social security institute had loosened its own rules, which let it put more of its money there."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter3",
+      "duration": 2.8
+    },
+    {
+      "id": "warn",
+      "lines": [
+        "In June 2026, central bank inspectors flagged about 146 million dollars in risky loans to companies linked to the bank's own owners.",
+        {
+          "text": "That summer, the newspaper ABC Color started asking questions. Ueno threatened to sue.",
+          "say": "That summer, the newspaper A.B.C. Color started asking questions. Wenno threatened to sue."
+        },
+        {
+          "text": "In October, a leaked central bank report naming problems at Ueno reached the Senate. Peña criticised the leak, and Ueno questioned whether the document was genuine.",
+          "say": "In October, a leaked central bank report naming problems at Wenno reached the Senate. Penya criticised the leak, and Wenno questioned whether the document was genuine."
+        },
+        {
+          "text": "On paper, Ueno said it was healthy, with capital above the legal minimum. On October 30th, it announced a plan to raise 100 million dollars.",
+          "say": "On paper, Wenno said it was healthy, with capital above the legal minimum. On October thirtieth, it announced a plan to raise 100 million dollars."
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "sub",
+      "lines": [
+        "Quick pause. If you're enjoying this story and haven't subscribed yet, tap subscribe.",
+        "It really helps the channel."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "chapter4",
+      "duration": 2.8
+    },
+    {
+      "id": "dark",
+      "lines": [
+        {
+          "text": "Three days later, the central bank shut it down.",
+          "pause": 0.8
+        },
+        {
+          "text": "Inspectors said that once bad loans were counted properly, Ueno's capital was not 13.8 percent. It was 5.56 percent, less than half the legal minimum.",
+          "say": "Inspectors said that once bad loans were counted properly, Wenno's capital was not thirteen point eight percent. It was five point five six percent. Less than half the legal minimum."
+        },
+        "Overnight, millions of accounts froze. Salaries, savings and pensions were stuck."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "impact",
+      "lines": [
+        "Shops lost their payment systems. In some cities, a school meals programme was suspended.",
+        {
+          "text": "A state guarantee fund began paying depositors back. Officials said 97 percent of customers would be covered in full, but Moody's estimated only about a third of the money held at the bank was insured.",
+          "say": "A state guarantee fund began paying depositors back. Officials said ninety-seven percent of customers would be covered in full. But Moody's estimated only about a third of the money held at the bank was insured."
+        },
+        {
+          "text": "Paraguay's currency fell more than 8 percent against the dollar.",
+          "say": "Paraguay's currency fell more than eight percent against the dollar."
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter5",
+      "duration": 2.8
+    },
+    {
+      "id": "days1",
+      "lines": [
+        "Monday, November 3rd: the central bank chief resigned. Crowds gathered outside closed branches.",
+        {
+          "text": "Then the crowds moved to Congress and the president's residence. Ueno's own staff burned their company cards. Police fired pepper spray and rubber bullets.",
+          "say": "Then the crowds moved to Congress and the president's residence. Wenno's own staff burned their company cards. Police fired pepper spray and rubber bullets."
+        },
+        {
+          "text": "Thursday, November 5th: Peña said he would resign \"for the stability of our country.\"",
+          "say": "Thursday, November fifth. Penya said he would resign, for the stability of our country.",
+          "pause": 0.7
+        },
+        {
+          "text": "But lawmakers refused. Resigning would have given him a lifetime Senate seat, and with it, immunity. The lower house voted 78 to 0 to impeach him instead.",
+          "say": "But lawmakers refused. Resigning would have given him a lifetime Senate seat, and with it, immunity. The lower house voted seventy-eight to zero to impeach him instead."
+        }
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "days2",
+      "lines": [
+        {
+          "text": "Friday, November 6th: the Senate voted 44 to 0 to remove him. Vice President Pedro Alliana was sworn in that evening.",
+          "say": "Friday, November sixth. The Senate voted forty-four to zero to remove him. Vice President Pedro Aliana was sworn in that evening."
+        },
+        {
+          "text": "That night, prosecutors ordered Peña's arrest.",
+          "say": "That night, prosecutors ordered Penya's arrest.",
+          "pause": 0.8
+        },
+        "Over the weekend, he and the former central bank chief were charged with breach of trust. Prosecutors charged 27 people linked to the bank, and a judge ordered its founder and president detained.",
+        {
+          "text": "Investigators raided Peña's country house and seized luxury cars, private planes and a yacht.",
+          "say": "Investigators raided Penya's country house and seized luxury cars, private planes and a yacht."
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter6",
+      "duration": 2.8
+    },
+    {
+      "id": "known",
+      "lines": [
+        {
+          "text": "Peña denies any wrongdoing, and no one has been convicted.",
+          "say": "Penya denies any wrongdoing, and no one has been convicted."
+        },
+        {
+          "text": "Ueno has disputed the leaked report and the reporting against it.",
+          "say": "Wenno has disputed the leaked report and the reporting against it."
+        },
+        "How much money is truly missing is still being counted.",
+        "This has happened before. In the late 1990s, Paraguay closed 13 banks and 35 finance companies."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "outro",
+      "lines": [
+        {
+          "text": "In five years, Ueno went from a small finance company to the bank in most people's pockets.",
+          "say": "In five years, Wenno went from a small finance company to the bank in most people's pockets.",
+          "pause": 0.8
+        },
+        {
+          "text": "In five days, it took a president down with it.",
+          "pause": 1.0
+        },
+        "This story is still developing, and we'll update you as it does."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "endcard",
+      "lines": [
+        "This has been Toppled Giants.",
+        "Subscribe, and I'll see you in the next story."
+      ],
+      "tail": 3.5
+    }
+  ]
+}
