@@ -21,6 +21,17 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 - The Case File toolkit (`dossier.js`, `iso.js`, `episodes/ep02-nvidia/casefile.js`, `episodes/styleframes-ep2`) is kept as a parts bin. Reuse ideas from it (isometric diorama, stamps, scan, evidence board) only when recoloured to the purple theme.
 - Don't run code downloaded from other repos; the safety check blocks it. Read their docs and reimplement the ideas instead.
 
+## Craft rules (from the owner's reference "Direct, don't describe")
+- For a new look or set piece, render style frames (stills) first and get approval before animating.
+- Direct with concrete terms, not vague ones:
+  - key light plus direction, not "bright"
+  - rim light for edge separation, not "pop out"
+  - warm key and cool fill, not "moody"
+  - also: volumetric rays, exponential falloff, bloom/halation, depth occlusion, inertia and weight (heavy sways slowly, light reacts fast), depth-scaled particles (near = thick and fast, far = thin and slow)
+- No single-frame pops: flashes and transitions build over about 8 frames and recover over about 10.
+- After every change, render stills of the new shots, look at them, and fix them before the full render.
+- Topic shortlist: `content/topics-shortlist.md`.
+
 ## Workflow for every new episode (owner's request)
 1. Write the draft script (fact-checked, with sources) and send it for approval.
 2. Plan the visuals shot by shot: story-specific motion graphics for every line.
