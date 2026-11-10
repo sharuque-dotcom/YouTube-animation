@@ -13,11 +13,11 @@ export const shots = {
   ],
   c_twist: [
     { type: 'kinetic', text: 'Not just *an affair', size: 140, dark: true },
-    { at: 'The woman at the centre', type: 'profile', name: 'Alice Huang', role: 'reportedly watched by US intelligence', caption: 'no photo shown', dark: true },
+    { at: 'The woman at the centre', type: 'profile', name: 'Alice Huang', role: 'no photo shown', caption: 'no photo shown', dark: true, scan: { when: 'watched', lines: ['SUBJECT · ALICE HUANG', 'WATCHED BY · US INTELLIGENCE', 'SUSPICION · WORKING FOR CHINA', '* ACCORDING TO REPORTS'] } },
     { at: 'And her company', type: 'number', value: 4.8, decimals: 1, prefix: '$', suffix: ' billion', when: 'billions', label: 'of Nvidia chips', sub: 'her former company, per The New York Times', dark: true },
   ],
   c_q: [
-    { type: 'list', items: [{ text: 'A LOVE STORY?', when: 'love story' }, { text: 'A SPY STORY?', when: 'spy story' }, { text: 'A CHIP STORY?', when: 'chips', color: 'yellow' }] },
+    { type: 'list', items: [{ text: 'A LOVE STORY?', when: 'love story' }, { text: 'A SPY STORY?', when: 'spy story' }, { text: 'A CHIP STORY?', when: 'chips', color: 'yellow' }], fx: [{ kind: 'hearts', when: 'love story' }, { kind: 'spy', when: 'spy story' }, { kind: 'chips', when: 'chips' }] },
     { at: 'Maybe all three', type: 'kinetic', text: 'Maybe *all three.', size: 140 },
   ],
   title: [{ type: 'sting', title: 'Toppled Giants', sub: 'Episode 2 · The CEO, the Chips and the Alleged Spy' }],
@@ -26,7 +26,7 @@ export const shots = {
   chapter1: [{ type: 'chapter', num: 1, title: 'The Man Who Powers AI', img: 'jensen' }],
   rise: [
     { type: 'map', from: [112, 26, 6], to: [120.6, 23.4, 30], pins: [{ at: TAINAN, label: 'Taiwan · 1963', when: 'Taiwan' }] },
-    { at: 'In 1993', type: 'flow', nodes: [{ text: '1993', sub: 'three friends', when: '1993' }, { text: "A DENNY'S BOOTH", sub: 'where the plan was sketched', when: "Denny's", color: 'yellow' }] },
+    { at: 'In 1993', type: 'diner', sketch: 'sketched', text: '1993 · three friends, one plan' },
     { at: 'They called it', type: 'letters', word: 'NVIDIA', when: 'Nvidia' },
   ],
   ai: [

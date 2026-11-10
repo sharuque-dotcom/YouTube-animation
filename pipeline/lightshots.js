@@ -11,6 +11,7 @@ import {
   lightMap, mapPin, avatar, cursor,
 } from './lightui.js';
 import { trophy, building } from './kit.js';
+import { hearts, chipRain, spy, scanHUD, diner } from './fx.js';
 
 /** Words land when spoken, but never later than a quick stagger from the shot start (no waiting) */
 const tight = (ws, a, lead = 0.3, gap = 0.11) => ws.map((w, k) => ({ ...w, at: Math.min(w.at, a + lead + k * gap) }));
@@ -617,7 +618,24 @@ L.tear = (g, sh, x) => {
   if (sh.sub) pill(g, clean(sh.sub), W / 2, 820, tearAt + 0.4, x.T, { size: 34, fill: UI.soft, color: UI.purple });
 };
 
+L.diner = (g, sh, x) => {
+  diner(g, x, { year: sh.year || '1993', sketchAt: sh.sketch ? when(x.words, sh.sketch, x.a) : x.a + 2 });
+  if (sh.text) pill(g, clean(sh.text), W / 2, 980, x.a + 0.5, x.T, { size: 30 });
+};
+
 function overlays(g, sh, x) {
+  // story effects tied to a spoken word: hearts, raining chips, a spy, a surveillance scan
+  const fxAt = (sh.fx || []).map((f) => (f.when != null ? when(x.words, f.when, x.a) : x.a));
+  (sh.fx || []).forEach((f, i) => {
+    const at = fxAt[i];
+    if (f.kind === 'hearts') hearts(g, x.T, at, f.dur ?? 2.4);
+    if (f.kind === 'chips') chipRain(g, x.T, at, f.dur ?? 2);
+    if (f.kind === 'spy') spy(g, x.T, at, { out: fxAt[i + 1] ?? 1e9 });
+  });
+  if (sh.scan) {
+    const at = sh.scan.when ? when(x.words, sh.scan.when, x.a) : x.a + 0.5;
+    scanHUD(g, x.T, at, sh.scan.rect || [260, 170, 560, 700], { lines: sh.scan.lines || [], label: sh.scan.label || 'SURVEILLANCE · REPORTED', readout: sh.scan.readout || [940, 640], lensPath: [[420, 380], [640, 470], [540, 420]] });
+  }
   if (sh.stamp) {
     const at = when(x.words, sh.stamp.when, x.a) + (sh.stamp.delay || 0);
     const s = spring(x.T, at, { freq: 1.8, damp: 0.5 });
@@ -695,6 +713,9 @@ export function lightSounds(timeline, shotLists) {
       if (sh.type === 'sting') out.push({ t: sc.start + a + 0.3, kind: 'whoosh', vol: 0.4 }, { t: sc.start + a + 1.5, kind: 'hit', vol: 0.8 }, { t: sc.start + a + 2.3, kind: 'pop', vol: 0.6 });
       if (sh.type === 'export') { const c = sh.cut ? w(sh.cut) : a + 2.2; out.push({ t: sc.start + c + 0.05, kind: 'hit', vol: 0.75 }, { t: sc.start + c + 0.2, kind: 'pop', vol: 0.6 }); }
       if (sh.type === 'subscribe') { const c = sh.clickWhen ? w(sh.clickWhen) : a + (sh.clickAt ?? 1.8); out.push({ t: sc.start + c, kind: 'tick', vol: 0.9 }, { t: sc.start + c + 0.5, kind: 'pop', vol: 0.8 }); }
+      (sh.fx || []).forEach((f) => { const at = f.when != null ? w(f.when) : a; out.push({ t: sc.start + at, kind: f.kind === 'spy' ? 'whoosh' : 'pop', vol: 0.7 }); if (f.kind === 'chips') for (let k = 1; k < 6; k++) out.push({ t: sc.start + at + 0.45 + k * 0.18, kind: 'tick', vol: 0.5 }); });
+      if (sh.scan) { const at = sh.scan.when ? w(sh.scan.when) : a + 0.5; out.push({ t: sc.start + at, kind: 'hit', vol: 0.5 }); (sh.scan.lines || []).forEach((_, k) => out.push({ t: sc.start + at + 0.5 + k * 0.55, kind: 'tick', vol: 0.55 })); }
+      if (sh.type === 'diner' && sh.sketch) out.push({ t: sc.start + w(sh.sketch), kind: 'pop', vol: 0.5 });
       if (sh.type === 'chapter') out.push({ t: sc.start + a + 0.15, kind: 'hit', vol: 0.6 }, { t: sc.start + a + 0.5, kind: 'pop', vol: 0.6 });
       if (sh.stamp) out.push({ t: sc.start + w(sh.stamp.when) + (sh.stamp.delay || 0), kind: 'pop', vol: 0.9 }, { t: sc.start + w(sh.stamp.when) + (sh.stamp.delay || 0), kind: 'hit', vol: 0.45 });
       if (sh.type === 'number') out.push({ t: sc.start + (sh.when ? w(sh.when) : a + 0.3), kind: 'pop' });
