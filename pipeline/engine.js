@@ -159,7 +159,8 @@ export class Player {
       ctx.globalAlpha = 1;
     }
 
-    if (this.look?.cinema) this.cinema(frame);
+    if (this.look?.finish) this.look.finish(ctx, frame); // an episode's own print/paper finish
+    else if (this.look?.cinema) this.cinema(frame);
     else if (this.look?.light) grain(ctx, frame, 0.018); // light mode: no dark vignette, barely-there grain
     else {
       vignette(ctx);
