@@ -3,3 +3,4 @@ build/
 node_modules/
 __pycache__/
 episodes/*/music/*.mp3
+content/episodes/*/episode*-1080p.mp4
