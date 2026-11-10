@@ -1,0 +1,267 @@
+{
+  "title": "The CEO, the Chips and the Alleged Spy",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "scenes": [
+    {
+      "id": "c_email",
+      "lines": [
+        "On Sunday, November 8th, 2026, the most important man in artificial intelligence sent an email to his employees.",
+        {
+          "text": "\"I was unfaithful to my wife,\" he wrote. \"My actions hurt her and our children. There is no excuse for what I did.\"",
+          "say": "I was unfaithful to my wife, he wrote. My actions hurt her, and our children. There is no excuse for what I did.",
+          "pause": 0.9
+        },
+        "The man was Jensen Huang, the founder and CEO of Nvidia."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "c_twist",
+      "lines": [
+        {
+          "text": "But this was not just a story about an affair.",
+          "pause": 0.7
+        },
+        "The woman at the centre of it, according to reports, had been watched by American intelligence, who suspected she could be working for China.",
+        {
+          "text": "And her company had bought billions of dollars' worth of Nvidia's chips.",
+          "pause": 0.9
+        }
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "c_q",
+      "lines": [
+        {
+          "text": "So is this a love story, a spy story, or a story about the most valuable chips on Earth?",
+          "pause": 0.6
+        },
+        "Maybe all three."
+      ],
+      "tail": 1.2
+    },
+    {
+      "id": "title",
+      "duration": 4.5
+    },
+    {
+      "id": "chapter1",
+      "duration": 2.8
+    },
+    {
+      "id": "rise",
+      "lines": [
+        "Jensen Huang was born in Taiwan in 1963, and moved to the United States as a child.",
+        "In 1993, he and two friends started a company to make graphics chips for video games. The plan was famously sketched out in a Denny's restaurant.",
+        "They called it Nvidia."
+      ]
+    },
+    {
+      "id": "ai",
+      "lines": [
+        "For years, Nvidia's chips made video games look better.",
+        "Then researchers discovered the same chips were perfect for training artificial intelligence.",
+        "When the AI boom arrived, almost every major AI system in the world needed Nvidia."
+      ]
+    },
+    {
+      "id": "value",
+      "lines": [
+        "By late 2026, Nvidia was worth roughly 4.5 trillion dollars, one of the most valuable companies ever.",
+        "And Jensen Huang, in his trademark leather jacket, became one of the most powerful businessmen alive."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter2",
+      "duration": 2.8
+    },
+    {
+      "id": "wall",
+      "lines": [
+        {
+          "text": "But Nvidia's chips aren't just products anymore.",
+          "pause": 0.5
+        },
+        "Governments now treat them like strategic weapons.",
+        "Since 2022, the United States has restricted the export of its most advanced AI chips to China, worried they could power China's military and its own AI race.",
+        "China is a huge market, so the rules have cost Nvidia billions."
+      ]
+    },
+    {
+      "id": "leak",
+      "lines": [
+        "As the wall went up, one question kept coming back.",
+        {
+          "text": "Were the chips finding a way around it?",
+          "pause": 0.6
+        },
+        "Investigators and lawmakers started looking at Southeast Asia, especially Singapore and Malaysia, as possible routes for chips to reach Chinese customers.",
+        "Nvidia has always said it follows the rules."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter3",
+      "duration": 2.8
+    },
+    {
+      "id": "mega",
+      "lines": [
+        "Which brings us to a company called Megaspeed.",
+        "Megaspeed is a cloud computing company based in Singapore.",
+        "According to reports, it began as a spin-off from a Chinese gaming and cloud firm called 7Road, and was later sold to an offshore company linked to a woman named Alice Huang."
+      ]
+    },
+    {
+      "id": "alice",
+      "lines": [
+        "Alice Huang had worked as a television reporter in China.",
+        "From March to November 2023, she was Megaspeed's managing director.",
+        "Huang is a common surname. The two are not reported to be related."
+      ]
+    },
+    {
+      "id": "chips",
+      "lines": [
+        "Megaspeed became one of Nvidia's big customers.",
+        "The New York Times reported that it bought more than 4.8 billion dollars of Nvidia chips over two years.",
+        "Investigators are now examining whether some of those chips were diverted to China.",
+        "The Times also reported that the Justice Department has opened a criminal inquiry into the company."
+      ]
+    },
+    {
+      "id": "deny",
+      "lines": [
+        {
+          "text": "Megaspeed denies all of it.",
+          "pause": 0.5
+        },
+        {
+          "text": "It calls the reports \"misleading information and incorrect insinuations\", and says inspections by American and Malaysian officials, and by Nvidia, found no evidence of any violations.",
+          "say": "It calls the reports, misleading information and incorrect insinuations, and says inspections by American and Malaysian officials, and by Nvidia, found no evidence of any violations."
+        }
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter4",
+      "duration": 2.8
+    },
+    {
+      "id": "report",
+      "lines": [
+        "On October 29th, The New York Times published a story that changed everything.",
+        "It reported that American intelligence agencies had been watching a person close to Jensen Huang, because they believed she could be a Chinese intelligence asset.",
+        "The concern, according to the report, was that she could help Beijing gain information about Nvidia, and about a CEO with access to the President of the United States."
+      ]
+    },
+    {
+      "id": "more",
+      "lines": [
+        "The Wall Street Journal reported that intelligence services in the United States, Singapore and Taiwan all had reason to suspect her.",
+        "The Financial Times reported that the relationship was romantic."
+      ]
+    },
+    {
+      "id": "nvreply",
+      "lines": [
+        {
+          "text": "Nvidia pushed back.",
+          "pause": 0.5
+        },
+        {
+          "text": "It said Huang talks to thousands of customers every year, and that the chip diversion allegations had been \"thoroughly investigated and debunked\".",
+          "say": "It said Huang talks to thousands of customers every year, and that the chip diversion allegations had been, thoroughly investigated and debunked."
+        }
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter5",
+      "duration": 2.8
+    },
+    {
+      "id": "congress",
+      "lines": [
+        {
+          "text": "But the story would not go away.",
+          "pause": 0.5
+        },
+        "Last week, three Republican committee chairmen in the House asked Huang to brief them behind closed doors: from the Foreign Affairs Committee, the China Committee, and the Intelligence Committee.",
+        "Democrats called for answers too."
+      ]
+    },
+    {
+      "id": "confess",
+      "lines": [
+        {
+          "text": "Then came Sunday's email.",
+          "pause": 0.5
+        },
+        "Huang admitted the affair, and said he supported an investigation and would cooperate fully.",
+        "Nvidia's board announced that independent directors, with outside lawyers, would investigate, including whether Huang had been the target of a foreign intelligence effort.",
+        "The board said it had no reason to believe that national security or Nvidia's secrets were compromised."
+      ]
+    },
+    {
+      "id": "market",
+      "lines": [
+        "On Monday, Nvidia's stock fell about 4 percent.",
+        {
+          "text": "President Trump called Huang \"an honorable guy\", and added that the FBI was \"looking into it in terms of something else\".",
+          "say": "President Trump called Huang, an honorable guy, and added that the F.B.I. was, looking into it, in terms of something else."
+        },
+        "Nvidia says Huang will stay on as CEO, without interruption."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "chapter6",
+      "duration": 2.8
+    },
+    {
+      "id": "known",
+      "lines": [
+        {
+          "text": "So, what do we actually know?",
+          "pause": 0.6
+        },
+        "Huang has admitted an affair. That part is confirmed.",
+        "The spying claims come from anonymous intelligence sources quoted in news reports.",
+        "No one has been charged. Alice Huang has not commented publicly.",
+        "And Megaspeed says it did nothing wrong."
+      ]
+    },
+    {
+      "id": "next",
+      "lines": [
+        "What happens next matters.",
+        "Nvidia's board is investigating. Lawmakers want a briefing. And investigators are still looking at where Megaspeed's chips went."
+      ]
+    },
+    {
+      "id": "outro",
+      "lines": [
+        {
+          "text": "For decades, the biggest risk to a company like Nvidia was a better chip.",
+          "pause": 0.6
+        },
+        "Now, in a world where chips are power, the biggest risk might be something far more human.",
+        "This story is still developing, and we'll update you as it does."
+      ],
+      "tail": 1.2
+    },
+    {
+      "id": "endcard",
+      "lines": [
+        "This has been Toppled Giants.",
+        "Subscribe, and I'll see you in the next story."
+      ],
+      "tail": 5.0
+    }
+  ]
+}

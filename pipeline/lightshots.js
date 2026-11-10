@@ -15,9 +15,25 @@ import { trophy, building } from './kit.js';
 const clean = (s = '') => s.replace(/\*/g, '').replace(/\|/g, ' ');
 const pick = (k) => (Array.isArray(k) ? k.find((x) => img(x)) : k);
 const FILLS = ['#c9b8ff', '#ffc9a8', '#b8e0d2', '#f5c6e0', '#ffe2a8'];
+// colours for the current shot: light (default) or dark (shot.dark = true, for the darker turns)
+const LIGHT_TH = { text: UI.ink, accent: UI.purple, pill: '#fff', pillText: UI.ink, soft: UI.soft, softText: UI.purple };
+const DARK_TH = { text: '#f3efff', accent: '#b9a2ff', pill: '#2c2350', pillText: '#f3efff', soft: '#2c2350', softText: '#cdbdff' };
+let TH = LIGHT_TH;
+function darkGround(g, T) {
+  const gr = g.createLinearGradient(0, 0, W, H);
+  gr.addColorStop(0, '#120d24'); gr.addColorStop(1, '#22163f');
+  g.fillStyle = gr; g.fillRect(-200, -200, W + 400, H + 400);
+  [[0.2, 0.25, 600, '120,80,220', 0.35], [0.8, 0.75, 520, '226,65,46', 0.18]].forEach(([bx, by, r, c, a], i) => {
+    const x = (bx + Math.sin(T * 0.12 + i) * 0.05) * W, y = (by + Math.cos(T * 0.1 + i) * 0.05) * H;
+    const rg = g.createRadialGradient(x, y, 0, x, y, r);
+    rg.addColorStop(0, `rgba(${c},${a})`); rg.addColorStop(1, `rgba(${c},0)`);
+    g.fillStyle = rg; g.fillRect(-200, -200, W + 400, H + 400);
+  });
+}
 
 /** Caption pill centred at (cx, y), popping in at `at` */
-function pill(g, str, cx, y, at, T, { size = 30, fill = '#fff', color = UI.ink, weight = 600 } = {}) {
+function pill(g, str, cx, y, at, T, { size = 30, fill = TH.pill, color = TH.pillText, weight = 600 } = {}) {
+  if (fill === UI.soft) { fill = TH.soft; color = TH.softText; }
   const s = spring(T, at, { freq: 1.8, damp: 0.65 });
   if (s <= 0.01 || !str) return;
   g.font = `${weight} ${size}px ${UI.BODY}`;
@@ -26,7 +42,7 @@ function pill(g, str, cx, y, at, T, { size = 30, fill = '#fff', color = UI.ink, 
 }
 
 /** Lines of words rising out of masks; *word = accent colour */
-function statement(g, T, words, lines, cx, cy, { size = 110, color = UI.ink } = {}) {
+function statement(g, T, words, lines, cx, cy, { size = 110, color = TH.text } = {}) {
   const lh = size * 1.12;
   let wi = 0;
   lines.forEach((ln, li) => {
@@ -42,7 +58,7 @@ function statement(g, T, words, lines, cx, cy, { size = 110, color = UI.ink } = 
       const e = ease(T, at - 0.08, 0.5);
       g.save();
       g.beginPath(); g.rect(x - 8, y - size * 0.95, widths[k] + 16, lh + 10); g.clip();
-      text(g, p.w, x, y + (1 - e) * lh, { font: UI.HEAD, weight: 600, size, color: p.acc ? UI.purple : color, spacing: -size * 0.02 });
+      text(g, p.w, x, y + (1 - e) * lh, { font: UI.HEAD, weight: 600, size, color: p.acc ? TH.accent : color, spacing: -size * 0.02 });
       g.restore();
       x += widths[k] + gap;
     });
@@ -91,7 +107,7 @@ L.number = (g, sh, x) => {
   const v = sh.value;
   const num = `${sh.prefix || ''}${v.toLocaleString('en-IN', { maximumFractionDigits: sh.decimals || 0, minimumFractionDigits: sh.decimals || 0 })}${sh.suffix || ''}`;
   if (sh.sub) pill(g, clean(sh.sub), W / 2, 300, at - 0.2, x.T, { size: 30, fill: UI.soft, color: UI.purple });
-  odometer(g, x.T, at - 0.15, num, W / 2, 600, { size: 230, align: 'center', color: sh.color ? UI.red : UI.ink });
+  odometer(g, x.T, at - 0.15, num, W / 2, 600, { size: 230, align: 'center', color: sh.color ? UI.red : TH.text });
   if (sh.label) pill(g, clean(sh.label), W / 2, 680, at + 0.5, x.T, { size: 34 });
 };
 
@@ -228,7 +244,7 @@ L.profile = (g, sh, x) => {
     if (sh.caption) text(cg, sh.caption, cw / 2, 600, { font: UI.BODY, weight: 600, size: 30, color: UI.muted, align: 'center' });
   });
   const lines = (sh.name || '').split('|').map((l) => l.replace(/\*/g, ''));
-  headline(g, x.T, lines, 940, 440, x.a + 0.3, 1e9, { size: lines.some((l) => l.length > 14) ? 80 : 100 });
+  headline(g, x.T, lines, 940, 440, x.a + 0.3, 1e9, { size: lines.some((l) => l.length > 14) ? 80 : 100, color: TH.accent });
   if (sh.role) pill(g, clean(sh.role), 940 + 260, 440 + lines.length * 108 - 30, x.a + 0.9, x.T, { size: 28, fill: UI.soft, color: UI.purple });
 };
 
@@ -305,7 +321,7 @@ L.list = (g, sh, x) => {
     g.save(); g.translate(cx, cy); g.scale(s, s);
     card(g, -520, -hh / 2, 1040, hh, { r: 40, fill: it.color === 'yellow' ? '#fff4d6' : '#fff' }, (cg, cw, ch) => {
       if (it.num) { cg.fillStyle = UI.purple; cg.beginPath(); cg.arc(110, ch / 2, 62, 0, Math.PI * 2); cg.fill(); text(cg, it.num, 110, ch / 2 + 30, { font: UI.HEAD, weight: 700, size: 80, color: '#fff', align: 'center' }); }
-      text(cg, it.text, it.num ? 600 : cw / 2, it.sub ? 160 : ch / 2 + 34, { font: UI.HEAD, weight: 700, size: 92, color: UI.ink, align: 'center' });
+      text(cg, it.text, it.num ? 600 : cw / 2, it.sub ? 160 : ch / 2 + 34, { font: UI.HEAD, weight: 700, size: it.text.length > 16 ? 70 : it.text.length > 12 ? 80 : 92, color: UI.ink, align: 'center' });
       if (it.sub) text(cg, it.sub, it.num ? 600 : cw / 2, 280, { font: UI.BODY, size: 46, color: UI.muted, align: 'center' });
     });
     if (it.circle && toRow === 0) {
@@ -368,6 +384,43 @@ L.vs = (g, sh, x) => {
     g.restore();
   });
   if (sh.title) pill(g, clean(sh.title), W / 2, 130, x.a + 0.3, x.T, { size: 32, fill: UI.soft, color: UI.purple });
+};
+
+L.email = (g, sh, x) => {
+  // an inbox-style email card; the body types out between `when` and `until`
+  push(g, x, { from: 1, to: 1.06, focus: [W / 2, 520] });
+  const at = sh.when ? when(x.words, sh.when, x.a) : x.a + 0.4;
+  const end = sh.until ? when(x.words, sh.until, at) : x.b - 0.5;
+  const ein = spring(x.T, x.a, { freq: 1.1, damp: 0.8 });
+  card(g, 300, 120 + (1 - Math.min(1, ein)) * 380, 1320, 860, { r: 36, alpha: Math.min(1, ein * 1.5) }, (cg, cw) => {
+    cg.fillStyle = UI.soft; cg.fillRect(0, 0, cw, 96);
+    [['#ff6b5f', 40], ['#ffbd2e', 72], ['#28c840', 104]].forEach(([c, xx]) => { cg.fillStyle = c; cg.beginPath(); cg.arc(xx, 48, 11, 0, Math.PI * 2); cg.fill(); });
+    text(cg, 'New message', cw / 2, 60, { font: UI.BODY, weight: 600, size: 26, color: UI.muted, align: 'center' });
+    const row = (k, label, val, y) => { const p = ease(x.T, x.a + 0.3 + k * 0.12, 0.5); text(cg, label, 60, y, { font: UI.BODY, size: 28, color: UI.faint, alpha: p }); text(cg, val, 170, y, { font: UI.BODY, weight: 600, size: 30, color: UI.ink, alpha: p }); };
+    row(0, 'From', sh.from || '', 170); row(1, 'To', sh.to || '', 225); row(2, 'Date', sh.date || '', 280);
+    cg.fillStyle = UI.line; cg.fillRect(60, 320, cw - 120, 2);
+    text(cg, sh.subject || '', 60, 395, { font: UI.HEAD, weight: 700, size: 44, color: UI.ink, alpha: ease(x.T, x.a + 0.6, 0.5) });
+    const cps = sh.body.length / Math.max(1, end - at);
+    typeOn(cg, x.T, at, sh.body, 60, 480, { size: 44, maxW: cw - 140, cps, lineH: 1.5, color: '#2b2838' });
+  });
+};
+
+L.title = (g, sh, x) => {
+  push(g, x, { from: 1.05, to: 1 });
+  const word = sh.title || 'Toppled Giants';
+  g.font = `700 170px ${UI.HEAD}`;
+  const ws = [...word].map((ch) => g.measureText(ch).width - 3);
+  let cx = W / 2 - ws.reduce((a, c) => a + c, 0) / 2;
+  [...word].forEach((ch, i) => {
+    const p = ez.expoOut(span(x.T, x.a + 0.3 + i * 0.03, 0.6 * TEMPO));
+    g.save(); g.beginPath(); g.rect(cx - 10, H / 2 - 150, ws[i] + 20, 200); g.clip();
+    text(g, ch, cx, H / 2 + 30 + (1 - p) * 180, { font: UI.HEAD, weight: 700, size: 170, color: UI.purple, spacing: -3 });
+    g.restore();
+    cx += ws[i];
+  });
+  const ln = ease(x.T, x.a + 0.9, 0.8);
+  g.fillStyle = UI.purple; g.fillRect(W / 2 - 300 * ln, H / 2 + 80, 600 * ln, 6);
+  pill(g, sh.sub || '', W / 2, H / 2 + 130, x.a + 1.1, x.T, { size: 28 });
 };
 
 L.chapter = (g, sh, x) => {
@@ -455,7 +508,14 @@ export function lightScene(list) {
         at: starts[i],
         end: s.d,
         in: i ? transitionFor(sh, list[i - 1], i) : null,
-        draw: (g, x) => { const xx = { ...x, words }; (L[sh.type] || L.kinetic)(g, sh, xx); overlays(g, sh, xx); },
+        draw: (g, x) => {
+          const xx = { ...x, words };
+          TH = sh.dark ? DARK_TH : LIGHT_TH;
+          if (sh.dark) darkGround(g, worldT);
+          (L[sh.type] || L.kinetic)(g, sh, xx);
+          overlays(g, sh, xx);
+          TH = LIGHT_TH;
+        },
       }));
       cache = { key, draw: sequence(beatsList, (c) => world(c, worldT)) };
     }
