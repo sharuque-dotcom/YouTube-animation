@@ -16,6 +16,7 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
 
 ROOT = Path(__file__).resolve().parent.parent
+CHANNEL = "Toppled Giants"
 W, H = 1080, 1920
 VW, VH = 1080, 608           # footage size
 VY = 640                      # footage top
@@ -98,13 +99,13 @@ Style: End,Plus Jakarta Sans,92,&H008C2A4A,&H000000FF,&H00FFFFFF,&H00000000,1,0,
 Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
 """
     ev = [f"Dialogue: 0,{ts(0)},{ts(dur)},Hook,,0,0,0,,{{\\fad(250,0)}}{hook}",
-          f"Dialogue: 0,{ts(0)},{ts(dur)},Brand,,0,0,0,,PAPER EMPIRES"]
+          f"Dialogue: 0,{ts(0)},{ts(dur)},Brand,,0,0,0,,{CHANNEL.upper()}"]
     for a, b, t in cues:
         for ca, cb, ct in chunks(t, a, b):
             ct = ct.replace("…", "...")
             ev.append(f"Dialogue: 1,{ts(ca)},{ts(cb)},Cap,,0,0,0,,{{\\fscx86\\fscy86\\t(0,110,\\fscx100\\fscy100)}}{ct}")
     end0 = dur - END
-    ev.append(f"Dialogue: 2,{ts(end0)},{ts(dur)},End,,0,0,0,,{{\\fad(200,0)\\fscx80\\fscy80\\t(0,200,\\fscx100\\fscy100)}}Watch the full story\\N{{\\fs56\\c&H00806B6B&}}on Paper Empires")
+    ev.append(f"Dialogue: 2,{ts(end0)},{ts(dur)},End,,0,0,0,,{{\\fad(200,0)\\fscx80\\fscy80\\t(0,200,\\fscx100\\fscy100)}}Watch the full story\\N{{\\fs56\\c&H00806B6B&}}on {CHANNEL}")
     Path(path).write_text(head + "\n".join(ev) + "\n")
 
 

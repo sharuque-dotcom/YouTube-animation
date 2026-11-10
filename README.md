@@ -1,4 +1,6 @@
-# Paper Empires: animation pipeline
+# Toppled Giants: animation pipeline
+
+(The channel was first planned as "Paper Empires"; episode 1 still carries that name.)
 
 **Making a new episode:** follow `.claude/skills/new-episode/SKILL.md` (Claude Code picks it up as the `new-episode` skill). An episode is a script, a narration file and shot lists; no drawing code.
 

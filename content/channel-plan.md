@@ -6,7 +6,9 @@ One format (animated documentary, 8–15 min, thriller pacing), one audience (cu
 
 ## Channel name
 
-**Top pick: Paper Empires**
+**Channel name: Toppled Giants** ("Paper Empires" was taken; episode 1 was made under that name)
+
+~~Top pick: Paper Empires~~
 - Fits every topic: fake companies, collapsed giants, fortunes that were never real.
 - Visual identity writes itself: paper/document textures, burning ledgers, folding paper cities.
 - Handle idea: `@PaperEmpires`

@@ -1,9 +1,9 @@
 ---
 name: new-episode
-description: Make a new Paper Empires episode (script → narration → shot lists → render) with the existing pipeline. Use when asked to make, script, animate or render a new episode, or to change shots/voice/music of an existing one.
+description: Make a new Toppled Giants episode (script → narration → shot lists → render) with the existing pipeline. Use when asked to make, script, animate or render a new episode, or to change shots/voice/music of an existing one.
 ---
 
-# Making a Paper Empires episode
+# Making a Toppled Giants episode
 
 The pipeline is finished; an episode is **data**, not code. Do not write new drawing code unless a
 moment truly needs a new shot type (then add it to `pipeline/shots.js` once, for every future episode).
