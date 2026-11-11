@@ -48,4 +48,7 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 - Episode 3 Ueno Bank ("The Bank That Toppled a President"): full 1080p render done (6:13), awaiting the owner's review.
   - Night painterly style: `pipeline/scenery.js`, `episodes/ep03-ueno/{sets,kit,rest,scenes}.js`.
   - Still to do: thumbnail, title, Shorts, and re-check facts before publishing (the story is still developing).
-- Next topic: "The $129M Deepfake CEO Heist" (see `content/topics-shortlist.md`).
+- Episode 4 Deepfake heist ("The $129 Million Deepfake Heist"): full 1080p render done (5:08), awaiting review.
+  - Night style plus the expressive cast: `pipeline/cast.js` (toon, parrot, lit/litToon), `pipeline/scenekit.js`, `episodes/ep04-deepfake/{night,sets,rest,scenes}.js`.
+  - Owner feedback: the night painterly look (episode 3 standard) suits our videos. The light versions looked flat.
+  - Lessons from a competitor (`content/competitor-paper-billions.md`): characters with emotion, one analogy per chapter, a running gag, face-led thumbnails. Keep our voice and style; improve, don't copy.
