@@ -2,7 +2,8 @@
 // toon(g, x, y, s, t, opts): (x, y) = feet on the ground (or seat height when seated).
 // expr: 'neutral' | 'happy' | 'worried' | 'shock' | 'smug' | 'sad' | 'talk' | 'laugh'
 // Arms: armL / armR angles (radians from straight down, + swings outward to the character's side).
-import { clamp, lerp, rand } from './engine.js';
+import { W, H, clamp, lerp, rand } from './engine.js';
+import { buf } from './scenery.js';
 
 const OUT = '#231a33';
 export function toon(g, x, y, s, t, o = {}) {
@@ -74,7 +75,7 @@ export function toon(g, x, y, s, t, o = {}) {
   const er = shock ? 11 : 8;
   [[-1], [1]].forEach(([sd]) => {
     const ex = fx + sd * 22;
-    if (blink || expr === 'laugh') { g.lineWidth = 4; g.beginPath(); if (expr === 'laugh' || expr === 'happy') g.arc(ex, eyeY + 3, 8, Math.PI * 1.1, Math.PI * 1.9); else { g.moveTo(ex - 8, eyeY); g.lineTo(ex + 8, eyeY); } g.stroke(); return; }
+    if (blink || expr === 'laugh' || expr === 'sleep') { g.lineWidth = 4; g.beginPath(); if (expr === 'laugh' || expr === 'happy') g.arc(ex, eyeY + 3, 8, Math.PI * 1.1, Math.PI * 1.9); else if (expr === 'sleep') g.arc(ex, eyeY - 2, 8, Math.PI * 0.1, Math.PI * 0.9); else { g.moveTo(ex - 8, eyeY); g.lineTo(ex + 8, eyeY); } g.stroke(); return; }
     g.fillStyle = '#fff'; g.beginPath(); g.ellipse(ex, eyeY, er, er * 1.15, 0, 0, Math.PI * 2); g.fill(); g.lineWidth = 3; g.stroke();
     g.fillStyle = OUT; g.beginPath(); g.arc(ex + look * 3, eyeY + 1, shock ? 4 : 5, 0, Math.PI * 2); g.fill();
     if (expr === 'smug') { g.fillStyle = skin; g.fillRect(ex - er - 2, eyeY - er * 1.2, er * 2 + 4, er * 0.9); g.strokeStyle = OUT; g.lineWidth = 3; g.beginPath(); g.moveTo(ex - er, eyeY - er * 0.3); g.lineTo(ex + er, eyeY - er * 0.3); g.stroke(); }
@@ -123,3 +124,26 @@ export function parrot(g, x, y, s, t, { talk = 0, look = 1 } = {}) {
   g.restore();
 }
 void clamp; void lerp;
+
+/**
+ * Draw something (drawFn(g)) lit by the scene: shaded away from the light, with a thin rim
+ * of light on the side facing it. Lets flat cartoon characters sit inside painterly night sets.
+ */
+export function lit(g, drawFn, { light = [0, 0], color = '255,200,140', shade = 'rgba(12,8,40,0.5)', rim = 4, key = 0.10, keyColor = '255,210,170' } = {}) {
+  const [c, cg] = buf('lit', W, H);
+  drawFn(cg);
+  cg.globalCompositeOperation = 'source-atop';
+  const gr = cg.createRadialGradient(light[0], light[1], 50, light[0], light[1], 1400);
+  gr.addColorStop(0, `rgba(${keyColor},${key})`); gr.addColorStop(0.35, 'rgba(0,0,0,0)'); gr.addColorStop(1, shade);
+  cg.fillStyle = gr; cg.fillRect(0, 0, W, H);
+  cg.globalCompositeOperation = 'source-over';
+  const [c2, cg2] = buf('litrim', W, H);
+  cg2.drawImage(c, 0, 0); cg2.globalCompositeOperation = 'source-in'; cg2.fillStyle = `rgba(${color},0.95)`; cg2.fillRect(0, 0, W, H);
+  // rim on the light side: offset the light-coloured silhouette toward the light, then the figure on top
+  const [cx, cy] = [W / 2, H / 2];
+  const dx = Math.sign(light[0] - cx) * rim, dy = Math.sign(light[1] - cy) * rim * 0.6;
+  g.drawImage(c2, dx, dy);
+  g.drawImage(c, 0, 0);
+}
+/** A toon lit by the scene light */
+export function litToon(g, x, y, s, t, o, light) { lit(g, (cg) => toon(cg, x, y, s, t, o), light); }
