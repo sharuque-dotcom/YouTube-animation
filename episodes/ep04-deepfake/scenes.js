@@ -8,6 +8,7 @@ import { glow, beam } from '../../pipeline/scenery.js';
 import { toon, parrot } from '../../pipeline/cast.js';
 import { ez, out3, span, spring, at, shots, pill, bubble } from '../../pipeline/scenekit.js';
 import { dotFace, waveform } from './sets.js';
+import * as R from './rest.js';
 import { nightOffice, ceoOffice, asleep, darkMap, theater, study, auditorium, EMP as NEMP, CEO as NCEO } from './night.js';
 import { litToon, lit } from '../../pipeline/cast.js';
 import { nightFinish, sky, stars, clouds, rain } from '../../pipeline/scenery.js';
@@ -221,7 +222,8 @@ const LIGHT = {
   endcard: [{ type: 'subscribe', clickWhen: 'Subscribe', text: 'see you in the next story' }],
 };
 const lightScenes = Object.fromEntries(Object.entries(LIGHT).map(([k, v]) => [k, lightScene(v)]));
-export const scenes = { c_call, c_gone, ...lightScenes, chapter1: chapterCard(1, 'A Voice You Can Copy'), voice };
+export const scenes = { c_call, c_gone, ...lightScenes, chapter1: chapterCard(1, 'A Voice You Can Copy'), voice, ...R.scenes,
+  chapter2: chapterCard(2, 'The Playbook'), chapter3: chapterCard(3, 'The Victims'), chapter4: chapterCard(4, 'Follow the Money'), chapter5: chapterCard(5, 'The Arrests'), chapter6: chapterCard(6, 'Don’t Be Next') };
 export async function preload() { await loadLand(); try { const tl = await (await fetch('/build/ep04-deepfake/timeline.json')).json(); lightRanges = tl.scenes.filter((x) => LIGHT[x.id]).map((x) => [x.start - 0.3, x.start + x.duration + 0.3]); } catch { /* none */ } }
 let lightRanges = [];
 export const look = { finish: (ctx, frame) => { const T = frame / 30; if (!lightRanges.some(([a, b]) => T >= a && T < b)) nightFinish(ctx, frame); } };
@@ -243,6 +245,8 @@ export const extraHits = (timeline) => {
   S(sc('chapter1').start + 0.15, 'hit', 0.6);
   S(w('voice', 'with AI'), 'whoosh', 0.5); S(w('voice', 'Think of a parrot') - 0.3, 'whoosh', 0.4); S(w('voice', 'Think of a parrot') + 1.4, 'pop', 0.6);
   ['interviews', 'earnings calls', 'conference talks'].forEach((p) => S(w('voice', p), 'pop', 0.5));
+  ['chapter2', 'chapter3', 'chapter4', 'chapter5', 'chapter6'].forEach((c) => S(sc(c).start + 0.15, 'hit', 0.6));
+  out.push(...R.sounds(timeline));
   return out;
 };
 void TEAL; void LAW;
