@@ -95,7 +95,7 @@ export function office(g, t, o = {}) {
   g.fillStyle = '#fff'; g.beginPath(); g.arc(760, 220, 70, 0, Math.PI * 2); g.fill(); g.strokeStyle = '#d9cdee'; g.lineWidth = 8; g.stroke();
   const hr = (t * 0.02) % (Math.PI * 2); g.strokeStyle = INK; g.lineWidth = 6; g.lineCap = 'round'; g.beginPath(); g.moveTo(760, 220); g.lineTo(760 + Math.cos(-1.2 + hr) * 34, 220 + Math.sin(-1.2 + hr) * 34); g.stroke(); g.lineWidth = 4; g.beginPath(); g.moveTo(760, 220); g.lineTo(760 + Math.cos(t * 0.5) * 52, 220 + Math.sin(t * 0.5) * 52); g.stroke();
   // employee at the desk (generic, seen from the front)
-  person(g, 700, 640, 1.55, t, { jacket: '#5b6ea8', shirt: '#ffffff', armL: 0.6, armR: -0.4, seed: 23, hair: '#3b2a1a', skin: '#e8b48f' });
+  if (o.person) o.person(g, t); else person(g, 700, 640, 1.55, t, { jacket: '#5b6ea8', shirt: '#ffffff', armL: 0.6, armR: -0.4, seed: 23, hair: '#3b2a1a', skin: '#e8b48f' });
   // desk (front edge) with warm sun stripes
   const dg = g.createLinearGradient(0, 760, 0, H); dg.addColorStop(0, '#fbf8ff'); dg.addColorStop(1, '#e3d9f2');
   g.fillStyle = dg; g.fillRect(0, 760, W, H - 760);

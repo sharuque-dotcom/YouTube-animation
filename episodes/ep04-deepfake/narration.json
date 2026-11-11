@@ -1,0 +1,196 @@
+{
+  "title": "The $129 Million Deepfake Heist",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "scenes": [
+    {
+      "id": "c_call",
+      "lines": [
+        {
+          "text": "The phone rings in the accounting department. It's the CEO.",
+          "pause": 0.6
+        },
+        "The voice is exactly right: the accent, the pauses, the way he says your name.",
+        "He needs help with a confidential deal, and a lawyer from a big London firm will call with the details."
+      ],
+      "tail": 0.5
+    },
+    {
+      "id": "c_gone",
+      "lines": [
+        {
+          "text": "The money is wired. Millions of dollars, gone in minutes.",
+          "pause": 0.8
+        },
+        {
+          "text": "The CEO never called. According to US prosecutors, the voice was made by artificial intelligence.",
+          "pause": 0.6
+        },
+        {
+          "text": "And it allegedly happened again, and again, at thousands of companies around the world, for about 129 million dollars.",
+          "say": "And it allegedly happened again, and again, at thousands of companies around the world. For about 129 million dollars."
+        }
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "title",
+      "duration": 4.5
+    },
+    {
+      "id": "chapter1",
+      "duration": 2.8
+    },
+    {
+      "id": "voice",
+      "lines": [
+        "Not long ago, faking someone's voice took a skilled impressionist. Now, with AI, a short recording can be enough.",
+        "Think of a parrot. It doesn't understand a word, but it can sound exactly like you.",
+        "Bosses are easy to record. They give interviews, earnings calls and conference talks."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "before",
+      "lines": [
+        "In 2019, criminals cloned the voice of an energy company's boss and talked a manager into sending about 243,000 dollars.",
+        {
+          "text": "In 2024, a worker at the engineering firm Arup in Hong Kong joined a video call with what looked like senior colleagues. Every person on the call was a deepfake. The company lost about 25 million dollars.",
+          "say": "In 2024, a worker at the engineering firm Arrup in Hong Kong joined a video call with what looked like senior colleagues. Every person on the call was a deepfake. The company lost about 25 million dollars."
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter2",
+      "duration": 2.8
+    },
+    {
+      "id": "play1",
+      "lines": [
+        "In November 2026, prosecutors in New York unsealed charges against three men. They say the scheme ran from July 2024 to February 2026.",
+        "First, an email that seemed to come from the company's CEO, asking for help with a secret transaction.",
+        "Then a call, with the CEO's voice, and sometimes his face, made with AI."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "play2",
+      "lines": [
+        "Then the CEO handed over to a \"lawyer\" at a major international law firm. The lawyer was fake too.",
+        {
+          "text": "Prosecutors say one of the men, Jacob Soall, mostly played British lawyers, and kept a handwritten script titled \"Lawyer Call\".",
+          "say": "Prosecutors say one of the men, Jacob Sole, mostly played British lawyers, and kept a handwritten script, titled, Lawyer Call."
+        },
+        "The lawyer gave the bank details. The employee sent the money."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter3",
+      "duration": 2.8
+    },
+    {
+      "id": "victims",
+      "lines": [
+        "Prosecutors say thousands of companies were targeted.",
+        "A hospital system in Missouri lost about 4.8 million dollars. A financial technology company in the UK lost about 11.6 million.",
+        "A hospital system in California, a bank in Rhode Island, a mutual fund company in Massachusetts, and even a pet food company in Florida were also named."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "sub",
+      "lines": [
+        "Quick pause. If you're enjoying this story and haven't subscribed yet, tap subscribe.",
+        "It really helps the channel."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "chapter4",
+      "duration": 2.8
+    },
+    {
+      "id": "money",
+      "lines": [
+        "The money was sent to bank accounts in Spain, Greece, the United Arab Emirates, Singapore and China.",
+        "Then, prosecutors say, it was turned into cryptocurrency to hide where it came from, and split between the members of the group.",
+        {
+          "text": "Two of the men, Sharon Hazan and Guy Sheetrit, are accused of laundering the money.",
+          "say": "Two of the men, Sharon Hazzan and Guy Sheetreet, are accused of laundering the money."
+        }
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "boast",
+      "lines": [
+        {
+          "text": "According to the indictment, Hazan boasted of laundering more than 400 million dollars in three years, and of being \"number one all over the world\".",
+          "say": "According to the indictment, Hazzan boasted of laundering more than 400 million dollars in three years, and of being, number one, all over the world."
+        },
+        {
+          "text": "The men also allegedly used nicknames: \"Rocky Balboa\", \"Superman Cash\" and \"Fat Boy\".",
+          "say": "The men also allegedly used nicknames. Rocky Balboa. Superman Cash. And Fat Boy."
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter5",
+      "duration": 2.8
+    },
+    {
+      "id": "arrests",
+      "lines": [
+        {
+          "text": "Soall was arrested in Spain in June 2026. Hazan was arrested in Spain in August. Sheetrit was arrested in the UK in September.",
+          "say": "Sole was arrested in Spain in June 2026. Hazzan was arrested in Spain in August. Sheetreet was arrested in the U.K. in September."
+        },
+        "They face charges including wire fraud, money laundering and aggravated identity theft. The most serious counts carry up to 20 years in prison.",
+        "The United States has asked for all three to be extradited. They are presumed innocent, and their lawyers did not comment."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter6",
+      "duration": 2.8
+    },
+    {
+      "id": "defend",
+      "lines": [
+        {
+          "text": "Prosecutors and the FBI say criminals are learning to \"weaponize\" new technology faster than companies can keep up.",
+          "say": "Prosecutors and the F.B.I. say criminals are learning to weaponize new technology faster than companies can keep up."
+        },
+        "The defences are simple. Hang up, and call back on a number you already know. Use a code word. Never let one person send a big payment alone.",
+        "And be careful when a request is both urgent and secret. That is the oldest trick in the book."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "outro",
+      "lines": [
+        {
+          "text": "The voices were perfect. The faces looked real.",
+          "pause": 0.8
+        },
+        {
+          "text": "The only thing missing was the real boss.",
+          "pause": 1.0
+        }
+      ],
+      "tail": 1.2
+    },
+    {
+      "id": "endcard",
+      "lines": [
+        "This has been Toppled Giants.",
+        "Subscribe, and I'll see you in the next story."
+      ],
+      "tail": 3.5
+    }
+  ]
+}
