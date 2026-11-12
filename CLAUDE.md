@@ -17,7 +17,8 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 ## Pipeline (see README.md and the `new-episode` skill)
 - `pipeline/tts.py` produces narration, timeline and subtitles. `pipeline/render.mjs` renders video and mixes audio (flags: `--stills`, `--from`, `--until`, `--remix`).
 - Shot types live in `lightshots.js` (light product-doc style, the style of episodes 1–2). Effects live in `fx.js`: hearts, chips, spy, scanHUD, person, diner.
-- **House style = the light PURPLE style** (episode 2 / test C look: `lightshots.js` + `fx.js` story effects). The owner prefers it over the Case File paper look.
+- **TEMPLATE = EPISODE 3 (Ueno).** The owner wants every new episode built like episode 3: night painterly set pieces (`pipeline/scenery.js`), the `episodes/ep03-ueno` structure (sets / kit / rest / scenes), style-frame stills first, a test clip, then the full render. Episode 4's lit expressive characters (`pipeline/cast.js`) can be added where a scene needs a person.
+- The light purple style (`lightshots.js` + `fx.js`) is now only used for the title sting and the subscribe/end cards.
 - The Case File toolkit (`dossier.js`, `iso.js`, `episodes/ep02-nvidia/casefile.js`, `episodes/styleframes-ep2`) is kept as a parts bin. Reuse ideas from it (isometric diorama, stamps, scan, evidence board) only when recoloured to the purple theme.
 - Don't run code downloaded from other repos; the safety check blocks it. Read their docs and reimplement the ideas instead.
 
@@ -29,7 +30,7 @@ The owner reads on a phone, so keep messages short and put the outcome first.
   - warm key and cool fill, not "moody"
   - also: volumetric rays, exponential falloff, bloom/halation, depth occlusion, inertia and weight (heavy sways slowly, light reacts fast), depth-scaled particles (near = thick and fast, far = thin and slow)
 - No single-frame pops: flashes and transitions build over about 8 frames and recover over about 10.
-- Pick the look per story. Night/painterly suits episode 3 (Ueno), but dark is NOT a rule for every video; the light purple style stays the default.
+- The look follows the episode 3 template by default (night painterly).
 - Detail target (the owner's reference: a painterly lighthouse made with Claude): layered depth (far, mid and near planes), textured clouds with rim light, volumetric light beams, depth-scaled rain, grass with inertia, film grain, and small story details (a lit window, distant lights). Not flat clip-art. Build key set pieces with that level of detail.
 - After every change, render stills of the new shots, look at them, and fix them before the full render.
 - Topic shortlist: `content/topics-shortlist.md`.
