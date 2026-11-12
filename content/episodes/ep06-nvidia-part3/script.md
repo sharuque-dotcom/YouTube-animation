@@ -1,6 +1,6 @@
 # Episode 6 · How Jensen Huang Lost Nvidia in 14 Days
 
-Toppled Giants · DRAFT for approval · facts as of 12 November 2026 · about 9 minutes
+Toppled Giants · DRAFT for approval · facts as of 12 November 2026 · about 6 minutes (825 words)
 Stands alone: a viewer who saw neither earlier Nvidia video can follow it.
 Real people appear as faceless silhouettes (episode 3 rule); the leather jacket stands in for Huang.
 Reported claims stay attributed. Nvidia gave no reason for the resignation, and the script never says it did.
