@@ -103,8 +103,9 @@ export function callEnded(g, t, o = {}) {
   g.fillStyle = '#5b4a9a'; g.beginPath(); g.arc(0, -110, 56, 0, Math.PI * 2); g.fill();
   text(g, '?', 0, -90, { font: 'Jakarta', weight: 800, size: 60, color: '#fff', align: 'center' });
   text(g, 'Unknown · New York', 0, 0, { font: 'Inter', weight: 600, size: 26, color: '#e8e3f5', align: 'center' });
-  text(g, 'Call ended', 0, 60, { font: 'Jakarta', weight: 800, size: 38, color: '#ff8a96', align: 'center' });
-  text(g, '0:07', 0, 108, { font: 'Jakarta', weight: 600, size: 30, color: '#cfc6ff', align: 'center' });
+  const ended = t >= (o.endedAt ?? -1);
+  text(g, ended ? 'Call ended' : 'Incoming call…', 0, 60, { font: 'Jakarta', weight: 800, size: 38, color: ended ? '#ff8a96' : '#9fffe0', align: 'center' });
+  text(g, ended ? '0:07' : '', 0, 108, { font: 'Jakarta', weight: 600, size: 30, color: '#cfc6ff', align: 'center' });
   g.restore();
   glow(g, 780, 860, 260, '150,130,255', 0.35);
   // a coffee cup and a folded newspaper in the lamp light

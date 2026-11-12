@@ -1,0 +1,153 @@
+{
+  "title": "The Fall of Jensen Huang?",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "scenes": [
+    {
+      "id": "c_open",
+      "lines": [
+        {
+          "text": "Wednesday night, November 11th, 2026. In Santa Clara, the lights are still on in a boardroom.",
+          "say": "Wednesday night, November eleventh, 2026. In Santa Clara, the lights are still on in a boardroom.",
+          "pause": 0.7
+        },
+        {
+          "text": "Eleven directors. One question.",
+          "pause": 0.6
+        },
+        {
+          "text": "Should the man who built Nvidia still be allowed to run it?",
+          "pause": 0.8
+        },
+        "In just a few days, investors had wiped out hundreds of billions of dollars of the company's value. And betting markets gave him less than a one-in-eight chance of surviving the year."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "title",
+      "duration": 4.5
+    },
+    {
+      "id": "chapter1",
+      "duration": 2.8
+    },
+    {
+      "id": "recap",
+      "lines": [
+        "If you missed part one, here is what happened.",
+        "On Sunday, Jensen Huang admitted in an email to staff that he had been unfaithful to his wife.",
+        "The woman, according to reports, was Alice Huang, who US intelligence suspected of working for China, and whose former company had bought billions of dollars of Nvidia chips.",
+        "Nvidia's board opened an investigation, and said it had no reason to believe any secrets were compromised.",
+        {
+          "text": "Then, on Wednesday, came a second report.",
+          "pause": 0.6
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter2",
+      "duration": 2.8
+    },
+    {
+      "id": "second",
+      "lines": [
+        "The New York Times reported that Huang had also had a romantic relationship with Kimberly Powell, Nvidia's vice president of health care, who reported directly to him.",
+        "The paper cited five former employees. Nvidia and Powell did not respond to requests for comment.",
+        {
+          "text": "When the Times called Huang himself, he reportedly said: \"I don't think you should be talking to me directly.\" Then he hung up.",
+          "say": "When the Times called Huang himself, he reportedly said, I don't think you should be talking to me directly. Then he hung up.",
+          "pause": 0.6
+        },
+        "A CEO dating someone who reports to him is a serious problem at almost any big company, even before the questions about spies."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter3",
+      "duration": 2.8
+    },
+    {
+      "id": "board",
+      "lines": [
+        "Under Nvidia's rules, a majority of its eleven directors can remove the CEO, with or without cause. Every director except Huang is independent.",
+        {
+          "text": "The board hired the law firm Wachtell Lipton, and reportedly a former federal prosecutor, to investigate.",
+          "say": "The board hired the law firm Wachtel Lipton, and reportedly a former federal prosecutor, to investigate."
+        },
+        "Bloomberg reported it was also working with an outside firm to find possible replacements. Nvidia has no public succession plan.",
+        "Some analysts have named the chief financial officer, Colette Kress, as a possible interim chief."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter4",
+      "duration": 2.8
+    },
+    {
+      "id": "money",
+      "lines": [
+        {
+          "text": "Investors did not wait for the decision.",
+          "pause": 0.5
+        },
+        "Nvidia's shares fell about seven percent over the week, then more than eight percent more in after-hours trading on Wednesday.",
+        "If that drop holds, the company will have lost roughly 600 billion dollars in value since the investigation began.",
+        "Rivals rose: AMD gained four percent, Broadcom three.",
+        {
+          "text": "And Nvidia reports its quarterly results on November 17th, giving the board very little time.",
+          "say": "And Nvidia reports its quarterly results on November seventeenth, giving the board very little time."
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "sub",
+      "lines": [
+        "Quick pause. If you're enjoying this story and haven't subscribed yet, tap subscribe.",
+        "It really helps the channel."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "chapter5",
+      "duration": 2.8
+    },
+    {
+      "id": "washington",
+      "lines": [
+        "In Washington, lawmakers threatened to subpoena Huang if he refuses a closed-door briefing.",
+        "After last week's midterm elections, Democrats now control both houses of Congress, and are promising oversight.",
+        "Inside the government, the Treasury Secretary reportedly challenged the Commerce Department over why Megaspeed had not been labelled a possible national-security threat.",
+        "And President Trump said Huang told him he had no idea the woman was allegedly a spy."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter6",
+      "duration": 2.8
+    },
+    {
+      "id": "decision",
+      "lines": [
+        "As of today, the board has not announced a decision.",
+        "Huang has said he did not know the woman was allegedly a spy. And no one has been charged with anything.",
+        {
+          "text": "He built a company the whole world depends on. Whether he still gets to run it may come down to a single vote.",
+          "pause": 1.0
+        },
+        "This story is still developing, and we will update you as it does."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "endcard",
+      "lines": [
+        "This has been Toppled Giants.",
+        "Subscribe, and I'll see you in the next story."
+      ],
+      "tail": 3.5
+    }
+  ]
+}
