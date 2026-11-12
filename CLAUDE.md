@@ -54,3 +54,9 @@ The owner reads on a phone, so keep messages short and put the outcome first.
   - Owner feedback: the night painterly look (episode 3 standard) suits our videos. The light versions looked flat.
   - Lessons from a competitor (`content/competitor-paper-billions.md`): characters with emotion, one analogy per chapter, a running gag, face-led thumbnails. Keep our voice and style; improve, don't copy.
 - Episode 5 NVIDIA part 2 ("The Fall of Jensen Huang?"): full 1080p render done (4:23), with the 'board still deciding' ending (as of 12 Nov). If the board decides before publishing, re-record the `decision` scene. Episode 3 style only (the owner rejected 3D for episodes); richer camera motion and varied transitions live in `episodes/ep05-nvidia-part2/scenes.js` (`cam`, `shots` with fade/blur/push/flash). A 3D multiverse proof exists (`pipeline/gl3d.js`) but is not used.
+- Episode 6 NVIDIA part 3 ("How Jensen Huang Lost Nvidia in 14 Days"): script approved, voice recorded (6:23), test clip sent (`content/episodes/ep06-nvidia-part3/test-clip-720p.mp4`), awaiting the go-ahead.
+  - Built so far: cold open and chapter 1 (`episodes/ep06-nvidia-part3/{sets,scenes,kit,jacket}.js`). Chapters 2–6 and the outro are placeholders in `rest.js`.
+  - After approval: build the rest, full 1080p render, then Shorts (the owner asked for them) and a face-led thumbnail.
+  - Before recording the final voice: update Thursday's closing price and the other items in the script's "To settle" list.
+  - Owner's goal: grow views. Packaging (thumbnail, title, 15-second hook) comes before animation polish; the title sting now plays after the cold open.
+- Episodes 3, 4 and 5 status may be out of date: episode 5 was published on 12 Nov, so treat it as published and do not change it.

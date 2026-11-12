@@ -1,0 +1,194 @@
+{
+  "title": "How Jensen Huang Lost Nvidia in 14 Days",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "scenes": [
+    {
+      "id": "c_open",
+      "lines": [
+        {
+          "text": "Thursday morning, November 12th, 2026. A short document lands on a government website.",
+          "say": "Thursday morning, November twelfth, 2026. A short document lands on a government website.",
+          "pause": 0.5
+        },
+        {
+          "text": "It says that Jensen Huang has resigned as president and chief executive of Nvidia. Effective immediately.",
+          "pause": 0.6
+        },
+        {
+          "text": "No reason is given.",
+          "pause": 0.7
+        },
+        {
+          "text": "Thirty-three years. A company worth around four trillion dollars. Gone in one paragraph.",
+          "pause": 0.6
+        },
+        "Fourteen days earlier, almost nobody saw it coming. This is how it happened."
+      ],
+      "tail": 0.5
+    },
+    {
+      "id": "title",
+      "duration": 3.4
+    },
+    {
+      "id": "chapter1",
+      "duration": 2.6
+    },
+    {
+      "id": "builder",
+      "lines": [
+        {
+          "text": "In 1993, three engineers met at a Denny's diner in California and sketched out a company. One of them was thirty years old. His name was Jensen Huang.",
+          "say": "In nineteen ninety-three, three engineers met at a Denny's diner in California, and sketched out a company. One of them was thirty years old. His name was Jensen Huang."
+        },
+        "For years, their chips made video games look better. Then researchers found the same chips were perfect for training artificial intelligence.",
+        "When the AI boom arrived, almost every major AI system on Earth needed Nvidia.",
+        "The company became one of the most valuable in history. And Huang, in his black leather jacket, ran it his own way. Dozens of executives reported directly to him.",
+        "Think of a wheel with one hub. It turns beautifully. Until something happens to the hub."
+      ],
+      "tail": 0.7
+    },
+    {
+      "id": "chapter2",
+      "duration": 2.6
+    },
+    {
+      "id": "customer",
+      "lines": [
+        "Nvidia's best chips are not just products. Governments treat them like weapons.",
+        {
+          "text": "Since 2022, the United States has restricted sales of its most advanced AI chips to China.",
+          "say": "Since twenty twenty-two, the United States has restricted sales of its most advanced AI chips to China."
+        },
+        "So investigators began to ask whether chips were leaking around the wall, through companies in Southeast Asia.",
+        {
+          "text": "One company drew attention. Megaspeed, a cloud firm in Singapore. The New York Times reported that it bought more than 4.8 billion dollars of Nvidia chips in two years.",
+          "say": "One company drew attention. Megaspeed, a cloud firm in Singapore. The New York Times reported that it bought more than four point eight billion dollars of Nvidia chips in two years."
+        },
+        {
+          "text": "For part of 2023, its managing director was a woman named Alice Huang. The two share a surname. They are not reported to be related.",
+          "say": "For part of twenty twenty-three, its managing director was a woman named Alice Huang. The two share a surname. They are not reported to be related."
+        },
+        "Megaspeed denies any wrongdoing, and says inspections found no violations."
+      ],
+      "tail": 0.7
+    },
+    {
+      "id": "chapter3",
+      "duration": 2.6
+    },
+    {
+      "id": "dayone",
+      "lines": [
+        {
+          "text": "October 29th. The New York Times reports that American intelligence agencies had been watching a person close to Jensen Huang, because they believed she could be working for China.",
+          "say": "October twenty-ninth. The New York Times reports that American intelligence agencies had been watching a person close to Jensen Huang, because they believed she could be working for China."
+        },
+        "The Financial Times reports the relationship was romantic. The Wall Street Journal reports that intelligence services in three countries had reason to suspect her.",
+        "Nvidia pushes back. It says Huang talks to thousands of customers every year.",
+        "But in Washington, three committee chairmen ask Huang for a closed-door briefing.",
+        "For ten days, he says nothing in public."
+      ],
+      "tail": 0.9
+    },
+    {
+      "id": "chapter4",
+      "duration": 2.6
+    },
+    {
+      "id": "email",
+      "lines": [
+        {
+          "text": "Then, on Sunday, November 8th, Nvidia's staff receive an email from their founder.",
+          "say": "Then, on Sunday, November eighth, Nvidia's staff receive an email from their founder."
+        },
+        {
+          "text": "\"I was unfaithful to my wife,\" he writes. \"My actions hurt her and our children. There is no excuse for what I did.\"",
+          "say": "I was unfaithful to my wife, he writes. My actions hurt her, and our children. There is no excuse for what I did.",
+          "pause": 0.5
+        },
+        "He says he supports an investigation and will cooperate fully.",
+        "The board says it has no reason to believe that national security, or Nvidia's secrets, were compromised. And it says Huang will stay on.",
+        {
+          "text": "On Monday, the stock falls about four percent. President Trump calls Huang \"an honorable guy.\"",
+          "say": "On Monday, the stock falls about four percent. President Trump calls Huang, an honorable guy."
+        },
+        "For a moment, it looks like he might survive."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "sub",
+      "lines": [
+        "Quick pause. If this is the first time you're hearing the full story, subscribe.",
+        "We follow these collapses as they happen."
+      ],
+      "tail": 0.5
+    },
+    {
+      "id": "chapter5",
+      "duration": 2.6
+    },
+    {
+      "id": "second",
+      "lines": [
+        "On Tuesday, the board hires a former top federal prosecutor and one of Wall Street's most powerful law firms to investigate.",
+        "Then, on Wednesday, the New York Times publishes again.",
+        "It reports that Huang also had a relationship with Kimberly Powell, a senior Nvidia executive who reported directly to him. The paper cites five former employees. Nvidia and Powell did not comment.",
+        {
+          "text": "When the Times called Huang, he reportedly said, \"I don't think you should be talking to me directly.\" And hung up.",
+          "say": "When the Times called Huang, he reportedly said, I don't think you should be talking to me directly. And hung up."
+        },
+        "One scandal was about a customer. This one was about his own company. Almost every big firm has rules about a boss dating someone who works for him.",
+        "That evening, the Wall Street Journal reports the board is preparing to remove him. In Santa Clara, the directors meet into the night."
+      ],
+      "tail": 0.9
+    },
+    {
+      "id": "chapter6",
+      "duration": 2.6
+    },
+    {
+      "id": "exit",
+      "lines": [
+        "Thursday morning, the announcement arrives. Huang has resigned as president, as chief executive, and from the board.",
+        "Nvidia's finance chief, Colette Kress, becomes interim CEO. And for the first time in its history, Nvidia names a chairman of the board, Harvey Jones.",
+        {
+          "text": "Wall Street reacts fast. The stock closed on Wednesday near 174 dollars. It opened on Thursday at 151, a fall of about thirteen percent.",
+          "say": "Wall Street reacts fast. The stock closed on Wednesday near one hundred seventy-four dollars. It opened on Thursday at one fifty-one, a fall of about thirteen percent."
+        },
+        "Then something strange happens. The stock climbs back, and ends the morning down only around five.",
+        "Because the question investors feared most had finally been answered."
+      ],
+      "tail": 0.9
+    },
+    {
+      "id": "outro",
+      "lines": [
+        "So what do we actually know?",
+        "Huang admitted being unfaithful. That is confirmed. He resigned. That is confirmed.",
+        "The spying claims come from unnamed intelligence sources in news reports. No one has been charged. And the board has said it has no reason to believe any secrets were lost.",
+        {
+          "text": "Huang is still Nvidia's largest individual shareholder, with about 3.6 percent. The investigation is still running. And on Tuesday, Nvidia reports its earnings, for the first time without him.",
+          "say": "Huang is still Nvidia's largest individual shareholder, with about three point six percent. The investigation is still running. And on Tuesday, Nvidia reports its earnings, for the first time without him."
+        },
+        "For thirty-three years, people asked what could possibly stop Nvidia. A better chip. A trade war. A crash.",
+        {
+          "text": "In the end, it was none of those. It was an email.",
+          "pause": 0.4
+        }
+      ],
+      "tail": 1.2
+    },
+    {
+      "id": "endcard",
+      "lines": [
+        "This has been Toppled Giants.",
+        "Subscribe, and I'll see you in the next story."
+      ],
+      "tail": 1.5
+    }
+  ]
+}
