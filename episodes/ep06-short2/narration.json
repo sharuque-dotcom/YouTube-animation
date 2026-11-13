@@ -1,0 +1,28 @@
+{
+  "title": "Why Microsoft broke",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "vertical": true,
+  "scenes": [
+    {
+      "id": "main",
+      "lines": [
+        {
+          "text": "Microsoft said there was \"elevated load across multiple regions\". A number of servers became unexpectedly unavailable, which put more strain on the ones still running.",
+          "say": "Microsoft said there was elevated load across multiple regions. A number of servers became unexpectedly unavailable, which put more strain on the ones still running."
+        },
+        "Some servers were failing automated health checks. And when Microsoft brought them back, they could become unresponsive again as soon as traffic hit them.",
+        "Microsoft said it saw no sign of a cyberattack. Australia's home affairs minister said Microsoft believed it was more like the 2024 CrowdStrike meltdown: an update gone wrong."
+      ],
+      "tail": 0.3
+    },
+    {
+      "id": "end",
+      "lines": [
+        "Watch the full story on Toppled Giants."
+      ],
+      "tail": 0.8
+    }
+  ]
+}

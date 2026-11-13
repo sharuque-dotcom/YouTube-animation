@@ -1,7 +1,7 @@
 // Paper-style world map: land cut from paper on a textured sea, with pins and route arcs.
 // Coastlines only: no country borders are drawn (data: Natural Earth via world-atlas, public domain).
 
-import { clamp, ease, text } from './engine.js';
+import { W, H, clamp, ease, text } from './engine.js';
 import { C, paperFill, markerLine } from './collage.js';
 
 let land = null;
@@ -18,7 +18,7 @@ const merc = (lat) => Math.log(Math.tan(Math.PI / 4 + (lat * Math.PI) / 360)) * 
  */
 export function view(lon, lat, scale) {
   const my = merc(lat);
-  return ([x, y]) => [960 + (x - lon) * scale, 540 - (merc(y) - my) * scale];
+  return ([x, y]) => [W / 2 + (x - lon) * scale, H / 2 - (merc(y) - my) * scale];
 }
 
 /** Draw land masses for a view */

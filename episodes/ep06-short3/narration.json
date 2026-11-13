@@ -1,0 +1,28 @@
+{
+  "title": "Microsoft fell before the bell",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "vertical": true,
+  "scenes": [
+    {
+      "id": "main",
+      "lines": [
+        "At 9:30 a.m., the New York Stock Exchange opens. But trading starts earlier, in what's called pre-market.",
+        "On Friday morning, Microsoft's shares were, at one point, down almost three percent before the bell, at around 508 dollars, while futures for the wider tech market barely moved.",
+        "For a company worth nearly four trillion dollars, a fall like that wipes out roughly 100 billion dollars of value, on paper.",
+        {
+          "text": "Microsoft is selling the world on AI and its cloud. On Thursday, that same cloud struggled to deliver an email."
+        }
+      ],
+      "tail": 0.3
+    },
+    {
+      "id": "end",
+      "lines": [
+        "Watch the full story on Toppled Giants."
+      ],
+      "tail": 0.8
+    }
+  ]
+}

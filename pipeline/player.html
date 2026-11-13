@@ -33,6 +33,10 @@
 </head>
 <body>
 <canvas id="c" width="1920" height="1080"></canvas>
+<script>
+  // ?vert -> native 9:16 Shorts canvas (must run before the engine module loads)
+  if (new URLSearchParams(location.search).has('vert')) { window.__VERT = 1; const c = document.getElementById('c'); c.width = 1080; c.height = 1920; }
+</script>
 <script type="module">
   import { Player } from './engine.js';
 

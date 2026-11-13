@@ -43,8 +43,10 @@ const server = createServer(async (req, res) => {
   res.writeHead(200, { 'content-type': types[path.extname(p)] || 'application/octet-stream' });
   res.end(await readFile(p));
 }).listen(0);
+// narration.json "vertical": true -> native 9:16 render (1080x1920) for Shorts
+const VERT = (() => { try { return !!JSON.parse(readFileSync(path.join(epDir, 'narration.json'), 'utf8')).vertical; } catch { return false; } })();
 const url = `http://127.0.0.1:${server.address().port}/pipeline/player.html` +
-  `?headless&ep=${encodeURIComponent(epRel)}&build=${encodeURIComponent(buildRel)}`;
+  `?headless&ep=${encodeURIComponent(epRel)}&build=${encodeURIComponent(buildRel)}${VERT ? '&vert' : ''}`;
 
 const until = Number(flag('until')) || 0;
 const dur = until ? Math.min(until, timeline.duration) : timeline.duration;
@@ -167,7 +169,7 @@ if (remix) {
 
 const browser = await chromium.launch();
 async function openPage() {
-  const context = await browser.newContext({ viewport: { width: 1920, height: 1080 } });
+  const context = await browser.newContext({ viewport: VERT ? { width: 1080, height: 1920 } : { width: 1920, height: 1080 } });
   const p = await context.newPage();
   p.on('pageerror', (e) => console.error('Page error:', e.message));
   await p.goto(url);

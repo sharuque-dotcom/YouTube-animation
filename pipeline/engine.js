@@ -1,8 +1,12 @@
 // Animation engine: draws any moment of an episode onto a 1920x1080 canvas.
 // Every frame is a pure function of time, so rendering is exact and repeatable.
 
-export const W = 1920;
-export const H = 1080;
+// Vertical mode (Shorts, 1080x1920) is switched on by the player before this module loads.
+export const VERT = !!globalThis.__VERT;
+export let W = VERT ? 1080 : 1920;
+export let H = VERT ? 1920 : 1080;
+/** Run fn with a temporary canvas size (e.g. draw a 16:9 set piece into a buffer inside a 9:16 Short) */
+export function withSize(w, h, fn) { const a = W, b = H; W = w; H = h; try { return fn(); } finally { W = a; H = b; } }
 const CROSSFADE = 0.5; // seconds of overlap between scenes
 
 export const palette = {

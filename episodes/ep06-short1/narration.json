@@ -1,0 +1,31 @@
+{
+  "title": "Microsoft email went dark in 74 countries",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "vertical": true,
+  "scenes": [
+    {
+      "id": "main",
+      "lines": [
+        {
+          "text": "Thursday, November 12th, a little after 11 in the morning in New York. Somewhere inside Microsoft's cloud, servers start dropping out.",
+          "say": "Thursday, November twelfth, a little after eleven in the morning in New York. Somewhere inside Microsoft's cloud, servers start dropping out."
+        },
+        "Within about an hour, people in 74 countries were reporting that Outlook, Teams and other Microsoft services had stopped working.",
+        {
+          "text": "You couldn't send an email. You couldn't book, move or cancel a meeting."
+        },
+        "At its worst, there were nearly 20,000 new reports every minute, compared with fewer than 15 on a normal Thursday."
+      ],
+      "tail": 0.3
+    },
+    {
+      "id": "end",
+      "lines": [
+        "Watch the full story on Toppled Giants."
+      ],
+      "tail": 0.8
+    }
+  ]
+}
