@@ -81,7 +81,7 @@ export function venice(g, t, { tower = 0 } = {}) {
 }
 
 // ---------------------------------------------------------------- 2. three masks in a dark palazzo hall
-function mask(g, t, x, y, s, { tint = '#f1e9ff', trim = '#d9b45a', feather = '#5a1d4a', blank = false, lit = 1 } = {}) {
+export function mask(g, t, x, y, s, { tint = '#f1e9ff', trim = '#d9b45a', feather = '#5a1d4a', blank = false, lit = 1 } = {}) {
   g.save(); g.translate(x, y + Math.sin(t * 0.8 + x) * 3); g.scale(s, s);
   // feathers behind, swaying (light = reacts fast)
   if (!blank) for (let i = 0; i < 5; i++) { const a = -0.9 + i * 0.25 + Math.sin(t * 2.2 + i) * 0.04; g.save(); g.rotate(a); const fg = g.createLinearGradient(0, -40, 0, -260); fg.addColorStop(0, feather); fg.addColorStop(1, 'rgba(120,60,140,0.2)'); g.fillStyle = fg; g.beginPath(); g.ellipse(60, -150, 26, 120, 0.25, 0, Math.PI * 2); g.fill(); g.restore(); }

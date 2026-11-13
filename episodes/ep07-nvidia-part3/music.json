@@ -1,0 +1,25 @@
+{
+  "level": -21,
+  "cues": [
+    {
+      "scene": "c_open",
+      "track": "music/tension.mp3"
+    },
+    {
+      "scene": "chapter1",
+      "track": "music/theme.mp3"
+    },
+    {
+      "scene": "chapter2",
+      "track": "music/tension.mp3"
+    },
+    {
+      "scene": "chapter4",
+      "track": "music/fall.mp3"
+    },
+    {
+      "scene": "outro",
+      "track": "music/resolve.mp3"
+    }
+  ]
+}

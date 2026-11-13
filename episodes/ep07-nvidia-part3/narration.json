@@ -1,0 +1,121 @@
+{
+  "title": "The Casanova of Silicon Valley?",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "scenes": [
+    {
+      "id": "c_open",
+      "lines": [
+        {
+          "text": "Venice, the 1700s. A man named Giacomo Casanova writes thousands of pages about his love affairs, and his name becomes a word.",
+          "say": "Venice, the seventeen hundreds. A man named Jacomo Casanova writes thousands of pages about his love affairs, and his name becomes a word.",
+          "pause": 0.7
+        },
+        {
+          "text": "Three hundred years later, Silicon Valley is asking whether it had a Casanova of its own.",
+          "pause": 0.7
+        },
+        "In four days, the man who built the world's most valuable chip company admitted one affair, was reported to have had two more, and lost the company he ran for 33 years."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "title",
+      "duration": 4.5
+    },
+    {
+      "id": "chapter1",
+      "duration": 2.8
+    },
+    {
+      "id": "masks",
+      "lines": [
+        "On Sunday, Jensen Huang wrote to Nvidia's staff that he had been unfaithful to his wife. \"I have fallen short of that responsibility,\" he wrote.",
+        "That same day, the New York Times reported that US intelligence suspected the woman, Alice Huang, of gathering information for China. The two are not related.",
+        "On Wednesday, the Times reported a second relationship, with Kimberly Powell, Nvidia's vice president of health care, who reported directly to him.",
+        "Sources told the paper the pair had been filmed being affectionate at a hotel during Nvidia's big developer conference. Three people said his security team approached the person who recorded it and offered a non-disclosure agreement. The Times did not see the footage.",
+        {
+          "text": "Then, on Thursday, Reuters reported a third relationship, with another Nvidia employee, citing two people familiar with the matter. She has not been named.",
+          "say": "Then, on Thursday, Royters reported a third relationship, with another Nvidia employee, citing two people familiar with the matter. She has not been named."
+        },
+        "Nvidia declined to comment on that report. Powell did not respond to requests for comment."
+      ]
+    },
+    {
+      "id": "chapter2",
+      "duration": 2.8
+    },
+    {
+      "id": "night",
+      "lines": [
+        "On Wednesday night, Nvidia's board met.",
+        "According to a filing with US regulators, the board accepted his resignation as president, chief executive and director, effective immediately.",
+        "The Wall Street Journal had reported that directors were preparing to push him out. One congressman called it a firing.",
+        "Chief financial officer Colette Kress became interim CEO, and longtime director Harvey Jones became the board's first-ever chair."
+      ]
+    },
+    {
+      "id": "chapter3",
+      "duration": 2.8
+    },
+    {
+      "id": "why",
+      "lines": [
+        "This was never only about romance.",
+        "A boss in a relationship with someone who reports to him raises conflict-of-interest questions.",
+        "A CEO close to a suspected intelligence recruit raises security questions.",
+        "And shareholders have filed a lawsuit alleging the company should have told investors sooner.",
+        "The board has said it has no reason to believe national security or company secrets were compromised."
+      ]
+    },
+    {
+      "id": "sub",
+      "lines": [
+        "Quick pause. If you're enjoying this story and haven't subscribed yet, tap subscribe.",
+        "It really helps the channel."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "chapter4",
+      "duration": 2.8
+    },
+    {
+      "id": "fallout",
+      "lines": [
+        "On Thursday, Nvidia's shares fell 14 percent at the open, then recovered half the loss and closed down about 4 percent.",
+        {
+          "text": "Senator Tim Scott has invited him to a public hearing on December 3rd, and lawmakers have warned of subpoenas.",
+          "say": "Senator Tim Scott has invited him to a public hearing on December third, and lawmakers have warned of subpeenas."
+        },
+        "Not everyone turned away. Elon Musk replied that hiring him \"would be an honor\".",
+        "And on Tuesday, Nvidia reports earnings for the first time in 33 years without him as CEO."
+      ]
+    },
+    {
+      "id": "outro",
+      "lines": [
+        {
+          "text": "Casanova told his story himself, in his memoirs. Jensen Huang has so far said one thing: that he fell short.",
+          "say": "Casanova told his story himself, in his memwahs. Jensen Huang has so far said one thing: that he fell short.",
+          "pause": 0.7
+        },
+        {
+          "text": "The other stories come from anonymous sources, and none of the women has spoken publicly.",
+          "pause": 0.7
+        },
+        "So, Casanova of Silicon Valley? Or a founder who simply got caught? The investigation, and Congress, may tell us more."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "endcard",
+      "lines": [
+        "This has been Toppled Giants.",
+        "Subscribe, and I'll see you in the next story."
+      ],
+      "tail": 3.5
+    }
+  ]
+}
