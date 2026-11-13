@@ -1,0 +1,33 @@
+TITLE (pick one)
+1. How Jensen Huang Lost Nvidia in 14 Days
+2. Why Nvidia's Founder Just Resigned
+3. The Email That Ended Jensen Huang
+
+DESCRIPTION
+On 12 November 2026, Jensen Huang resigned as president and CEO of Nvidia, effective immediately. Nvidia gave no reason. This is the full 14-day story, from the first New York Times report to the resignation: what is confirmed, what is only reported, and what happens next.
+
+Facts as of midday, 12 November 2026. The spying claims come from unnamed intelligence sources quoted in news reports. No one has been charged. Megaspeed denies any wrongdoing.
+
+Chapters
+0:00 The resignation
+0:37 1. The Builder
+1:25 2. The Customer
+2:17 3. Day One
+2:58 4. The Email
+3:48 5. The Second Report
+4:45 6. Day Fourteen
+5:29 What we actually know
+
+Sources
+Nvidia 8-K, 12 Nov 2026: https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000082/nvidiaannouncesceotransiti.htm
+SF Standard: https://sfstandard.com/2026/11/12/nvidia-ceo-jensen-huang-resigns/
+Fox 9: https://www.fox9.com/news/nvidia-ceo-jensen-huang-resigns-effective-immediately
+CNBC: https://www.cnbc.com/2026/11/11/nvidia-jensen-huang-affair-employee.html
+Yahoo Finance: https://finance.yahoo.com/markets/live/stock-market-today-thursday-november-12-sp-500-nasdaq-dow-nvidia-invest-110027430.html
+StockAnalysis (midday price): https://stockanalysis.com/stocks/nvda/history/
+
+Credits
+Thumbnail photo: "Nvidia CEO Jensen Huang gestikuliert" by Maurizio Pesce, CC BY 2.0 (https://commons.wikimedia.org/wiki/File:Nvidia_CEO_Jensen_Huang_gestikuliert.jpg), cropped and cut out.
+Narration: Kokoro TTS. Animation: Toppled Giants.
+
+#nvidia #jensenhuang #business

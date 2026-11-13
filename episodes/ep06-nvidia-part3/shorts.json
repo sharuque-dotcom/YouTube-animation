@@ -1,0 +1,5 @@
+[
+  { "name": "short1-resigned", "start": 0, "end": 30.3, "hook": "Nvidia's founder\\Njust resigned.\\NNo reason given" },
+  { "name": "short2-email", "start": 178.2, "end": 217.0, "hook": "The email Jensen\\NHuang sent to\\Nevery employee" },
+  { "name": "short3-cliff", "start": 285.5, "end": 328.9, "hook": "Nvidia fell 13%\\Nat the open. Then\\Nsomething strange" }
+]
