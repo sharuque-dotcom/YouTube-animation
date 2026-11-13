@@ -84,7 +84,7 @@ Nvidia pushes back. It says Huang talks to thousands of customers every year.
 But in Washington, three committee chairmen ask Huang for a closed-door briefing.
 *The Capitol at night under searchlights; a letter with three seals.*
 
-For ten days, he says nothing in public.
+For ten days, the story only grows.
 *The calendar pages turn in silence: Day 2, Day 5, Day 9. A phone lights up, unanswered.*
 
 ---
@@ -144,7 +144,7 @@ Nvidia's finance chief, Colette Kress, becomes interim CEO. And for the first ti
 Wall Street reacts fast. The stock closed on Wednesday near 174 dollars. It opened on Thursday at 151, a fall of about thirteen percent.
 *A cliff: the price line walks off the edge, 174 to 151.*
 
-Then something strange happens. The stock climbs back, and ends the morning down only around five.
+Then something strange happens. The stock climbs back, and by midday it is down less than six percent.
 *The line catches a ledge and climbs.*
 
 Because the question investors feared most had finally been answered.
@@ -196,10 +196,10 @@ Confirmed in two or more sources:
 - Largest individual shareholder, 3.6% — SF Standard (single source: confirm)
 
 To settle before recording:
-- "Ten days he says nothing in public" (29 Oct to 8 Nov): confirm he made no public statement in between; otherwise soften to "says little".
+- Settled 12 Nov: Inc reports Huang had earlier denied the affair, so "he says nothing in public" was replaced with "the story only grows".
 - Powell's exact title (vice president vs senior vice president): script avoids it.
 - "Around four trillion dollars": use the value at Wednesday's close.
-- "Ends the morning down around five": update to the actual close on Thursday.
+- Settled 12 Nov: midday snapshot 164.06, −5.57% (StockAnalysis, 12:29 ET); intraday low about −14%. Line now says "by midday it is down less than six percent". The official close was not available at recording time.
 - "The question investors feared most had been answered" is our reading, not a reported fact. Keep it as narration, or cut.
 
 Left out on purpose:

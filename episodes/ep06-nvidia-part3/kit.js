@@ -144,7 +144,7 @@ export function orgChart(g, t, a) {
     const lp = hot ? ez(span(t, a, 0.8)) : Math.min(1, p);
     g.beginPath(); g.moveTo(960, 250); g.lineTo(960, 360); g.lineTo(lerp(960, x, lp), 360); if (lp > 0.99) g.lineTo(x, 470); g.stroke();
     if (hot) g.restore();
-    box(x, y, 300, k === 0 ? 'Kimberly Powell' : v.split(' · ')[1], k === 0 ? 'VP · Healthcare' : v.split(' · ')[0], hot, p);
+    box(x, y, 300, k === 0 ? 'Kimberly Powell' : v.split(' · ')[1], k === 0 ? 'senior executive · health care' : v.split(' · ')[0], hot, p);
   });
   if (t > a + 0.8) { const pp = spring(t, a + 0.8, 1.8, 0.6); g.save(); g.translate(240, 700); g.scale(Math.min(1, pp), Math.min(1, pp)); panel(g, -230, -36, 460, 72, 36); text(g, 'reported directly to him', 0, 10, { font: 'Inter', weight: 600, size: 26, color: '#ffb3be', align: 'center' }); g.restore(); }
 }

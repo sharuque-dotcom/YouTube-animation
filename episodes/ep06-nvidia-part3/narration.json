@@ -89,7 +89,7 @@
         "The Financial Times reports the relationship was romantic. The Wall Street Journal reports that intelligence services in three countries had reason to suspect her.",
         "Nvidia pushes back. It says Huang talks to thousands of customers every year.",
         "But in Washington, three committee chairmen ask Huang for a closed-door briefing.",
-        "For ten days, he says nothing in public."
+        "For ten days, the story only grows."
       ],
       "tail": 0.9
     },
@@ -159,7 +159,7 @@
           "text": "Wall Street reacts fast. The stock closed on Wednesday near 174 dollars. It opened on Thursday at 151, a fall of about thirteen percent.",
           "say": "Wall Street reacts fast. The stock closed on Wednesday near one hundred seventy-four dollars. It opened on Thursday at one fifty-one, a fall of about thirteen percent."
         },
-        "Then something strange happens. The stock climbs back, and ends the morning down only around five.",
+        "Then something strange happens. The stock climbs back, and by midday it is down less than six percent.",
         "Because the question investors feared most had finally been answered."
       ],
       "tail": 0.9

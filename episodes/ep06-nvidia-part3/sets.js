@@ -116,7 +116,7 @@ export function filingPage(g, t, o = {}) {
 }
 
 // ---------------------------------------------------------------- 3. the empty chair
-function execChair(g) {
+export function execChair(g) {
   const cg = g.createLinearGradient(-130, -330, 130, 40); cg.addColorStop(0, '#2a2433'); cg.addColorStop(0.5, '#15121c'); cg.addColorStop(1, '#08070c');
   g.fillStyle = '#0a0810'; g.fillRect(-10, 60, 20, 80); for (let k = 0; k < 5; k++) { const a = (k / 5) * Math.PI * 2 + 0.3; g.beginPath(); g.moveTo(0, 140); g.lineTo(Math.cos(a) * 130, 150 + Math.sin(a) * 26); g.lineWidth = 12; g.strokeStyle = '#0a0810'; g.stroke(); }
   g.fillStyle = cg; g.beginPath(); g.roundRect(-118, -310, 236, 350, 44); g.fill();
@@ -268,7 +268,7 @@ export function napkin(g, t, { draw0 = 0.2, dur = 6 } = {}) {
 
 // ---------------------------------------------------------------- 7. games in, intelligence out
 const SHIP = ['...##...', '..####..', '.######.', '##.##.##', '########', '.#.##.#.', '#......#', '.#....#.'];
-function chipBody(g, s, t, pulse = 1) {
+export function chipBody(g, s, t, pulse = 1) {
   g.save(); g.shadowColor = `rgba(118,185,0,${0.8 * pulse})`; g.shadowBlur = 50; const cg = g.createLinearGradient(-s, -s, s, s); cg.addColorStop(0, '#2d4a12'); cg.addColorStop(1, '#0f1c07'); g.fillStyle = cg; g.beginPath(); g.roundRect(-s, -s, s * 2, s * 2, s * 0.14); g.fill(); g.restore();
   g.strokeStyle = NV; g.lineWidth = 4; g.beginPath(); g.roundRect(-s, -s, s * 2, s * 2, s * 0.14); g.stroke();
   for (let i = 0; i < 9; i++) { const u = -s * 0.8 + i * s * 0.2; g.fillStyle = '#b8c4a8'; g.fillRect(u - 5, -s - 26, 10, 22); g.fillRect(u - 5, s + 4, 10, 22); g.fillRect(-s - 26, u - 5, 22, 10); g.fillRect(s + 4, u - 5, 22, 10); }
