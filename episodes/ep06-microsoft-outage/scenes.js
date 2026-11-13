@@ -280,6 +280,20 @@ function aiVsEmail(g, t, a) {
   text(g, 'ONE EMAIL', ex, ey + 230, { font: 'Jakarta', weight: 800, size: 34, color: '#a8d8ff', align: 'center', spacing: 4 });
 }
 
+function recovering(g, t, a0, aTeams, aMail, aStill) {
+  nightBG(g, t, { seed: 31, moonAt: [1650, 150], horizon: '#3a2c55' });
+  g.save(); g.globalCompositeOperation = 'lighter'; const dg = g.createLinearGradient(0, 1000, 0, 500); dg.addColorStop(0, `rgba(255,170,110,${0.25 * span(t, a0, 3)})`); dg.addColorStop(1, 'rgba(255,170,110,0)'); g.fillStyle = dg; g.fillRect(0, 0, W, H); g.restore();
+  const card = (x, name, col, ic, at, state, note) => { const p = spring(t, at, 1.8, 0.6); if (p <= 0.01) return; g.save(); g.translate(x, 500); g.scale(Math.min(1, p), Math.min(1, p));
+    const c = state === 'ok' ? '80,230,140' : '255,201,60'; glow(g, 0, 0, 300, c, 0.25);
+    panel(g, -250, -230, 500, 460, 36); text(g, ic, 0, -40, { font: 'Jakarta', weight: 800, size: 130, color: col, align: 'center' });
+    text(g, name, 0, 60, { font: 'Jakarta', weight: 800, size: 46, color: INK, align: 'center' });
+    g.fillStyle = state === 'ok' ? '#1f8a5b' : '#8a6a10'; g.beginPath(); g.roundRect(-190, 100, 380, 76, 38); g.fill();
+    const blink = state === 'ok' || Math.floor(t * 2.5) % 3 !== 0;
+    text(g, note, 0, 150, { font: 'Jakarta', weight: 800, size: 30, color: '#fff', align: 'center', alpha: blink ? 1 : 0.55 }); g.restore(); };
+  card(560, 'Teams', '#8b8df0', 'T', aTeams - 0.2, 'ok', 'restored ✓');
+  card(1360, 'Outlook', '#4ea3ff', 'O', aMail - 0.2, 'part', t > aStill ? 'some still affected' : 'recovering…');
+  pill(g, t, a0 + 0.3, 'Friday morning · Microsoft update', 90, D);
+}
 // ---------------------------------------------------------------- scenes
 function c_open(g, s) {
   const t = s.t, b = (p) => at(s, p);
@@ -337,10 +351,11 @@ function bell(g, s) {
 }
 function outro(g, s) {
   const t = s.t, b = (p) => at(s, p);
-  shots(g, t, [b('This story is still') - 0.25], [
+  shots(g, t, [b('By Friday morning') - 0.25, b('This story is still') - 0.25], [
     (g2, tt) => { cam(g2, tt, { z0: 1.06, z1: 1.0, dur: 8 }); outageMap(g2, tt + 8, { start: 0, dur: 0.1 }); g2.save(); g2.globalCompositeOperation = 'color'; g2.fillStyle = `rgba(255,190,80,${0.35 * span(tt, 0.5, 4)})`; g2.fillRect(0, 0, W, H); g2.restore(); pill(g2, tt, 0.5, 'governments · hospitals · airlines · markets', 90, D); },
+    (g2, tt) => { const a0 = b('By Friday morning'); cam(g2, tt - a0, { z0: 1.0, z1: 1.06, dur: 9 }); recovering(g2, tt, a0, b('Teams was back'), b('encouraging'), b('still having problems')); },
     (g2, tt) => { const a0 = b('This story is still'); nightBG(g2, tt, { seed: 30, rainA: 0.3, moonAt: [1500, 160] }); mist(g2, tt, { y: 900, h: 160, alpha: 0.2 }); text(g2, 'Still developing', W / 2, 520, { font: 'Jakarta', weight: 700, size: 110, color: INK, align: 'center', alpha: span(tt, a0 + 0.2, 0.6) }); pill(g2, tt, a0 + 0.6, 'as of Friday 13 November', 620, D); },
-  ], ['blur']);
+  ], ['push', 'blur']);
 }
 function chapterCard(num, title) {
   return (g, s) => {
@@ -377,7 +392,7 @@ export const extraHits = (timeline) => {
   const sc = (id) => timeline.scenes.find((x) => x.id === id);
   const w = (id, p) => { const x = sc(id); return x.start + when(sceneWords(x.cues), p); };
   const S = (t, kind, vol = 0.6) => out.push({ t, kind, vol });
-  const cuts = { c_open: ['Within about an hour', "You couldn't send", 'The next morning'], inbox: ['On the outage tracker', 'At its worst'], broke: ['Some servers were failing', 'Engineers patched', 'Microsoft said it saw no sign', 'The real cause'], world: ['In Britain', 'The shipping giant', 'Airlines in India', 'Even AI companies'], fix: ['To protect messages', 'But later'], bell: ['On Friday morning', 'For a company', 'Microsoft is selling'], outro: ['This story is still'] };
+  const cuts = { c_open: ['Within about an hour', "You couldn't send", 'The next morning'], inbox: ['On the outage tracker', 'At its worst'], broke: ['Some servers were failing', 'Engineers patched', 'Microsoft said it saw no sign', 'The real cause'], world: ['In Britain', 'The shipping giant', 'Airlines in India', 'Even AI companies'], fix: ['To protect messages', 'But later'], bell: ['On Friday morning', 'For a company', 'Microsoft is selling'], outro: ['By Friday morning', 'This story is still'] };
   Object.entries(cuts).forEach(([id, ps]) => ps.forEach((p) => S(w(id, p) - 0.35, 'whoosh', 0.35)));
   ['chapter1', 'chapter2', 'chapter3', 'chapter4', 'chapter5'].forEach((c) => S(sc(c).start + 0.15, 'hit', 0.6));
   S(sc('c_open').start + 4.2, 'hit', 0.5); for (let k = 0; k < 8; k++) S(w('c_open', 'Within about an hour') + 0.4 + k * 0.6, 'tick', 0.35);

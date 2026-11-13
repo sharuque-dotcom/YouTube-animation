@@ -88,7 +88,7 @@ But later it admitted that one fix was "not working as expected", and gave no ti
 At 9:30 a.m., the New York Stock Exchange opens. But trading starts earlier, in what's called pre-market.
 *Dawn on Wall Street; a clock ticks toward 9:30; traders' screens wake up early.*
 
-On Friday morning, Microsoft's shares were down almost three percent before the bell, at around 508 dollars, while futures for the wider tech market barely moved.
+On Friday morning, Microsoft's shares were, at one point, down almost three percent before the bell, at around 508 dollars, while futures for the wider tech market barely moved.
 *A ticker: MSFT falls red; next to it, "NASDAQ futures ≈ 0%" stays flat.*
 
 For a company worth nearly four trillion dollars, a fall like that wipes out roughly 100 billion dollars of value, on paper.
@@ -102,6 +102,9 @@ Microsoft is selling the world on AI and its cloud. On Thursday, that same cloud
 **[outro]**
 One company's servers. Millions of inboxes. Governments, hospitals, airlines and markets, all waiting.
 *The world map, every ping slowly turning from red to amber.*
+
+By Friday morning, Microsoft said Teams was back, and it reported encouraging recovery progress for email. But some users were still having problems.
+*Teams card turns green "restored"; Outlook card amber "recovering".*
 
 This story is still developing, and we'll update you as it does.
 *"Still developing · as of Friday 13 November".*
@@ -123,3 +126,5 @@ This story is still developing, and we'll update you as it does.
 2. **The dead inbox:** a desk at night, a laptop with Outlook stuck on "Can't connect", a meeting invite stamped "Couldn't save", rain on the window.
 3. **The outage map:** a dark world map with red rings rippling out from city after city (74 countries).
 4. **Before the bell:** dawn over a stock-exchange façade with a big clock at 7:30 a.m. and a red "MSFT −2.8% PRE-MARKET" ticker.
+
+- Update 13 Nov ~9:30 a.m. ET: Teams "mitigative actions have successfully restored service health"; "encouraging recovery progress", some users intermittent: [ABC News](https://abcnews.com/US/outlook-down-microsoft-outage-reported-mail/story?id=138088203). Pre-market drop narrowed to ~1% by the open (Yahoo), so the line now says "at one point".
