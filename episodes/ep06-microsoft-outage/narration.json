@@ -1,0 +1,147 @@
+{
+  "title": "The Day Email Stopped",
+  "fps": 30,
+  "voice": "am_michael",
+  "speed": 0.95,
+  "scenes": [
+    {
+      "id": "c_open",
+      "lines": [
+        {
+          "text": "Thursday, November 12th, a little after 11 in the morning in New York. Somewhere inside Microsoft's cloud, servers start dropping out.",
+          "say": "Thursday, November twelfth, a little after eleven in the morning in New York. Somewhere inside Microsoft's cloud, servers start dropping out.",
+          "pause": 0.6
+        },
+        "Within about an hour, people in 74 countries were reporting that Outlook, Teams and other Microsoft services had stopped working.",
+        {
+          "text": "You couldn't send an email. You couldn't book, move or cancel a meeting.",
+          "pause": 0.7
+        },
+        "The next morning, before the stock market had even opened, Microsoft's shares were already falling."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "title",
+      "duration": 4.5
+    },
+    {
+      "id": "chapter1",
+      "duration": 2.8
+    },
+    {
+      "id": "inbox",
+      "lines": [
+        "It wasn't just email. Outlook, Teams, OneDrive, SharePoint and Copilot were all hit.",
+        "On the outage tracker Downdetector, reports for Outlook alone peaked at around 140,000.",
+        "At its worst, there were nearly 20,000 new reports every minute, compared with fewer than 15 on a normal Thursday."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter2",
+      "duration": 2.8
+    },
+    {
+      "id": "broke",
+      "lines": [
+        {
+          "text": "Microsoft said there was \"elevated load across multiple regions\". A number of servers became unexpectedly unavailable, which put more strain on the ones still running.",
+          "say": "Microsoft said there was elevated load across multiple regions. A number of servers became unexpectedly unavailable, which put more strain on the ones still running."
+        },
+        "Some servers were failing automated health checks. And when Microsoft brought them back, they could become unresponsive again as soon as traffic hit them.",
+        "Engineers patched a part of the system that handles sign-ins and routing traffic.",
+        "Microsoft said it saw no sign of a cyberattack. Australia's home affairs minister said Microsoft believed it was more like the 2024 CrowdStrike meltdown: an update gone wrong.",
+        "The real cause, Microsoft says, will come in its post-incident report."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter3",
+      "duration": 2.8
+    },
+    {
+      "id": "world",
+      "lines": [
+        "In Japan, government ministries struggled to email each other.",
+        {
+          "text": "In Britain, the NHS told patients to keep their appointments, and some police forces asked people to use phone lines instead of online forms.",
+          "say": "In Britain, the N.H.S. told patients to keep their appointments, and some police forces asked people to use phone lines instead of online forms."
+        },
+        {
+          "text": "The shipping giant Maersk and the stock-market operator Euronext reported problems. Luxury group Richemont's results were delayed, and Workhorse postponed its earnings.",
+          "say": "The shipping giant Mersk and the stock-market operator Euronext reported problems. Luxury group Reeshmont's results were delayed, and Workhorse postponed its earnings."
+        },
+        {
+          "text": "Airlines in India rerouted customer emails. In the US, cities like Austin, Jacksonville and Baltimore County lost email; Austin said its 911 service was not affected.",
+          "say": "Airlines in India rerouted customer emails. In the U.S., cities like Austin, Jacksonville and Baltimore County lost email. Austin said its nine one one service was not affected."
+        },
+        "Even AI companies like OpenAI and Anthropic reported problems with tools that connect to Microsoft."
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "sub",
+      "lines": [
+        "Quick pause. If you're enjoying this story and haven't subscribed yet, tap subscribe.",
+        "It really helps the channel."
+      ],
+      "tail": 0.6
+    },
+    {
+      "id": "chapter4",
+      "duration": 2.8
+    },
+    {
+      "id": "fix",
+      "lines": [
+        {
+          "text": "Early on Friday, Microsoft reported \"early signs of stabilization\", starting in Asia-Pacific.",
+          "say": "Early on Friday, Microsoft reported early signs of stabilization, starting in Asia-Pacific."
+        },
+        "To protect messages stuck in limbo, it extended the email retry window to 48 hours, so delayed emails wouldn't simply be lost.",
+        {
+          "text": "But later it admitted that one fix was \"not working as expected\", and gave no timeline for a full recovery.",
+          "say": "But later it admitted that one fix was not working as expected, and gave no timeline for a full recovery."
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "chapter5",
+      "duration": 2.8
+    },
+    {
+      "id": "bell",
+      "lines": [
+        "At 9:30 a.m., the New York Stock Exchange opens. But trading starts earlier, in what's called pre-market.",
+        "On Friday morning, Microsoft's shares were down almost three percent before the bell, at around 508 dollars, while futures for the wider tech market barely moved.",
+        "For a company worth nearly four trillion dollars, a fall like that wipes out roughly 100 billion dollars of value, on paper.",
+        {
+          "text": "Microsoft is selling the world on AI and its cloud. On Thursday, that same cloud struggled to deliver an email.",
+          "pause": 0.8
+        }
+      ],
+      "tail": 0.8
+    },
+    {
+      "id": "outro",
+      "lines": [
+        {
+          "text": "One company's servers. Millions of inboxes. Governments, hospitals, airlines and markets, all waiting.",
+          "pause": 0.8
+        },
+        "This story is still developing, and we'll update you as it does."
+      ],
+      "tail": 1.0
+    },
+    {
+      "id": "endcard",
+      "lines": [
+        "This has been Toppled Giants.",
+        "Subscribe, and I'll see you in the next story."
+      ],
+      "tail": 3.5
+    }
+  ]
+}

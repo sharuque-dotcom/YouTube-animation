@@ -8,6 +8,7 @@ The owner reads on a phone, so keep messages short and put the outcome first.
 - **Never change published episodes**: episode 1 (`ep01-satyam`) and episode 2 (`ep02-nvidia`), including their content folders.
 - For every new video, send a **45–60 s test clip** first and wait for confirmation before the full render.
 - Every video needs new, story-specific motion graphics. No plain, repetitive or blank frames, and no waiting for the voice: the first element appears ≤0.35 s after a cut.
+- **Shorts are native 9:16** (1080×1920): recompose each shot for vertical, big centred text, safe margins. Never letterbox or squeeze a 16:9 frame.
 - Use the Toppled Giants **title sting** (the owner likes it). Add a YouTube-style **subscribe** moment mid-video and at the end.
 - Show visual metaphors for what's said: a lens scanning on "watched", hearts on "love story", characters, a cut line for "cut off", real logo and portrait cards.
 - Voice: Kokoro `am_michael`, speed 0.95. Music: the owner's own tracks in each episode's `music/` folder.
