@@ -5,13 +5,15 @@ The channel was first called "Paper Empires". Episode 1 went out under that name
 The owner reads on a phone, so keep messages short and put the outcome first.
 
 ## Standing rules from the owner
+- **NEW DIRECTION (14 Nov): Shorts only** (71% of views come from the Shorts feed). Native 9:16. Hook in the first second: line one states the stakes (no scene-setting intros such as 'Venice, the 1700s'). Fast cuts (every 1.5–2 s), big readable text, real faces/photos where licensed. The owner wants animation quality 10x better than episodes 3–7.
+- **Voice:** Kokoro is too flat. Testing Chatterbox (expressive, MIT, CPU; env `/home/user/venvs/cb`, samples in `content/voice-samples/`). The pipeline also accepts the owner's own recordings (`<episode>/voice/<scene>-<n>.wav`).
 - **Never change published episodes**: episode 1 (`ep01-satyam`) and episode 2 (`ep02-nvidia`), including their content folders.
 - For every new video, send a **45–60 s test clip** first and wait for confirmation before the full render.
 - Every video needs new, story-specific motion graphics. No plain, repetitive or blank frames, and no waiting for the voice: the first element appears ≤0.35 s after a cut.
 - **Shorts are native 9:16** (1080×1920): recompose each shot for vertical, big centred text, safe margins. Never letterbox or squeeze a 16:9 frame.
 - Use the Toppled Giants **title sting** (the owner likes it). Add a YouTube-style **subscribe** moment mid-video and at the end.
 - Show visual metaphors for what's said: a lens scanning on "watched", hearts on "love story", characters, a cut line for "cut off", real logo and portrait cards.
-- Voice: Kokoro `am_michael`, speed 0.95. Music: the owner's own tracks in each episode's `music/` folder.
+- Voice (episodes 1–7): Kokoro `am_michael`, speed 0.95. Music: the owner's own tracks in each episode's `music/` folder.
 - Photos come from Wikimedia Commons (public domain or CC), credited in `photos/CREDITS.txt`. The owner can supply images if needed.
 - Commit and push to the session's branch after each piece of work.
 
