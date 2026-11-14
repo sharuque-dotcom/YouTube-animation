@@ -1,0 +1,67 @@
+{
+  "title": "Jensen Huang: three women, four days",
+  "fps": 30,
+  "voice": "chatterbox",
+  "speed": 1.0,
+  "vertical": true,
+  "scenes": [
+    {
+      "id": "main",
+      "lead": 0.05,
+      "lines": [
+        {
+          "text": "Nvidia's founder just lost the company he built over thirty-three years.",
+          "pause": 0.12
+        },
+        {
+          "text": "Not over chips.",
+          "pause": 0.12
+        },
+        {
+          "text": "Not over money.",
+          "pause": 0.12
+        },
+        {
+          "text": "Over three women.",
+          "pause": 0.12
+        },
+        {
+          "text": "Sunday. He admits an affair.",
+          "pause": 0.12
+        },
+        {
+          "text": "The woman, the New York Times reported, was suspected by US intelligence of gathering information for China.",
+          "pause": 0.12
+        },
+        {
+          "text": "Wednesday. The Times reports a second relationship, with an executive who reported directly to him.",
+          "pause": 0.12
+        },
+        {
+          "text": "That night, the board accepts his resignation.",
+          "pause": 0.12
+        },
+        {
+          "text": "Thursday. Reuters reports a third. Another Nvidia employee. Still unnamed.",
+          "pause": 0.12
+        },
+        {
+          "text": "The stock dropped fourteen percent at the open.",
+          "pause": 0.12
+        },
+        {
+          "text": "Thirty-three years. Four days.",
+          "pause": 0.12
+        }
+      ],
+      "tail": 0.3
+    },
+    {
+      "id": "end",
+      "lines": [
+        "Follow Toppled Giants for what happens next."
+      ],
+      "tail": 1.2
+    }
+  ]
+}
