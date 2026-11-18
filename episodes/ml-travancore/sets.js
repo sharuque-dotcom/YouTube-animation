@@ -133,7 +133,7 @@ export function thoriumBeach(g, t, { atom = 1 } = {}) {
   // palms on the right, near (heavy, slow sway) with rim light from the sunset
   palm(g, t, 960, 1560, 1.35, { rim: 'rgba(255,170,110,0.45)', h: 760, lean: -90 }); palm(g, t, 70, 1460, 0.95, { rim: 'rgba(255,170,110,0.35)', h: 720, lean: 60, ph: 2 });
   // a glowing atom traced above the sand
-  if (atom > 0) { g.save(); g.globalAlpha = atom; g.translate(500, 1500); glow(g, 0, 0, 260, '120,220,255', 0.4); g.strokeStyle = 'rgba(160,230,255,0.85)'; g.lineWidth = 4; for (let i = 0; i < 3; i++) { g.save(); g.rotate(i * Math.PI / 3 + t * 0.3); g.beginPath(); g.ellipse(0, 0, 170, 60, 0, 0, Math.PI * 2); g.stroke(); const a = t * 3 + i * 2; g.fillStyle = '#e8fbff'; g.beginPath(); g.arc(Math.cos(a) * 170, Math.sin(a) * 60, 9, 0, Math.PI * 2); g.fill(); g.restore(); } g.fillStyle = '#bff0ff'; g.beginPath(); g.arc(0, 0, 22, 0, Math.PI * 2); g.fill();
+  if (atom > 0) { g.save(); g.globalAlpha = atom; g.translate(560, 1330); glow(g, 0, 0, 260, '120,220,255', 0.4); g.strokeStyle = 'rgba(160,230,255,0.85)'; g.lineWidth = 4; for (let i = 0; i < 3; i++) { g.save(); g.rotate(i * Math.PI / 3 + t * 0.3); g.beginPath(); g.ellipse(0, 0, 170, 60, 0, 0, Math.PI * 2); g.stroke(); const a = t * 3 + i * 2; g.fillStyle = '#e8fbff'; g.beginPath(); g.arc(Math.cos(a) * 170, Math.sin(a) * 60, 9, 0, Math.PI * 2); g.fill(); g.restore(); } g.fillStyle = '#bff0ff'; g.beginPath(); g.arc(0, 0, 22, 0, Math.PI * 2); g.fill();
     text(g, 'Th', 0, 12, { font: 'Jakarta', weight: 800, size: 30, color: '#0a3040', align: 'center' }); g.restore(); }
   mist(g, t, { y: 1220, h: 120, alpha: 0.2, color: '255,190,160' });
 }
