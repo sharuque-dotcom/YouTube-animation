@@ -4,19 +4,19 @@
 import { W, H, clamp, lerp, rand } from '../../pipeline/engine.js';
 import { buf } from '../../pipeline/scenery.js';
 
-const S = 4;                          // one art pixel = 4 screen pixels
-const LW = W / S, LH = H / S;         // 270 x 480 art canvas
-const INK = '#1a1220';
+export const S = 4;                          // one art pixel = 4 screen pixels
+export const LW = W / S, LH = H / S;         // 270 x 480 art canvas
+export const INK = '#1a1220';
 const BAYER = [0, 8, 2, 10, 12, 4, 14, 6, 3, 11, 1, 9, 15, 7, 13, 5].map((v) => v / 16);
 
-function px(c, x, y, w, h, col) { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); }
+export function px(c, x, y, w, h, col) { c.fillStyle = col; c.fillRect(Math.round(x), Math.round(y), Math.round(w), Math.round(h)); }
 /** vertical gradient through a palette ramp, dithered (Bayer 4x4, narrow) */
-function ditherV(c, x, y, w, h, ramp, { width = 0.45 } = {}) {
+export function ditherV(c, x, y, w, h, ramp, { width = 0.45 } = {}) {
   for (let j = 0; j < h; j++) { const u = j / Math.max(1, h - 1) * (ramp.length - 1);
     for (let i = 0; i < w; i++) { const b = (BAYER[((y + j) % 4) * 4 + ((x + i) % 4)] - 0.5) * width; const k = clamp(Math.round(u + b), 0, ramp.length - 1); c.fillStyle = ramp[k]; c.fillRect(x + i, y + j, 1, 1); } }
 }
 /** Kerala house in high 3/4 view: laterite walls, steep tiled roof, carved verandah, emissive windows */
-function house(c, t, x, y, w, { lit = [1, 1], seed = 1, wall = ['#6a3a2a', '#8a4e34', '#a8643e'], doorGlow = 0 } = {}) {
+export function house(c, t, x, y, w, { lit = [1, 1], seed = 1, wall = ['#6a3a2a', '#8a4e34', '#a8643e'], doorGlow = 0 } = {}) {
   const wh = 34, rh = 30, depth = 14;
   // side wall in shade, front wall in key
   px(c, x + w, y - wh, depth * 0.6, wh, '#3a2026');
@@ -36,7 +36,7 @@ function house(c, t, x, y, w, { lit = [1, 1], seed = 1, wall = ['#6a3a2a', '#8a4
   for (let i = 0; i < w; i += 3) px(c, x + i, y - wh - 2, 1, 1, 'rgba(200,220,255,0.6)');
 }
 /** a pixel sprite: villager in mundu (stepped, 2-frame idle). hero gets the saturated colour */
-function villager(c, t, x, y, { shirt = '#e8e0d0', skin = '#8a5a3a', hero = false, phase = 0, face = 1 } = {}) {
+export function villager(c, t, x, y, { shirt = '#e8e0d0', skin = '#8a5a3a', hero = false, phase = 0, face = 1 } = {}) {
   const f = Math.floor(t * 1.5 + phase) % 2; const by = y - f;  // 2-frame idle bob, stepped
   px(c, x - 3, y, 7, 1, 'rgba(26,18,32,0.6)');                              // contact shadow
   px(c, x - 2, by - 8, 5, 8, '#f2eee4'); px(c, x - 2, by - 8, 1, 8, '#c8c0b0');  // mundu (white, selout left)
@@ -44,7 +44,7 @@ function villager(c, t, x, y, { shirt = '#e8e0d0', skin = '#8a5a3a', hero = fals
   px(c, x - 1 + (face > 0 ? 1 : 0), by - 19, 3, 4, skin); px(c, x - 1, by - 20, 4, 2, INK);   // head + hair
   px(c, x + (face > 0 ? 3 : -3), by - 14, 1, 5, skin);                       // arm
 }
-function palm(c, t, x, y, h, seed = 0) {
+export function palm(c, t, x, y, h, seed = 0) {
   const sway = Math.round(Math.sin(t * 0.6 + seed) * 1.5);
   for (let j = 0; j < h; j++) px(c, x + Math.round(Math.sin(j / h * 1.2) * 4) + (j > h * 0.7 ? sway : 0), y - j, 2, 1, j % 4 ? '#3a2a22' : '#4a3628');
   const tx = x + Math.round(Math.sin(1.2) * 4) + sway, ty = y - h;
@@ -89,23 +89,25 @@ function streetArt(c, t) {
 }
 
 /** compose: pixel art (nearest) + smooth light, fog, rain, tilt-shift, bloom, vignette. No grain. */
-export function pixelStreet(g, t, { band = [0.36, 0.66], camZ = 2.05, focus = [500, 1150], to = [540, 980] } = {}) {
-  const [a, ac] = buf('pxart', LW, LH); ac.imageSmoothingEnabled = false;
-  const lights = streetArt(ac, t);
+export function pixelStreet(g, t, o = {}) { compose(g, t, streetArt, { band: [0.36, 0.66], camZ: 2.05, focus: [500, 1150], to: [540, 980], ...o }); }
+/** generic diorama compositor: art(c, t) draws the 270x480 pixel set and returns practical lights [x, y, level] in screen px */
+export function compose(g, t, art, { band = [0.36, 0.66], camZ = 1, focus = [W / 2, H / 2], to = [W / 2, H / 2], fog = '120,120,190', fogA = 0.45, rainA = 1, warm = '255,200,120', blur = 12 } = {}) {
+  const [a, ac] = buf('pxart', LW, LH); ac.imageSmoothingEnabled = false; ac.clearRect(0, 0, LW, LH);
+  const lights = art(ac, t) || [];
   const [s, sg] = buf('pxsharp');
   sg.imageSmoothingEnabled = false; sg.save(); sg.translate(to[0], to[1]); sg.scale(camZ, camZ); sg.translate(-focus[0], -focus[1]); sg.drawImage(a, 0, 0, W, H);
   // practical lights: smooth, flickering (sum of sines, about ±20%), additive glow sprites + floor pools
   sg.globalCompositeOperation = 'lighter';
   lights.forEach(([x, y, lv], k) => { const fl = lv * (1 + 0.1 * Math.sin(t * 7 + k) + 0.1 * Math.sin(t * 13.3 + k * 2)); const r = 120 + 260 * Math.pow(fl, 1.3);
-    const gg = sg.createRadialGradient(x, y, 2, x, y, r); gg.addColorStop(0, `rgba(255,200,120,${0.55 * fl})`); gg.addColorStop(0.25, `rgba(255,170,90,${0.2 * fl})`); gg.addColorStop(1, 'rgba(255,150,80,0)'); sg.fillStyle = gg; sg.fillRect(x - r, y - r, r * 2, r * 2); });
+    const gg = sg.createRadialGradient(x, y, 2, x, y, r); gg.addColorStop(0, `rgba(${warm},${0.55 * fl})`); gg.addColorStop(0.25, `rgba(${warm},${0.2 * fl})`); gg.addColorStop(1, 'rgba(255,150,80,0)'); sg.fillStyle = gg; sg.fillRect(x - r, y - r, r * 2, r * 2); });
   sg.globalCompositeOperation = 'source-over';
   // fog: one colour per set (cool blue-violet), thicker far away
-  const fg = sg.createLinearGradient(0, 380, 0, 1100); fg.addColorStop(0, 'rgba(120,120,190,0.45)'); fg.addColorStop(1, 'rgba(120,120,190,0)'); sg.fillStyle = fg; sg.fillRect(0, 0, W, H);
+  const fg = sg.createLinearGradient(0, 380, 0, 1100); fg.addColorStop(0, `rgba(${fog},${fogA})`); fg.addColorStop(1, `rgba(${fog},0)`); sg.fillStyle = fg; sg.fillRect(0, 0, W, H);
   // rain: smooth slanted streaks, depth-scaled
-  const r = rand(5); for (let i = 0; i < 380; i++) { const d = r(), x = (r() * W + t * 60) % W, y = (r() * H + t * lerp(500, 1400, d)) % H, l = lerp(14, 40, d); sg.strokeStyle = `rgba(200,210,255,${lerp(0.15, 0.4, d)})`; sg.lineWidth = lerp(1, 2.5, d); sg.beginPath(); sg.moveTo(x, y); sg.lineTo(x - l * 0.2, y + l); sg.stroke(); }
+  const r = rand(5); for (let i = 0; i < 380 * rainA; i++) { const d = r(), x = (r() * W + t * 60) % W, y = (r() * H + t * lerp(500, 1400, d)) % H, l = lerp(14, 40, d); sg.strokeStyle = `rgba(200,210,255,${lerp(0.15, 0.4, d)})`; sg.lineWidth = lerp(1, 2.5, d); sg.beginPath(); sg.moveTo(x, y); sg.lineTo(x - l * 0.2, y + l); sg.stroke(); }
   sg.restore();
   // tilt-shift: blur grows away from the sharp band (far above, near below)
-  const [b, bg] = buf('pxblur'); bg.filter = 'blur(12px)'; bg.drawImage(s, 0, 0); bg.filter = 'none';
+  const [b, bg] = buf('pxblur'); bg.filter = `blur(${blur}px)`; bg.drawImage(s, 0, 0); bg.filter = 'none';
   bg.globalCompositeOperation = 'destination-out'; const m = bg.createLinearGradient(0, 0, 0, H);
   const [b0, b1] = band; m.addColorStop(0, 'rgba(0,0,0,0)'); m.addColorStop(Math.max(0, b0 - 0.18), 'rgba(0,0,0,0)'); m.addColorStop(b0, 'rgba(0,0,0,1)'); m.addColorStop(b1, 'rgba(0,0,0,1)'); m.addColorStop(Math.min(1, b1 + 0.06), 'rgba(0,0,0,0)'); m.addColorStop(1, 'rgba(0,0,0,0)');
   bg.fillStyle = m; bg.fillRect(0, 0, W, H);
