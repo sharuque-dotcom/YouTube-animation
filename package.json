@@ -1,5 +1,8 @@
 {
   "name": "youtube-animation",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "three": "^0.170.0"
+  }
 }
