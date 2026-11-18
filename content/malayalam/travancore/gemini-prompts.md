@@ -1,113 +1,168 @@
-# Travancore Short: copy-paste prompts for Gemini
+# Travancore Short: copy-paste prompts for Gemini (pixel-art style locked)
 
-**How to use:** first generate the **character sheets** (Part A) and save them. Then for each clip (Part B), copy the whole block and attach the character images it names as references, so the same people appear in every clip and in future episodes.
+**Why it came out realistic:** video models default to realism unless the style leads the prompt and the first frame already looks like pixel art. So for every clip:
 
-Every clip: vertical 9:16, no text on screen. I add captions, dates and Malayalam text in the edit.
+1. **Step 1, image:** paste the IMAGE prompt into Gemini (image generation) and attach the character sheets listed. Regenerate until it clearly looks like pixel art.
+2. **Step 2, video:** in Veo, choose image-to-video ("frames to video" / "animate image"), upload that image, paste the VIDEO prompt and set the length shown.
 
-**Clip lengths** (each is about 1–2 s longer than its narration line, so I have room to trim and blend; the whole Short comes to about 85 s):
+Make the character sheets (Part A) first and reuse them in every clip and future episode.
 
-| Clip | Line | Narration (approx.) | Generate |
-|---|---|---|---|
-| 1 | main-1 | 8.6 s | **10 s** |
-| 2 | main-2 | 10.3 s | **12 s** |
-| 3 | main-3 | 5.3 s | **7 s** |
-| 4 | main-4 | 8.6 s | **10 s** |
-| 5 | main-5 | 11.0 s | **12 s** |
-| 6 | main-6 | 4.2 s | **6 s** |
-| 7 | main-7 | 5.1 s | **7 s** |
-| 8 | main-8 | 11.1 s | **13 s** |
-| 9a + 9b | main-9 | 9.4 s | **11 s each** (shown together as a split screen) |
-| 10 | end-1 | 8.0 s | **10 s** |
-
-If your recorded lines come out longer, generate a little more; anything up to 15 s is fine.
+| Clip | Length |
+|---|---|
+| Clip 1 main-1 | 10 s |
+| Clip 2 main-2 | 12 s |
+| Clip 3 main-3 | 7 s |
+| Clip 4 main-4 | 10 s |
+| Clip 5 main-5 | 12 s |
+| Clip 6 main-6 | 6 s |
+| Clip 7 main-7 | 7 s |
+| Clip 8 main-8 | 13 s |
+| Clip 9a main-9 | 11 s |
+| Clip 9b main-9 | 11 s |
+| Clip 10 end-1 | 10 s |
 
 ---
 
-# Part A · Recurring cast (generate once, reuse forever)
+# Part A · Recurring cast (image prompts, generate once)
 
 ### A1 · KANNAN, our guide (appears in every episode)
 ```
-Character reference sheet for a 2.5D pixel-art game, plain warm off-white background, no text. One character shown four times in a row: front view, three-quarter view, side view, back view, plus a small row of 4 walk-cycle frames and 2 idle frames below. Character: KANNAN, a friendly young Malayali man in his mid-20s from 1940s Kerala, slim build, short black hair with a side parting, a thin moustache, warm brown skin, wearing a TEAL short-sleeved cotton shirt and a white mundu (Kerala sarong) with a thin gold border, barefoot. Curious, kind expression. Pixel-art sprite style: chunky hand-made pixel art about 34x50 pixels per figure, scaled up crisp with nearest-neighbour (no smoothing, no anti-aliasing), limited palette of 3 to 6 shades per colour with subtle Bayer dithering, a 1-pixel dark warm outline around the figure, soft directional light from the upper left. The teal shirt is his signature colour and must stay identical in every image. Flat 2D sprite, not voxel, not cubic, not 3D-rendered.
+Pixel-art video game character sprite sheet, retro 16-bit / 32-bit pixel art with chunky visible pixels, no smoothing, plain light background, no text. One character shown 4 times in a row: front, three-quarter, side, back, plus a row of 4 walk frames and 2 idle frames. Character: KANNAN, a friendly young Malayali man from 1940s Kerala, slim, short black side-parted hair, thin moustache, warm brown skin, TEAL short-sleeved shirt, white mundu (Kerala sarong) with a thin gold border, barefoot. Each figure about 34x50 pixels scaled up crisp, 1-pixel dark outline, limited palette with light dithering. The teal shirt is his signature colour. NOT photorealistic, NOT 3D-rendered, NOT a real person, flat 2D game sprite.
 ```
 
 ### A2 · AMMINI, an elder of the coast
 ```
-Character reference sheet for a 2.5D pixel-art game, plain warm off-white background, no text. One character shown four times in a row: front view, three-quarter view, side view, back view, plus 2 idle frames and 2 frames of her bending to scoop sand into a woven basket. Character: AMMINI, a strong Malayali woman in her 50s from 1940s coastal Kerala, grey hair tied in a bun, warm dark-brown skin, wearing a deep RED blouse and a white mundu with a red border, a woven palm-leaf basket on her hip, barefoot, a calm wise expression. Pixel-art sprite style: chunky hand-made pixel art about 34x50 pixels per figure, scaled up crisp with nearest-neighbour (no smoothing, no anti-aliasing), limited palette of 3 to 6 shades per colour with subtle Bayer dithering, a 1-pixel dark warm outline, soft directional light from the upper left. Flat 2D sprite, not voxel, not cubic, not 3D-rendered.
+Pixel-art video game character sprite sheet, retro 16-bit / 32-bit pixel art with chunky visible pixels, no smoothing, plain light background, no text. One character shown 4 times in a row: front, three-quarter, side, back, plus 2 idle frames and 2 frames scooping sand into a basket. Character: AMMINI, a strong Malayali woman in her 50s from 1940s coastal Kerala, grey hair in a bun, warm dark-brown skin, deep RED blouse, white mundu with a red border, a woven palm-leaf basket on her hip, barefoot. Each figure about 34x50 pixels scaled up crisp, 1-pixel dark outline, limited palette with light dithering. NOT photorealistic, NOT 3D-rendered, NOT a real person, flat 2D game sprite.
 ```
 
 ### A3 · VILLAGERS, a crowd pack
 ```
-Sprite sheet for a 2.5D pixel-art game, plain warm off-white background, no text. Eight different Malayali villagers from 1940s Kerala standing in a row, front three-quarter view, each with 2 idle frames: an old man with a white beard and a walking stick; a middle-aged shopkeeper with a towel on his shoulder; a young woman in a green blouse and white mundu with jasmine in her hair; a schoolboy in khaki shorts; a man reading a folded newspaper; a fisherman with a cloth headband; a woman holding a brass pot; a clerk with round spectacles and a white shirt. Mostly white mundus and earthy shirts in beige, brown and muted green, with varied warm brown skin tones. Pixel-art sprite style: chunky hand-made pixel art about 34x50 pixels per figure, crisp nearest-neighbour scaling, 3 to 6 shades per colour with subtle Bayer dithering, 1-pixel dark warm outline, soft light from the upper left. Flat 2D sprites, not voxel, not 3D-rendered.
+Pixel-art video game sprite sheet, retro 16-bit / 32-bit pixel art with chunky visible pixels, no smoothing, plain light background, no text. Eight different 1940s Kerala villagers standing in a row, each with 2 idle frames: an old man with a white beard and stick; a shopkeeper with a towel on his shoulder; a young woman in a green blouse with jasmine in her hair; a schoolboy in khaki shorts; a man reading a newspaper; a fisherman with a headband; a woman holding a brass pot; a clerk with round spectacles. Mostly white mundus and earthy shirts, varied warm brown skin. Each about 34x50 pixels, 1-pixel dark outline. NOT photorealistic, NOT 3D-rendered, flat 2D game sprites.
 ```
 
-### A4 · THE DEWAN, seen only as a silhouette (no likeness of the real person)
+### A4 · THE DEWAN, silhouette only (no likeness of the real person)
 ```
-Character reference sheet for a 2.5D pixel-art game, plain warm off-white background, no text. A tall, dignified 1940s statesman shown ONLY from behind and in side silhouette, face never visible: dark buttoned long coat (bandhgala), white trousers, a folded shawl over one shoulder, hands clasped behind his back. Four views: back, back three-quarter, side silhouette against warm light, and walking away (4 frames). Pixel-art sprite style: chunky hand-made pixel art about 34x52 pixels, crisp nearest-neighbour scaling, 3 to 6 shades per colour with subtle dithering, 1-pixel dark warm outline. Flat 2D sprite, not voxel, not 3D. Do not show any face.
-```
-
----
-
-# Part B · The clips (style guide included in every block)
-
-### Clip 1 · main-1 · "In 1947, one kingdom in Kerala almost said no to India. Travancore."
-```
-Vertical 9:16 video, 10 seconds, no text, no logos, no subtitles. Daytime, late morning. A miniature royal study in a 1940s Kerala palace: sunlight streams through tall wooden-shuttered windows in visible dust-filled light shafts onto a polished teak desk. On the desk lies a hand-drawn 1947 survey map showing ONLY the south-west Kerala coastline (no other borders, no map of India). A dashed gold line traces the old Travancore state and slowly begins to glow gold. Beside the map: a brass desk lamp with a green shade, an inkwell, a stack of leather books, a small golden conch-shell paperweight. The camera starts high above the desk and slowly pushes in toward the glowing map. STYLE: 2.5D pixel-art diorama: a miniature 3D set built from simple boxes and cylinders covered in crisp hand-made pixel-art textures (about 24 texels per metre, nearest-neighbour, no smoothing). Camera always looks down from a high three-quarter angle, never eye level, with slow, smooth, weighty moves and no overshoot. Tilt-shift lens: one sharp horizontal focus band on the subject with strong blur above and below, so it feels like a tabletop miniature. Light is the subject: warm sunlit key and cool shade, practical lamps with soft real shadows, heavy bloom and halation around light sources, gentle vignette, filmic tone mapping, darkest colour a warm ink and never pure black, no film grain. Smooth drifting dust motes. Avoid voxel or cubic characters, eye-level shots, fast cuts, text and watermarks.
-```
-
-### Clip 2 · main-2 · "On 18 June 1947, Travancore announced on the radio it would become independent."
-Attach: **Kannan (A1)** and **Villagers (A3)**.
-```
-Vertical 9:16 video, 12 seconds, no text, no logos, no subtitles. Night, 8:45 pm, gentle rain. A miniature 1947 Trivandrum lane: Kerala houses with red terracotta-tiled pitched roofs, lime-washed walls and warm glowing windows, coconut palms swaying slowly, a wet red laterite road with puddles reflecting lamplight. In the centre a small radio shop with an open front glows warm orange: shelves of colourful jars and a wooden valve radio with a glowing dial on the counter. Villagers from the reference sheet gather in front, listening, with KANNAN (teal shirt, white mundu, from the reference) at the centre. Two street lamps cast warm pools of light, and slanted rain streaks catch the light. The camera glides slowly down from high above toward the crowd. STYLE: 2.5D pixel-art diorama: a miniature 3D set of simple boxes and cylinders with crisp hand-made pixel-art textures (about 24 texels per metre, nearest-neighbour, no smoothing). Characters are flat 2D pixel sprites (about 34x50 pixels, 1-pixel dark outline) standing in the 3D world like paper cut-outs, receiving light and casting real shadows, animated in stepped low-frame-rate pixel animation (2-frame idles). Everything else (camera, rain, light, reflections, focus) moves perfectly smoothly. High three-quarter camera looking down, never eye level, slow weighty moves. Tilt-shift lens with one sharp focus band on the crowd and strong blur above and below. Lighting: cool blue-violet moonlight and blue fog against warm orange shop and lamp light, heavy bloom and halation, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid voxel or cubic characters, eye-level shots, fast cuts, text and watermarks.
-```
-
-### Clip 3 · main-3 · "It already had its own currency, its own stamps, and its own army."
-```
-Vertical 9:16 video, 7 seconds, no text, no logos, no subtitles. Indoors, warm candlelight. A deep crimson velvet tablecloth on a palace table, seen from above at a high angle. One by one, three objects drop onto the velvet and settle with a small weighty bounce: a silver 1940s Travancore coin with a conch-shell emblem, a red postage stamp with perforated edges and a gold conch emblem, and a polished brass eight-pointed army badge. A single soft spotlight from the upper left and a candle flickering at the edge of frame. The objects glint with soft specular highlights. A slow push-in. STYLE: 2.5D pixel-art diorama: miniature 3D props with crisp hand-made pixel-art textures (nearest-neighbour, no smoothing), seen from a high three-quarter angle, never eye level. Slow, smooth, weighty camera move with no overshoot. Tilt-shift lens with one sharp focus band on the objects and blur above and below. Light is the subject: warm practical candle and spotlight with soft real shadows, heavy bloom and halation, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid fast cuts, text and watermarks.
-```
-
-### Clip 4 · main-4 · "Its beaches held thorium sand, a nuclear fuel the world wanted."
-Attach: **Ammini (A2)**.
-```
-Vertical 9:16 video, 10 seconds, no text, no logos, no subtitles. Sunset. A miniature Kerala beach of BLACK mineral sand that glitters with tiny gold and white sparkles. Gentle waves roll in with pixel foam lines. The sea reflects a pink, orange and violet sky with pixel clouds, and a low sun on the horizon throws a long glittering light column across the water. Coconut palms lean over the beach with warm rim light on their fronds. AMMINI (red blouse, white mundu, woven basket, from the reference) slowly gathers sand into her basket. The camera descends slowly toward her. STYLE: 2.5D pixel-art diorama: a miniature 3D set with crisp hand-made pixel-art textures (about 24 texels per metre, nearest-neighbour, no smoothing). Characters are flat 2D pixel sprites (about 34x50 pixels, 1-pixel dark outline) like paper cut-outs, receiving light and casting real shadows, with stepped low-frame-rate animation (2-frame bending motion). Camera, waves, light and particles move perfectly smoothly. High three-quarter camera looking down, never eye level. Tilt-shift lens with a sharp band on Ammini and strong blur above and below. Warm sunset key against cool violet shadows, sea haze, depth-scaled sea spray, heavy bloom and halation around the sun, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid voxel or cubic characters, eye-level shots, text and watermarks.
-```
-
-### Clip 5 · main-5 · "On 25 July, the Dewan C.P. Ramaswami Iyer was attacked after a concert in Trivandrum."
-Attach: **The Dewan (A4)** and **Villagers (A3)**.
-```
-Vertical 9:16 video, 12 seconds, no text, no logos, no subtitles. Night, rain. A miniature 1940s colonnaded concert hall: white stone columns, a triangular pediment and wide stone steps, its tall doors open with warm golden light spilling out. A black 1940s sedan waits at the bottom of the steps with headlights on. The DEWAN silhouette (from the reference, seen only from behind, face never shown) walks down the steps toward the car while concert-goers leave under umbrellas. Two lamp posts glow in the rain. Suddenly one bright lightning flash whitens the whole scene for an instant and fades: the flash alone stands for the attack. No violence, no weapons, no injuries shown. The camera slowly pushes in toward the car. STYLE: 2.5D pixel-art diorama: a miniature 3D set of simple boxes and cylinders with crisp hand-made pixel-art textures (nearest-neighbour, no smoothing). Characters are flat 2D pixel sprites (about 34x50 pixels, 1-pixel dark outline) like paper cut-outs with stepped low-frame-rate animation (4-frame walk). Camera, rain, light and focus move smoothly. High three-quarter camera looking down, never eye level. Tilt-shift lens with a sharp band on the steps and car. Cold blue-grey night fog against warm doorway light, slanted rain streaks, heavy bloom and halation, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid voxel characters, eye-level shots, gore, text and watermarks.
-```
-
-### Clip 6 · main-6 · "Within days, Travancore agreed to join India."
-```
-Vertical 9:16 video, 6 seconds, no text, no logos, no subtitles. Daytime. The same miniature royal study and polished teak desk as before, with sunlight through wooden shutters and dust motes in the light shafts. The glowing gold Travancore border on the coastline-only map (south-west Kerala coast only, no other borders) slowly fades back to plain ink, as if the kingdom quietly dissolves into the wider coast. The camera slowly rises and pulls back from the desk, revealing more of the sunlit room. A calm, reflective mood. STYLE: 2.5D pixel-art diorama: a miniature 3D set with crisp hand-made pixel-art textures (about 24 texels per metre, nearest-neighbour, no smoothing). High three-quarter camera looking down, never eye level, with a slow, smooth rising pull-back and no overshoot. Tilt-shift lens with one sharp focus band on the map and blur above and below. Warm sunlit key and cool shade, practical brass lamp glow, heavy bloom and halation, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid text and watermarks.
-```
-
-### Clip 7 · main-7 · "But imagine if the plan had worked."
-```
-Vertical 9:16 video, 7 seconds, no text, no logos, no subtitles. Sunrise. A time-lapse feeling: a miniature Kerala harbour town transforms from 1947 to today. Old red-tiled roofs and coconut palms give way to a modern skyline of slim towers with glowing windows, cranes rise, and a container ship glides into the harbour. A golden sun sits low with long light shafts through the morning haze and the sea glittering. The camera starts very high and wide and slowly pushes in. STYLE: 2.5D pixel-art diorama: a miniature 3D city of simple boxes and cylinders with crisp hand-made pixel-art textures (about 24 texels per metre, nearest-neighbour, no smoothing). High three-quarter camera looking down, never eye level, slow smooth push with no overshoot. Tilt-shift lens with one sharp horizontal focus band and strong blur above and below, so it feels like a tabletop miniature. Pink and gold dawn light against cool blue shadows, volumetric light shafts, one haze colour, heavy bloom and halation, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid text and watermarks.
-```
-
-### Clip 8 · main-8 · "A Travancore passport. Embassies in Trivandrum. Ships flying the conch flag."
-Attach: **Kannan (A1)** and **Villagers (A3)**.
-```
-Vertical 9:16 video, 13 seconds, no text, no logos, no subtitles. Morning. A busy miniature modern Kerala harbour: a large container ship with colourful stacked containers docks at a stone quay. On its mast a red flag with a golden conch shell waves smoothly. Behind it is a skyline of the capital, with a boulevard lined with flags. KANNAN (teal shirt, white mundu, from the reference) walks along the quay with a small suitcase and a dark-blue passport, alongside other travellers. The camera glides sideways along the quay, tracking him, with the conch flag in view. STYLE: 2.5D pixel-art diorama: a miniature 3D set of simple boxes and cylinders with crisp hand-made pixel-art textures (nearest-neighbour, no smoothing). Characters are flat 2D pixel sprites (about 34x50 pixels, 1-pixel dark outline) like paper cut-outs, receiving light and casting real shadows, with stepped 4-frame walk cycles at 6–10 fps while the camera, flag, water and light move perfectly smoothly. High three-quarter camera looking down, never eye level. Tilt-shift lens with a sharp band on Kannan. Bright warm sunlight against cool blue shadows, soft haze, glittering sea, heavy bloom and halation, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid voxel characters, eye-level shots, text and watermarks.
-```
-
-### Clip 9a · main-9 (the dream)
-```
-Vertical 9:16 video, 11 seconds, no text, no logos, no subtitles. A sunny day. A gleaming, prosperous miniature city-state harbour in Kerala: modern towers with glowing windows, green parks with coconut palms, busy container ships, and red conch flags waving. Optimistic golden light. A slow push-in from high above. STYLE: 2.5D pixel-art diorama: a miniature 3D set with crisp hand-made pixel-art textures (nearest-neighbour, no smoothing), high three-quarter camera looking down, never eye level, slow smooth move. Tilt-shift lens with one sharp focus band and blur above and below. Warm sunlight with soft real shadows, light haze, heavy bloom and halation, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid text and watermarks.
-```
-
-### Clip 9b · main-9 (the fear), same camera angle as 9a
-```
-Vertical 9:16 video, 11 seconds, no text, no logos, no subtitles. A grey, rainy day. The same miniature Kerala harbour from the same high angle, but struggling: shuttered warehouses, idle rusting cranes, empty quays, a closed shop with its shutter down, puddles. Flat cold light, steady drizzle, dull desaturated colours. A slow push-in matching the dream version. STYLE: 2.5D pixel-art diorama: a miniature 3D set with crisp hand-made pixel-art textures (nearest-neighbour, no smoothing), high three-quarter camera looking down, never eye level. Tilt-shift lens with one sharp focus band and blur above and below. Cold grey key light, one grey-blue fog colour, depth-scaled rain streaks, soft bloom, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid text and watermarks.
-```
-
-### Clip 10 · end-1 · "Part two: what would Travancore look like today? Follow."
-Attach: **Kannan (A1)**.
-```
-Vertical 9:16 video, 10 seconds, no text, no logos, no subtitles. Sunset. A miniature Kerala palace with a long red-tiled pitched roof, carved wooden verandah pillars and a central tower. On top of the tower a large red flag with a golden conch waves in the evening breeze. Coconut palms frame both sides and the sky is pink, violet and gold with pixel clouds. KANNAN (teal shirt, white mundu, from the reference) stands small in the courtyard looking up at the flag. The camera slowly rises and tilts up toward the flag. A warm, hopeful, cinematic ending. STYLE: 2.5D pixel-art diorama: a miniature 3D set with crisp hand-made pixel-art textures (about 24 texels per metre, nearest-neighbour, no smoothing). Characters are flat 2D pixel sprites (about 34x50 pixels, 1-pixel dark outline) like paper cut-outs with a stepped 2-frame idle while the camera, flag and light move perfectly smoothly. High three-quarter camera, never eye level, a rising pull-back with no overshoot. Tilt-shift lens with a sharp band on the flag. Warm sunset key against cool violet shadows, heavy bloom and halation around the sun, gentle vignette, darkest colour warm ink never pure black, no film grain. Avoid voxel characters, eye-level shots, text and watermarks.
+Pixel-art video game character sprite sheet, retro 16-bit / 32-bit pixel art with chunky visible pixels, no smoothing, plain light background, no text. A tall dignified 1940s statesman shown ONLY from behind and as a side silhouette, face never visible: dark buttoned long coat, white trousers, a shawl over one shoulder, hands clasped behind his back. Views: back, back three-quarter, side silhouette, and 4 walking-away frames. About 34x52 pixels, 1-pixel dark outline. NOT photorealistic, NOT 3D-rendered, no face shown, flat 2D game sprite.
 ```
 
 ---
-**After generating:** send me the clips and your Malayalam audio files (main-1 … main-9, end-1). I'll cut the clips to your narration, add the captions, date plates, year counter, split screen and Follow button, and colour-match everything.
+
+# Part B · Clips
+
+### Clip 1 · main-1 · Hook: "In 1947, one kingdom in Kerala almost said no to India. Travancore."  (10 s)
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Daytime. A tiny royal study in a 1940s Kerala palace: sunlight through tall wooden-shuttered windows in dusty light shafts onto a teak desk. On the desk a hand-drawn old map showing ONLY the south-west Kerala coastline (no other borders, no map of India), with a dashed gold line around the old Travancore state glowing gold. Beside it a brass desk lamp with a green shade, an inkwell, a stack of books and a small golden conch-shell paperweight.
+```
+**Step 2, VIDEO prompt (10 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: The gold border on the map slowly brightens and pulses; dust motes drift in the light shafts; the camera slowly pushes in toward the map. Duration 10 seconds.
+```
+
+### Clip 2 · main-2 · "On 18 June 1947, Travancore announced on the radio it would become independent."  (12 s)
+Attach: **Kannan (A1) + Villagers (A3)**
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Night, gentle rain. A tiny 1947 Trivandrum lane: Kerala houses with red-tiled pitched roofs, white walls and warm glowing windows, coconut palms, a wet red-earth road with puddles reflecting lamplight. In the centre a small radio shop with an open front glowing warm orange, shelves of colourful jars and a wooden radio with a glowing dial on the counter. A small crowd of villagers in white mundus gathers in front listening, with KANNAN (teal shirt) at the centre. Two street lamps, cool blue moonlight and fog against warm orange light.
+```
+**Step 2, VIDEO prompt (12 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: Rain falls in slanted streaks; the shop light flickers softly; villagers do small 2-frame idle bobs; the camera glides slowly down toward the crowd. Duration 12 seconds.
+```
+
+### Clip 3 · main-3 · "It already had its own currency, its own stamps, and its own army."  (7 s)
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Indoors, candlelight. A deep crimson velvet tablecloth on a palace table seen from above. On it: a silver old coin with a conch emblem, a red postage stamp with perforated edges and a gold conch, and a brass eight-pointed army badge. A soft spotlight from the upper left, a candle at the edge, glints on the metal.
+```
+**Step 2, VIDEO prompt (7 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: The three objects drop onto the velvet one after another and settle with a small bounce; the candle flickers; slow push-in. Duration 7 seconds.
+```
+
+### Clip 4 · main-4 · "Its beaches held thorium sand, a nuclear fuel the world wanted."  (10 s)
+Attach: **Ammini (A2)**
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Sunset. A tiny Kerala beach of BLACK sand with gold and white sparkles. Gentle waves with white foam; the sea reflects a pink, orange and violet sky with pixel clouds; a low sun with a long glittering light path on the water. Coconut palms lean over the beach with warm rim light. AMMINI (red blouse, white mundu, basket) gathers sand into her basket.
+```
+**Step 2, VIDEO prompt (10 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: Waves roll in gently; the sand sparkles twinkle; palm fronds sway slowly; Ammini bends and scoops sand in a 2-frame loop; the camera slowly descends toward her. Duration 10 seconds.
+```
+
+### Clip 5 · main-5 · "On 25 July, the Dewan C.P. Ramaswami Iyer was attacked after a concert in Trivandrum."  (12 s)
+Attach: **The Dewan (A4) + Villagers (A3)**
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Night, rain. A tiny 1940s concert hall with white columns, a triangular roof and wide steps; tall doors open with warm golden light spilling out. A black 1940s car waits at the bottom of the steps, headlights on. The DEWAN silhouette (seen only from behind, no face) walks down the steps; a few people leave under umbrellas. Two lamp posts glow in the rain. Cold blue night against warm doorway light.
+```
+**Step 2, VIDEO prompt (12 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: Rain falls; the Dewan walks down the steps in a 4-frame walk; then one bright lightning flash whitens the scene for an instant and fades (no violence, no weapons, no injuries); slow push-in toward the car. Duration 12 seconds.
+```
+
+### Clip 6 · main-6 · "Within days, Travancore agreed to join India."  (6 s)
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Daytime. The same tiny royal study and teak desk with sunlight through wooden shutters; the old Kerala-coast-only map on the desk with its gold border around Travancore.
+```
+**Step 2, VIDEO prompt (6 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: The glowing gold border slowly fades back to plain ink; dust drifts; the camera slowly rises and pulls back. Duration 6 seconds.
+```
+
+### Clip 7 · main-7 · "But imagine if the plan had worked."  (7 s)
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Sunrise. A tiny Kerala harbour city: a modern skyline of slim towers with glowing windows beside old red-tiled roofs and coconut palms, cranes, a container ship in the harbour, the sea glittering, long golden light shafts through morning haze.
+```
+**Step 2, VIDEO prompt (7 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: Time-lapse feeling: windows light up, cranes turn, the ship glides in, the sun rises a little; slow push-in from high above. Duration 7 seconds.
+```
+
+### Clip 8 · main-8 · "A Travancore passport. Embassies in Trivandrum. Ships flying the conch flag."  (13 s)
+Attach: **Kannan (A1) + Villagers (A3)**
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Morning. A busy tiny modern Kerala harbour: a container ship with colourful stacked containers at a stone quay, a red flag with a golden conch shell on its mast, a city skyline behind with a boulevard of flags. KANNAN (teal shirt, white mundu) walks along the quay with a small suitcase and a dark-blue passport among other travellers.
+```
+**Step 2, VIDEO prompt (13 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: The conch flag waves; the water glitters; Kannan walks in a 4-frame walk cycle; the camera tracks sideways along the quay with him. Duration 13 seconds.
+```
+
+### Clip 9a · main-9 · the dream  (11 s)
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Sunny day. A gleaming prosperous tiny city-state harbour in Kerala: modern towers, green parks with coconut palms, busy ships, red conch flags. Golden optimistic light.
+```
+**Step 2, VIDEO prompt (11 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: Flags wave, ships move slowly, slow push-in from high above. Duration 11 seconds.
+```
+
+### Clip 9b · main-9 · the fear (same camera angle as 9a)  (11 s)
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Grey rainy day. The same tiny Kerala harbour from the same high angle but struggling: shuttered warehouses, idle rusty cranes, empty quays, a closed shop, puddles. Flat cold light, dull colours.
+```
+**Step 2, VIDEO prompt (11 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: Drizzle falls, puddles ripple, slow push-in matching the dream version. Duration 11 seconds.
+```
+
+### Clip 10 · end-1 · "Part two: what would Travancore look like today? Follow."  (10 s)
+Attach: **Kannan (A1)**
+**Step 1, IMAGE prompt:**
+```
+Pixel-art video game screenshot, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, no smoothing, limited colour palette with dithering. Seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down (never eye level): small 3D blocky buildings and props covered in pixel-art textures, flat 2D pixel-sprite characters (tiny, about 1/10 of the frame height, simple pixel faces, 1-pixel dark outline). Soft glowing bloom around lights, sharp focus band in the middle, blurred top and bottom like a miniature. Vertical 9:16. NOT photorealistic, NOT live action, NOT a photograph, NOT 3D-rendered realistic people, no realistic faces, no text, no watermark. Scene: Sunset. A tiny Kerala palace with a long red-tiled roof, carved wooden pillars and a central tower; on top a large red flag with a golden conch. Coconut palms on both sides; pink, violet and gold sky with pixel clouds. KANNAN (teal shirt) stands small in the courtyard looking up at the flag.
+```
+**Step 2, VIDEO prompt (10 seconds, image-to-video):**
+```
+Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game style, the same chunky pixels, palette and tilt-shift miniature look in every frame: do NOT turn it into photorealism or live action. Characters move in simple stepped pixel animation (2-frame idle, 4-frame walk); the camera, light, water, rain and particles move smoothly and slowly. High three-quarter camera looking down, slow gentle camera move, no cuts. Vertical 9:16, no text. Motion: The flag waves in the breeze; palms sway; Kannan does a 2-frame idle; the camera slowly rises and tilts up toward the flag. Duration 10 seconds.
+```
+
+---
+**If Veo still drifts toward realism:** shorten the motion, keep the camera move small, and add "retro pixel-art game, every frame pixel art" again at the end. Send me the clips and your 10 Malayalam audio files; I'll cut them to your voice and add the captions, plates and Follow button.
