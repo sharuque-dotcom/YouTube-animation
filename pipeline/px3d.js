@@ -100,7 +100,7 @@ const GradeShader = {
 export function makeStage(w, h, { ss = 1 } = {}) {
   const canvas = new OffscreenCanvas(w * ss, h * ss);
   const r = new THREE.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance', preserveDrawingBuffer: true });
-  r.setSize(w * ss, h * ss, false); r.shadowMap.enabled = true; r.shadowMap.type = THREE.PCFSoftShadowMap; r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.15; r.outputColorSpace = THREE.SRGBColorSpace;
+  r.setSize(w * ss, h * ss, false); r.shadowMap.enabled = true; r.shadowMap.type = THREE.PCFSoftShadowMap; r.toneMapping = THREE.ACESFilmicToneMapping; r.toneMappingExposure = 1.35; r.outputColorSpace = THREE.SRGBColorSpace;
   const depthTex = new THREE.DepthTexture(w * ss, h * ss); const rt = new THREE.WebGLRenderTarget(w * ss, h * ss, { depthTexture: depthTex, samples: 4, type: THREE.HalfFloatType });
   const composer = new EffectComposer(r); composer.setSize(w * ss, h * ss);
   const dof = new ShaderPass(DofShader, 'tIgnored'); dof.uniforms.res.value.set(w * ss, h * ss); composer.addPass(dof);
