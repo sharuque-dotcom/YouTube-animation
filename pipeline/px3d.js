@@ -40,13 +40,14 @@ export function pxBox(w, h, d, tex, { tileM = 2, emissive = null, emissiveMap = 
   const m = new THREE.MeshLambertMaterial({ map: tex, color, emissive: emissive ?? 0x000000, emissiveMap, emissiveIntensity });
   const mesh = new THREE.Mesh(g, m); mesh.castShadow = true; mesh.receiveShadow = true; return mesh;
 }
-/** a pitched tiled roof (two planes) over a w x d footprint */
+/** a solid gable roof (extruded triangle) spanning w (x) by d (z), ridge height h, with tiles at constant texel density */
 export function roof(w, d, h, tex, tileM = 2) {
-  const grp = new THREE.Group(); const slope = Math.hypot(d / 2 + 0.4, h);
-  for (const s of [-1, 1]) { const g = new THREE.PlaneGeometry(w + 0.8, slope); const uv = g.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) * (w + 0.8) / tileM, uv.getY(i) * slope / tileM);
-    const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ map: tex, side: THREE.DoubleSide })); m.castShadow = m.receiveShadow = true;
-    m.rotation.x = s * (Math.PI / 2 - Math.atan2(h, d / 2 + 0.4)); m.position.set(0, h / 2, s * (d / 4 + 0.2)); m.rotation.order = 'YXZ'; if (s < 0) m.rotation.y = Math.PI; grp.add(m); }
-  return grp;
+  const sh = new THREE.Shape(); sh.moveTo(-d / 2 - 0.4, 0); sh.lineTo(d / 2 + 0.4, 0); sh.lineTo(0, h); sh.closePath();
+  const g = new THREE.ExtrudeGeometry(sh, { depth: w + 0.4, bevelEnabled: false }); g.translate(0, 0, -(w + 0.4) / 2); g.rotateY(Math.PI / 2); g.computeVertexNormals();
+  const uv = g.attributes.uv, pos = g.attributes.position, nrm = g.attributes.normal;
+  for (let i = 0; i < uv.count; i++) { const nx = Math.abs(nrm.getX(i)); const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+    const [u, v] = nx > 0.5 ? [z, y] : [x, Math.hypot(y, Math.abs(z))]; uv.setXY(i, u / tileM, v / tileM); }
+  const m = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ map: tex })); m.castShadow = true; m.receiveShadow = true; return m;
 }
 /** a y-axis billboard carrying a pixel sprite canvas; lit by the scene (so it needs a front fill) */
 export function sprite(px, heightM, { emissive = 0, alphaTest = 0.5 } = {}) {
