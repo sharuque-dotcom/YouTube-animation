@@ -166,3 +166,74 @@ Animate this pixel-art image. Keep EXACTLY the same retro pixel-art video game s
 
 ---
 **If Veo still drifts toward realism:** shorten the motion, keep the camera move small, and add "retro pixel-art game, every frame pixel art" again at the end. Send me the clips and your 10 Malayalam audio files; I'll cut them to your voice and add the captions, plates and Follow button.
+
+---
+
+# Option B · One continuous video with Extend (recommended for you)
+
+Generate segment 1 as a new video, then press **Extend** and paste each next segment, setting the length shown. Each segment flows into the next through an in-world transition, so the result plays as one unbroken journey. Attach the character sheets (Part A) wherever a character first appears.
+
+| Segment | Narration line | Length |
+|---|---|---|
+| 1 | main-1 | 10 s |
+| 2 | main-2 | 12 s |
+| 3 | main-3 | 7 s |
+| 4 | main-4 | 10 s |
+| 5 | main-5 | 12 s |
+| 6 | main-6 | 6 s |
+| 7 | main-7 | 7 s |
+| 8 | main-8 | 13 s |
+| 9 | main-9 | 11 s |
+| 10 | end-1 | 10 s |
+
+### Segment 1 · main-1 · 10 s · START (generate as a new video, ideally from your Step-1 pixel-art image of the desk)
+```
+Pixel-art video game cutscene, retro 16-bit / 32-bit pixel art with chunky visible square pixels, crisp edges, limited palette with dithering, seen as a tiny tilt-shift miniature diorama from a high three-quarter angle looking down. Vertical 9:16. Daytime: a tiny royal study in a 1940s Kerala palace, sunlight through wooden shutters in dusty light shafts onto a teak desk. On the desk an old hand-drawn map showing ONLY the south-west Kerala coastline (no other borders, no map of India), with a dashed gold line around the old Travancore state that slowly starts to glow gold. A brass desk lamp with a green shade, an inkwell, books and a small golden conch-shell paperweight. The camera slowly pushes in toward the glowing map. NOT photorealistic, NOT live action, no text. Duration 10 seconds.
+```
+
+### Segment 2 · main-2 · 12 s · EXTEND
+```
+What happens next: the camera keeps diving into the glowing map until the drawn coastline becomes a real tiny 1947 Trivandrum lane at night in gentle rain: red-tiled Kerala houses with warm windows, coconut palms, a wet red-earth road with puddles. In the centre a small radio shop glows orange with a wooden radio on the counter; villagers in white mundus gather in front listening, with KANNAN in his teal shirt in the middle. Two street lamps glow; cool blue moonlight against warm orange light. The camera glides slowly down toward the crowd. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 12 seconds.
+```
+
+### Segment 3 · main-3 · 7 s · EXTEND
+```
+What happens next: the camera pushes past the crowd into the glowing radio shop and down onto its counter, now covered with a deep crimson velvet cloth under a warm spotlight. One after another, a silver coin with a conch emblem, a red postage stamp with a gold conch, and a brass eight-pointed army badge drop onto the velvet and settle with a small bounce. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 7 seconds.
+```
+
+### Segment 4 · main-4 · 10 s · EXTEND
+```
+What happens next: the silver coin's glint flares and becomes a low setting sun. The scene opens into a tiny Kerala beach at sunset: BLACK sand glittering with gold sparkles, gentle waves with white foam, a pink-orange-violet sky with pixel clouds, coconut palms leaning over the beach. AMMINI in her red blouse scoops the sparkling black sand into her basket. The camera slowly descends toward her. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 10 seconds.
+```
+
+### Segment 5 · main-5 · 12 s · EXTEND
+```
+What happens next: the sun sinks and night falls with rain. The camera rises over the palms and drifts to a tiny 1940s concert hall with white columns and wide steps, warm golden light spilling from its open doors, a black 1940s car waiting with headlights on. The DEWAN, seen only from behind as a dark silhouette (no face), walks down the steps toward the car while people leave under umbrellas. Then one bright lightning flash whitens the whole scene for an instant and fades. No violence, no weapons, no injuries. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 12 seconds.
+```
+
+### Segment 6 · main-6 · 6 s · EXTEND
+```
+What happens next: the white of the lightning flash fades into warm daylight, and we are back above the teak desk in the sunlit royal study. On the Kerala-coast map, the glowing gold Travancore border slowly fades back to plain ink. The camera slowly rises and pulls back. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 6 seconds.
+```
+
+### Segment 7 · main-7 · 7 s · EXTEND
+```
+What happens next: the camera dives into the map once more and the inked coast blooms into a tiny modern harbour city at sunrise: slim towers with glowing windows rising beside old red-tiled roofs and palms, cranes turning, a container ship gliding in, golden light shafts through morning haze. A time-lapse feeling, slow push-in. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 7 seconds.
+```
+
+### Segment 8 · main-8 · 13 s · EXTEND
+```
+What happens next: the camera comes down to the stone quay. A container ship with colourful containers is docked, with a red flag with a golden conch waving on its mast and a boulevard of flags behind. KANNAN in his teal shirt walks along the quay with a small suitcase and a dark-blue passport among other travellers. The camera tracks sideways with him. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 13 seconds.
+```
+
+### Segment 9 · main-9 · 11 s · EXTEND
+```
+What happens next: the camera rises high above the harbour. First it gleams in sunshine: busy ships, green parks, flags. Then dark clouds roll in over the same harbour: the light turns cold and grey, drizzle falls, warehouses shutter, cranes stop and the quays empty. The dream turns into the fear in one shot. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 11 seconds.
+```
+
+### Segment 10 · end-1 · 10 s · EXTEND
+```
+What happens next: the clouds part into a pink, violet and gold sunset. The camera drifts to a tiny Kerala palace with a long red-tiled roof and a central tower, where a large red flag with a golden conch waves in the breeze. KANNAN stands small in the courtyard looking up at it. The camera slowly rises and tilts up toward the flag. Continue in EXACTLY the same retro pixel-art video game style as the video so far: chunky visible square pixels, same palette, tilt-shift miniature diorama seen from a high three-quarter angle, flat 2D pixel-sprite characters with stepped animation, smooth slow camera. NOT photorealistic, NOT live action, no realistic faces, no text. Duration 10 seconds.
+```
+
+Send me the final extended video and your 10 Malayalam audio files. I'll time the cuts to your voice and add captions, date plates, the year counter and the Follow button.
