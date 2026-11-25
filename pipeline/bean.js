@@ -153,6 +153,17 @@ function towelHead(color) { // thorthu tied on head (fisherman)
     ctx.beginPath(); ctx.moveTo(48, -332); ctx.lineTo(70, -342); ctx.lineTo(66, -322); ctx.closePath(); fs(ctx, color, 5);
   };
 }
+function turban(color, band) { // formal talappa of the 1940s court
+  return (ctx) => {
+    ctx.beginPath(); ctx.moveTo(-56, -318); ctx.bezierCurveTo(-62, -380, 62, -380, 56, -318); ctx.quadraticCurveTo(0, -330, -56, -318); ctx.closePath(); fs(ctx, color);
+    ctx.save(); ctx.clip(); ctx.strokeStyle = 'rgba(42,28,23,.35)'; ctx.lineWidth = 3;
+    for (let i = 0; i < 4; i++) { ctx.beginPath(); ctx.moveTo(-60, -336 - i * 10); ctx.quadraticCurveTo(0, -356 - i * 12, 60, -328 - i * 10); ctx.stroke(); } ctx.restore();
+    ctx.strokeStyle = band; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(-54, -322); ctx.quadraticCurveTo(0, -334, 54, -322); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(30, -350); ctx.quadraticCurveTo(52, -372, 46, -340); fs(ctx, color, 4.5);
+    // grey sideburns
+    ctx.fillStyle = '#c9c3bb'; for (const s of [-1, 1]) { ctx.beginPath(); ctx.ellipse(s * 51, -306, 6, 12, 0, 0, 7); ctx.fill(); }
+  };
+}
 function moustache(ctx, c = INK) { ctx.beginPath(); ctx.moveTo(-22, -279); ctx.quadraticCurveTo(-10, -293, 0, -284); ctx.quadraticCurveTo(10, -293, 22, -279); ctx.quadraticCurveTo(10, -281, 0, -277); ctx.quadraticCurveTo(-10, -281, -22, -279); ctx.closePath(); ctx.fillStyle = c; ctx.fill(); ctx.strokeStyle = c; ctx.lineWidth = 3; ctx.stroke(); }
 function glasses(ctx) { ctx.strokeStyle = INK; ctx.lineWidth = 3.5; for (const s of [-1, 1]) { ell(ctx, s * 19, -300, 13, 12); ctx.fillStyle = 'rgba(255,255,255,.25)'; ctx.fill(); ctx.stroke(); } ctx.beginPath(); ctx.moveTo(-6, -302); ctx.lineTo(6, -302); ctx.stroke(); }
 
@@ -169,6 +180,8 @@ export const CAST = {
     shirt: '#f0a03a', shirtDark: '#c57d22', lower: 'pavada', mundu: '#7b3fa6', kasavu: '#e7b93a', legs: '#6b4632', shoes: '#c33' },
   postman: { name: 'POSTMAN', skin: '#b98257', hair: hairShort('#2a2018', 1), stache: true, cap: '#6d5a3a',
     shirt: '#b49a6a', shirtDark: '#8e784e', collar: true, pocket: true, lower: 'pants', mundu: '#8e784e', legs: '#8e784e', shoes: '#2a1c17' },
+  dewan: { name: 'DEWAN C.P.', skin: '#c99068', hair: turban('#f5f1e6', '#d9a521'), glasses: true, coat: true,
+    shirt: '#23262f', shirtDark: '#14161c', collar: false, lower: 'mundu', mundu: '#f6f1e4', kasavu: '#d9a521', legs: '#6b4632', shoes: '#1a1310' },
   official: { name: 'OFFICIAL (silhouette)', silhouette: true, skin: '#2b2440', shirt: '#2b2440', lower: 'pants', mundu: '#2b2440', legs: '#2b2440', shoes: '#1a1528', hair: (ctx) => { ctx.beginPath(); ctx.moveTo(-50,-330); ctx.lineTo(-40,-372); ctx.quadraticCurveTo(0,-385,40,-372); ctx.lineTo(50,-330); ctx.closePath(); fs(ctx,'#2b2440'); } },
 };
 
@@ -200,6 +213,9 @@ function torso(ctx, c) {
   if (c.banian) { ctx.strokeStyle = 'rgba(0,0,0,.15)'; ctx.lineWidth = 2; for (let x = -40; x < 45; x += 9) { ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, bot); ctx.stroke(); } }
   if (c.collar) { ctx.fillStyle = c.shirtDark; ctx.beginPath(); ctx.moveTo(-22, top - 2); ctx.lineTo(0, top + 22); ctx.lineTo(22, top - 2); ctx.lineTo(10, top + 8); ctx.lineTo(0, top + 4); ctx.lineTo(-10, top + 8); ctx.closePath(); ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.stroke();
     ctx.beginPath(); ctx.moveTo(0, top + 22); ctx.lineTo(0, bot); ctx.stroke(); for (let y = top + 34; y < bot - 6; y += 22) { ell(ctx, -6, y, 2.6, 2.6); ctx.fillStyle = INK; ctx.fill(); } }
+  if (c.coat) { ctx.fillStyle = '#14161c'; ctx.fillRect(-18, top - 4, 36, 10); ctx.strokeStyle = '#e0b43a'; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(0, top + 6); ctx.lineTo(0, bot); ctx.stroke();
+    for (let y = top + 18; y < bot - 6; y += 18) { ell(ctx, 0, y, 3.4, 3.4); ctx.fillStyle = '#f0c23a'; ctx.fill(); }
+    ctx.strokeStyle = '#f0c23a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(2, top + 62); ctx.quadraticCurveTo(18, top + 78, 30, top + 60); ctx.stroke(); ell(ctx, 31, top + 58, 4, 4); ctx.fillStyle = '#f0c23a'; ctx.fill(); }
   if (c.pocket) { ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.strokeRect(-34, top + 34, 18, 16); ctx.fillStyle = '#f1f1f1'; ctx.fillRect(-30, top + 28, 4, 9); }
   if (c.bare) { ctx.strokeStyle = 'rgba(0,0,0,.25)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(-14, top + 40, 10, 0.3, 2.6); ctx.arc(14, top + 40, 10, 0.5, 2.8); ctx.stroke(); }
   ctx.restore();
