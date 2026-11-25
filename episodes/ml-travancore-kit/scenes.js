@@ -2,6 +2,7 @@
 // hook + snapback, "you see", mockery joke, escalation, "wait...?", twist, everyday analogy, spectacle, callback ending.
 // Bean characters acting in inked 3D sets (reuses episodes/ml-bean sets), one continuous camera flight.
 import { W, H, clamp, lerp, text } from '../../pipeline/engine.js';
+import { ALIGN } from './align.js'; // word start times from pauses in the recording (pipeline/align_pauses.py)
 
 const ML = "'Noto Malayalam'";
 let K = null, B = null, S = null, stage = null, camera = null, THREE = null, PROPS = null;
@@ -142,7 +143,8 @@ const shakeAt = (t, t0, d = 0.5) => (t >= t0 && t < t0 + d ? Math.pow(1 - (t - t
 // word time inside a narration line (proportional to characters, Malayalam text)
 // digits are spoken as long words in Malayalam ("1947" = aayirathi thollaayirathi naalpathiyezhu), so weight them when placing words in time
 const cw = (ch) => (/[0-9]/.test(ch) ? 7 : 1);
-function wt(s, i, needle) { const line = s.line(i), a = s.cue(i), b = s.cueEnd(i); const k = Math.max(0, line.indexOf(needle)); let pre = 0, tot = 0; for (let j = 0; j < line.length; j++) { const c = cw(line[j]); tot += c; if (j < k) pre += c; } return a + (pre / tot) * (b - a); }
+function wt(s, i, needle) { const line = s.line(i), a = s.cue(i), b = s.cueEnd(i); const k = Math.max(0, line.indexOf(needle));
+  const al = ALIGN[i]; if (al && al.length === line.split(/\s+/).length) { const wi = line.slice(0, k).split(/\s+/).length - 1, ws = line.split(/\s+/), off = k - line.split(/\s+/).slice(0, wi).join(' ').length - (wi ? 1 : 0), t0 = al[wi][1], t1 = wi + 1 < al.length ? al[wi + 1][1] : b - a; return a + t0 + (t1 - t0) * Math.max(0, off) / Math.max(1, ws[wi].length); } let pre = 0, tot = 0; for (let j = 0; j < line.length; j++) { const c = cw(line[j]); tot += c; if (j < k) pre += c; } return a + (pre / tot) * (b - a); }
 
 function resetProps() {
   const o = S.office, st = S.street, b = S.beach;
@@ -356,7 +358,7 @@ function nameplate(g, t, a0, alpha) {
 function captions(g, s) {
   const t = s.t; let li = -1; for (let i = 0; s.line(i); i++) if (t >= s.cue(i) - 0.05 && t < s.cueEnd(i) + 0.15) li = i; if (li < 0) return;
   const words = s.line(li).split(/\s+/), a = s.cue(li), b = s.cueEnd(li), wl = (w) => [...w].reduce((x, ch) => x + cw(ch), 0), tot = words.reduce((x, w) => x + wl(w) + 2, 0); let acc = 0;
-  const ws = words.map((w) => { const t0 = a + (acc / tot) * (b - a); acc += wl(w) + 2; return [w, t0]; });
+  const al = ALIGN[li] && ALIGN[li].length === words.length ? ALIGN[li] : null; const ws = words.map((w, q) => { const t0 = al ? a + al[q][1] : a + (acc / tot) * (b - a); acc += wl(w) + 2; return [w, t0]; });
   const chunks = []; for (let i = 0; i < ws.length;) { const n = ws[i][0].length > 9 || (ws[i + 1] && ws[i + 1][0].length > 9) ? 1 : 2; chunks.push(ws.slice(i, i + n)); i += n; }
   let k = 0; while (k + 1 < chunks.length && t >= chunks[k + 1][0][1]) k++;
   const str = chunks[k].map(([w]) => w).join(' '), p = ezo(span(t, chunks[k][0][1], 0.12)), sc = 0.88 + 0.12 * p;
