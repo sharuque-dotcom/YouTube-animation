@@ -3,19 +3,21 @@
 import { W, H, clamp, lerp, text } from '../../pipeline/engine.js';
 
 const ML = "'Noto Malayalam'";
-let K = null, B = null, S = null, stage = null, camera = null, THREE = null, PROPS = null;
+let drawBeanRef = null; let K = null, B = null, S = null, stage = null, camera = null, THREE = null, PROPS = null;
 const ez = (x) => { x = clamp(x, 0, 1); return x * x * (3 - 2 * x); };
 const ezo = (x) => 1 - Math.pow(1 - clamp(x, 0, 1), 3);
 const span = (t, a, d) => clamp((t - a) / d, 0, 1);
 const V = (a) => new THREE.Vector3(...a);
 
 export async function preload() {
-  K = await import('../../pipeline/toon3d.js'); THREE = K.THREE; B = await import('../../pipeline/bean.js'); PROPS = B.PROPS;
+  K = await import('../../pipeline/toon3d.js'); THREE = K.THREE; B = await import('../../pipeline/bean.js'); PROPS = B.PROPS; drawBeanRef = (g) => B.drawBean(g, 'kannan', { expr: 'smile' });
   const st = await import('../ml-bean/street.js'), sets = await import('../ml-bean/sets.js');
   S = { street: st.buildStreet(), office: sets.officeSet(), beach: sets.beachSet(), concert: sets.concertSet() };
   S.street.cards = st.radioCrowd(S.street.scene);
   buildStreetExtras(); buildBeachCast(); buildConcertCast(); buildOfficeCast();
   stage = K.makeInkStage(W, H); camera = new THREE.PerspectiveCamera(52, W / H, 0.05, 400);
+  const tl = await (await fetch('/build/ml-travancore-bean/timeline.json')).json(); const m = tl.scenes.find((x) => x.id === 'main'), e = tl.scenes.find((x) => x.id === 'end');
+  SH = shots({ line: (i) => m.cues[i]?.text, cue: (i) => m.start + m.cues[i].start, cueEnd: (i) => m.start + m.cues[i].end }); END0 = e.start;
 }
 
 // ------------------------------------------------------------------ actors
@@ -45,11 +47,31 @@ function buildStreetExtras() {
   // the Nair Brigade marching up the street
   s.soldiers = []; for (let i = 0; i < 8; i++) s.soldiers.push(actor(sc, 'soldier', (i % 2 ? 0.55 : -0.55), -13.5 - Math.floor(i / 2) * 1.4));
   s.cheer = [actor(sc, 'meenu', 2.6, -12), actor(sc, 'kannan', 2.9, -14.5), actor(sc, 'ammini', -2.8, -13.5), actor(sc, 'fisher', -3.0, -11.5)];
+  // embassy row: flag poles with foreign flags + a brass plaque
+  s.flags = new THREE.Group(); sc.add(s.flags);
+  const flagTex = [(g, w, h) => { g.fillStyle = '#fff'; g.fillRect(0, 0, w, h); g.fillStyle = '#c8102e'; g.beginPath(); g.arc(w / 2, h / 2, h * 0.3, 0, 7); g.fill(); },
+    (g, w, h) => { ['#0055a4', '#fff', '#ef4135'].forEach((c, i) => { g.fillStyle = c; g.fillRect(i * w / 3, 0, w / 3 + 1, h); }); },
+    (g, w, h) => { ['#000', '#dd0000', '#ffce00'].forEach((c, i) => { g.fillStyle = c; g.fillRect(0, i * h / 3, w, h / 3 + 1); }); },
+    (g, w, h) => { ['#009246', '#fff', '#ce2b37'].forEach((c, i) => { g.fillStyle = c; g.fillRect(i * w / 3, 0, w / 3 + 1, h); }); }];
+  [[-3.3, -2.6], [-3.3, -6.2], [3.2, -4.0], [3.2, -8.0]].forEach(([x, z], i) => { const pole = K.mesh(new THREE.CylinderGeometry(0.04, 0.05, 4.4, 8), K.col(0xd8d8d8)); pole.position.set(x, 2.2, z); s.flags.add(pole);
+    const fg = new THREE.PlaneGeometry(1.1, 0.72, 10, 1); fg.translate(0.55, 0, 0); const f = K.mesh(fg, new THREE.MeshLambertMaterial({ map: K.paint(150, 100, flagTex[i]), side: THREE.DoubleSide }), { shadow: false }); f.position.set(x, 4.0, z); f.rotation.y = x < 0 ? 0.4 : Math.PI - 0.4; s.flags.add(f);
+    const f0 = fg.attributes.position.array.slice(); s.life = s.life || []; S.street.life.push((t) => { const a = fg.attributes.position; for (let k = 0; k < a.count; k++) { const xx = f0[k * 3]; a.setZ(k, Math.sin(xx * 5 - t * 4 + i) * 0.06 * xx); } a.needsUpdate = true; }); });
+  { const pl = K.mesh(new THREE.PlaneGeometry(1.3, 0.5), new THREE.MeshLambertMaterial({ map: K.signTex(['എംബസി റോഡ്', 'EMBASSY ROW'], { bg: '#c8962a', fg: '#2a1c17', border: '#5a3018', w: 512, h: 200 }) })); pl.position.set(-3.25, 2.3, -4.4); pl.rotation.y = 1.0; s.flags.add(pl); }
+  s.dips = [actor(sc, 'brit', -1.5, -9), actor(sc, 'yank', -0.7, -9.6), actor(sc, 'clerk', 0.3, -9.2)];
+  // coin rain + our hero + two giants
+  s.rain = []; { const r2 = K.rnd(31); for (let i = 0; i < 40; i++) { const c = s.coin.clone(); c.scale.setScalar(0.6); c.userData = { x: -2.6 + r2() * 3.4, z: -5.8 + r2() * 2.8, sp: 0.5 + r2() * 0.6, ph: r2() }; c.visible = false; sc.add(c); s.rain.push(c); } }
+  s.hero = actor(sc, 'kannan', -1.0, -4.6);
+  s.giants = [actor(sc, 'brit', -2.05, -4.9, 0, 2.6), actor(sc, 'yank', 0.05, -4.9, 0, 2.6)];
   // crows that take off from the wire
   s.crows = []; sc.traverse((o) => { if (o.isGroup && o.children.length === 3 && o.position.y > 7) s.crows.push(o); });
 }
 function buildBeachCast() {
   const b = S.beach, sc = b.scene;
+  { const ft = K.paint(300, 200, (g, w, h) => { g.fillStyle = '#c8312c'; g.fillRect(0, 0, w, h); g.fillStyle = '#f4efe4'; g.beginPath(); g.ellipse(w / 2, h / 2, 34, 48, 0.3, 0, 7); g.fill(); g.strokeStyle = '#c8312c'; g.lineWidth = 6; g.beginPath(); g.arc(w / 2, h / 2, 20, 0.5, 5); g.stroke(); });
+    const fg = new THREE.PlaneGeometry(2.6, 1.7, 10, 1); fg.translate(1.3, 0, 0); b.conch = K.mesh(fg, new THREE.MeshLambertMaterial({ map: ft, side: THREE.DoubleSide }), { shadow: false }); b.conch.position.set(5, 6.6, 0); b.ship.add(b.conch);
+    const f0 = fg.attributes.position.array.slice(); b.life.push((t) => { const a = fg.attributes.position; for (let k = 0; k < a.count; k++) { const xx = f0[k * 3]; a.setZ(k, Math.sin(xx * 2.5 - t * 4) * 0.12 * xx); } a.needsUpdate = true; });
+    b.port = new THREE.Group(); const sp = K.mesh(new THREE.PlaneGeometry(2.4, 0.9), new THREE.MeshLambertMaterial({ map: K.signTex(['കൊല്ലം തുറമുഖം', 'PORT OF KOLLAM'], { bg: '#1f4f6a', fg: '#f6e0a0', border: '#e8b93a', w: 512, h: 200 }) })); sp.position.y = 2.2; b.port.add(sp);
+    for (const x of [-1, 1]) { const l = K.box(0.1, 2.2, 0.1, K.stdTextures().wood, { tileM: 1 }); l.position.set(x, 1.1, -0.06); b.port.add(l); } b.port.position.set(3.5, 0, -24); b.port.rotation.y = -0.6; sc.add(b.port); }
   b.ammini = actor(sc, 'ammini', -0.2, 0.9); b.fisher = actor(sc, 'fisher', 0.9, 0.2); b.kid = actor(sc, 'meenu', -1.0, 1.6);
   b.brit = actor(b.ship, 'brit', -1.5, 1.1, 3.8); b.yank = actor(b.ship, 'yank', 0.2, 1.1, 3.8);
 }
@@ -66,6 +88,15 @@ function buildOfficeCast() {
   const pages = []; for (let d = 30; d >= 25; d--) { const tx = K.paint(220, 300, (g, w, h) => { g.fillStyle = '#f6efdc'; g.fillRect(0, 0, w, h); g.fillStyle = '#b8302a'; g.fillRect(0, 0, w, 70); g.fillStyle = '#fff'; g.font = "800 40px 'Noto Malayalam'"; g.textAlign = 'center'; g.fillText('ജൂലൈ', w / 2, 52); g.fillStyle = '#2a1c17'; g.font = "800 150px 'Oswald'"; g.fillText(String(d), w / 2, 240); });
     const m = K.mesh(new THREE.PlaneGeometry(0.62, 0.84), new THREE.MeshLambertMaterial({ map: tx, side: THREE.DoubleSide }), { shadow: false }); m.geometry.translate(0, -0.42, 0); m.position.set(o.R.w / 2 - 0.05, 2.9, 1.6); m.rotation.y = -Math.PI / 2; sc.add(m); pages.push({ m, d }); }
   o.pages = pages.reverse(); // pages[0] = 25
+  { const cover = K.paint(256, 360, (g, w, h) => { g.fillStyle = '#5a1a24'; g.fillRect(0, 0, w, h); g.fillStyle = '#e8b93a'; g.textAlign = 'center'; g.font = "800 34px 'Noto Malayalam'"; g.fillText('തിരുവിതാംകൂർ', w / 2, 70); g.beginPath(); g.ellipse(w / 2, 175, 40, 58, 0.3, 0, 7); g.fill(); g.font = "700 40px 'Oswald'"; g.fillText('PASSPORT', w / 2, 300); });
+    const inside = K.paint(512, 360, (g, w, h) => { g.fillStyle = '#efe6d0'; g.fillRect(0, 0, w, h); g.strokeStyle = 'rgba(90,26,36,.4)'; g.lineWidth = 2; for (let y = 40; y < h; y += 30) { g.beginPath(); g.moveTo(w / 2 + 20, y); g.lineTo(w - 20, y); g.stroke(); } g.fillStyle = '#c99068'; g.fillRect(40, 60, 150, 190); g.save(); g.translate(115, 330); g.scale(0.42, 0.42); drawBeanRef(g); g.restore(); g.strokeStyle = '#2a1c17'; g.lineWidth = 4; g.strokeRect(40, 60, 150, 190); });
+    const stampT = K.paint(256, 256, (g, w, h) => { g.translate(w / 2, h / 2); g.rotate(-0.3); g.strokeStyle = '#1f5a7a'; g.lineWidth = 10; g.beginPath(); g.arc(0, 0, 100, 0, 7); g.stroke(); g.fillStyle = '#1f5a7a'; g.font = "800 40px 'Noto Malayalam'"; g.textAlign = 'center'; g.fillText('പ്രവേശനം', 0, -10); g.font = "700 34px 'Oswald'"; g.fillText('KOLLAM · 2026', 0, 40); });
+    const pp = new THREE.Group(); const back = K.mesh(new THREE.BoxGeometry(0.3, 0.02, 0.42), new THREE.MeshLambertMaterial({ color: 0x5a1a24 })); back.position.x = 0.15; pp.add(back);
+    const pages2 = K.mesh(new THREE.PlaneGeometry(0.6, 0.42), new THREE.MeshLambertMaterial({ map: inside })); pages2.rotation.x = -Math.PI / 2; pages2.position.set(0, 0.012, 0); pp.add(pages2);
+    const lid = new THREE.Group(); const lidM = K.mesh(new THREE.BoxGeometry(0.3, 0.02, 0.42), [new THREE.MeshLambertMaterial({ color: 0x5a1a24 }), new THREE.MeshLambertMaterial({ color: 0x5a1a24 }), new THREE.MeshLambertMaterial({ map: cover }), new THREE.MeshLambertMaterial({ color: 0xefe6d0 }), new THREE.MeshLambertMaterial({ color: 0x5a1a24 }), new THREE.MeshLambertMaterial({ color: 0x5a1a24 })]); lidM.position.x = -0.15; lid.add(lidM); pp.add(lid);
+    const st = K.mesh(new THREE.PlaneGeometry(0.2, 0.2), new THREE.MeshBasicMaterial({ map: stampT, transparent: true, depthWrite: false }), { shadow: false }); st.userData.noInk = true; st.rotation.x = -Math.PI / 2; st.position.set(0.16, 0.025, 0.02); pp.add(st);
+    pp.userData.open = (u) => { lid.rotation.z = -(1 - u) * Math.PI * 0.98 + 0; lid.position.y = 0.01; }; pp.userData.stamped = (b) => { st.visible = b; };
+    pp.position.set(0.05, 1.03, 0.05); o.desk.add(pp); o.passport = pp; pp.visible = false; }
 }
 
 // ------------------------------------------------------------------ camera
@@ -89,7 +120,7 @@ function wt(s, i, needle) { const line = s.line(i), a = s.cue(i), b = s.cueEnd(i
 // ------------------------------------------------------------------ shots
 function shots(s) {
   const L = (i) => s.cue(i), wNo = wt(s, 0, 'ഇല്ല'), wTrav = wt(s, 0, 'തിരുവിതാംകൂർ'), wInd = wt(s, 1, 'സ്വതന്ത്ര'), wCur = wt(s, 2, 'കറൻസി'), wSt = wt(s, 2, 'സ്റ്റാമ്പ'), wArmy = wt(s, 2, 'സൈന്യ'),
-    wFuel = wt(s, 3, 'ആണവ'), wSand = wt(s, 3, 'മണൽ'), wDewan = wt(s, 4, 'ദിവാൻ'), wTvm = wt(s, 4, 'തിരുവനന്തപുരത്ത്'), wAtt = wt(s, 4, 'ആക്രമി');
+    wFuel = wt(s, 3, 'ആണവ'), wSand = wt(s, 3, 'മണൽ'), wDewan = wt(s, 4, 'ദിവാൻ'), wTvm = wt(s, 4, 'തിരുവനന്തപുരത്ത്'), wAtt = wt(s, 4, 'ആക്രമി'), wPass = wt(s, 7, 'തിരുവനന്തപുരത്ത്'), wShip = wt(s, 7, 'ശംഖു'), wOr = wt(s, 8, 'അതോ'), E0 = s.cueEnd(8) + 0.35;
   return [
     // ---- line 1: the Dewan says NO
     { set: 'office', a: 0, b: 1.9, keys: [[0, [0.15, 1.3, -0.45], [0.05, 1.0, -0.72], 0.05, 44], [0.5, [0.25, 1.55, 0.3], [0.05, 1.2, -1.2], 0.02, 48], [1.9, [0.35, 1.75, 1.3], [0, 1.55, -1.6], -0.02, 50]],
@@ -148,13 +179,41 @@ function shots(s) {
     { set: 'office', a: L(5), b: L(5) + 2.3, keys: [[0, [2.2, 2.4, 2.3], [4.5, 2.5, 1.6], 0.03, 48], [0.45, [2.7, 2.5, 1.9], [4.5, 2.5, 1.6], 0.02, 48], [2.3, [2.9, 2.5, 1.8], [4.5, 2.5, 1.6], -0.01, 48]],
       act: (t, tt, sh) => { const o = S.office; o.pages.forEach((p, i) => { const k = sh.a + 0.25 + i * 0.32, u = span(t, k, 0.6); p.m.visible = i === 5 || u < 1; p.m.rotation.set(0, -Math.PI / 2, 0); p.m.position.set(o.R.w / 2 - 0.05 - u * 1.2, 2.9 + u * 0.8 - u * u * 1.5, 1.6 + u * 0.6); p.m.rotation.x = u * 3; p.m.rotation.z = u * 1.5; });
         o.dewan.c.visible = false; pose(o.clerk, { expr: 'nervous', look: 1, R: 'hang' }, t); o.setBanner(1); o.mark.visible = true; o.markMat.map = o.noMark; } },
-    { set: 'office', a: L(5) + 2.3, b: L(6) + 0.6, shake: L(5) + 2.3 + 0.75, keys: [[0, [0.75, 1.5, 0.5], [0.12, 1.05, -0.7], -0.03, 46], [0.45, [0.6, 1.45, 0.3], [0.12, 1.02, -0.72], 0.0, 46], [3, [0.7, 1.75, 1.5], [0.1, 1.3, -1.2], 0.02, 50]],
+    { set: 'office', a: L(5) + 2.3, b: L(6), shake: L(5) + 2.3 + 0.75, keys: [[0, [0.75, 1.5, 0.5], [0.12, 1.05, -0.7], -0.03, 46], [0.45, [0.6, 1.45, 0.3], [0.12, 1.02, -0.72], 0.0, 46], [3, [0.7, 1.75, 1.5], [0.1, 1.3, -1.2], 0.02, 50]],
       act: (t, tt, sh) => { const o = S.office, ts = sh.a + 0.75; o.dewan.c.visible = false; o.clerk.c.position.set(0.15, 0, -1.55); o.setStamp(t < ts ? 0.5 + 0.2 * span(t, sh.a, 0.75) : 0.7 + 0.3 * span(t, ts, 0.5));
         o.markMat.map = t > ts ? o.yesMark : o.noMark; o.mark.scale.setScalar(t > ts ? 1 + 0.3 * Math.max(0, 1 - (t - ts) / 0.2) : 1); o.setBanner(1 - ezo(span(t, ts + 0.6, 1.2)));
         pose(o.clerk, { expr: t < ts ? 'nervous' : 'beam', R: t < ts ? 'holdUp' : 'hold', L: 'hip', look: 0.5 }, t); o.pages.forEach((p) => { p.m.visible = p.d === 30; p.m.position.set(o.R.w / 2 - 0.05, 2.9, 1.6); p.m.rotation.set(0, -Math.PI / 2, 0); }); } },
-  ];
+    // ---- line 7: rewind. What if the plan had worked?
+    { set: 'office', a: L(6), b: L(7), rewind: true, keys: [[0, [0.9, 1.9, 2.2], [0, 1.6, -1.75], 0.04, 52], [0.4, [0.6, 1.7, 1.4], [0, 1.55, -1.75], 0.0, 50], [2.5, [0.45, 1.65, 1.15], [0, 1.55, -1.75], -0.02, 48]],
+      act: (t, tt, sh) => { const o = S.office, u = span(t, sh.a, 0.6); o.dewan.c.visible = u > 0.5; o.clerk.c.position.set(-1.7, 0, -0.7); o.markMat.map = u > 0.5 ? o.noMark : o.yesMark; o.mark.visible = true; o.setStamp(0); o.setBanner(ezo(span(t, sh.a + 0.4, 0.8))); o.passport.visible = false;
+        o.pages.forEach((p) => { p.m.visible = p.d === 25; p.m.position.set(o.R.w / 2 - 0.05, 2.9, 1.6); p.m.rotation.set(0, -Math.PI / 2, 0); });
+        pose(o.dewan, { expr: u < 0.9 ? 'shock' : 'sly', L: 'hip', R: 'chin', look: 0.5, hop: u > 0.5 && u < 0.9 ? 0.1 : 0 }, t); pose(o.clerk, { expr: 'shock', L: 'up', R: 'up', look: 1 }, t); } },
+    // ---- line 8: passport, embassies, ships
+    { set: 'office', a: L(7), b: wPass, keys: [[0, [0.45, 2.0, 0.3], [0.05, 1.0, -0.8], 0.04, 46], [0.4, [0.3, 1.85, 0.0], [0.05, 1.0, -0.8], 0.02, 46], [3, [0.35, 1.95, 0.15], [0.05, 1.05, -0.85], -0.02, 48]],
+      shake: L(7) + 1.4, act: (t, tt, sh) => { const o = S.office, u = ezo(span(t, sh.a + 0.1, 0.6)); o.dewan.c.visible = true; o.letter.visible = false; o.passport.visible = true; o.passport.userData.open(u); o.setStamp(t < sh.a + 1.4 ? 0.5 + 0.2 * span(t, sh.a + 0.7, 0.7) : 0.7 + 0.3 * span(t, sh.a + 1.4, 0.5), undefined, new THREE.Vector3(0.18, 1.1, 0.1)); o.mark.visible = false; o.passport.userData.stamped(t > sh.a + 1.4);
+        pose(o.dewan, { expr: 'proud', L: 'hip', R: 'hold', look: 0.4 }, t); pose(o.clerk, { expr: 'beam', L: 'clap', R: 'clap', look: 1 }, t); } },
+    { set: 'street', a: wPass, b: wShip - 0.1, keys: [[0, [1.6, 2.6, 1.0], [-2.4, 3.2, -6], 0.03, 54], [0.45, [1.3, 2.2, 0.3], [-2.4, 2.8, -6], 0.02, 54], [3.5, [0.9, 2.0, -1.2], [-2.4, 2.6, -7], -0.02, 54]],
+      act: (t, tt, sh) => { streetCrowd(t, 'calm'); const s0 = S.street; s0.flags.visible = true; s0.dips.forEach((a, i) => { a.c.visible = true; a.c.position.z = a.base[2] + (t - sh.a) * 0.9; pose(a, { expr: ['proud', 'grin', 'smile'][i], L: 'hip', R: i === 1 ? 'wave' : 'hold', walk: (t * 1.4 + i * 0.3) % 1, look: 0.5 }, t); }); } },
+    { set: 'beach', a: wShip - 0.1, b: L(8), keys: [[0, [3.0, 3.2, -27], [11.5, 5.5, -44], 0.03, 54], [0.5, [5.0, 3.8, -30], [12.5, 6.0, -45], 0.02, 54], [4, [6.0, 4.0, -32], [12.5, 6.2, -45], -0.02, 54]],
+      act: (t) => { const b = S.beach; b.conch.visible = true; b.port.visible = true; beachCast(t, 'wave'); pose(b.brit, { expr: 'beam', R: 'wave', L: 'hip', look: -1 }, t); pose(b.yank, { expr: 'grin', L: 'wave', R: 'hip', look: -1 }, t); b.setGlow(0, t); } },
+    // ---- line 9: rich like Singapore? Or squeezed between giants?
+    { set: 'street', a: L(8), b: wOr - 0.1, keys: [[0, [0.4, 1.5, -2.0], [-1.0, 1.55, -5], 0.03, 50], [0.45, [0.2, 1.6, -2.6], [-1.0, 1.7, -5], 0.02, 50], [2.5, [0.1, 1.65, -2.9], [-1.0, 1.75, -5], -0.02, 50]],
+      act: (t, tt, sh) => { const s0 = S.street; streetCrowd(t, 'cheer', sh.a); s0.flags.visible = true; s0.rain.forEach((c, i) => { const d = c.userData, u = (t - sh.a) * d.sp + d.ph; c.visible = true; c.position.set(d.x, 4.5 - (u % 1) * 4.5, d.z); c.rotation.set(t * 6 + i, t * 3, 0); }); pose(s0.hero, { expr: 'laugh', L: 'up', R: 'up', look: -0.3, hop: Math.max(0, Math.sin(t * 8)) * 0.12 }, t); s0.hero.c.visible = true; s0.giants.forEach((g) => { g.c.visible = false; }); } },
+    { set: 'street', a: wOr - 0.1, b: E0, keys: [[0, [0.3, 1.8, -1.0], [-1.0, 1.9, -5], -0.04, 56], [0.45, [0.2, 1.9, -0.6], [-1.0, 2.2, -5], -0.03, 58], [2.5, [0.15, 1.95, -0.4], [-1.0, 2.3, -5], 0.01, 58]],
+      act: (t, tt, sh) => { const s0 = S.street; streetCrowd(t, 'calm'); s0.flags.visible = true; s0.rain.forEach((c) => { c.visible = false; }); s0.hero.c.visible = true; const sq = ezo(span(t, sh.a + 0.2, 1.2));
+        pose(s0.hero, { expr: sq > 0.5 ? 'nervous' : 'shock', L: 'hang', R: 'hang', look: (t * 2) % 2 > 1 ? 1 : -1, lean: 0 }, t); s0.hero.c.userData.cardMesh.scale.x = 1 - sq * 0.35;
+        s0.giants.forEach((g, i) => { g.c.visible = true; g.c.position.x = lerp(i ? 2.6 : -4.6, i ? 0.05 : -2.05, sq); pose(g, { expr: 'smug', L: i ? 'hip' : 'cross', R: i ? 'cross' : 'hip', look: i ? -1 : 1 }, t); }); } },
+    // ---- end: part 2, follow
+    { set: 'street', a: E0, b: E0 + 8, keys: [[0, [0.2, 1.9, 0.5], [-1.0, 2.0, -5], 0.02, 54], [0.6, [0.9, 2.4, 6.0], [-0.6, 2.6, -6], -0.02, 56], [6, [0.4, 3.4, 8.5], [-0.4, 3.8, -20], 0.0, 58]],
+      endcard: true, act: (t, tt, sh) => { const s0 = S.street; streetCrowd(t, 'cheer', sh.a - 0.5); s0.hero.c.visible = false; s0.giants.forEach((g) => { g.c.visible = false; }); s0.flags.visible = true; s0.rain.forEach((c) => { c.visible = false; }); } },
+  ].reduce((out, x) => { const prev = out[out.length - 1]; if (prev) { x.a = Math.max(x.a, prev.a + 0.5); prev.b = x.a; } out.push(x); return out; }, []).filter((x) => x.b - x.a > 0.35);
 }
 
+function defaults(name) {
+  if (name === 'street') { const s0 = S.street; s0.flags.visible = false; s0.dips.forEach((a) => { a.c.visible = false; }); s0.rain.forEach((c) => { c.visible = false; }); s0.hero.c.visible = false; s0.hero.c.userData.cardMesh.scale.x = 1; s0.giants.forEach((g) => { g.c.visible = false; }); }
+  if (name === 'office') { const o = S.office; o.passport.visible = false; o.letter.visible = true; o.dewan.c.visible = true; o.clerk.c.position.set(-1.7, 0, -0.7); o.pages.forEach((p) => { p.m.visible = p.d === 25; }); }
+  if (name === 'beach') { S.beach.conch.visible = false; S.beach.port.visible = false; }
+}
 function streetCrowd(t, mode, t0 = 0) {
   const s = S.street, cheer = mode === 'cheer' && t > t0;
   const E = { listen: ['think', 'smug', 'nervous', 'think', 'neutral', 'think', 'nervous', 'smile', 'think'], cheer: ['beam', 'proud', 'laugh', 'beam', 'beam', 'grin', 'shock', 'beam', 'laugh'], calm: ['smile', 'smug', 'grin', 'smile', 'beam', 'think', 'smile', 'smile', 'grin'] }[cheer ? 'cheer' : mode === 'cheer' ? 'listen' : mode];
@@ -192,7 +251,7 @@ function concertCast(t, mode, t0 = 0, tAtt = 1e9) {
 
 // ------------------------------------------------------------------ rendering
 function renderShot(g, sh, t, alpha = 1) {
-  const set = S[sh.set]; const tt = t - sh.a; set.life.forEach((f) => f(t)); sh.act(t, tt, sh);
+  const set = S[sh.set]; const tt = t - sh.a; set.life.forEach((f) => f(t)); defaults(sh.set); sh.act(t, tt, sh);
   if (sh.set === 'street' && sh.act.toString().indexOf('streetCrowd') < 0) { /* crowd keeps idling */ }
   const c = camAt(sh.keys, tt); place(c, t, sh.shake != null ? shakeAt(t, sh.shake, 0.5) : 0); camera.updateMatrixWorld();
   const look = new THREE.Vector3(...c.l), focus = camera.position.distanceTo(look);
@@ -200,14 +259,24 @@ function renderShot(g, sh, t, alpha = 1) {
   const cv = stage.render(set.scene, camera, { focus, aperture: night ? 7 : 6, hazeAmt: night ? 0.15 : 0.3, haze: night ? 0x5a5a9a : 0xdfe9f2, sat: night ? 1.12 : 1.1, contrast: 0.06, lift: night ? 0.03 : 0.015, warm: night ? -0.01 : 0.02, vignette: 0.3 });
   g.save(); g.globalAlpha = alpha; g.drawImage(cv, 0, 0, W, H); g.restore();
   if (sh.iris) iris(g, alpha);
+  if (sh.rewind) rewindFx(g, t, sh.a, alpha);
+  if (sh.endcard) endcard(g, t, sh.a, alpha);
   if (sh.nameplate) nameplate(g, t, sh.a + 0.3, alpha);
 }
+function rewindFx(g, t, a0, alpha) { const u = span(t, a0, 0.7); if (u >= 1) return; g.save(); g.globalAlpha = alpha * (1 - u) * 0.9; g.fillStyle = 'rgba(40,60,140,0.25)'; g.fillRect(0, 0, W, H);
+  for (let y = (t * 900) % 24; y < H; y += 24) { g.fillStyle = 'rgba(255,255,255,0.06)'; g.fillRect(0, y, W, 3); } g.fillStyle = '#fff'; g.font = "800 150px 'Oswald'"; g.textAlign = 'center'; g.fillText('◀◀', W / 2, H * 0.62); g.restore(); }
+function endcard(g, t, a0, alpha) { const p = ezo(span(t, a0 + 0.6, 0.5)); if (p > 0) { g.save(); g.globalAlpha = alpha; g.translate(W / 2, 640); g.scale(p, p); g.fillStyle = '#f4ecd6'; g.strokeStyle = '#2a1c17'; g.lineWidth = 8; g.beginPath(); g.roundRect(-260, -120, 520, 240, 24); g.fill(); g.stroke(); g.fillStyle = '#c8312c'; g.fillRect(-260, -120, 520, 18);
+    text(g, 'ഭാഗം', 0, -30, { font: ML, weight: 800, size: 64, color: '#8a1e1e', align: 'center' }); text(g, '2', 0, 90, { font: "'Oswald'", weight: 700, size: 120, color: '#2a1c17', align: 'center' }); g.restore(); }
+  const tap = a0 + 3.0, q = ezo(span(t, a0 + 2.0, 0.4)); if (q <= 0) return; const pr = t > tap && t < tap + 0.25 ? 0.9 : 1, done = t > tap + 0.2;
+  g.save(); g.globalAlpha = alpha; g.translate(W / 2, 1560); g.scale(q * pr, q * pr); g.fillStyle = done ? '#3a3350' : '#ff2f45'; g.strokeStyle = '#120c0a'; g.lineWidth = 6; g.beginPath(); g.roundRect(-250, -70, 500, 140, 70); g.fill(); g.stroke();
+  text(g, done ? 'FOLLOWING ✓' : 'FOLLOW', 0, 20, { font: "'Oswald'", weight: 700, size: 64, color: '#fff', align: 'center' }); g.restore();
+  if (t > tap - 0.6 && t < tap + 0.5) { const hx = W / 2 + 120 + (1 - span(t, tap - 0.6, 0.6)) * 160, hy = 1600 + (1 - span(t, tap - 0.6, 0.6)) * 120; g.save(); g.globalAlpha = alpha; g.fillStyle = '#fff'; g.strokeStyle = '#120c0a'; g.lineWidth = 6; g.beginPath(); g.ellipse(hx, hy, 34, 46, -0.4, 0, 7); g.fill(); g.stroke(); g.restore(); } }
 function iris(g, a) { // look-through telescope: brass ring + dark outside
   g.save(); g.globalAlpha = a; g.fillStyle = '#1a120e'; g.beginPath(); g.rect(0, 0, W, H); g.arc(W / 2, H * 0.46, 470, 0, Math.PI * 2, true); g.fill('evenodd');
   g.strokeStyle = '#c8962a'; g.lineWidth = 34; g.beginPath(); g.arc(W / 2, H * 0.46, 470, 0, 7); g.stroke(); g.strokeStyle = '#2a1c17'; g.lineWidth = 6; g.beginPath(); g.arc(W / 2, H * 0.46, 452, 0, 7); g.stroke(); g.beginPath(); g.arc(W / 2, H * 0.46, 488, 0, 7); g.stroke(); g.restore();
 }
 function nameplate(g, t, a0, alpha) {
-  const p = ezo(span(t, a0, 0.35)); if (p <= 0) return; g.save(); g.globalAlpha = alpha * p; g.translate(W / 2, 330 - (1 - p) * 40);
+  const p = ezo(span(t, a0, 0.35)); if (p <= 0) return; g.save(); g.globalAlpha = alpha * p; g.translate(W / 2, 1500 + (1 - p) * 40);
   g.fillStyle = '#f4ecd6'; g.strokeStyle = '#2a1c17'; g.lineWidth = 7; g.beginPath(); g.roundRect(-400, -78, 800, 156, 18); g.fill(); g.stroke();
   g.fillStyle = '#8a1e1e'; g.fillRect(-400, -78, 800, 14);
   text(g, 'ദിവാൻ', 0, -16, { font: ML, weight: 800, size: 40, color: '#8a1e1e', align: 'center' }); text(g, 'സി.പി. രാമസ്വാമി അയ്യർ', 0, 50, { font: ML, weight: 800, size: 56, color: '#2a1c17', align: 'center' }); g.restore();
@@ -221,20 +290,22 @@ function captions(g, s) {
   const chunks = []; for (let i = 0; i < ws.length;) { const n = ws[i][0].length > 9 || (ws[i + 1] && ws[i + 1][0].length > 9) ? 1 : 2; chunks.push(ws.slice(i, i + n)); i += n; }
   let k = 0; while (k + 1 < chunks.length && t >= chunks[k + 1][0][1]) k++;
   const str = chunks[k].map(([w]) => w).join(' '), p = ezo(span(t, chunks[k][0][1], 0.12)), sc = 0.88 + 0.12 * p;
-  g.save(); g.translate(W / 2, 1300); g.scale(sc, sc); g.font = `800 92px ${ML}`; const fsz = Math.min(92, 92 * 940 / (g.measureText(str).width + 1)); g.font = `800 ${fsz}px ${ML}`;
+  g.save(); g.translate(W / 2, 300); g.scale(sc, sc); g.font = `800 92px ${ML}`; const fsz = Math.min(92, 92 * 940 / (g.measureText(str).width + 1)); g.font = `800 ${fsz}px ${ML}`;
   g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round'; g.lineWidth = fsz * 0.22; g.strokeStyle = '#120c0a'; g.strokeText(str, 0, 0); g.fillStyle = '#ffffff'; g.fillText(str, 0, 0); g.restore();
 }
 
 let SH = null;
+let MAIN = null;
 function main(g, s) {
-  if (!SH) SH = shots(s);
-  const t = s.t; let i = SH.findIndex((x) => t >= x.a && t < x.b); if (i < 0) i = t < SH[0].a ? 0 : SH.length - 1;
+  const t = s.t; draw(g, t); captions(g, s);
+}
+function draw(g, t) { let i = SH.findIndex((x) => t >= x.a && t < x.b); if (i < 0) i = t < SH[0].a ? 0 : SH.length - 1;
   const sh = SH[i], prev = SH[i - 1], XF = 0.3; // moving dissolve between different sets (both shots keep moving)
   if (prev && prev.set !== sh.set && t < sh.a + XF) { renderShot(g, prev, t); renderShot(g, sh, t, ez((t - sh.a) / XF)); }
   else renderShot(g, sh, t);
-  captions(g, s);
 }
-function end(g, s) { main(g, s); }
+function end(g, s) { draw(g, s.t + END0); captions(g, s); }
+let END0 = 53.5;
 export const scenes = { main, end };
 export const hits = [];
 export const extraHits = (timeline) => {
