@@ -3,3 +3,4 @@
 | Order | Episode | Video file (engilo repo) | Status |
 |---|---|---|---|
 | 1 | episodes/ml-travancore-bean | ep01-travancore.mp4 | PUBLISHED 25 Nov (lEMuzkDTZCI) |
+| 2 | episodes/ml-travancore-kit (Travancore v2, kit formula, captions synced; youtube.json in that folder, code on branch travancore-kit-v2) | ep02-travancore-v2.mp4 | APPROVED 25 Nov: publish 26 Nov 6 pm Dubai |
