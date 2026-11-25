@@ -1,6 +1,6 @@
 // Kuwait 1990 (Gulf Part 2): new cast. Real people (Mathunny "Toyota Sunny" Mathews, Harbhajan Singh Vedi) are
 // drawn as friendly bean caricatures by costume and props only (era clothes, briefcase, turban), never from photos.
-// The "film hero" is a generic movie-star bean, not any actor's likeness. Saddam appears only as a silhouette poster.
+// The "film hero" is a generic movie-star bean, not any actor's likeness. Saddam is a bean caricature (beret, moustache, uniform).
 const INK = '#2a1c17', OL = 6.5;
 function ell(ctx, x, y, rx, ry, rot = 0) { ctx.beginPath(); ctx.ellipse(x, y, rx, ry, rot, 0, Math.PI * 2); }
 function fs(ctx, fill, w = OL) { if (fill) { ctx.fillStyle = fill; ctx.fill(); } ctx.lineWidth = w; ctx.strokeStyle = INK; ctx.stroke(); }
@@ -23,9 +23,16 @@ const safari = (ctx, top, bot) => { ctx.strokeStyle = 'rgba(42,28,23,.5)'; ctx.l
   ctx.fillStyle = '#8a7a5a'; ctx.fillRect(-60, bot - 16, 120, 10); for (let y = top + 18; y < bot - 20; y += 22) { ell(ctx, 4, y, 3, 3); ctx.fillStyle = INK; ctx.fill(); } };
 const suit = (tie) => (ctx, top, bot) => { ctx.fillStyle = '#f4f4f0'; ctx.beginPath(); ctx.moveTo(-18, top - 2); ctx.lineTo(0, top + 60); ctx.lineTo(18, top - 2); ctx.closePath(); ctx.fill(); ctx.fillStyle = tie; ctx.beginPath(); ctx.moveTo(-5, top + 4); ctx.lineTo(5, top + 4); ctx.lineTo(7, top + 50); ctx.lineTo(0, top + 60); ctx.lineTo(-7, top + 50); ctx.closePath(); ctx.fill();
   ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(-18, top - 2); ctx.lineTo(0, top + 60); ctx.lineTo(18, top - 2); ctx.stroke(); };
+function beret(color) { return (ctx) => { ctx.beginPath(); ctx.moveTo(-58, -322); ctx.bezierCurveTo(-70, -376, 10, -392, 60, -350); ctx.quadraticCurveTo(64, -330, 50, -322); ctx.quadraticCurveTo(0, -334, -58, -322); ctx.closePath(); fs(ctx, color);
+  ctx.fillStyle = '#e8b93a'; ell(ctx, -26, -340, 9, 10); ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.stroke(); ctx.fillStyle = '#c9c3bb'; for (const s of [-1, 1]) { ctx.beginPath(); ctx.ellipse(s * 51, -304, 6, 13, 0, 0, 7); ctx.fill(); } }; }
+function bigStache(ctx) { ctx.beginPath(); ctx.moveTo(-30, -276); ctx.quadraticCurveTo(-14, -298, 0, -286); ctx.quadraticCurveTo(14, -298, 30, -276); ctx.quadraticCurveTo(14, -282, 0, -276); ctx.quadraticCurveTo(-14, -282, -30, -276); ctx.closePath(); ctx.fillStyle = '#1a120d'; ctx.fill(); ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.stroke(); }
+const military = (ctx, top, bot) => { ctx.fillStyle = '#3a4a2a'; for (const s of [-1, 1]) ctx.fillRect(s * 44 - 10, top + 2, 20, 10); ctx.fillStyle = '#e8b93a'; for (const s of [-1, 1]) { ell(ctx, s * 44, top + 7, 4, 4); ctx.fill(); }
+  ctx.fillStyle = '#c8312c'; ctx.fillRect(-40, top + 36, 22, 6); ctx.fillStyle = '#2f6a3a'; ctx.fillRect(-40, top + 42, 22, 6); ctx.fillStyle = '#3a2a20'; ctx.fillRect(-60, bot - 22, 120, 12); ctx.fillStyle = '#e8b93a'; ctx.fillRect(-7, bot - 23, 14, 14);
+  ctx.strokeStyle = 'rgba(42,28,23,.45)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(0, top + 6); ctx.lineTo(0, bot - 22); ctx.stroke(); };
 const jacket = (ctx, top, bot) => { ctx.fillStyle = '#1a1a1e'; ctx.fillRect(-60, top - 10, 40, bot - top + 20); ctx.fillRect(20, top - 10, 40, bot - top + 20); ctx.fillStyle = '#c8312c'; ctx.fillRect(-20, top - 10, 40, bot - top + 20); };
 
 export const NEW_CAST = {
+  saddam: { name: 'SADDAM', skin: '#c99a70', hair: both(beret('#1a1a1e'), bigStache), shirt: '#5a6a3a', shirtDark: '#3f4f28', collar: true, over: military, lower: 'pants', mundu: '#5a6a3a', legs: '#4a5a30', shoes: '#1a1310' },
   sunny: { name: "'TOYOTA SUNNY'", skin: '#c68b62', hair: both(hairGrey('#d6d0c6'), glassesThin), stache: true, shirt: '#c8b48a', shirtDark: '#a8946a', collar: true, over: safari, lower: 'pants', mundu: '#a8946a', legs: '#a8946a', shoes: '#4a3022' },
   vedi: { name: 'H. S. VEDI', skin: '#d0a078', hair: both(beardFull('#3a3430'), turbanS('#2a4a8a')), shirt: '#e8e2d4', shirtDark: '#c8c0aa', collar: true, pocket: true, lower: 'pants', mundu: '#4a4a52', legs: '#4a4a52', shoes: '#2a1c17' },
   ambassador: { name: 'AMBASSADOR', skin: '#c08a5e', hair: (ctx) => { ctx.beginPath(); ctx.moveTo(-53, -300); ctx.bezierCurveTo(-58, -360, 58, -362, 53, -300); ctx.quadraticCurveTo(30, -330, -30, -326); ctx.quadraticCurveTo(-46, -320, -53, -300); ctx.closePath(); fs(ctx, '#8a8480'); }, glasses: true, shirt: '#2a3040', shirtDark: '#1d2230', over: suit('#8a1e1e'), lower: 'pants', mundu: '#2a3040', legs: '#2a3040', shoes: '#1a1310' },
