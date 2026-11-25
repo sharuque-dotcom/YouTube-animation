@@ -99,6 +99,8 @@ export const NEW_PROPS = {
   scroll: (ctx) => { ctx.save(); ctx.rotate(-0.2); ctx.beginPath(); ctx.rect(-2, -46, 36, 48); fs(ctx, '#f4e6c0', 4); for (const y of [-48, 2]) { ell(ctx, 16, y, 22, 5); fs(ctx, '#e2cf9a', 3); } ell(ctx, 16, -10, 7, 7); fs(ctx, '#c8312c', 3); ctx.restore(); },
   whistle: (ctx) => { ctx.beginPath(); ctx.roundRect(-4, -14, 26, 14, 5); fs(ctx, '#d8d8dc', 3.5); ell(ctx, 18, -2, 8, 8); fs(ctx, '#d8d8dc', 3.5); ctx.strokeStyle = '#c8312c'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(-4, -8); ctx.quadraticCurveTo(-30, -40, -10, -70); ctx.stroke(); },
   oar: (ctx) => { ctx.save(); ctx.rotate(0.2); ctx.strokeStyle = INK; ctx.lineWidth = 9; ctx.beginPath(); ctx.moveTo(0, 50); ctx.lineTo(0, -120); ctx.stroke(); ctx.strokeStyle = '#b08850'; ctx.lineWidth = 5; ctx.stroke(); ctx.beginPath(); ctx.ellipse(0, -128, 12, 30, 0, 0, 7); fs(ctx, '#b08850', 4); ctx.restore(); },
+  tricorne: (ctx) => { ctx.save(); ctx.translate(0, -14); ctx.rotate(-0.15); ctx.beginPath(); ctx.moveTo(-54, 0); ctx.quadraticCurveTo(-38, -14, -26, -42); ctx.quadraticCurveTo(0, -26, 26, -42); ctx.quadraticCurveTo(38, -14, 54, 0); ctx.quadraticCurveTo(0, 14, -54, 0); ctx.closePath(); fs(ctx, '#1d2330', 5);
+    ctx.strokeStyle = '#e8b93a'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(-48, -2); ctx.quadraticCurveTo(-36, -16, -26, -36); ctx.quadraticCurveTo(0, -22, 26, -36); ctx.quadraticCurveTo(36, -16, 48, -2); ctx.stroke(); ell(ctx, -30, -14, 6, 6); fs(ctx, '#f4a02a', 3); ctx.restore(); },
 };
 
 export function registerCast(B) { Object.assign(B.CAST, NEW_CAST); Object.assign(B.PROPS, NEW_PROPS); }
