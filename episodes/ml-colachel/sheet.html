@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style></head><body><canvas id=c width=2000 height=1500></canvas><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const B = await import('/pipeline/bean.js'); const { registerCast } = await import('/episodes/ml-colachel/cast.js'); registerCast(B);
+const { drawBean, CAST, PROPS } = B;
+const c = document.getElementById('c'), x = c.getContext('2d'); x.fillStyle = '#f2d78a'; x.fillRect(0, 0, 2000, 1500);
+x.fillStyle = '#2a1c17'; x.textAlign = 'center'; x.font = "700 46px 'Oswald'"; x.fillText('COLACHEL 1741: CAST', 1000, 70);
+const row1 = [['maharaja', { expr: 'smug', L: 'hip', R: 'holdUp', propR: PROPS.sword }], ['ramayyan', { expr: 'stern', R: 'point', L: 'hip' }], ['nair', { expr: 'angry', R: 'holdUp', propR: PROPS.sword, L: 'hold', propL: PROPS.shield }], ['fisher2', { expr: 'grin', R: 'hold', propR: PROPS.oar }], ['diver', { expr: 'sly', L: 'mouth', R: 'wave' }]];
+const row2 = [['imhoff', { expr: 'angry', R: 'point', L: 'holdUp', propL: PROPS.scroll }], ['dutchSoldier', { expr: 'stern', R: 'rifle', propR: PROPS.musket }], ['lannoy', { expr: 'smug', L: 'hip', R: 'holdUp', propR: PROPS.sword }], ['lannoyPrisoner', { expr: 'sad', L: 'hold', R: 'hold' }], ['kappithan', { expr: 'proud', R: 'holdUp', propR: PROPS.whistle, L: 'hip' }]];
+const put = (row, y) => row.forEach(([k, o], i) => { const cx = 200 + i * 400; x.save(); x.translate(cx, y); x.scale(1.3, 1.3); drawBean(x, k, o); x.restore(); x.font = "700 30px 'Oswald'"; x.fillStyle = '#2a1c17'; x.fillText(CAST[k].name.toUpperCase(), cx, y + 50); });
+put(row1, 640); put(row2, 1380);
+window.png = c.toDataURL('image/png'); window.done = true;
+</script></body></html>

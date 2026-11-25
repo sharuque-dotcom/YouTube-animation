@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Noto Malayalam'; font-weight: 600; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-600-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 800; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0;background:#000}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+const q = new URLSearchParams(location.search);
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const B = await import('/pipeline/bean.js'); (await import('/episodes/ml-colachel/cast.js')).registerCast(B);
+const { beachSet } = await import('/episodes/ml-bean/sets.js'); const { dutchShip } = await import('/episodes/ml-colachel/ship.js');
+const W = +(q.get('w') || 540), H = +(q.get('h') || 960), t = +(q.get('t') || 1.3);
+const S = beachSet(); S.ship.visible = false;
+[[6, -34, 0.35], [-22, -48, 0.2], [30, -60, -0.1]].forEach(([x, z, r], i) => { const sh = dutchShip({ life: S.life, seed: i + 3 }); sh.position.set(x, 0.6, z); sh.rotation.y = -Math.PI / 2 + 0.6 + r; sh.scale.setScalar(0.8); S.scene.add(sh); });
+const put = (who, x, z, o) => { const c = K.card(who, o); c.position.set(x, 0, z); S.scene.add(c); };
+const P = B.PROPS;
+put('maharaja', -0.6, 1.6, { expr: 'smug', L: 'hip', R: 'holdUp', propR: P.sword }); put('nair', 0.6, 0.8, { expr: 'angry', R: 'holdUp', propR: P.sword, L: 'hold', propL: P.shield }); put('nair', -1.7, 0.4, { expr: 'stern', R: 'holdUp', propR: P.sword, L: 'hold', propL: P.shield });
+put('fisher2', 1.6, 1.4, { expr: 'grin', R: 'hold', propR: P.oar }); put('diver', 2.4, 0.2, { expr: 'sly', L: 'mouth', R: 'wave' });
+put('dutchSoldier', -0.6, -6, { expr: 'stern', R: 'rifle', propR: P.musket }); put('dutchSoldier', 0.6, -6.6, { expr: 'nervous', R: 'rifle', propR: P.musket }); put('lannoy', 0, -5.2, { expr: 'smug', L: 'hip', R: 'holdUp', propR: P.sword });
+S.setGlow(0, t);
+const cam = new THREE.PerspectiveCamera(+(q.get('fov') || 52), W / H, 0.1, 600);
+const cp = (q.get('cam') || '0.4,1.5,6.5').split(',').map(Number), la = (q.get('look') || '0,3,-30').split(',').map(Number);
+cam.position.set(...cp); cam.lookAt(...la); cam.rotateZ(+(q.get('roll') || 0.02));
+S.life.forEach((f) => f(t));
+const stage = K.makeInkStage(W, H);
+stage.render(S.scene, cam, { focus: +(q.get('focus') || 6), aperture: +(q.get('ap') || 4), hazeAmt: 0.2, haze: 0xdfe9f2, sat: 1.1, contrast: 0.06, lift: 0.015, warm: 0.02, vignette: 0.3 });
+window.png = stage.canvas.toDataURL('image/png'); window.done = true;
+</script></body></html>
