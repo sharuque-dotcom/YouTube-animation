@@ -136,6 +136,13 @@ const sfx = {
   tick: ['0.4*sin(2*PI*1800*t)*exp(-t*90)', 0.1, ''],
   whoosh: ['(random(0)*2-1)*sin(PI*min(t/0.7\\,1))^2*0.5', 0.7, ',highpass=f=500,lowpass=f=3500'],
   hit: ['0.8*sin(2*PI*(60+40*exp(-t*12))*t)*exp(-t*5)+0.15*sin(2*PI*220*t)*exp(-t*9)', 1.6, ''],
+  // added for the Malayalam Shorts (kit foley): bell chime on reveals, coin clink, paper flutter, body thud, paper rip, ship horn
+  chime: ['0.35*(sin(2*PI*1568*t)+0.6*sin(2*PI*2349*t)+0.3*sin(2*PI*3136*t))*exp(-t*4)', 1.4, ''],
+  coin: ['0.4*(sin(2*PI*2637*t)+0.7*sin(2*PI*3951*t))*exp(-t*14)+0.3*(sin(2*PI*3322*t))*exp(-max(t-0.07\\,0)*16)*gte(t\\,0.07)', 0.5, ''],
+  paper: ['(random(0)*2-1)*0.35*sin(PI*min(t/0.25\\,1))*(0.6+0.4*sin(2*PI*31*t))', 0.25, ',highpass=f=1800'],
+  thud: ['0.9*sin(2*PI*(70+60*exp(-t*25))*t)*exp(-t*14)+0.2*(random(0)*2-1)*exp(-t*40)', 0.4, ',lowpass=f=900'],
+  rip: ['(random(0)*2-1)*0.6*sin(PI*min(t/0.45\\,1))*(0.5+0.5*sin(2*PI*45*t))', 0.45, ',highpass=f=900'],
+  horn: ['0.35*(sin(2*PI*110*t)+0.6*sin(2*PI*165*t)+0.3*sin(2*PI*220*t))*min(t*6\\,1)*min((1.6-t)*4\\,1)', 1.6, ',lowpass=f=1200'],
 };
 hitTimes.forEach((_, i) => {
   const [expr, d] = sfx[hitKinds[i]] || sfx.boom;
