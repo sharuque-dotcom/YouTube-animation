@@ -229,6 +229,7 @@ function torso(ctx, c) {
     ctx.strokeStyle = '#f0c23a'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(2, top + 62); ctx.quadraticCurveTo(18, top + 78, 30, top + 60); ctx.stroke(); ell(ctx, 31, top + 58, 4, 4); ctx.fillStyle = '#f0c23a'; ctx.fill(); }
   if (c.belt) { ctx.fillStyle = '#4a3020'; ctx.fillRect(-56, bot - 18, 112, 12); ctx.fillStyle = '#f0c23a'; ctx.fillRect(-7, bot - 19, 14, 14); }
   if (c.pocket) { ctx.strokeStyle = INK; ctx.lineWidth = 3; ctx.strokeRect(-34, top + 34, 18, 16); ctx.fillStyle = '#f1f1f1'; ctx.fillRect(-30, top + 28, 4, 9); }
+  if (c.over) c.over(ctx, top, bot); // episode-specific clothing layer (vest, sash...), clipped to the torso
   if (c.bare) { ctx.strokeStyle = 'rgba(0,0,0,.25)'; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(-14, top + 40, 10, 0.3, 2.6); ctx.arc(14, top + 40, 10, 0.5, 2.8); ctx.stroke(); }
   ctx.restore();
   ctx.beginPath(); ctx.moveTo(-30, top); ctx.bezierCurveTo(-48, top + 18, -56, bot - 40, -46, bot); ctx.lineTo(46, bot); ctx.bezierCurveTo(56, bot - 40, 48, top + 18, 30, top); ctx.quadraticCurveTo(0, top - 8, -30, top); ctx.closePath(); ctx.lineWidth = OL; ctx.strokeStyle = INK; ctx.stroke();
