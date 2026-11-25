@@ -1,31 +1,31 @@
 # Colachel 1741: the king who captured Europe's captain
 
-Draft v1 (25 Nov), written to the kit formula. Spoken length is about 60–65 s (≈140 words), with 12 lines.
+Final script (25 Nov), written to the kit formula. Spoken length is about 60–65 s (≈140 words), with 12 lines.
 
 **Title ideas:**
 - യൂറോപ്പ് പിടിക്കുമെന്ന് പറഞ്ഞ രാജാവ് 🐚 The King Who Threatened Europe #shorts
 - ഡച്ചുകാരെ തോൽപ്പിച്ച തിരുവിതാംകൂർ | Colachel 1741 #shorts
 
-## Malayalam (paste into Gemini, then ElevenLabs v4)
+## Malayalam: FINAL (owner's Gemini version, 25 Nov)
 
-The tags are only [excited], [pause], [slowly] and [softly]. Numbers are written out in words so the voice reads them correctly.
+This is the version that goes to ElevenLabs v4 (Namitha, one take).
 
 ```
 [excited] ആയിരത്തി എഴുനൂറ്റി നാല്പത്തിയൊന്ന്. ഒരു ഡച്ച് ഗവർണർ തിരുവിതാംകൂർ രാജാവിനെ ഭീഷണിപ്പെടുത്തി: "യുദ്ധം വേണോ?" രാജാവിന്റെ മറുപടി: "ഞാനൊരു ദിവസം യൂറോപ്പ് പിടിക്കാൻ ആലോചിക്കുകയാണ്!"
 ആളുകൾ ചിരിച്ചു. കാരണം? നോക്കൂ, അന്ന് ഡച്ചുകാർ ലോകത്തിലെ ഏറ്റവും വലിയ കച്ചവട സാമ്രാജ്യമായിരുന്നു.
 അവർ കുളച്ചൽ കടപ്പുറത്ത് കപ്പലിറങ്ങി. പീരങ്കികൾ. തോക്കുകൾ. യൂറോപ്യൻ പട്ടാളം.
 മാർത്താണ്ഡവർമ്മയുടെ കയ്യിലോ? നായർ പടയാളികൾ... പിന്നെ കടപ്പുറത്തെ മുക്കുവന്മാർ!
-കഥ പറയുന്നത്, മുക്കുവന്മാർ തടി കൊണ്ട് വ്യാജ പീരങ്കികൾ ഉണ്ടാക്കി. രാത്രി മുങ്ങിച്ചെന്ന് ഡച്ച് കപ്പലുകൾ മുക്കി.
-മാസങ്ങൾ നീണ്ട യുദ്ധം. ഒടുവിൽ ഒരു പീരങ്കിയുണ്ട ഡച്ചുകാരുടെ വെടിമരുന്നിൽ ചെന്നുവീണു. ബൂം!
+കഥകൾ പറയുന്നത്, മുക്കുവന്മാർ പനന്തടി കൊണ്ട് വ്യാജ പീരങ്കികൾ നിരത്തി. ചെറുവള്ളങ്ങളിൽ രാത്രി വളഞ്ഞ് ഡച്ച് കപ്പലുകളുടെ വഴിയടച്ചു.
+മാസങ്ങൾ നീണ്ട ഉപരോധം. ഒടുവിൽ ഒരു പീരങ്കിയുണ്ട ഡച്ചുകാരുടെ വെടിമരുന്ന് ശേഖരത്തിൽ ചെന്നുവീണു. ബൂം!
 ഓഗസ്റ്റ് പത്ത്. ഡച്ചുകാർ കീഴടങ്ങി. അവരുടെ ക്യാപ്റ്റൻ ഡി ലനോയ് തടവുകാരനായി.
-[pause] കാത്തിരിക്കൂ... ഡച്ചുകാർ ജയിച്ചിരുന്നെങ്കിലോ? [slowly] കേരളം, ഇന്തോനേഷ്യയെപ്പോലെ, നൂറ്റാണ്ടുകളോളം ഒരു ഡച്ച് കോളനി ആയേനെ.
-പക്ഷേ ശരിക്കുള്ള ട്വിസ്റ്റ് ഇതാണ്: ആ തടവുകാരൻ തിരുവിതാംകൂറിന്റെ പട്ടാളത്തെ പരിശീലിപ്പിച്ചു. കോട്ടകൾ കെട്ടി. "വലിയ കപ്പിത്താൻ" ആയി.
-തോറ്റ ടീമിന്റെ ക്യാപ്റ്റനെ നമ്മുടെ കോച്ചാക്കുന്നതുപോലെ!
-[softly] മുപ്പത്താറ് വർഷം രാജാവിനെ സേവിച്ച്, ഇന്നും അദ്ദേഹം ഉദയഗിരിക്കോട്ടയിൽ ഉറങ്ങുന്നു.
-[excited] രാജാവ് യൂറോപ്പ് പിടിച്ചില്ല... പക്ഷേ യൂറോപ്പിന്റെ ക്യാപ്റ്റനെ പിടിച്ചു!
+[pause] കാത്തിരിക്കൂ... അന്ന് ഡച്ചുകാർ ജയിച്ചിരുന്നെങ്കിലോ? [slowly] കേരളം, ഇന്തോനേഷ്യയെപ്പോലെ, നൂറ്റാണ്ടുകളോളം ഒരു ഡച്ച് കോളനി ആയേനെ.
+പക്ഷേ ശരിക്കുള്ള ട്വിസ്റ്റ് ഇതാണ്: തോറ്റ ടീമിന്റെ ക്യാപ്റ്റനെ നമ്മുടെ കോച്ചാക്കുന്നതുപോലെ... ആ തടവുകാരനെ രാജാവ് തിരുവിതാംകൂർ പട്ടാളത്തിന്റെ തലവനാക്കി!
+അദ്ദേഹം കോട്ടകൾ കെട്ടി. സൈന്യത്തെ പരിശീലിപ്പിച്ചു. തിരുവിതാംകൂറിന്റെ "വലിയ കപ്പിത്താൻ" ആയി.
+[softly] മുപ്പത്താറ് വർഷം ഈ നാടിനെ സേവിച്ച്, ഇന്നും അദ്ദേഹം ഉദയഗിരിക്കോട്ടയിൽ ഉറങ്ങുന്നു.
+[excited] അന്ന് രാജാവ് യൂറോപ്പ് പിടിച്ചില്ല... പക്ഷേ യൂറോപ്പിന്റെ ക്യാപ്റ്റനെ പിടിച്ചു!
 ```
 
-## English (for checking)
+## English (gloss of draft v1; the final differs in lines 5, 6 and 9–10)
 
 1. 1741. A Dutch governor threatens the king of Travancore: "Want a war?" The king replies: "I've been thinking of invading Europe one day!"
 2. People laughed. Why? You see, the Dutch were then the world's biggest trading empire.
@@ -54,6 +54,23 @@ The tags are only [excited], [pause], [slowly] and [softly]. Numbers are written
 | Callback ending | 12: "invade Europe" → "captured Europe's captain" |
 
 There's no spoken call to action. Part 2 and Subscribe go on on-screen cards only.
+
+## Shot plan (final text)
+
+| Line | Beat | Shots |
+|---|---|---|
+| 1 | Hook | Van Imhoff slams a scroll down ("യുദ്ധം വേണോ?"). Smash cut to Marthanda Varma: a smug close-up of the comeback, with the map turning to Europe. |
+| 2 | Mockery, "you see" | The Dutch crew laughing on deck. A VOC trade map with ships pouring out. |
+| 3 | Landing | Three VOC ships at Colachel; boats land. Beats on "cannons, guns, army" as each one slams in. |
+| 4 | Our side | Nair warriors raise their swords. Then the fishermen with oars (the joke beat). |
+| 5 | Legend | Fishermen roll palm-trunk "cannons" onto carts in a row. Night: small vallams circle and block the Dutch ships. |
+| 6 | Siege, then boom | A calendar pages through the months. The cannonball arcs into the powder store. Big explosion (flash builds over 8 frames). |
+| 7 | Surrender | A white flag goes up. De Lannoy in chains. |
+| 8 | Wait...? | Dream wobble: the Kerala coast map (coast only) turns orange-white-blue, Indonesia-style. |
+| 9 | Twist + analogy | A jersey, a whistle, a coach's clipboard. The prisoner's chains snap and the king hands him the general's sash. |
+| 10 | Montage | Forts rise (Udayagiri). He drills Nair soldiers. Valiya Kappithan nameplate. |
+| 11 | Quiet beat | Udayagiri fort chapel at dusk, his tombstone, a soft light. |
+| 12 | Callback | The king grins, holding up a small "captured" Dutch tricorne. Pull back over the cheering beach. |
 
 ## Visual ideas (new cast)
 
