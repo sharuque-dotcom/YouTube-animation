@@ -140,7 +140,9 @@ function place(c, t, shake = 0) {
 const shakeAt = (t, t0, d = 0.5) => (t >= t0 && t < t0 + d ? Math.pow(1 - (t - t0) / d, 2) : 0);
 
 // word time inside a narration line (proportional to characters, Malayalam text)
-function wt(s, i, needle) { const line = s.line(i), a = s.cue(i), b = s.cueEnd(i); const k = Math.max(0, line.indexOf(needle)); return a + (k / line.length) * (b - a); }
+// digits are spoken as long words in Malayalam ("1947" = aayirathi thollaayirathi naalpathiyezhu), so weight them when placing words in time
+const cw = (ch) => (/[0-9]/.test(ch) ? 7 : 1);
+function wt(s, i, needle) { const line = s.line(i), a = s.cue(i), b = s.cueEnd(i); const k = Math.max(0, line.indexOf(needle)); let pre = 0, tot = 0; for (let j = 0; j < line.length; j++) { const c = cw(line[j]); tot += c; if (j < k) pre += c; } return a + (pre / tot) * (b - a); }
 
 function resetProps() {
   const o = S.office, st = S.street, b = S.beach;
@@ -353,8 +355,8 @@ function nameplate(g, t, a0, alpha) {
 // captions: 1-2 words, white with a thick dark outline, at the very top (owner's call: keeps the action clear), 88->100% pop
 function captions(g, s) {
   const t = s.t; let li = -1; for (let i = 0; s.line(i); i++) if (t >= s.cue(i) - 0.05 && t < s.cueEnd(i) + 0.15) li = i; if (li < 0) return;
-  const words = s.line(li).split(/\s+/), a = s.cue(li), b = s.cueEnd(li), tot = words.reduce((x, w) => x + w.length + 2, 0); let acc = 0;
-  const ws = words.map((w) => { const t0 = a + (acc / tot) * (b - a); acc += w.length + 2; return [w, t0]; });
+  const words = s.line(li).split(/\s+/), a = s.cue(li), b = s.cueEnd(li), wl = (w) => [...w].reduce((x, ch) => x + cw(ch), 0), tot = words.reduce((x, w) => x + wl(w) + 2, 0); let acc = 0;
+  const ws = words.map((w) => { const t0 = a + (acc / tot) * (b - a); acc += wl(w) + 2; return [w, t0]; });
   const chunks = []; for (let i = 0; i < ws.length;) { const n = ws[i][0].length > 9 || (ws[i + 1] && ws[i + 1][0].length > 9) ? 1 : 2; chunks.push(ws.slice(i, i + n)); i += n; }
   let k = 0; while (k + 1 < chunks.length && t >= chunks[k + 1][0][1]) k++;
   const str = chunks[k].map(([w]) => w).join(' '), p = ezo(span(t, chunks[k][0][1], 0.12)), sc = 0.88 + 0.12 * p;
