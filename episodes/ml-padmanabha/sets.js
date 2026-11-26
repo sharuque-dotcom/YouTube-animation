@@ -94,11 +94,14 @@ export function vaultSet() {
     heap.position.set(0, 0, -0.4); d.group.add(heap); }
   // Vault B at the end of the corridor
   const B = new THREE.Group(); B.position.set(0, 0, -20); scene.add(B); const sm = stoneMat(2, 2);
-  const wallB = K.mesh(new THREE.PlaneGeometry(6, 4.2), sm); wallB.position.set(0, 2.1, -0.4); B.add(wallB);
+  for (const [x, y, w, h] of [[-2.0, 2.1, 2.0, 4.2], [2.0, 2.1, 2.0, 4.2], [0, 3.47, 2.0, 1.45]]) { const wp = K.mesh(new THREE.PlaneGeometry(w, h), sm); wp.position.set(x, y, -0.4); B.add(wp); }
+  const recess = K.mesh(new THREE.BoxGeometry(2.0, 2.75, 2.4), new THREE.MeshLambertMaterial({ color: 0x1a120a, side: THREE.BackSide })); recess.position.set(0, 1.38, -1.6); B.add(recess);
+  const goldWall = noInk(K.mesh(new THREE.PlaneGeometry(2.0, 2.75), new THREE.MeshBasicMaterial({ color: 0xffd070, transparent: true, opacity: 0, toneMapped: false }), { shadow: false })); goldWall.position.set(0, 1.38, -2.75); B.add(goldWall);
   const fr = [[-1.2, 1.4, 0.4, 2.9], [1.2, 1.4, 0.4, 2.9], [0, 2.95, 2.8, 0.4]]; fr.forEach(([x, y, w, h]) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, 0.6), sm); m.position.set(x, y, -0.2); m.castShadow = m.receiveShadow = true; B.add(m); });
   const plateB = plane(0.7, 0.7, K.signTex(['B'], { w: 128, h: 128, bg: '#2a2018', fg: '#f0c23a', border: '#d9a521', font: 'Oswald' })); plateB.position.set(0, 2.96, 0.11); B.add(plateB);
   // 3rd door: iron, studded, with two serpents facing each other
-  const iron = new THREE.Group(); iron.position.set(0, 0, -0.35); B.add(iron); const ironLeaf = K.box(2.0, 2.75, 0.12, null, { color: 0x3a3632 }); ironLeaf.position.set(0, 1.38, 0); iron.add(ironLeaf);
+  const ironP = new THREE.Group(); ironP.position.set(-1.0, 0, -0.35); B.add(ironP); const iron = new THREE.Group(); iron.position.set(1.0, 0, 0); ironP.add(iron);
+  const behind = new THREE.PointLight(0xffc860, 0, 9, 1.3); behind.position.set(0, 1.4, -1.6); B.add(behind);  const ironLeaf = K.box(2.0, 2.75, 0.12, null, { color: 0x3a3632 }); ironLeaf.position.set(0, 1.38, 0); iron.add(ironLeaf);
   for (let i = 0; i < 5; i++) for (let j = 0; j < 7; j++) { if (i > 0 && i < 4 && j > 0 && j < 6) continue; const st = K.mesh(new THREE.SphereGeometry(0.045, 8, 6), K.col(0x8a7a5a)); st.position.set(-0.8 + i * 0.4, 0.2 + j * 0.4, 0.08); iron.add(st); }
   const eyeMats = []; const sL = serpent(1, eyeMats), sR = serpent(-1, eyeMats); sL.position.set(-0.45, 1.2, 0.06); sR.position.set(0.45, 1.2, 0.06); sL.rotation.z = -0.08; sR.rotation.z = 0.08; iron.add(sL, sR);
   const lock = K.box(0.26, 0.34, 0.1, null, { color: 0x6a5a3a }); lock.position.set(0, 1.1, 0.12); iron.add(lock);
@@ -114,11 +117,12 @@ export function vaultSet() {
   scene.add(new THREE.HemisphereLight(0x8a7a9a, 0x2a1a10, 0.35));
   const api = { scene, life, doors, B, iron, sL, sR,
     setGrille(u) { grilleP.rotation.y = -u * 1.9; }, setWood(u) { woodP.rotation.y = -u * 1.75; },
-    setIronStrain(u, t = 0) { iron.position.x = Math.sin(t * 40) * 0.006 * u; },
+    setIronStrain(u, t = 0) { iron.position.x = 1.0 + Math.sin(t * 40) * 0.006 * u; },
+    setIronOpen(u, light = 0) { ironP.rotation.y = -u * 1.6; behind.intensity = light * 40; goldWall.material.opacity = light * 0.9; },
     setEyes(u) { eyeMats.forEach((m) => m.color.setRGB(0.23 + u * 0.77, 0.1 + u * 0.75, 0.06 + u * 0.1)); },
     setDoors(u, which = 'ACDEF') { for (const l of 'ACDEF') doors[l].setOpen(which.includes(l) ? u : 0); },
   };
-  api.setGrille(0); api.setWood(0); api.setEyes(0); api.setDoors(0); return api;
+  api.setGrille(0); api.setWood(0); api.setEyes(0); api.setDoors(0); api.setIronOpen(0); return api;
 }
 
 // ------------------------------------------------------------------ the treasure chamber (inside the opened vaults)
