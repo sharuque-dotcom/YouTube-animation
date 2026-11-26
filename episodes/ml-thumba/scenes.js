@@ -247,7 +247,7 @@ function rawShots(s) {
   // ---- 12. CALLBACK: one Amen was India's first countdown
   if (I.end >= 0) { const i = I.end, wAm = w(i, '"ആമേൻ"'), wAt = w(i, 'അതായിരുന്നു'), end = L(i) + 30;
     add(CH({ a: L(i), b: wAt - 0.1, keys: naveCam, act: (t) => { congr(t, t > wAm ? 'beam' : 'think', { R: t > wAm ? 'up' : 'hang', L: t > wAm ? 'up' : 'hang', hop: t > wAm ? 1 : 0 }); pose(c.bis, { expr: 'smile', R: 'up', L: 'hold', propL: 'bible' }, t); OV.rewind = { t0: L(i) }; if (t > wAm) OV.bubble = { t0: wAm, txt: '"ആമേൻ"', x: 0.5, y: 0.6 }; } }));
-    add(BE({ a: wAt - 0.1, b: end, keys: launchCam, act: (t) => { b.setDusk(1); b.bike.visible = false; b.setLaunch(Math.max(0, t - w(i, 'കൗണ്ട്ഡൗൺ') - 0.6)); OV.count = { t0: wAt }; } })); }
+    add(BE({ a: wAt - 0.1, b: end, keys: launchCam, act: (t) => { b.setDusk(1); b.bike.visible = false; b.setLaunch(Math.max(0, t - wAt - 1.5)); OV.count = { t0: wAt }; } })); }
   return out.sort((x, y) => x.a - y.a);
 }
 
@@ -305,7 +305,7 @@ function space(g, t, o, alpha) { const p = ezo(span(t, o.t0, 0.3)); if (p <= 0) 
   const [rx, ry] = at2(u); text(g, '🚀', rx, ry, { size: 90, font: 'sans-serif', weight: 400 });
   const pl = (x, y, r, c1, c2, lbl, tt) => { const q = ezo(span(t, tt, 0.3)); if (q <= 0) return; g.save(); g.translate(x, y); g.scale(q, q); const gg = g.createRadialGradient(-r / 3, -r / 3, 4, 0, 0, r); gg.addColorStop(0, c1); gg.addColorStop(1, c2); g.fillStyle = gg; g.strokeStyle = '#2a1c17'; g.lineWidth = 8; g.beginPath(); g.arc(0, 0, r, 0, 7); g.fill(); g.stroke(); text(g, lbl, 0, r + 60, { size: 60, color: '#fff', stroke: '#2a1c17', strokeWidth: 14 }); g.restore(); };
   pl(-60, -150, 95, '#f4f0e6', '#9a9a9a', 'ചന്ദ്രൻ ✓', o.m); pl(330, -40, 80, '#f0a070', '#a8452e', 'ചൊവ്വ ✓', o.r); g.restore(); }
-function countdown(g, t, t0, alpha) { const k = t - t0; if (k < 0) return; const n = Math.max(0, 3 - Math.floor(k / 0.75)); const ph = (k / 0.75) % 1; g.save(); g.globalAlpha = alpha * Math.min(1, k * 4); g.translate(W / 2, 1250); const sc = 1.3 - 0.3 * ezo(ph * 3);
+function countdown(g, t, t0, alpha) { const k = t - t0; if (k < 0) return; const n = Math.max(0, 3 - Math.floor(k / 0.5)); const ph = (k / 0.5) % 1; g.save(); g.globalAlpha = alpha * Math.min(1, k * 4); g.translate(W / 2, 1250); const sc = 1.3 - 0.3 * ezo(ph * 3);
   g.scale(sc, sc); text(g, n > 0 ? String(n) : 'LIFT-OFF!', 0, 0, { font: "'Oswald'", weight: 700, size: n > 0 ? 360 : 170, color: n > 0 ? '#f6d24a' : '#ffffff', stroke: '#2a1c17', strokeWidth: 30 }); g.restore(); }
 
 export const hits = [];
@@ -324,7 +324,7 @@ export const extraHits = (timeline) => {
   for (let k = 0; k < 8; k++) add(at2('നവംബർ', 'ആദ്യ') + k * 0.12, 'thud', 0.3); add(at2('നവംബർ', 'ആദ്യ'), 'boom', 0.5); add(at2('നവംബർ', 'ആകാശത്ത്'), 'chime', 0.35);
   add(at2('ബിഷപ്പ് "പറ്റില്ല"', 'ബിഷപ്പ്'), 'whoosh', 0.35); add(at2('ബിഷപ്പ് "പറ്റില്ല"', 'വർഷങ്ങൾ'), 'whoosh', 0.3); add(at2('ബിഷപ്പ് "പറ്റില്ല"', 'കലാം'), 'chime', 0.35);
   add(at2('ഇന്ന്', 'ചന്ദ്രനിലും'), 'pop', 0.35); add(at2('ഇന്ന്', 'ചൊവ്വയിലും'), 'pop', 0.35);
-  const ec = at2('ആ ഞായറാഴ്ചത്തെ', 'അതായിരുന്നു'); if (ec != null) for (let k = 0; k < 3; k++) add(ec + k * 0.75, 'tick', 0.45); if (ec != null) add(ec + 2.25, 'boom', 0.5);
+  const ec = at2('ആ ഞായറാഴ്ചത്തെ', 'അതായിരുന്നു'); if (ec != null) for (let k = 0; k < 3; k++) add(ec + k * 0.5, 'tick', 0.45); if (ec != null) add(ec + 1.5, 'boom', 0.5);
   return out.filter((x) => x.t != null && !Number.isNaN(x.t));
 };
 export const shotTimes = (timeline) => { const m = timeline.scenes.find((x) => x.id === 'main'); const s = { line: (i) => m.cues[i]?.text, cue: (i) => m.cues[i].start, cueEnd: (i) => m.cues[i].end }; return shots(s).map((x) => ({ a: m.start + x.a, b: m.start + x.b, set: x.set })); };
