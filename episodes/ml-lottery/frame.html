@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const B = await import('/pipeline/bean.js');
+(await import('/episodes/ml-gulf/cast.js')).registerCast(B); (await import('/episodes/ml-lottery/cast.js')).registerCast(B);
+const Z = await import('/episodes/ml-lottery/sets.js'); const q = location.search.slice(1) || 'tea';
+const W = 1080, H = 1920; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(50, W / H, 0.05, 900);
+const put = (sc, who, o, x, z, y = 0, s = 1) => { const c = K.card(who, o, { scale: s }); c.position.set(x, y, z); sc.add(c); return c; };
+let set, p, l, t = 2;
+if (q === 'tea') { set = Z.teaShopSet(); put(set.shop, 'chaya', { expr: 'smile', R: 'hold', propR: B.PROPS.glass }, 0.6, -0.9, 0.3); put(set.scene, 'seller', { expr: 'grin', R: 'holdUp', propR: B.PROPS.board, L: 'wave' }, 2.6, 2.6); put(set.scene, 'dasan', { expr: 'think', R: 'hold', propR: B.PROPS.newspaper }, -1.4, 1.6, 0.3); p = [1.2, 2.0, 8.5]; l = [0, 1.5, -1]; }
+if (q === 'teabox') { set = Z.teaShopSet(); set.setBox(1); p = [1.2, 2.4, 9.5]; l = [0, 2, -1]; }
+if (q === 'draw') { set = Z.drawSet(); set.setWheels(3, 0, [4, 3, 8, 2, 7, 1], [1, 1.2, 1.4, 1.6, 1.8, 2]); put(set.scene, 'kunju', { expr: 'proud', R: 'point', L: 'hip' }, -3.4, -4.2, 0.7); p = [0, 2.6, -0.6]; l = [0, 2.0, -5.2]; }
+if (q === 'chest') { set = Z.drawSet(); const c = Z.treasuryChest(); c.group.position.set(0, 0, 0); set.scene.add(c.group); c.setOpen(1); c.setFill(1); c.setCrown(true); p = [0, 1.8, 3.6]; l = [0, 0.8, 0]; }
+if (q === 'chestempty') { set = Z.drawSet(); const c = Z.treasuryChest(); set.scene.add(c.group); c.setOpen(0.7); c.setCobweb(true, 1); c.setLeak(1, 1); p = [0.4, 1.4, 3.2]; l = [0, 0.6, 0]; }
+set.life.forEach((f) => f(t)); cam.position.set(...p); cam.lookAt(...l); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, { focus: 6, aperture: 4, hazeAmt: 0.15, haze: 0xdfe9f2, sat: 1.1, contrast: 0.06, lift: 0.015, warm: 0.03, vignette: 0.3 });
+window.png = cv.toDataURL('image/png'); window.done = true;
+</script></body></html>
