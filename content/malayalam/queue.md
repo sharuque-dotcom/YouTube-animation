@@ -8,5 +8,6 @@
 | 4 | episodes/ml-colachel (Colachel 1741: the king who captured Europe's captain; youtube.json in that folder, code on branch travancore-kit-v2) | ep04-colachel.mp4 | covers/03-colachel.png | APPROVED 25 Nov: publish 28 Nov 6 pm Dubai |
 | 5 | episodes/ml-gulf (What if the Gulf boom never happened? Dasan/Vijayan swim ashore, Kuwait 1990 twist; youtube.json in that folder, code on branch gulf-boom) | ep05-gulf-boom.mp4 | covers/04-gulf-boom.png | APPROVED 26 Nov: publish 29 Nov 6 pm Dubai |
 | 6 | episodes/ml-kuwait (Kuwait 1990 airlift: 'Toyota Sunny', Gulf Part 2; youtube.json in that folder, code on branch gulf-boom) | ep06-kuwait-airlift.mp4 | covers/05-kuwait-airlift.png | APPROVED 26 Nov: publish 30 Nov 6 pm Dubai |
+| 7 | episodes/ml-lottery (What if the Kerala State Lottery never started? Kittunni 'adichu mole' hook, govt always wins; youtube.json in that folder, code on branch lottery) | ep07-kerala-lottery.mp4 | covers/06-kerala-lottery.png | APPROVED 26 Nov: publish 1 Dec 6 pm Dubai |
 
 Covers live in engilo covers/. Add the path in the Cover column when each episode is queued.
