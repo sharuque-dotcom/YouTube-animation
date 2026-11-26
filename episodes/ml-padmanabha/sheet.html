@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style></head><body><canvas id=c width=2000 height=1500></canvas><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const B = await import('/pipeline/bean.js'); (await import('/episodes/ml-colachel/cast.js')).registerCast(B); (await import('/episodes/ml-padmanabha/cast.js')).registerCast(B);
+const { drawBean, CAST, PROPS } = B;
+const c = document.getElementById('c'), x = c.getContext('2d'); const g = x.createLinearGradient(0, 0, 0, 1500); g.addColorStop(0, '#3a2a1a'); g.addColorStop(1, '#1a120c'); x.fillStyle = g; x.fillRect(0, 0, 2000, 1500);
+x.fillStyle = '#f0c23a'; x.textAlign = 'center'; x.font = "700 46px 'Oswald'"; x.fillText('PADMANABHASWAMY VAULT B: CAST', 1000, 1484);
+const row1 = [['sundar', { expr: 'stern', R: 'hold', propR: PROPS.petition, L: 'point' }], ['sundarHome', { expr: 'smile', R: 'hold', propR: PROPS.paper, L: 'hang' }], ['maharaja', { expr: 'proud', R: 'hold', propR: PROPS.sword, L: 'out' }], ['royal', { expr: 'smile', R: 'hold', propR: PROPS.lamp, L: 'hang' }]];
+const row2 = [['judge', { expr: 'stern', R: 'holdUp', propR: PROPS.gavel, L: 'hang' }], ['inspector', { expr: 'shock', R: 'holdUp', propR: PROPS.torch, L: 'out' }], ['auditor', { expr: 'smug', R: 'holdUp', propR: PROPS.report, L: 'hip' }], ['tantri', { expr: 'smile', R: 'hold', propR: PROPS.lamp, L: 'hold', propL: PROPS.cowrie }]];
+const put = (row, y) => row.forEach(([k, o], i) => { const cx = 250 + i * 500; x.fillStyle = 'rgba(255,210,120,.12)'; x.beginPath(); x.ellipse(cx, y - 260, 210, 330, 0, 0, 7); x.fill(); x.save(); x.translate(cx, y); x.scale(1.4, 1.4); drawBean(x, k, o); x.restore(); x.font = "700 30px 'Oswald'"; x.fillStyle = '#f6efe0'; x.fillText(CAST[k].name.toUpperCase(), cx, y + 46); });
+put(row1, 680); put(row2, 1380);
+window.png = c.toDataURL('image/png'); window.done = true;
+</script></body></html>
