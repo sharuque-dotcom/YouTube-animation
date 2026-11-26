@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const B = await import('/pipeline/bean.js');
+(await import('/episodes/ml-thumba/cast.js')).registerCast(B);
+const Z = await import('/episodes/ml-thumba/sets.js'); const base = await import('/episodes/ml-bean/sets.js');
+const q = location.search.slice(1) || 'beach'; const P = B.PROPS;
+const W = 540, H = 960; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(50, W / H, 0.05, 900);
+const put = (sc, who, o, x, z, y = 0, s = 1) => { const c = K.card(who, o, { scale: s }); c.position.set(x, y, z); sc.add(c); return c; };
+let set, p, l, t = 2, gr = { focus: 6, aperture: 4, hazeAmt: 0.15, haze: 0xdfe9f2, sat: 1.1, contrast: 0.06, lift: 0.015, warm: 0.03, vignette: 0.3 };
+const beach = () => Z.thumbaSet(base.beachSet());
+if (q === 'beach') { set = beach(); set.setEquator(1, 1); put(set.scene, 'kalam', { expr: 'beam', R: 'hold', L: 'hold' }, 4.4, 6.3); p = [0, 2.2, 14]; l = [8, 2.5, -2]; gr = { ...gr, focus: 10, aperture: 2 }; }
+if (q === 'bike') { set = beach(); set.bike.position.set(0, 0, 4); set.bike.rotation.y = 0.2; const k = put(set.scene, 'kalam', { expr: 'beam', R: 'point', L: 'hang', walk: 0.25 }, -0.6, 4.6); p = [1.2, 1.2, 8]; l = [4, 1.6, -3]; gr = { ...gr, focus: 4, aperture: 4 }; }
+if (q === 'pad') { set = beach(); put(set.scene, 'sarabhai', { expr: 'smile', R: 'hold', propR: P.clipboard, L: 'hip' }, -4.6, -3.6); put(set.scene, 'kalam', { expr: 'beam', R: 'point', L: 'hang' }, -3.4, -3.0); p = [-1.5, 2.4, 3]; l = [-8, 4.5, -9]; gr = { ...gr, focus: 7, aperture: 3 }; }
+if (q === 'launch') { set = beach(); set.setDusk(1); set.setLaunch(1.6); set.setCloud(0.6, 0); ['fisher', 'fisherwoman', 'fisherboy'].forEach((w, i) => put(set.scene, w, { expr: 'shock', R: 'point', L: 'mouth' }, 2 + i * 1.3, 4 + (i % 2))); p = [4, 1.8, 10]; l = [-8, 9, -12]; gr = { ...gr, warm: 0.06, focus: 10, aperture: 1.5 }; }
+if (q === 'cloud') { set = beach(); set.setDusk(1); set.setCloud(1, 0); p = [6, 2, 12]; l = [-12, 30, -60]; gr = { ...gr, warm: 0.08, focus: 30, aperture: 1 }; }
+if (q === 'house') { set = beach(); put(set.scene, 'sarabhai', { expr: 'smile', R: 'out', L: 'hip' }, 21.2, 7.4); put(set.scene, 'bishop', { expr: 'smile', R: 'point', L: 'hold', propL: P.bible }, 19.6, 6.6); p = [17, 1.9, 14]; l = [20.5, 2, 4]; gr = { ...gr, focus: 7, aperture: 3 }; }
+if (q === 'nave' || q === 'lab' || q === 'museum') { set = Z.churchSet(); if (q === 'lab') set.setLab(1); if (q === 'museum') set.setMuseum(1);
+  if (q === 'nave') { put(set.scene, 'bishop', { expr: 'smile', R: 'up', L: 'hold', propL: P.bible }, -3.4, -17, 1.3); ['fisher', 'fisherwoman', 'fisherboy', 'ammini', 'chaya', 'kannan'].forEach((w, i) => put(set.scene, w, { expr: 'think', R: 'hang', L: 'hang' }, (i % 2 ? 2.4 : -2.4) + (i % 3 - 1) * 0.8, -11 + Math.floor(i / 2) * 2.1)); p = [0, 2.6, 2]; l = [0, 2.2, -20]; }
+  if (q === 'lab') { put(set.scene, 'kalam', { expr: 'think', R: 'hold', propR: P.wrench, L: 'hip' }, -1, -10); put(set.scene, 'scientist', { expr: 'smile', R: 'chin', L: 'hang' }, 1.0, -7.6); p = [0.5, 2.4, 0]; l = [-1, 1.6, -14]; }
+  if (q === 'museum') { put(set.scene, 'meenu', { expr: 'beam', R: 'point', L: 'hang' }, 0.6, -9); p = [0, 2.2, 1]; l = [0, 3, -16]; }
+  gr = { ...gr, haze: 0xd8c0a0, warm: 0.05, focus: 9, aperture: 2 }; }
+set.life.forEach((f) => f(t)); cam.position.set(...p); cam.lookAt(...l); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, gr);
+window.png = cv.toDataURL('image/png'); window.done = true;
+</script></body></html>
