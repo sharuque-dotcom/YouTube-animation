@@ -9,5 +9,6 @@
 | 5 | episodes/ml-gulf (What if the Gulf boom never happened? Dasan/Vijayan swim ashore, Kuwait 1990 twist; youtube.json in that folder, code on branch gulf-boom) | ep05-gulf-boom.mp4 | covers/04-gulf-boom.png | APPROVED 26 Nov: publish 29 Nov 6 pm Dubai |
 | 6 | episodes/ml-kuwait (Kuwait 1990 airlift: 'Toyota Sunny', Gulf Part 2; youtube.json in that folder, code on branch gulf-boom) | ep06-kuwait-airlift.mp4 | covers/05-kuwait-airlift.png | APPROVED 26 Nov: publish 30 Nov 6 pm Dubai |
 | 7 | episodes/ml-lottery (What if the Kerala State Lottery never started? Kittunni 'adichu mole' hook, govt always wins; youtube.json in that folder, code on branch lottery) | ep07-kerala-lottery.mp4 | covers/06-kerala-lottery.png | APPROVED 26 Nov: publish 1 Dec 6 pm Dubai |
+| 8 | episodes/ml-padmanabha (What if Padmanabhaswamy temple's Vault B is opened? serpent door, 7-openings twist; youtube.json in that folder, code on branch padmanabha) | ep08-padmanabha-vault-b.mp4 | covers/07-padmanabha-vault-b.png | APPROVED 26 Nov: publish 2 Dec 6 pm Dubai |
 
 Covers live in engilo covers/. Add the path in the Cover column when each episode is queued.
