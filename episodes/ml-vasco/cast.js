@@ -74,7 +74,7 @@ export const NEW_CAST = {
 
 export const NEW_PROPS = {
   sugarBox: (ctx) => { ctx.beginPath(); ctx.rect(-26, -40, 56, 44); fs(ctx, '#c8a46a', 4); ctx.beginPath(); ctx.moveTo(-26, -40); ctx.lineTo(-14, -52); ctx.lineTo(42, -52); ctx.lineTo(30, -40); ctx.closePath(); fs(ctx, '#d8b47a', 3.5);
-    ctx.fillStyle = '#fbfaf6'; for (const [x, y] of [[-6, -56], [8, -60], [20, -56], [2, -54]]) { ctx.fillRect(x, y, 8, 8); } ctx.fillStyle = INK; ctx.font = "700 14px 'Oswald'"; ctx.textAlign = 'center'; ctx.fillText('AÇÚCAR', 2, -14); },
+    ctx.fillStyle = '#fbfaf6'; for (const [x, y] of [[-6, -56], [8, -60], [20, -56], [2, -54]]) { ctx.fillRect(x, y, 8, 8); } ctx.fillStyle = INK; ctx.font = "700 11px 'Oswald', 'Osw', sans-serif"; ctx.textAlign = 'center'; ctx.fillText('AÇÚCAR', 2, -14, 50); },
   honeyJar: (ctx) => { ctx.beginPath(); ctx.moveTo(-18, 2); ctx.quadraticCurveTo(-30, -30, -14, -52); ctx.lineTo(16, -52); ctx.quadraticCurveTo(32, -30, 20, 2); ctx.closePath(); fs(ctx, '#d8892a', 4); ctx.beginPath(); ctx.rect(-16, -62, 34, 10); fs(ctx, '#8a5a2a', 3.5);
     ctx.strokeStyle = 'rgba(255,240,180,.7)'; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(-12, -40); ctx.quadraticCurveTo(-16, -24, -10, -8); ctx.stroke(); },
   hat: (ctx) => { ctx.beginPath(); ctx.ellipse(8, -6, 34, 9, 0, 0, 7); fs(ctx, '#c8312c', 4); ctx.beginPath(); ctx.moveTo(-14, -8); ctx.bezierCurveTo(-16, -44, 32, -44, 30, -8); ctx.closePath(); fs(ctx, '#c8312c', 4); },
