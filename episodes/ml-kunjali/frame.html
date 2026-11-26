@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const B = await import('/pipeline/bean.js');
+(await import('/episodes/ml-colachel/cast.js')).registerCast(B); (await import('/episodes/ml-kunjali/cast.js')).registerCast(B);
+const Z = await import('/episodes/ml-kunjali/sets.js'); const base = await import('/episodes/ml-bean/sets.js'); const CO = await import('/episodes/ml-colachel/sets.js');
+const q = location.search.slice(1) || 'sea'; const P = B.PROPS;
+const W = 540, H = 960; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(50, W / H, 0.05, 900);
+const put = (sc, who, o, x, z, y = 0, s = 1) => { const c = K.card(who, o, { scale: s }); c.position.set(x, y, z); sc.add(c); return c; };
+let set, p, l, t = 2, gr = { focus: 6, aperture: 4, hazeAmt: 0.15, haze: 0xdfe9f2, sat: 1.1, contrast: 0.06, lift: 0.015, warm: 0.03, vignette: 0.3 };
+const sea = () => { const s = Z.seaSet(base.beachSet()); return s; };
+if (q === 'sea') { set = sea(); set.paroes.slice(0, 5).forEach((b, i) => { b.visible = true; b.position.set(-9 + i * 4.4, 0.25, -24 - (i % 2) * 5); b.rotation.y = 0.15 * i; });
+  put(set.scene, 'kunjali', { expr: 'proud', R: 'holdUp', propR: P.scimitar, L: 'point' }, 0.2, 1.2); put(set.scene, 'sailor', { expr: 'grin', R: 'fist', L: 'hang' }, -1.3, 0.4); put(set.scene, 'sailor2', { expr: 'beam', R: 'up', L: 'hang' }, 1.5, 0.5);
+  p = [0.4, 1.8, 6.5]; l = [0, 2.4, -30]; }
+if (q === 'dhow') { set = sea(); set.dhow.visible = true; set.setSink(0.35); set.dhow.position.set(2, set.dhow.position.y, -30); set.carracks[0].position.set(14, 0.6, -40); p = [-2, 2.6, -10]; l = [4, 2, -36]; gr = { ...gr, focus: 12, aperture: 2 }; }
+if (q === 'chaliyam') { set = sea(); put(set.scene, 'portSoldier', { expr: 'smug', R: 'rifle', propR: P.musket }, 15.2, -2.4); p = [8, 3, 6]; l = [16, 2, -6]; gr = { ...gr, focus: 11, aperture: 2 }; }
+if (q === 'ruin') { set = sea(); set.setRuin(0.75); put(set.scene, 'kunjali3', { expr: 'proud', R: 'holdUp', propR: P.scimitar, L: 'fist' }, 10.5, -0.5); put(set.scene, 'nair', { expr: 'angry', R: 'holdUp', propR: P.sword, L: 'hold', propL: P.shield }, 9.2, 0.3);
+  p = [7, 2.6, 6.5]; l = [15, 1.6, -6]; gr = { ...gr, focus: 7, aperture: 3 }; }
+if (q === 'kottakkal') { set = sea(); set.paroes.slice(0, 3).forEach((b, i) => { b.visible = true; b.position.set(-20 + i * 5, 0.25, -24 - i * 2); b.rotation.y = 0.4; }); put(set.scene, 'kunjali', { expr: 'smug', R: 'hip', L: 'hold', propL: P.telescope }, -9.6, 1.4); p = [-4, 2.2, 8]; l = [-14, 2.6, -8]; gr = { ...gr, focus: 10, aperture: 2 }; }
+if (q === 'goa') { set = Z.goaSet(); put(set.scene, 'portSoldier', { expr: 'stern', R: 'rifle', propR: P.musket }, -2.6, -6); put(set.scene, 'portSoldier', { expr: 'stern', R: 'rifle', propR: P.musket }, 2.6, -6); put(set.scene, 'viceroy', { expr: 'sly', R: 'hold', propR: P.treaty, L: 'hip' }, -4.4, -4.6);
+  p = [2, 3.4, 9]; l = [0, 4.5, -14]; gr = { ...gr, haze: 0xe8d8c8, warm: 0.03, focus: 10, aperture: 2 }; }
+if (q === 'saltbox') { set = Z.goaSet(); put(set.scene, 'portSoldier', { expr: 'smug', R: 'point', L: 'hip' }, 3.2, 5.6); p = [2.6, 1.7, 9.2]; l = [4.6, 0.8, 4.6]; gr = { ...gr, haze: 0xe0c0a0, warm: 0.06, focus: 4, aperture: 4 }; }
+if (q === 'palace') { set = Z.dressPalace(CO.fortSet()); put(set.scene, 'zamorin', { expr: 'sly', R: 'out', L: 'hip' }, -0.6, -2.2); put(set.scene, 'viceroy', { expr: 'smug', R: 'out', L: 'hold', propL: P.treaty }, 0.7, -2.0); put(set.scene, 'nair', { expr: 'stern', R: 'holdUp', propR: P.sword }, -2.4, -3.2);
+  p = [0.2, 1.8, 3.2]; l = [0, 1.7, -4]; gr = { ...gr, focus: 5.2, aperture: 4, warm: 0.05 }; }
+if (q === 'navy') { set = Z.navySet(); put(set.scene, 'navy', { expr: 'proud', R: 'wave', L: 'hang' }, 1.6, -2.2); p = [1.2, 2.4, 13]; l = [0, 5, -6]; }
+set.life.forEach((f) => f(t)); cam.position.set(...p); cam.lookAt(...l); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, gr);
+window.png = cv.toDataURL('image/png'); window.done = true;
+</script></body></html>
