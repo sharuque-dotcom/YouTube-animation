@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const B = await import('/pipeline/bean.js');
+(await import('/episodes/ml-gulf/cast.js')).registerCast(B); (await import('/episodes/ml-colachel/cast.js')).registerCast(B); (await import('/episodes/ml-padmanabha/cast.js')).registerCast(B);
+const Z = await import('/episodes/ml-padmanabha/sets.js'); const q = location.search.slice(1) || 'temple'; const P = B.PROPS;
+const W = 1080, H = 1920; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(50, W / H, 0.05, 900);
+const put = (sc, who, o, x, z, y = 0, s = 1) => { const c = K.card(who, o, { scale: s }); c.position.set(x, y, z); sc.add(c); return c; };
+let set, p, l, t = 2, gr = { focus: 6, aperture: 4, hazeAmt: 0.15, haze: 0xdfe9f2, sat: 1.1, contrast: 0.06, lift: 0.015, warm: 0.03, vignette: 0.3 };
+if (q === 'temple') { set = Z.templeSet(); put(set.scene, 'devotee', { expr: 'smile', R: 'clap', L: 'clap' }, -1.2, 6); put(set.scene, 'tantri', { expr: 'smile', R: 'hold', propR: P.lamp }, 1.4, 5.5); p = [0, 2.6, 27]; l = [0, 8, -6]; gr = { ...gr, focus: 20, aperture: 1.5, haze: 0xf0b890, warm: 0.05 }; }
+if (q === 'dedicate') { set = Z.templeSet(); put(set.scene, 'maharaja', { expr: 'proud', R: 'out', L: 'clap' }, 0, -1.6); p = [1.4, 2.4, 4.2]; l = [0, 2.6, -4]; gr = { ...gr, focus: 5.5, haze: 0xf0b890, warm: 0.05 }; }
+if (q === 'corridor') { set = Z.vaultSet(); set.setDoors(1, 'ACDEF'); put(set.scene, 'inspector', { expr: 'shock', R: 'holdUp', propR: P.torch, L: 'out' }, 0.6, -3); put(set.scene, 'inspector', { expr: 'beam', R: 'point', L: 'hip' }, -0.8, -1.2); p = [0.3, 1.9, 3.5]; l = [0, 1.5, -20]; gr = { ...gr, focus: 7, aperture: 3, haze: 0x1a120c, hazeAmt: 0.25, warm: 0.04, vignette: 0.45 }; }
+if (q === 'doorB') { set = Z.vaultSet(); set.setGrille(1); set.setWood(0.85); set.setEyes(1); put(set.scene, 'inspector', { expr: 'nervous', R: 'holdUp', propR: P.torch, L: 'out' }, 1.3, -18.4); p = [0.2, 1.7, -14.6]; l = [0, 1.6, -20.3]; gr = { ...gr, focus: 5.5, aperture: 4, haze: 0x1a120c, hazeAmt: 0.2, warm: 0.04, vignette: 0.5 }; }
+if (q === 'serpents') { set = Z.vaultSet(); set.setGrille(1); set.setWood(1); set.setEyes(1); p = [0, 2.0, -17.6]; l = [0, 2.0, -20.4]; gr = { ...gr, focus: 2.8, aperture: 6, haze: 0x1a120c, hazeAmt: 0.2, warm: 0.04, vignette: 0.55 }; }
+if (q === 'treasure') { set = Z.treasureSet(); set.setGlow(1); put(set.scene, 'inspector', { expr: 'shock', R: 'holdUp', propR: P.torch, L: 'out' }, 2.6, 2.4); p = [0.4, 2.2, 7.4]; l = [0, 1.2, -2]; gr = { ...gr, focus: 7, aperture: 3, haze: 0x1a120c, hazeAmt: 0.2, warm: 0.05, vignette: 0.4 }; }
+if (q === 'court') { set = Z.courtSet(); put(set.scene, 'judge', { expr: 'stern', R: 'holdUp', propR: P.gavel }, 0, -3.3, 0.5); put(set.scene, 'judge', { expr: 'neutral', R: 'hold', propR: P.paper }, -2.4, -3.3, 0.5); put(set.scene, 'judge', { expr: 'think', R: 'chin' }, 2.4, -3.3, 0.5); put(set.scene, 'sundar', { expr: 'stern', R: 'point', L: 'hold', propL: P.petition }, 1.9, 1.0); p = [-1.2, 2.2, 6.2]; l = [0.4, 1.8, -2.5]; gr = { ...gr, focus: 5, aperture: 3 }; }
+if (q === 'pathayam') { set = Z.tharavadSet(); set.setOpen(1); set.setGold(1); put(set.scene, 'ammini', { expr: 'shock', R: 'up', L: 'up' }, 1.9, -0.6); p = [1.6, 2.4, 4.4]; l = [0.4, 1.1, -1.4]; gr = { ...gr, focus: 4.5, aperture: 4, warm: 0.05 }; }
+set.life.forEach((f) => f(t)); cam.position.set(...p); cam.lookAt(...l); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, gr);
+window.png = cv.toDataURL('image/png'); window.done = true;
+</script></body></html>
