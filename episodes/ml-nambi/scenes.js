@@ -130,11 +130,11 @@ export const scenes = { main, end };
 // ------------------------------------------------------------------ cast on the sets
 let ALL = [];
 function buildCast() { const A = (set, who, x, z, y = 0, s = 1) => { const a = actor(S[set].scene, who, x, z, y, s); ALL.push(a); return a; };
-  const l = S.lab; l.nam = A('lab', 'nambi', -1.6, 0.4); l.pol = A('lab', 'police', 1.8, 1.4); l.con = A('lab', 'constable', 2.9, 0.8); l.rep = A('lab', 'reporter', -3.4, 1.6); l.old = A('lab', 'nambiOld', -1.6, 0.4);
+  const l = S.lab; l.nam = A('lab', 'nambi', -0.9, 1.4); l.pol = A('lab', 'police', 0.8, 2.0); l.con = A('lab', 'constable', 1.7, 1.2); l.rep = A('lab', 'reporter', -1.9, 2.4); l.old = A('lab', 'nambiOld', -0.9, 1.4);
   const st = S.station; st.nam = A('station', 'nambi', 4.0, -3.4); st.pol = A('station', 'police', -0.6, -2.2); st.con = A('station', 'constable', 1.4, -1.6); st.cbi = A('station', 'cbi', -2.6, 0.4); st.rep = A('station', 'reporter', -3.6, 1.0);
   const te = S.tea; te.n1 = A('tea', 'neighbour', -1.0, 1.2); te.n2 = A('tea', 'neighbour2', 0.8, 1.4); te.rep = A('tea', 'reporter2', 2.2, 0.8); te.chaya = A('tea', 'chaya', -2.4, 0.6);
-  const ki = S.kitchen; ki.cook = A('kitchen', 'cook', 1.0, -2.0); ki.n1 = A('kitchen', 'neighbour', -2.6, -0.6); ki.n2 = A('kitchen', 'neighbour2', -1.6, -0.2); ki.con = A('kitchen', 'constable', -0.7, -0.8);
-  const co = S.court; co.j = [A('court', 'judge', 0, -3.2, 0.5), A('court', 'judge', -2.4, -3.2, 0.5), A('court', 'judge', 2.4, -3.2, 0.5)]; co.old = A('court', 'nambiOld', 1.2, 0.6); co.cbi = A('court', 'cbi', -1.6, 0.9);
+  const ki = S.kitchen; ki.cook = A('kitchen', 'cook', 1.0, -1.8); ki.n1 = A('kitchen', 'neighbour', -1.2, -0.6); ki.n2 = A('kitchen', 'neighbour2', -0.3, 0.2); ki.con = A('kitchen', 'constable', -2.0, -1.4);
+  const co = S.court; co.j = [A('court', 'judge', 0, -3.2, 0.5), A('court', 'judge', -2.4, -3.2, 0.5), A('court', 'judge', 2.4, -3.2, 0.5)]; co.old = A('court', 'nambiOld', 0.2, 2.2); co.cbi = A('court', 'cbi', -1.6, 0.9);
 }
 function resetProps() { ALL.forEach((x) => { x.c.visible = false; x.c.position.set(...x.base); });
   S.lab.setFire(0); S.lab.setFrost(1); S.station.setStory(0); S.station.setDays(0); S.pad.setLaunch(0); S.kitchen.setCold(1); OV = {}; }
@@ -152,26 +152,26 @@ function rawShots(s) {
   const l = S?.lab, st = S?.station, te = S?.tea, ki = S?.kitchen, co = S?.court, pd = S?.pad;
   const push = (p0, lk, r0 = 0.03, f = 50, d = [0, 0, -0.6]) => [[0, p0, lk, r0, f], [0.35, p0.map((x, q) => x + d[q] * 0.4), lk, 0.01, f - 2], [2.2, p0.map((x, q) => x + d[q]), lk, -0.02, f - 4]];
   const labWide = push([0, 2.3, 8.2], [0, 1.8, -2], 0.03, 52, [0, 0, -0.9]);
-  const labNam = push([-1.2, 1.9, 3.6], [-1.5, 1.7, 0.2], 0.03, 50, [0, 0, -0.5]);
+  const labNam = push([-0.6, 1.6, 4.8], [-0.9, 1.25, 1.4], 0.03, 50, [0, 0, -0.5]);
   const labEng = push([0.4, 2.2, 3.4], [0, 2.0, -2], 0.03, 50, [0, -0.1, -0.5]);
   const stWide = push([0.4, 2.4, 7.4], [0.2, 2.0, -3], 0.03, 52, [0, 0, -0.8]);
-  const stBoard = push([-1.6, 2.8, 2.4], [-2.2, 2.8, -4.9], 0.02, 50, [0, 0, -0.5]);
+  const stBoard = [[0, [-3.0, 2.8, 2.4], [-3.0, 2.8, -4.9], 0.02, 50], [2.0, [-0.5, 2.8, 2.2], [-0.5, 2.8, -4.9], -0.01, 48]];
   const stCell = push([3.2, 1.9, 2.6], [3.9, 1.6, -3.6], 0.03, 50, [0, 0, -0.5]);
   const stPol = push([-0.2, 2.0, 3.2], [-1.0, 1.7, -1.0], 0.03, 50, [0, 0, -0.5]);
   const teaCam = push([0, 2.0, 7.4], [0, 1.6, -1], 0.03, 50, [0, 0, -0.7]);
   const teaClose = push([-0.6, 1.9, 4.6], [-0.8, 1.7, 1.0], 0.03, 48, [0, 0, -0.5]);
-  const kiCam = push([0, 2.0, 4.8], [0, 1.6, -3], 0.03, 50, [0, 0, -0.6]);
+  const kiCam = push([0, 2.3, 6.6], [0, 1.5, -2.5], 0.03, 52, [0, 0, -0.6]);
   const padCam = push([6, 3, 16], [-1, 7, -14], 0.02, 52, [-0.4, 0.2, -1.2]);
   const padLaunch = [[0, [6, 2.5, 20], [0, 6, -10], 0.02, 52], [3.5, [6, 2.5, 20], [0, 20, -10], 0, 56]];
   const coCam = push([0, 2.2, 6.4], [0, 1.9, -3], 0.03, 52, [0, 0, -0.8]);
-  const coOld = push([1.0, 1.9, 3.6], [1.2, 1.7, 0.6], 0.03, 48, [0, 0, -0.5]);
+  const coOld = push([0.1, 1.6, 5.8], [0.2, 1.3, 2.2], 0.03, 48, [0, 0, -0.5]);
   const out = []; const add = (x) => { if (x.a != null && x.b != null && x.b > x.a) out.push(x); };
   const nam94 = (t, o = {}) => pose(l.nam, { expr: 'proud', R: 'point', L: 'hold', propL: 'blueprint', ...o }, t);
   const cops = (t, ex = 'smug') => { pose(l.pol, { expr: ex, R: 'point', L: 'hold', propL: 'lathi' }, t); pose(l.con, { expr: 'stern', R: 'hold', propR: 'lathi', L: 'hip' }, t); };
   // ---- 1. HOOK: handcuffs on India's rocket-engine scientist; treason; 1994 Thiruvananthapuram; what if nobody had framed him?
   if (I.hook >= 0) { const i = I.hook, wKa = w(i, 'കയ്യിൽ'), wKu = w(i, 'കുറ്റം'), wAy = w(i, 'ആയിരത്തി'), wAn = w(i, 'അന്ന്'), wKt = w(i, 'കുടുക്കിയില്ലായിരുന്നെങ്കിലോ'), end = L(i + 1);
     add(LB({ a: 0, b: wKa - 0.15, keys: labWide, act: (t) => { nam94(t, { expr: 'shock', R: 'hold', propR: 'handcuffs', L: 'hold', propL: null }); cops(t); pose(l.rep, { expr: 'grin', R: 'holdUp', propR: 'camera', L: 'hang' }, t); OV.flashes = { t0: 0.05 }; OV.tag = { t0: 0.1, txt: 'റോക്കറ്റ് ശാസ്ത്രജ്ഞൻ', sub: 'ISRO · CRYOGENIC ENGINE' }; } }));
-    add(LB({ a: wKa - 0.15, b: wAy - 0.1, shake: wKa + 0.2, keys: labNam, act: (t) => { nam94(t, { expr: 'shock', R: 'hold', propR: 'handcuffs', L: 'hold', propL: null }); OV.cuffs = { t0: wKa }; if (t > wKu - 0.1) OV.stamp = { t0: wKu, txt: 'രാജ്യദ്രോഹം', sub: 'THE CHARGE' }; } }));
+    add(LB({ a: wKa - 0.15, b: wAy - 0.1, shake: wKa + 0.2, keys: labNam, act: (t) => { nam94(t, { expr: 'shock', R: 'hold', propR: 'handcuffs', L: 'hold', propL: null }); OV.cuffs = { t0: wKa }; if (t > wKu - 0.1) OV.cuffs = null, OV.stamp = { t0: wKu, txt: 'രാജ്യദ്രോഹം', sub: 'THE CHARGE' }; } }));
     add(ST({ a: wAy - 0.1, b: wAn - 0.1, keys: stWide, act: (t) => { pose(st.nam, { expr: 'sad', R: 'hang', L: 'hang' }, t); pose(st.pol, { expr: 'smug', R: 'hip', L: 'hold', propL: 'lathi' }, t); pose(st.con, { expr: 'stern', R: 'hold', propR: 'lathi', L: 'hang' }, t); st.setDays(0); OV.cal = { t0: wAy, top: 'THIRUVANANTHAPURAM', big: '1994' }; } }));
     add(ST({ a: wAn - 0.1, b: wKt + 0.25, keys: stCell, act: (t) => { pose(st.nam, { expr: 'sad', R: 'hang', L: 'hang', look: 1 }, t); OV.tag = { t0: wAn, txt: 'നമ്പി നാരായണൻ', sub: 'ISRO SCIENTIST' }; } }));
     add(PD({ a: wKt + 0.25, b: end, flash: wKt + 0.1, night: true, keys: padCam, act: (t) => { OV.big = { t0: wKt + 0.25, txt: '?', sub: 'WHAT IF?' }; } })); }
@@ -197,7 +197,7 @@ function rawShots(s) {
       OV.pot = { t0: wIt }; if (acc) OV.bubble = { t0: wMo, txt: '"കള്ളൻ!"', x: 0.32, y: 0.5 }; } })); }
   // ---- 6. WAIT...: within a year and a half the CBI: the whole case is false, no evidence
   if (I.wait >= 0) { const i = I.wait, wSi = w(i, 'സിബിഐ'), wKe = w(i, 'കേസ്'), end = L(i + 1);
-    add(ST({ a: L(i), b: wKe - 0.1, keys: stWide, act: (t) => { st.setStory(1); pose(st.cbi, { expr: 'stern', R: 'hold', propR: 'file', L: 'hip' }, t); at(st.cbi, -1.2 + Math.min(0, (t - wSi) * 0.8), 0, 0.2); pose(st.pol, { expr: 'nervous', R: 'hang', L: 'hold', propL: 'lathi' }, t); OV.rewind = { t0: L(i) }; OV.tag = { t0: wSi, txt: 'സിബിഐ', sub: 'CBI · APRIL 1996' }; } }));
+    add(ST({ a: L(i), b: wKe - 0.1, keys: stWide, act: (t) => { st.setStory(1); pose(st.cbi, { expr: 'stern', R: 'hold', propR: 'file', L: 'hip' }, t); at(st.cbi, lerp(-1.6, -0.3, ez(clamp((t - L(i)) / 1.2, 0, 1))), 0, 0.6); pose(st.pol, { expr: 'nervous', R: 'hang', L: 'hold', propL: 'lathi' }, t); OV.rewind = { t0: L(i) }; OV.tag = { t0: wSi, txt: 'സിബിഐ', sub: 'CBI · APRIL 1996' }; } }));
     add(ST({ a: wKe - 0.1, b: end, shake: wKe + 0.3, keys: stBoard, act: (t) => { st.setStory(1); OV.stamp = { t0: wKe, txt: 'കേസ് കള്ളം!', sub: 'NO EVIDENCE' }; } })); }
   // ---- 7. THE COST: lost years didn't come back; own cryogenic engine flew only in 2014
   if (I.lost >= 0) { const i = I.lost, wNm = w(i, 'നമ്മുടെ'), wRa = w(i, 'രണ്ടായിരത്തി'), end = L(i + 1);
@@ -269,7 +269,7 @@ function follow(g, t, t0, alpha) { const p = pop(t, t0, 0.3); if (p <= 0) return
 function drawCuffs(g, open = 0, col = '#c8ccd4') { g.lineCap = 'round'; for (const s of [-1, 1]) { g.save(); g.translate(s * 150, 0); g.rotate(s * open * 0.9);
     g.lineWidth = 46; g.strokeStyle = '#2a1c17'; g.beginPath(); g.arc(0, 0, 105, -Math.PI * 0.5 + (s > 0 ? 0 : 0) , Math.PI * 1.5 - open * 1.2); g.stroke(); g.lineWidth = 28; g.strokeStyle = col; g.stroke(); g.restore(); }
   g.lineWidth = 22; g.strokeStyle = '#2a1c17'; g.beginPath(); for (let k = 0; k < 4; k++) { g.moveTo(-50 + k * 33, -10); g.lineTo(-30 + k * 33, 10); } g.stroke(); g.lineWidth = 10; g.strokeStyle = col; g.stroke(); }
-function cuffs(g, t, t0, alpha) { const k = t - t0; if (k < 0) return; const u = ezo(clamp(k / 0.25, 0, 1)); g.save(); g.globalAlpha = alpha * Math.min(1, k * 6); g.translate(W / 2, 1120); g.rotate(-0.08); const sc = lerp(2.2, 1, u); g.scale(sc, sc); drawCuffs(g, 1 - u);
+function cuffs(g, t, t0, alpha) { const k = t - t0; if (k < 0) return; const u = ezo(clamp(k / 0.25, 0, 1)); g.save(); g.globalAlpha = alpha * Math.min(1, k * 6); g.translate(W / 2, 1380); g.rotate(-0.08); const sc = lerp(2.2, 1, u); g.scale(sc, sc); drawCuffs(g, 1 - u);
   if (k > 0.25 && k < 0.6) { g.strokeStyle = '#f6d24a'; g.lineWidth = 10; for (let a = 0; a < 8; a++) { g.beginPath(); g.moveTo(Math.cos(a) * 240, Math.sin(a) * 160); g.lineTo(Math.cos(a) * 320, Math.sin(a) * 220); g.stroke(); } }
   text(g, 'ക്ലിക്ക്!', 0, 220, { size: 90, color: '#f6d24a', stroke: '#2a1c17', strokeWidth: 18 }); g.restore(); }
 function cuffsGone(g, t, t0, alpha) { const k = t - t0; if (k < 0 || k > 1.6) return; g.save(); g.globalAlpha = alpha * (k < 1 ? 1 : 1 - (k - 1) / 0.6); g.translate(W / 2, 1150 - k * 260); g.rotate(k * 0.6); g.scale(1 + k * 0.4, 1 + k * 0.4); drawCuffs(g, Math.min(1, k * 2));
@@ -293,7 +293,7 @@ function building(g, t, t0, alpha) { const p = pop(t, t0, 0.3); if (p <= 0) retu
 function recipe(g, t, t0, alpha) { const p = pop(t, t0, 0.35); if (p <= 0) return; g.save(); g.globalAlpha = alpha * p; g.translate(W / 2, 1450); g.rotate(-0.05); g.scale(0.8 + 0.2 * p, 0.8 + 0.2 * p);
   card(g, 860, 280, '#fbf6e6'); text(g, 'ബിരിയാണി രഹസ്യക്കൂട്ട്', 0, -60, { size: 66, color: '#8a1e1e', maxWidth: 800 }); text(g, 'ഇതുവരെ ഉണ്ടാക്കിയിട്ടില്ല! 🍲❌', 0, 50, { size: 54, color: '#2a1c17', maxWidth: 800 }); g.restore(); }
 function years(g, t, o, alpha) { const p = pop(t, o.t0, 0.3); if (p <= 0) return; const y = Math.round(lerp(1994, 2014, ezo(clamp((t - o.t0) / (o.t1 - o.t0), 0, 1)))); calendar(g, t, { t0: o.t0, top: 'വർഷങ്ങൾ...', big: String(y) }, alpha); }
-function quote(g, t, o, alpha) { const p = pop(t, o.t0, 0.3); if (p <= 0) return; g.save(); g.globalAlpha = alpha * p; g.translate(W / 2, 1440); g.rotate(-0.03); g.scale(0.8 + 0.2 * p, 0.8 + 0.2 * p);
+function quote(g, t, o, alpha) { const p = pop(t, o.t0, 0.3); if (p <= 0) return; g.save(); g.globalAlpha = alpha * p; g.translate(W / 2, 1120); g.rotate(-0.03); g.scale(0.8 + 0.2 * p, 0.8 + 0.2 * p);
   card(g, 900, 300, '#ffffff', 40); text(g, '❝', -380, -90, { font: 'serif', size: 120, color: '#c8312c' }); text(g, o.txt, 0, -30, { size: 84, color: '#2a1c17', maxWidth: 780 }); text(g, o.sub, 0, 80, { font: "'Oswald'", weight: 700, size: 48, color: '#8a1e1e', maxWidth: 800 }); g.restore(); }
 function yesno(g, t, t0, alpha) { [['അതെ', '#2f8a4a', '✅'], ['അല്ല', '#c8312c', '❌']].forEach(([lbl, col, ic], j) => { const p = pop(t, t0 + j * 0.5, 0.3); if (p <= 0) return; g.save(); g.globalAlpha = alpha * p; g.translate(W / 2 + (j ? 250 : -250), 1340); g.rotate(j ? 0.05 : -0.05); g.scale(0.8 + 0.2 * p, 0.8 + 0.2 * p);
   card(g, 440, 360, '#f4ecd6'); text(g, ic, 0, -60, { font: 'sans-serif', size: 120 }); g.fillStyle = col; g.beginPath(); g.roundRect(-200, 60, 400, 100, 20); g.fill(); g.stroke(); text(g, lbl, 0, 112, { size: 64, color: '#fff', maxWidth: 380 }); g.restore(); }); }
