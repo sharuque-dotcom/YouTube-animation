@@ -14,4 +14,6 @@
 | 10 | episodes/ml-thumba (What if the bishop had said no? Thumba 1963: rocket on a bicycle into a church, the Sunday 'Amen', first-countdown callback; youtube.json in that folder, code on branch thumba) | ep10-thumba-rocket.mp4 | covers/09-thumba-rocket.png | APPROVED (owner, thread 26 Nov): publish 4 Dec 6 pm Dubai |
 | 11 | episodes/ml-vasco (What if the Zamorin had sent Vasco da Gama back? the court laughs at the gift, trade allowed anyway, one box of sugar = 400 years, question + follow ending; youtube.json in that folder, code on branch vasco) | ep11-vasco-da-gama.mp4 | covers/10-vasco-da-gama.png | APPROVED (owner, thread 26 Nov): publish 5 Dec 6 pm Dubai |
 
+Title rule: sequel titles never start with "Part N" / "ഭാഗം N"; lead with the what-if hook and put any series mark at the end (see PUBLISHING.md, Title rules).
+
 Covers live in engilo covers/. Add the path in the Cover column when each episode is queued.

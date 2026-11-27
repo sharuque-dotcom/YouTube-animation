@@ -13,6 +13,13 @@ One Short a day. Flow for each video:
 
 Metadata for each video lives in `<episode>/youtube.json` (title, description, tags).
 
+## Title rules (added 27 Nov 2026)
+- **Sequel titles never start with "Part N" / "ഭാഗം N".** Lead with the episode's own bold what-if hook so a Shorts-feed viewer who never saw Part 1 still gets it in the first glance. A series mark is fine at the end, before #shorts, e.g. `(Pt 2)`. Why: YouTube Studio flagged Travancore Part 2 (59% stayed-to-watch vs 60–67% on earlier Shorts) because "Part 2" up front makes new viewers feel they missed something. It was retitled to `ഗൾഫുകാർ ജോലിക്ക് തിരുവിതാംകൂറിലേക്ക് വന്നിരുന്നെങ്കിൽ? 🐚 If Travancore Existed Today (Pt 2) #shorts`.
+- The spoken opening of a sequel must also stand alone: a bold what-if statement, not "last time we saw...".
+- Pre-1956 states (Travancore, Cochin, Malabar) are not "Kerala": no "Kerala" framing or size words ("small kingdom") for them in Malayalam or English titles. Kerala state was formed in 1956.
+- YouTube titles max out at 100 characters (Malayalam letters with their vowel signs count as several). Check with `python3 -c "print(len('<title>'))"`.
+- Series linking: when a sequel goes up, add its link to the earlier part's description and post a comment on each part linking to the other, ending with an open question. Pin both comments (one tap in YouTube Studio or the app: comment ⋮ → Pin; the API can't pin).
+
 ## Keeping the engilo repo safe (added 27 Nov 2026)
 On 26 Nov a commit that added ep11 (bb720b6) was made from a clone that didn't have the other files, so it deleted every earlier MP4 and cover from engilo main, and the 27 Nov upload had nothing to fetch. Restored in e06bace.
 - To add a video or cover to engilo, clone with `git clone --filter=blob:none --depth 3` (full checkout, so the other files stay), `git add` only the new files, and check `git show --stat HEAD` lists only additions before pushing. Never commit from an empty or sparse checkout, and never use `git add -A` there.
