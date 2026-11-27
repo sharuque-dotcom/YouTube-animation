@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style></head><body><canvas id=c width=2500 height=1500></canvas><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const B = await import('/pipeline/bean.js'); (await import('/episodes/ml-ems/cast.js')).registerCast(B);
+const { drawBean, CAST, PROPS } = B;
+const c = document.getElementById('c'), x = c.getContext('2d'); const g = x.createLinearGradient(0, 0, 0, 1500); g.addColorStop(0, '#5a0e12'); g.addColorStop(0.6, '#9a1c1e'); g.addColorStop(1, '#2a0c10'); x.fillStyle = g; x.fillRect(0, 0, 2500, 1500);
+x.fillStyle = '#f6efe0'; x.textAlign = 'center'; x.font = "700 46px 'Oswald'"; x.fillText('EMS GOVERNMENT 1957: CAST', 1250, 1484);
+const row1 = [['ems', { expr: 'proud', R: 'hold', propR: PROPS.notice, L: 'hold', propL: PROPS.ballot }], ['nehru', { expr: 'stern', R: 'hold', propR: PROPS.order356, L: 'hip' }], ['mannathu', { expr: 'angry', R: 'hold', propR: PROPS.whiteFlag, L: 'point' }], ['priest', { expr: 'stern', R: 'point', L: 'hang' }], ['leaguer', { expr: 'angry', R: 'hold', propR: PROPS.greenFlag, L: 'hip' }], ['congress', { expr: 'smug', R: 'hold', propR: PROPS.triFlag, L: 'hang' }]];
+const row2 = [['landlord', { expr: 'angry', R: 'hold', propR: PROPS.umbrella, L: 'hip' }], ['farmer', { expr: 'beam', R: 'hold', propR: PROPS.redFlag, L: 'hold', propL: PROPS.plough }], ['teacher', { expr: 'smile', R: 'hold', propR: PROPS.payEnv, L: 'hold', propL: PROPS.book }], ['police', { expr: 'stern', R: 'hold', propR: PROPS.lathi, L: 'hip' }], ['umpire', { expr: 'stern', R: 'up', L: 'hang' }], ['batter', { expr: 'proud', R: 'hold', propR: PROPS.bat, L: 'hip' }]];
+const put = (row, y) => row.forEach(([k, o], i) => { const cx = 210 + i * 416; x.fillStyle = 'rgba(255,230,190,.14)'; x.beginPath(); x.ellipse(cx, y - 260, 190, 330, 0, 0, 7); x.fill(); x.save(); x.translate(cx, y); x.scale(1.3, 1.3); drawBean(x, k, o); x.restore(); x.font = "700 30px 'Oswald'"; x.fillStyle = '#f6efe0'; x.fillText(CAST[k].name.toUpperCase(), cx, y + 46); });
+put(row1, 680); put(row2, 1380);
+window.png = c.toDataURL('image/png'); window.done = true;
+</script></body></html>

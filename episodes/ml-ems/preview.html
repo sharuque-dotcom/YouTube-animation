@@ -1,0 +1,11 @@
+<!doctype html><html><head><meta charset="utf-8">
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE;
+const [mod, fn] = location.search.slice(1).split('.');
+const M = await import(`/episodes/${mod}/sets.js`); const set = M[fn]();
+const W = 540, H = 960; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(52, W / H, 0.05, 900);
+set.life.forEach((f) => f(2)); cam.position.set(0, 2.3, 8); cam.lookAt(0, 1.8, -2); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, { focus: 8, aperture: 4, hazeAmt: 0.1, haze: 0xdfe9f2, sat: 1.05, contrast: 0.06, lift: 0.015, warm: 0.03, vignette: 0.3 });
+window.png = cv.toDataURL('image/png'); window.done = true;
+</script></body></html>
