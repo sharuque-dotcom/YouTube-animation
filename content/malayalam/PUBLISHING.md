@@ -12,3 +12,9 @@ One Short a day. Flow for each video:
 7. **Log**: add the video ID and date to `content/malayalam/published.md`.
 
 Metadata for each video lives in `<episode>/youtube.json` (title, description, tags).
+
+## Keeping the engilo repo safe (added 27 Nov 2026)
+On 26 Nov a commit that added ep11 (bb720b6) was made from a clone that didn't have the other files, so it deleted every earlier MP4 and cover from engilo main, and the 27 Nov upload had nothing to fetch. Restored in e06bace.
+- To add a video or cover to engilo, clone with `git clone --filter=blob:none --depth 3` (full checkout, so the other files stay), `git add` only the new files, and check `git show --stat HEAD` lists only additions before pushing. Never commit from an empty or sparse checkout, and never use `git add -A` there.
+- The daily task checks that today's MP4 and cover return HTTP 200 on raw.githubusercontent.com before uploading. If one is missing, it restores it from engilo history (the last commit that has it) and then uploads.
+- Safety net: a second scheduled task at 18:25 Dubai checks the channel (YouTube API search on UCqIf5JWztv5T1CSNQMGBa_A) for today's Short. If it isn't live, it fixes the cause and uploads it, then reports in the project.
