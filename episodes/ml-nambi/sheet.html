@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style></head><body><canvas id=c width=2500 height=1500></canvas><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const B = await import('/pipeline/bean.js'); (await import('/episodes/ml-nambi/cast.js')).registerCast(B);
+const { drawBean, CAST, PROPS } = B;
+const c = document.getElementById('c'), x = c.getContext('2d'); const g = x.createLinearGradient(0, 0, 0, 1500); g.addColorStop(0, '#24345a'); g.addColorStop(0.6, '#4a6a8a'); g.addColorStop(1, '#2a2430'); x.fillStyle = g; x.fillRect(0, 0, 2500, 1500);
+x.fillStyle = '#f6efe0'; x.textAlign = 'center'; x.font = "700 46px 'Oswald'"; x.fillText('ISRO SPY CASE 1994: CAST', 1250, 1484);
+const row1 = [['nambi', { expr: 'proud', R: 'hold', propR: PROPS.engineModel, L: 'hold', propL: PROPS.blueprint }], ['nambi', { expr: 'shock', R: 'hold', propR: PROPS.handcuffs, L: 'hold' }], ['police', { expr: 'smug', R: 'hold', propR: PROPS.lathi, L: 'point' }], ['reporter', { expr: 'grin', R: 'holdUp', propR: PROPS.camera, L: 'hang' }], ['reporter2', { expr: 'shock', R: 'hold', propR: PROPS.newspaper, L: 'hold', propL: PROPS.notepad }], ['shadowWoman', { R: 'hang', L: 'hang' }]];
+const row2 = [['neighbour', { expr: 'angry', R: 'point', L: 'hip' }], ['neighbour2', { expr: 'sly', R: 'mouth', L: 'hang' }], ['cbi', { expr: 'stern', R: 'hold', propR: PROPS.file, L: 'hip' }], ['judge', { expr: 'stern', R: 'point', L: 'hang' }], ['nambiOld', { expr: 'proud', R: 'hold', propR: PROPS.cheque, L: 'hold', propL: PROPS.medal }], ['cook', { expr: 'nervous', R: 'hold', propR: PROPS.ladle, L: 'hold', propL: PROPS.emptyPot }]];
+const put = (row, y) => row.forEach(([k, o], i) => { const cx = 210 + i * 416; x.fillStyle = 'rgba(255,230,190,.14)'; x.beginPath(); x.ellipse(cx, y - 260, 190, 330, 0, 0, 7); x.fill(); x.save(); x.translate(cx, y); x.scale(1.3, 1.3); drawBean(x, k, o); x.restore(); x.font = "700 30px 'Oswald'"; x.fillStyle = '#f6efe0'; x.fillText(CAST[k].name.toUpperCase(), cx, y + 46); });
+put(row1, 680); put(row2, 1380);
+window.png = c.toDataURL('image/png'); window.done = true;
+</script></body></html>
