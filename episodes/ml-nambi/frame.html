@@ -1,0 +1,26 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const B = await import('/pipeline/bean.js');
+(await import('/episodes/ml-lottery/cast.js')).registerCast?.(B); (await import('/episodes/ml-nambi/cast.js')).registerCast(B);
+const Z = await import('/episodes/ml-nambi/sets.js'); const PD = await import('/episodes/ml-padmanabha/sets.js'); const LO = await import('/episodes/ml-lottery/sets.js');
+const q = location.search.slice(1) || 'lab'; const P = B.PROPS;
+const W = 540, H = 960; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(50, W / H, 0.05, 900);
+const put = (sc, who, o, x, z, y = 0, s = 1) => { const c = K.card(who, o, { scale: s }); c.position.set(x, y, z); sc.add(c); return c; };
+let set, p, l, t = 2, gr = { focus: 6, aperture: 4, hazeAmt: 0.12, haze: 0xdfe9f2, sat: 1.1, contrast: 0.06, lift: 0.015, warm: 0.03, vignette: 0.3 };
+if (q === 'lab') { set = Z.labSet(); put(set.scene, 'nambi', { expr: 'proud', R: 'point', L: 'hold', propL: P.blueprint }, -1.6, 0.2); p = [0.6, 2.0, 6]; l = [0, 1.8, -2]; }
+if (q === 'station') { set = Z.stationSet(); set.setStory(1); set.setDays(23); put(set.scene, 'police', { expr: 'smug', R: 'point', L: 'hold', propL: P.lathi }, -0.6, -2.4); put(set.scene, 'nambi', { expr: 'sad', R: 'hang', L: 'hang' }, 3.8, -3.2); p = [0.5, 2.2, 6]; l = [0.5, 2.2, -3]; gr = { ...gr, warm: 0.08 }; }
+if (q === 'kitchen') { set = Z.kitchenSet(); put(set.scene, 'cook', { expr: 'nervous', R: 'hold', propR: P.ladle, L: 'shrug' }, 1.0, -2.2); ['neighbour', 'neighbour2', 'constable'].forEach((w, i) => put(set.scene, w, { expr: 'angry', R: 'point', L: 'hip' }, -2.8 + i * 0.9, -0.6 + (i % 2) * 0.5)); p = [0, 2.0, 4.5]; l = [0, 1.6, -3]; }
+if (q === 'pad') { set = Z.padSet(); set.setLaunch(q === 'pad' ? 0 : 1); p = [6, 3, 14]; l = [-2, 6, -14]; gr = { ...gr, focus: 20, aperture: 1, warm: 0.05 }; }
+if (q === 'launch') { set = Z.padSet(); set.setLaunch(0.55, 1); p = [6, 3, 18]; l = [-2, 9, -14]; gr = { ...gr, focus: 20, aperture: 1, warm: 0.05 }; }
+if (q === 'court') { set = PD.courtSet(); put(set.scene, 'judge', { expr: 'stern', R: 'point', L: 'hang' }, 0, -3.2, 0.5); put(set.scene, 'nambiOld', { expr: 'proud', R: 'hold', propR: P.cheque, L: 'hang' }, 1.2, 0.6); p = [0, 2, 6]; l = [0, 2, -3]; }
+if (q === 'tea') { set = LO.teaShopSet(); ['neighbour', 'neighbour2'].forEach((w, i) => put(set.scene, w, { expr: i ? 'sly' : 'angry', R: i ? 'mouth' : 'hold', propR: i ? null : P.newspaper, L: 'hip' }, -1 + i * 1.6, 1.2)); p = [0, 2, 7]; l = [0, 1.6, -1]; }
+set.life.forEach((f) => f(t)); cam.position.set(...p); cam.lookAt(...l); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, gr);
+window.png = cv.toDataURL('image/png'); window.done = true;
+</script></body></html>
