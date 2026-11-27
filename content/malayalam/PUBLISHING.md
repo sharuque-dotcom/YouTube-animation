@@ -25,3 +25,11 @@ On 26 Nov a commit that added ep11 (bb720b6) was made from a clone that didn't h
 - To add a video or cover to engilo, clone with `git clone --filter=blob:none --depth 3` (full checkout, so the other files stay), `git add` only the new files, and check `git show --stat HEAD` lists only additions before pushing. Never commit from an empty or sparse checkout, and never use `git add -A` there.
 - The daily task checks that today's MP4 and cover return HTTP 200 on raw.githubusercontent.com before uploading. If one is missing, it restores it from engilo history (the last commit that has it) and then uploads.
 - Safety net: a second scheduled task at 18:25 Dubai checks the channel (YouTube API search on UCqIf5JWztv5T1CSNQMGBa_A) for today's Short. If it isn't live, it fixes the cause and uploads it, then reports in the project.
+
+## Description format (owner rule, 27 Nov 2026)
+Every youtube.json description follows YouTube's advice the owner shared. Most viewers search in English, and the Malayalam script catches voice and Malayalam-script searches. Shorts are found in the feed, so keep it short:
+1. Lines 1–2: an English summary of 1–2 sentences with the main topic, names and places, ending with "Explained in Malayalam."
+2. Lines 3–4: a 1–2 sentence Malayalam-script summary with the key names and places.
+3. 3–5 hashtags on the last line: #Malayalam #KeralaHistory #Shorts plus 1–2 topic tags (e.g. #Travancore, #KuwaitAirlift).
+No long source lists or keyword stuffing; keep sources in the episode's script.md. Tags (the tags field) stay as they are.
+Captions: YouTube search also reads captions. The Zapier connector can't upload caption files (no file upload in raw requests), so clean Malayalam captions have to be added in YouTube Studio by hand, or the video's burned-in captions are what viewers see.
