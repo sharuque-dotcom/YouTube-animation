@@ -1,0 +1,6 @@
+{
+  "_note": "Default score for Engilo Shorts (owner's Google Flow track, 28 Nov 2026). Used when an episode has no music.json or music.* file. Copy this into an episode as music.json and change offset to start at another section (good starts: 0, 53, 120 s; hard stops near 52 s and 140 s, sparse stop-start hits 80-115 s).",
+  "level": -24,
+  "voiceDip": -3,
+  "cues": [{ "track": "dramatic-suspense.mp3", "offset": 0 }]
+}

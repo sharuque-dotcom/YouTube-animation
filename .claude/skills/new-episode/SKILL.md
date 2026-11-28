@@ -16,7 +16,7 @@ Keep token use low: don't re-read pipeline source, this file is the reference.
 3. `python3 pipeline/tts.py episodes/<ep>` (cached; only changed lines regenerate).
 4. **Photos**: `python3 pipeline/fetch_photos.py episodes/<ep> key="search terms" ...` (Wikimedia Commons, free licences, credits written to `photos/CREDITS.txt`). Check each photo by eye: wrong era, wrong subject or a visible later brand name → delete it and its credit line. Rate-limited? Wait and retry.
 5. **Shots** → `episodes/<ep>/shots.js` exporting `photos` (keys) and `shots` (scene id → list). Copy `episodes/ep01-satyam/scenes.js` and point it at the new shots (cold open can be shots too; drop the coldopen-v2 import).
-6. **Music** → `episodes/<ep>/music.json` (one track per chapter, Kevin MacLeod / incompetech, credit in description).
+6. **Music** → Malayalam Shorts use the channel default score automatically (`content/music/default.json` → `content/music/dramatic-suspense.mp3`, owner's Google Flow track) when the episode has no `music.json`. To vary it, copy `default.json` into the episode as `music.json` and change `offset` (good starts 0, 53, 120 s); line up its hard stops (~52 s, ~140 s) with a pause or twist line, never mid-sentence. Older long-form episodes: one track per chapter, Kevin MacLeod / incompetech, credit in description.
 7. Check: `node pipeline/render.mjs episodes/<ep> --stills <t,...>` at shot midpoints (`shotMidpoints` in `pipeline/shots.js`), fix, then render: `node pipeline/render.mjs episodes/<ep>` (~3 s of render per 1 s of video). Sound-only changes: `--remix`. Quick test of the start: `--until 50`.
 
 ## Shot list format

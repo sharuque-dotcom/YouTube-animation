@@ -72,17 +72,26 @@ const hitKinds = sounds.map((x) => x.kind);
 /**
  * Music. Either:
  *  - music.json: a cue sheet, one track per section, e.g.
- *      { "level": -24, "cues": [{ "scene": "letter", "track": "music/hidden-agenda.mp3", "offset": 0 }, ...] }
- *    Each track plays from its scene until the next cue (looping if short), with crossfades.
+ *      { "level": -24, "voiceDip": -3, "cues": [{ "scene": "letter", "track": "music/hidden-agenda.mp3", "offset": 0 }, ...] }
+ *    Each track plays from its scene (or from 0 s if the cue has no scene) until the next cue (looping if
+ *    short), with crossfades. Track paths are relative to the sheet's folder. voiceDip (dB, optional) cuts
+ *    the music's 1-4 kHz band so a dense score leaves room for the narration.
  *  - music.mp3/.wav/.m4a: one track looped under the whole video
- *  - nothing: a generated dark drone
+ *  - nothing: the channel's default score, content/music/default.json
  */
 function buildMusicBed() {
-  const sheetFile = path.join(epDir, 'music.json');
-  if (!existsSync(sheetFile)) return null;
+  let sheetFile = path.join(epDir, 'music.json');
+  if (!existsSync(sheetFile)) {
+    // an episode's own music.mp3/.wav/.m4a wins over the channel default
+    if (['mp3', 'wav', 'm4a'].some((e) => existsSync(path.join(epDir, `music.${e}`)))) return null;
+    sheetFile = path.join(ROOT, 'content', 'music', 'default.json');
+    if (!existsSync(sheetFile)) return null;
+  }
+  const sheetDir = path.dirname(sheetFile);
   const sheet = JSON.parse(readFileSync(sheetFile, 'utf8'));
   const XF = 2; // crossfade seconds
   const cues = sheet.cues.map((c) => {
+    if (c.scene == null) return { ...c, start: 0 };
     const sc = timeline.scenes.find((s) => s.id === c.scene);
     if (!sc) throw new Error(`music.json: unknown scene ${c.scene}`);
     return { ...c, start: sc.start };
@@ -92,7 +101,7 @@ function buildMusicBed() {
   cues.forEach((c, i) => {
     const end = i + 1 < cues.length ? cues[i + 1].start + XF : Math.max(dur, c.start + XF) + 1;
     const len = end - c.start;
-    args.push('-stream_loop', '-1', '-i', path.join(epDir, c.track));
+    args.push('-stream_loop', '-1', '-i', path.resolve(sheetDir, c.track));
     const fin = i === 0 ? 0.3 : XF;
     parts.push(`[${i}]atrim=start=${c.offset || 0}:duration=${len.toFixed(3)},asetpts=PTS-STARTPTS,` +
       `aresample=48000,aformat=channel_layouts=stereo,loudnorm=I=-16:TP=-2,aresample=48000,` +
@@ -100,12 +109,13 @@ function buildMusicBed() {
       `adelay=${Math.round(c.start * 1000)}:all=1[c${i}]`);
   });
   const level = sheet.level ?? -24;
+  const dip = sheet.voiceDip ? `,equalizer=f=2200:t=o:w=1.8:g=${sheet.voiceDip}` : '';
   const graph = parts.join(';') + ';' + cues.map((_, i) => `[c${i}]`).join('') +
-    `amix=inputs=${cues.length}:normalize=0,volume=${level + 16}dB,atrim=duration=${dur.toFixed(3)}[m]`;
+    `amix=inputs=${cues.length}:normalize=0${dip},volume=${level + 16}dB,atrim=duration=${dur.toFixed(3)}[m]`;
   const bed = path.join(buildDir, 'music.wav');
   const r = spawnSync('ffmpeg', [...args, '-filter_complex', graph, '-map', '[m]', '-ar', '48000', bed], { stdio: 'inherit' });
   if (r.status) throw new Error('Building the music bed failed');
-  console.log(`Music bed: ${cues.length} cues -> ${path.relative(ROOT, bed)}`);
+  console.log(`Music bed (${path.relative(ROOT, sheetFile)}): ${cues.length} cues -> ${path.relative(ROOT, bed)}`);
   return bed;
 }
 const bed = args.includes('--stills') ? null : buildMusicBed();
