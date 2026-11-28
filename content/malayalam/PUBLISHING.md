@@ -33,3 +33,6 @@ Every youtube.json description follows YouTube's advice the owner shared. Most v
 3. 3–5 hashtags on the last line: #Malayalam #KeralaHistory #Shorts plus 1–2 topic tags (e.g. #Travancore, #KuwaitAirlift).
 No long source lists or keyword stuffing; keep sources in the episode's script.md. Tags (the tags field) stay as they are.
 Captions: YouTube search also reads captions. The Zapier connector can't upload caption files (no file upload in raw requests), so clean Malayalam captions have to be added in YouTube Studio by hand, or the video's burned-in captions are what viewers see.
+
+## Covers sometimes do not stick (28 Nov 2026)
+On 4 of 10 pre-scheduled Shorts the cover call returned success but Studio still showed an auto frame. Re-setting worked after the video was processed (YouTube may return 429 if covers are changed many times in a day; wait and retry). The 6:25 pm Dubai check now re-sets the cover on every Short after it goes public.
