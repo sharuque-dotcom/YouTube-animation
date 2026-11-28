@@ -1,0 +1,44 @@
+{
+  "polyhaven": {
+    "models": {
+      "dutch_ship_large_01": "2k",
+      "dutch_ship_large_02": "1k",
+      "dutch_ship_medium": "1k",
+      "ship_pinnace": "1k",
+      "modular_wooden_pier": "1k",
+      "modular_fort_01": "1k",
+      "wooden_barrels_01": "1k",
+      "wooden_crate_01": "1k",
+      "cannon_01": "1k",
+      "treasure_chest": "1k",
+      "wooden_lantern_01": "1k",
+      "coastal_cliff_01": "1k",
+      "coast_rocks_01": "1k",
+      "island_tree_01": "1k",
+      "island_tree_02": "1k",
+      "shrub_01": "1k",
+      "boulder_01": "1k"
+    },
+    "hdris": {
+      "kloppenheim_06_puresky": "2k",
+      "belfast_sunset_puresky": "2k",
+      "kloofendal_48d_partly_cloudy_puresky": "2k",
+      "satara_night_no_lamps": "2k",
+      "industrial_sunset_puresky": "2k",
+      "evening_road_01_puresky": "2k"
+    },
+    "textures": {
+      "weathered_planks": "1k",
+      "wood_floor_deck": "1k",
+      "coast_sand_rocks_02": "1k",
+      "rock_face_03": "1k",
+      "castle_brick_02_red": "1k",
+      "painted_plaster_wall": "1k",
+      "old_stone_wall": "1k",
+      "forest_ground_04": "1k"
+    }
+  },
+  "kenney": [
+    "pirate-kit"
+  ]
+}

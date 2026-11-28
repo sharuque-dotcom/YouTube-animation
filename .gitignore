@@ -4,3 +4,6 @@ node_modules/
 __pycache__/
 episodes/*/music/*.mp3
 content/episodes/*/episode*-1080p.mp4
+content/assets/polyhaven/
+content/assets/kenney/*/glb/
+content/assets/kenney/*/Preview.png

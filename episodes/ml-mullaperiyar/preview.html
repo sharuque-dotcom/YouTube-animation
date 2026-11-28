@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const A = await import('/pipeline/assets.js');
+const Z = await import('/episodes/ml-mullaperiyar/sets.js');
+const [q, v] = (location.search.slice(1) || 'dam').split(',');
+const W = 540, H = 960; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(52, W / H, 0.05, 1200);
+let set, p, l, gr = { focus: 40, aperture: 1.5, hazeAmt: 0.08, haze: 0xdfe9f2, sat: 1.05, contrast: 0.06, lift: 0.015, warm: 0.03, vignette: 0.3 };
+if (q === 'dam') { set = await Z.damSet(stage.renderer); p = [-12, 24, 72]; l = [0, 9, -16]; if (v === 'dusk') set.setDusk(1); if (v === 'flow') { set.setFlow(1); p = [-40, 40, 60]; l = [30, 10, -30]; } if (v === 'build') set.setBuild(0.45); if (v === 'wide') { p = [-17, set.gorgeHeight(-17,34) + 2.2, 44]; l = [-4, 8, 0]; } if (v === 'age') set.setAge(1); }
+if (q === 'durbar') { set = Z.durbarSet(); if (v === '1970') set.setEra(1970); set.sign(0.6, v === '1970' ? 1970 : 1886); p = [0, 2.6, 5.5]; l = [0, 1.4, -2]; gr = { ...gr, focus: 6, aperture: 4, warm: 0.07 }; }
+if (q === 'dry') { set = Z.dryFieldSet(); p = [0, 2, 7]; l = [0, 1.6, -6]; gr = { ...gr, focus: 7, aperture: 4, warm: 0.1 }; }
+if (q === 'tank') { set = Z.tankHouseSet(); set.setDrip(1); p = [1.5, 3.4, 11]; l = [1, 3, -1]; gr = { ...gr, focus: 10, aperture: 4, warm: 0.0 }; }
+await A.settle();
+set.life.forEach((f) => f(2)); cam.position.set(...p); cam.lookAt(...l); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, gr);
+window.png = cv.toDataURL('image/png'); window.done = true;
+</script></body></html>
