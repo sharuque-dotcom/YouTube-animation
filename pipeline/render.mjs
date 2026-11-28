@@ -75,10 +75,12 @@ const hitKinds = sounds.map((x) => x.kind);
  *      { "level": -24, "voiceDip": -3, "cues": [{ "scene": "letter", "track": "music/hidden-agenda.mp3", "offset": 0 }, ...] }
  *    Each track plays from its scene (or from 0 s if the cue has no scene) until the next cue (looping if
  *    short), with crossfades. Track paths are relative to the sheet's folder. voiceDip (dB, optional) cuts
- *    the music's 1-4 kHz band so a dense score leaves room for the narration.
+ *    the music's 1-4 kHz band so a dense score leaves room for the narration. duck (optional, default 5)
+ *    is the compressor ratio that lowers the music while someone speaks: lower = music stays louder.
  *  - music.mp3/.wav/.m4a: one track looped under the whole video
  *  - nothing: the channel's default score, content/music/default.json
  */
+let duckRatio = 5; // how hard the music dips under the voice; a music.json can set "duck"
 function buildMusicBed() {
   let sheetFile = path.join(epDir, 'music.json');
   if (!existsSync(sheetFile)) {
@@ -109,6 +111,7 @@ function buildMusicBed() {
       `adelay=${Math.round(c.start * 1000)}:all=1[c${i}]`);
   });
   const level = sheet.level ?? -24;
+  if (sheet.duck) duckRatio = sheet.duck;
   const dip = sheet.voiceDip ? `,equalizer=f=2200:t=o:w=1.8:g=${sheet.voiceDip}` : '';
   const graph = parts.join(';') + ';' + cues.map((_, i) => `[c${i}]`).join('') +
     `amix=inputs=${cues.length}:normalize=0${dip},volume=${level + 16}dB,atrim=duration=${dur.toFixed(3)}[m]`;
@@ -165,7 +168,7 @@ const graph = [
   `[2]aresample=48000,aformat=channel_layouts=stereo,volume=${bed ? 1 : musicFile ? 0.35 : 0.28},` +
     `afade=in:d=1,afade=out:st=${Math.max(0, LEN - (FROM ? 1 : 3))}:d=${FROM ? 1 : 3}[m]`,
   // lower the music while someone is speaking
-  `[m][v1]sidechaincompress=threshold=0.05:ratio=${bed ? 5 : 5}:attack=40:release=700[md]`,
+  `[m][v1]sidechaincompress=threshold=0.05:ratio=${duckRatio}:attack=40:release=700[md]`,
   ...hitTimes.map((t, i) => `[${3 + i}]adelay=${Math.round(t * 1000)}:all=1${(sfx[hitKinds[i]] || sfx.boom)[2]},aformat=channel_layouts=stereo,volume=${sounds[i].vol}[h${i}]`),
   `[v2][md]${hitTimes.map((_, i) => `[h${i}]`).join('')}amix=inputs=${2 + hitTimes.length}:normalize=0,` +
     'alimiter=limit=0.88[a]',
