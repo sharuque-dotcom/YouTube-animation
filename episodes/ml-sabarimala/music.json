@@ -1,0 +1,7 @@
+{
+  "_note": "Default score (content/music/default.json) at the Mullaperiyar level (-20). Offset 53 s so the track's two hard stops (~52 s and ~140 s) both fall outside this 61 s Short.",
+  "level": -20,
+  "voiceDip": -3,
+  "duck": 2.5,
+  "cues": [{ "track": "../../content/music/dramatic-suspense.mp3", "offset": 53 }]
+}

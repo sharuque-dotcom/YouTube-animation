@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+// Cover 14 (Sabarimala 1950): a clean render of our burning-shrine set + the series badge, headline, a shadow with a lantern, a big '?'
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const A = await import('/pipeline/assets.js'); const B = await import('/pipeline/bean.js');
+(await import('/episodes/ml-sabarimala/cast.js')).registerCast(B);
+const Z = await import('/episodes/ml-sabarimala/sets.js');
+const W = 1080, H = 1920; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(50, W / H, 0.05, 1500);
+const set = await Z.hillSet(stage.renderer); const T = set.TOP; set.setMode('night'); set.setFire(1); await A.settle();
+set.life.forEach((f) => f(2.3)); cam.position.set(6, T + 6, 30); cam.lookAt(0, T + 4.5, 0); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, { focus: 30, aperture: 1.5, hazeAmt: 0.04, haze: 0x2a1a20, sat: 1.12, contrast: 0.1, lift: 0, warm: 0.06, vignette: 0.45 });
+const out = document.createElement('canvas'); out.width = W; out.height = H; const g = out.getContext('2d'); g.drawImage(cv, 0, 0);
+const INK = '#2a1c17';
+const txt = (s, x, y, { size = 100, fill = '#fff', sw = 18, rot = -0.04, font = "'Noto Malayalam'", weight = 800, maxW = 1000 } = {}) => { g.save(); g.translate(x, y); g.rotate(rot); g.font = `${weight} ${size}px ${font}`; const m = g.measureText(s).width; if (m > maxW) g.scale(maxW / m, maxW / m);
+  g.textAlign = 'center'; g.textBaseline = 'middle'; g.lineJoin = 'round'; g.fillStyle = INK; g.lineWidth = sw; g.strokeStyle = INK; g.strokeText(s, 0, sw * 0.5); g.fillText(s, 0, sw * 0.5); g.strokeText(s, 0, 0); g.fillStyle = fill; g.fillText(s, 0, 0); g.restore(); };
+const top = g.createLinearGradient(0, 0, 0, 900); top.addColorStop(0, 'rgba(10,6,14,.85)'); top.addColorStop(1, 'rgba(10,6,14,0)'); g.fillStyle = top; g.fillRect(0, 0, W, 900);
+const bot = g.createLinearGradient(0, 1300, 0, H); bot.addColorStop(0, 'rgba(10,6,14,0)'); bot.addColorStop(1, 'rgba(10,6,14,.75)'); g.fillStyle = bot; g.fillRect(0, 1300, W, 620);
+g.save(); g.beginPath(); g.roundRect(300, 150, 480, 110, 55); g.fillStyle = '#fff6df'; g.fill(); g.lineWidth = 8; g.strokeStyle = INK; g.stroke(); g.restore(); txt('എങ്കിലോ?', 540, 206, { size: 62, fill: '#c8312c', sw: 0, rot: 0 });
+txt('ശബരിമല 1950', 540, 480, { size: 120, fill: '#fff6df' }); txt('കത്തിച്ചാമ്പലായി!', 540, 670, { size: 150, fill: '#f4c430', sw: 24 });
+// the shadow with a lantern, bottom left, and a big ?
+g.save(); g.translate(250, 1900); g.scale(2.4, 2.4); const lg = g.createRadialGradient(150, -420, 5, 150, -420, 140); lg.addColorStop(0, 'rgba(255,200,90,.6)'); lg.addColorStop(1, 'rgba(255,160,60,0)'); g.fillStyle = lg; g.fillRect(0, -560, 300, 300);
+B.drawBean(g, 'shadow', { R: 'holdUp', propR: B.PROPS.lamp, L: 'hang' }); g.restore();
+txt('?', 880, 1250, { size: 320, fill: '#f4c430', sw: 26, rot: 0.15, font: "'Oswald'", weight: 700 });
+txt('അപകടമോ? ആക്രമണമോ?', 600, 1760, { size: 70, fill: '#ffffff', sw: 14, rot: 0 , maxW: 760 });
+window.png = out.toDataURL('image/png'); window.done = true;
+</script></body></html>
