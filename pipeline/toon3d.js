@@ -184,7 +184,7 @@ export function makeInkStage(w, h) {
       r.setRenderTarget(rt); r.render(scene, camera);
       // normal pass: world -> view normals, cards -> black (ignored by ink), additive sprites hidden
       const swaps = [];
-      scene.traverse((o) => { if (!o.isMesh && !o.isSprite) return; if (o.isSprite || o.userData.noInk) { swaps.push([o, null, o.visible]); o.visible = false; return; }
+      scene.traverse((o) => { if (!o.isMesh && !o.isSprite && !(o.isPoints && o.userData.noInk)) return; if (o.isSprite || o.isPoints || o.userData.noInk) { swaps.push([o, null, o.visible]); o.visible = false; return; }
         if (o.userData.card) { let b = blackCache.get(o.material.map); if (!b) { b = new THREE.MeshBasicMaterial({ color: 0, map: o.material.map, alphaTest: 0.5, side: THREE.DoubleSide }); blackCache.set(o.material.map, b); } swaps.push([o, o.material]); o.material = b; }
         else { swaps.push([o, o.material]); o.material = nMat; } });
       const bg = scene.background, fog = scene.fog; scene.background = null; scene.fog = null; r.setClearColor(0, 0);

@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>
+@font-face { font-family: 'Noto Malayalam'; font-weight: 800; src: url(/pipeline/fonts/noto-sans-malayalam-malayalam-800-normal.woff2); }
+@font-face { font-family: 'Oswald'; font-weight: 700; src: url(/pipeline/fonts/oswald-latin-700-normal.woff2); }
+html,body{margin:0}</style>
+<script type="importmap">{ "imports": { "three": "/node_modules/three/build/three.module.js", "three/addons/": "/node_modules/three/examples/jsm/" } }</script>
+</head><body><script type="module">
+await document.fonts.load("800 40px 'Noto Malayalam'"); await document.fonts.load("700 40px 'Oswald'");
+const K = await import('/pipeline/toon3d.js'); const THREE = K.THREE; const B = await import('/pipeline/bean.js');
+(await import('/episodes/ml-ems/cast.js')).registerCast(B); const Z = await import('/episodes/ml-ems/sets.js');
+const q = location.search.slice(1) || 'assembly'; const P = B.PROPS;
+const W = 540, H = 960; const stage = K.makeInkStage(W, H); const cam = new THREE.PerspectiveCamera(52, W / H, 0.05, 900);
+const put = (sc, who, o, x, z, y = 0, s = 1) => { const c = K.card(who, o, { scale: s }); c.position.set(x, y, z); sc.add(c); return c; };
+let set, p, l, t = 2, gr = { focus: 6, aperture: 4, hazeAmt: 0.1, haze: 0xf0d8c8, sat: 1.08, contrast: 0.07, lift: 0.015, warm: 0.06, vignette: 0.34 };
+if (q === 'assembly') { set = Z.assemblySet(); set.setTally(1); put(set.scene, 'ems', { expr: 'proud', R: 'point', L: 'hang' }, -1.6, 0.4); put(set.scene, 'teacher', { expr: 'smile' }, -3.4, -1.2, 0.3); p = [0, 2.4, 8]; l = [0, 2.2, -3]; }
+if (q === 'field') { set = Z.fieldSet(); put(set.scene, 'farmer', { expr: 'beam', R: 'hold', propR: P.redFlag, L: 'hold', propL: P.plough }, 3.6, 0.2); put(set.scene, 'landlord', { expr: 'angry', R: 'hold', propR: P.umbrella, L: 'hip' }, 1.2, 0.6); p = [1.5, 2.2, 7]; l = [2, 1.8, -4]; gr = { ...gr, focus: 7, haze: 0xdfe9f2, warm: 0.03 }; }
+if (q === 'street') { set = Z.streetSet(); set.setTorch(1); set.setSmoke(1, 2); ['mannathu', 'priest', 'leaguer', 'congress'].forEach((w, i) => put(set.scene, w, { expr: 'angry', R: 'fist', L: 'hang' }, -2.1 + i * 1.4, 0.4 - (i % 2) * 0.4)); p = [0, 2.2, 7]; l = [0, 2.0, -6]; gr = { ...gr, focus: 7, haze: 0x7a3a30, warm: 0.1 }; }
+if (q === 'delhi') { set = Z.delhiSet(); set.setStamp(0.2); put(set.scene, 'nehru', { expr: 'stern', R: 'point', L: 'hold', propL: P.order356 }, -1.6, -0.6); p = [0, 2.4, 5.6]; l = [0, 1.8, -2.5]; gr = { ...gr, warm: 0.08 }; }
+if (q === 'ground') { set = Z.groundSet(); set.setNoise(1); put(set.scene, 'batter', { expr: 'proud', R: 'hold', propR: P.bat, L: 'hip' }, 0.4, 1.4); put(set.scene, 'umpire', { expr: 'stern', R: 'up', L: 'hang' }, -1.4, -1.2); p = [0, 2.0, 8]; l = [0, 2.0, -10]; gr = { ...gr, focus: 8, haze: 0xdfe9f2, warm: 0.03 }; }
+set.life.forEach((f) => f(t)); cam.position.set(...p); cam.lookAt(...l); cam.updateMatrixWorld();
+const cv = stage.render(set.scene, cam, gr);
+window.png = cv.toDataURL('image/png'); window.done = true;
+</script></body></html>
